@@ -33,3 +33,5 @@
 .club-result-event span{color:#e2c985;font-size:12px}.club-result-event h3{margin-top:8px}
 @media(max-width:620px){.club-event-heading,.club-event-caption{padding-inline:16px}.club-event-dialog .club-event-top{padding:12px 16px}.club-event-changes{margin-inline:16px;gap:8px}.club-change{padding:11px}.club-change strong{font-size:22px}.club-event-dialog .club-event-actions{padding:13px 16px}.club-event-actions>div{width:100%;justify-content:flex-end}.club-result-event{align-items:flex-start;flex-direction:column}.club-event-place{font-size:10px;left:8px;top:8px;padding:5px 8px}}
 @media(max-height:760px) and (min-width:621px){.club-event-dialog{width:min(690px,94vw)}.club-event-heading{padding-block:12px}.club-event-picture canvas{max-height:300px;object-fit:contain}.club-event-caption{padding-block:10px;min-height:68px}.club-event-dialog .club-event-actions{padding-block:12px}}
+
+.club-story-beats{display:flex;flex-wrap:wrap;gap:6px;padding:10px 18px;background:#0b2a3d}.club-story-beats button{flex:1;min-width:130px;font-size:11px;padding:8px}.club-story-beats button[aria-pressed=true]{color:#173749;background:#efd292;border-color:#ffedb4}

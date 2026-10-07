@@ -19,8 +19,8 @@ function fixture(draws=[]){
 const setup=`const p={id:'player-1',name:'김해체',number:7,fans:50,loyalty:50,a:{contact:42},appearance:{body:2}};
 const m={id:'match-1',done:true,score:[1,3],used:['starter']},t={primary:11,secondary:5,news:[],match:m,players:[p]};`;
 
-test('all eight events apply the specified fan/loyalty change once and retain their actor',()=>{
- for(const [index,kind,fans,loyalty] of [[0,'autograph',18,2],[1,'litter',-22,-2],[2,'donation',25,3],[3,'ignore',-18,-3],[4,'gift',20,2],[5,'bench-song',0,3],[6,'lost-child',20,0],[7,'flat-interview',-12,0]]){
+test('all ten events apply the specified fan/loyalty change once and retain their actor',()=>{
+ for(const [index,kind,fans,loyalty] of [[0,'autograph',18,2],[1,'litter',-22,-2],[2,'donation',25,3],[3,'ignore',-18,-3],[4,'gift',20,2],[5,'bench-song',0,3],[6,'lost-child',20,0],[7,'flat-interview',-12,0],[8,'youth-lesson',18,0],[9,'concession-cut',-15,0]]){
   const result=fixture()(`(()=>{${setup}if(${index}===7)m.used.push(p.id);const event=applyClubEvent(t,m,p,${index});const again=applyClubEvent(t,m,p,${index});return {p,t,event,same:event===again};})()`);
   assert.equal(result.event.kind,kind);assert.equal(result.event.fans,fans);assert.equal(result.event.loyalty,loyalty);
   assert.equal(result.p.fans,50+fans);assert.equal(result.p.loyalty,50+loyalty);
@@ -79,11 +79,32 @@ test('random selection draws only eligible stories and eligible players',()=>{
  const interview=fixture([7,0])(`(()=>{${setup}t.players.push({...p,id:'starter'});return rollClubEvent(t,m);})()`);
  assert.equal(interview.kind,'flat-interview');assert.equal(interview.playerId,'starter');
  const win=fixture([99,0])(`(()=>{${setup}m.score=[3,1];return rollClubEvent(t,m);})()`);
- assert.equal(win.kind,'lost-child');
+ assert.equal(win.kind,'concession-cut');
  const noBench=fixture([99,0])(`(()=>{${setup}m.used=[p.id];m.score=[3,1];return rollClubEvent(t,m);})()`);
- assert.equal(noBench.kind,'lost-child');
+ assert.equal(noBench.kind,'concession-cut');
 });
 test('departing or unavailable players cannot receive a new event and an empty pool is safe',()=>{
  const result=fixture()(`(()=>{${setup}p.exitPending26=true;const first=rollClubEvent(t,m);delete p.exitPending26;p.loyalty=0;const second=rollClubEvent(t,m);t.players=[];return [first,second,rollClubEvent(t,m),t.news.length];})()`);
  assert.deepEqual(result,[null,null,null,0]);
+});
+
+test('five story events have four timed shots; original five keep their timing',()=>{
+ const run=fixture();
+ for(const kind of ['bench-song','lost-child','flat-interview','youth-lesson','concession-cut']){
+  const result=run(`(()=>{const e={kind:'${kind}'};return [clubEventDuration(e),clubEventSceneEnd(e),[0,2199,2200,4799,4800,7399,7400,10000].map(ms=>clubEventScenePhase(ms,e)),clubEventDefinition(e).shots.length];})()`);
+  assert.deepEqual(result,[10000,7400,[0,0,1,1,2,2,3,3],4]);
+ }
+ assert.deepEqual(run("[clubEventDuration({kind:'autograph'}),clubEventPhaseCount({kind:'autograph'}),clubEventSceneEnd({kind:'autograph'})]"),[6600,3,4400]);
+});
+
+test('companions preserve the actual teammates without aliasing saved players',()=>{
+ const result=fixture()(`(()=>{${setup}t.players.push({...clone(p),id:'friend',name:'동료'});const e=applyClubEvent(t,m,p,5);t.players[1].name='변경';return [e.companions.length,e.companions[0].name,e.companions.some(x=>x.id===p.id)];})()`);
+ assert.deepEqual(result,[1,'동료',false]);
+});
+
+test('only selected candidates exist; rejected cup, rhythm and photo stories are absent',()=>{
+ const kinds=fixture()('CLUB_EVENT_TYPES.map(x=>x.id)');
+ assert.equal(kinds.length,10);assert.equal(new Set(kinds).size,10);
+ assert.ok(kinds.includes('youth-lesson')&&kinds.includes('concession-cut'));
+ assert.ok(!kinds.some(x=>/cup|rhythm|photo/.test(x)));
 });
