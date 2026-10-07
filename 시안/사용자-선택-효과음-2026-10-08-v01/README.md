@@ -18,3 +18,12 @@
 - 원본 `u_xg7ssi08yr-crowd-cheering-379666.mp3`의 0.75~4.75초를 사용하며, 마지막 0.65초를 부드럽게 줄인 기존 시안 그대로입니다. 승인 후 다시 편집하지 않았습니다.
 - 선택 파일의 해시와 원본 구간은 [homerun-selection.json](homerun-selection.json)에 기록했습니다.
 - 제공 음원은 로컬에 보관하고 공개 저장소에는 선택 내역만 기록합니다. 게임 연결·배포는 진행하지 않았습니다.
+
+## 투수가 공을 던질 때
+
+- **선택 완료, 게임 적용 전.** 사용자가 제공한 `ElevenLabs_Pitcher_throwing_a_fastball,_whoosh_sound.mp3`를 투구 효과음으로 지정했습니다.
+- 향후 재생 시점은 투수가 공을 놓아 던지는 순간입니다. 헛스윙 소리와 별도로 지정합니다.
+- 로컬 보관본: [원본 MP3](local-audio/ElevenLabs_Pitcher_throwing_a_fastball,_whoosh_sound.mp3).
+- 원본과 같은 파일을 보관했으며 길이·음색·음량 편집이나 재인코딩은 하지 않았습니다.
+- 파일 정보와 해시는 [pitch-selection.json](pitch-selection.json)에 기록했습니다. 제공 음원은 로컬에 보관하고 GitHub에는 선택 기록만 저장합니다.
+- 게임 코드·자산 목록·실행 파일·공개 사이트는 변경하지 않았습니다.
