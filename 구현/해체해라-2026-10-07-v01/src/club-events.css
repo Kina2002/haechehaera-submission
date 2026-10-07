@@ -9,7 +9,12 @@
 .club-event-heading h2{font-size:clamp(21px,3.5vw,29px);line-height:1.35;margin:0;color:var(--event-accent)}
 .club-event-picture{position:relative;background:#15344b;border-block:1px solid #537187;overflow:hidden}
 .club-event-picture canvas{width:100%;height:auto;display:block;image-rendering:pixelated;aspect-ratio:900/460}
-.club-event-place{position:absolute;left:16px;top:14px;background:#072336dc;border:1px solid #94b2bd77;color:#ffefd1;border-radius:4px;padding:7px 11px;font-size:12px}
+.club-event-scene-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 14px;background:#0a293e;border-bottom:1px solid #537187}
+.club-event-place{color:#d7e2de;font-size:12px;line-height:1.5}
+.club-event-actor{display:flex;align-items:center;gap:9px;min-width:0;margin-left:auto;border-left:3px solid var(--event-accent);padding-left:9px}
+.club-event-actor img{width:46px;height:46px;object-fit:contain;image-rendering:pixelated;flex:none;background:#214157;border-radius:5px}
+.club-event-actor small{display:block;font-size:10px;color:#abc6d2;margin-bottom:5px}
+.club-event-actor strong{display:block;font-size:16px;color:#fff1c2;overflow-wrap:anywhere}
 .club-event-caption{padding:15px 24px 11px;min-height:81px}
 .club-event-step{color:#93b7c7;font-size:11px;letter-spacing:.07em}
 .club-event-caption p{font-size:16px;line-height:1.5;margin:7px 0 0}

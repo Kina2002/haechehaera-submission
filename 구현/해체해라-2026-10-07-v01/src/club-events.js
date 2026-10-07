@@ -62,6 +62,14 @@ function applyClubEvent(t,m,p,typeIndex){
 }
 function clubEventSigned(n){return (n>0?'+':'')+n;}
 function clubEventDefinition(event){return CLUB_EVENT_TYPES.find(x=>x.id===event?.kind);}
+function clubEventActorLabel(event){const p=event.actor;return (p?.number!=null?'#'+p.number+' ':'')+(p?.name||event.player);}
+function clubEventActorPortrait(event){
+ const portrait=canvasNew(72,72),c=portrait.getContext('2d');
+ const a=charFrame(event.actor,{primary:event.primary,secondary:event.secondary},'motion',1,0),[x,y,w,h]=a.face,size=w*1.5;
+ c.clearRect(0,0,c.canvas.width,c.canvas.height);c.imageSmoothingEnabled=false;
+ c.drawImage(a.canvas,x-w*.25,y-h*1.3,size,size,0,0,c.canvas.width,c.canvas.height);
+ return portrait.toDataURL();
+}
 function clubEventChanges(event){
  return [['개인 팬','fans','명'],['구단 애정도','loyalty','']].map(([label,key,unit])=>{
   const delta=event[key],before=event.before[key],after=event.after[key];
@@ -96,15 +104,16 @@ function showClubEvent(event,preview=false){
  el.setAttribute('aria-labelledby','club-event-title');el.setAttribute('aria-describedby','club-event-caption');
  el.innerHTML='<article class="club-event-card '+(def.positive?'positive':'negative')+'">'+
   '<header class="club-event-top"><span>'+(preview?'구단 사건 미리보기':'경기장 밖 이야기')+'</span><span class="club-event-tone">'+(def.positive?'팬들의 응원':'팬들의 실망')+'</span></header>'+
-  '<div class="club-event-heading"><p>#'+event.actor.number+' · '+esc(event.player)+'</p><h2 id="club-event-title">'+esc(event.text)+'</h2></div>'+
+  '<div class="club-event-heading"><p>'+esc(clubEventActorLabel(event))+' 선수의 이야기</p><h2 id="club-event-title">'+esc(event.text)+'</h2></div>'+
   (preview?'<label class="club-preview-label">사건 선택 <select data-club-event-select>'+CLUB_EVENT_TYPES.map(x=>'<option value="'+x.id+'" '+(x.id===def.id?'selected':'')+'>'+x.title+'</option>').join('')+'</select></label>':'')+
-  '<div class="club-event-picture"><canvas width="900" height="460" role="img" aria-label="'+esc(event.player+' 선수가 '+def.title+' 사건에 등장하는 애니메이션')+'"></canvas><span class="club-event-place">'+esc(def.place)+'</span></div>'+
+  '<div class="club-event-picture"><div class="club-event-scene-heading"><span class="club-event-place">'+esc(def.place)+'</span><div class="club-event-actor"><img data-club-actor-portrait width="72" height="72" alt="'+esc(clubEventActorLabel(event)+' 선수 얼굴')+'"><div><small>이번 이야기의 선수</small><strong>'+esc(clubEventActorLabel(event))+'</strong></div></div></div><canvas data-club-scene width="900" height="460" role="img" aria-label="'+esc(clubEventActorLabel(event)+' 선수가 '+def.title+' 사건에 등장하는 애니메이션')+'"></canvas></div>'+
   (preview&&def.shots?'<div class="club-story-beats" aria-label="장면별로 보기">'+def.shots.map((s,i)=>'<button class="small ghost" data-club-scene-beat="'+i+'">'+(i+1)+'. '+esc(s[0])+'</button>').join('')+'</div>':'')+
   '<div class="club-event-caption" aria-live="polite"><span class="club-event-step"></span><p id="club-event-caption"></p></div>'+
   '<div class="club-event-changes" hidden>'+clubEventChanges(event)+'</div>'+
   '<footer class="club-event-actions"><span class="club-event-help">'+(preview?'미리보기 · 선수 수치는 바뀌지 않습니다.':'사건에 따른 변화는 이미 반영되었습니다.')+'</span><div><button data-club-event-skip>결과 바로 보기</button><button data-club-event-replay hidden>다시 재생</button><button class="primary" data-club-event-close>'+(preview?'닫기':'확인하고 계속')+'</button></div></footer></article>';
  const reduced=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
  const state=clubEventView={el,event,team:t,preview,elapsed:reduced?clubEventDuration(event):0,last:performance.now(),phase:-1,raf:0,focus:document.activeElement};
+ el.querySelector('[data-club-actor-portrait]').src=clubEventActorPortrait(event);
  document.body.append(el);el.showModal();el.querySelector('[data-club-event-close]').focus({preventScroll:true});
  const confirm=()=>{if(!state.preview&&state.phase<clubEventPhaseCount(state.event)-1)finishClubEventScene();else closeClubEvent();};
  el.addEventListener('cancel',e=>{e.preventDefault();confirm();});
@@ -158,7 +167,7 @@ function drawClubEventScene(c,event,ms){
  const ball=(x,y)=>{box(x-7,y-7,14,14,'#fff6da');box(x-5,y-5,3,4,'#c94b48');box(x+2,y+1,3,4,'#c94b48');};
  const bubble=(text,x,y,negative=false)=>{c.font='21px NeoDunggeunmo';const w=c.measureText(text).width+30;box(x-w/2,y-30,w,42,negative?'#ffe1d8':'#fff7d8');box(x-3,y+12,8,9,negative?'#ffe1d8':'#fff7d8');label(text,x,y,negative?'#6f2e36':'#183956',21);};
  const fan=(x,y,scale,index,moving=false)=>entranceFan(c,x,y,scale,tm,moving?ms:0,index);
- const athlete=(x,y,pose='idle',flip=false)=>sprite(c,x,y,2.85,tm,actor.number,'player',pose,ms,actor.id,flip);
+ const athlete=(x,y,pose='idle',flip=false)=>clubStoryPlayer(c,actor,tm,x,y,178,pose==='run'?'walk':pose==='throw'?'teach':pose,ms,flip);
  c.save();c.imageSmoothingEnabled=false;c.clearRect(0,0,900,460);
  sceneImage(c,def.id==='bench-song'?3:0,0,-190,900,675);
  box(0,0,900,460,'#061c3744');box(0,308,900,152,'#c9b894');

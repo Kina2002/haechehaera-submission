@@ -1,0 +1,407 @@
+{
+  "passed": true,
+  "checks": 100,
+  "rows": [
+    {
+      "name": "sad asset ready",
+      "ok": true
+    },
+    {
+      "name": "original artwork ready",
+      "ok": true
+    },
+    {
+      "name": "g04 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g05 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g06 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g07 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g08 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g09 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g14 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g16 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g18 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g19 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g21 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g22 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g23 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g24 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g27 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g30 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g31 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "g32 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b01 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b02 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b03 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b04 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b05 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b06 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b07 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b08 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b09 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b10 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b11 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "b12 uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "f23-awayLead uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "f23-awayTie uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "f23-awayChase uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "f23-awayExtend uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "f23-mixed uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "f23-awayScoreOut uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "f23-awayAdvance uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "f23-awayChance uses sad portrait",
+      "ok": true
+    },
+    {
+      "name": "우리 관객 g26",
+      "ok": true
+    },
+    {
+      "name": "상대 관객 g27",
+      "ok": true
+    },
+    {
+      "name": "우리 치어리더 g29",
+      "ok": true
+    },
+    {
+      "name": "우리 관객 f23-scoreOut",
+      "ok": true
+    },
+    {
+      "name": "palette 4/3 fits",
+      "ok": true
+    },
+    {
+      "name": "palette 11/5 fits",
+      "ok": true
+    },
+    {
+      "name": "palette 0/2 fits",
+      "ok": true
+    },
+    {
+      "name": "palette 3/7 fits",
+      "ok": true
+    },
+    {
+      "name": "team recolouring differs",
+      "ok": true
+    },
+    {
+      "name": "autograph opens",
+      "ok": true
+    },
+    {
+      "name": "autograph label",
+      "ok": true
+    },
+    {
+      "name": "autograph portrait",
+      "ok": true
+    },
+    {
+      "name": "autograph renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "autograph snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "litter opens",
+      "ok": true
+    },
+    {
+      "name": "litter label",
+      "ok": true
+    },
+    {
+      "name": "litter portrait",
+      "ok": true
+    },
+    {
+      "name": "litter renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "litter snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "donation opens",
+      "ok": true
+    },
+    {
+      "name": "donation label",
+      "ok": true
+    },
+    {
+      "name": "donation portrait",
+      "ok": true
+    },
+    {
+      "name": "donation renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "donation snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "ignore opens",
+      "ok": true
+    },
+    {
+      "name": "ignore label",
+      "ok": true
+    },
+    {
+      "name": "ignore portrait",
+      "ok": true
+    },
+    {
+      "name": "ignore renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "ignore snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "gift opens",
+      "ok": true
+    },
+    {
+      "name": "gift label",
+      "ok": true
+    },
+    {
+      "name": "gift portrait",
+      "ok": true
+    },
+    {
+      "name": "gift renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "gift snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "bench-song opens",
+      "ok": true
+    },
+    {
+      "name": "bench-song label",
+      "ok": true
+    },
+    {
+      "name": "bench-song portrait",
+      "ok": true
+    },
+    {
+      "name": "bench-song renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "bench-song snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "lost-child opens",
+      "ok": true
+    },
+    {
+      "name": "lost-child label",
+      "ok": true
+    },
+    {
+      "name": "lost-child portrait",
+      "ok": true
+    },
+    {
+      "name": "lost-child renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "lost-child snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "flat-interview opens",
+      "ok": true
+    },
+    {
+      "name": "flat-interview label",
+      "ok": true
+    },
+    {
+      "name": "flat-interview portrait",
+      "ok": true
+    },
+    {
+      "name": "flat-interview renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "flat-interview snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "youth-lesson opens",
+      "ok": true
+    },
+    {
+      "name": "youth-lesson label",
+      "ok": true
+    },
+    {
+      "name": "youth-lesson portrait",
+      "ok": true
+    },
+    {
+      "name": "youth-lesson renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "youth-lesson snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "concession-cut opens",
+      "ok": true
+    },
+    {
+      "name": "concession-cut label",
+      "ok": true
+    },
+    {
+      "name": "concession-cut portrait",
+      "ok": true
+    },
+    {
+      "name": "concession-cut renders actual actor",
+      "ok": true
+    },
+    {
+      "name": "concession-cut snapshot identity",
+      "ok": true
+    },
+    {
+      "name": "original state preserved",
+      "ok": true
+    }
+  ],
+  "runtimeErrors": []
+}

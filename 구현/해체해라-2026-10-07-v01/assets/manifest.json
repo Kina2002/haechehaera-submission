@@ -443,5 +443,10 @@
     "mime": "image/png",
     "sha256": "4af3f41c66e9165be865b794cd4652b7037de3f6b91ce70bc5f65f04f065afdc",
     "bytes": 777510
+  },
+  "assets/4d9aac81d0350111c93f.png": {
+    "mime": "image/png",
+    "sha256": "4d9aac81d0350111c93fe87778181b3a487b545e38e57f3b08432a90af219d5b",
+    "bytes": 1528291
   }
 }
