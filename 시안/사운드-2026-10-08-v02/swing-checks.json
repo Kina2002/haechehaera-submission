@@ -1,0 +1,30 @@
+{
+  "draft": true,
+  "integrated": false,
+  "order": [
+    "수정 전",
+    "수정 후",
+    "수정 전",
+    "수정 후"
+  ],
+  "original_preserved": true,
+  "old_high_frequency_energy_ratio": 0.962738,
+  "new_high_frequency_energy_ratio": 0.0,
+  "checks": [
+    {
+      "file": "03-old-swing.wav",
+      "seconds": 0.65,
+      "passed": true
+    },
+    {
+      "file": "04-short-swing.wav",
+      "seconds": 0.33,
+      "passed": true
+    },
+    {
+      "file": "00-swing-before-after.wav",
+      "seconds": 4.71,
+      "passed": true
+    }
+  ]
+}

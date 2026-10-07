@@ -1,0 +1,134 @@
+{
+  "overflow": false,
+  "status": "재생 중 · 수정 전후 전체 이어 듣기",
+  "tracks": [
+    {
+      "duration": 28.28,
+      "error": null,
+      "name": "수정 전후 전체 이어 듣기",
+      "paused": false,
+      "ready": 4,
+      "time": 0.12105
+    },
+    {
+      "duration": 5.25,
+      "error": null,
+      "name": "일반과 홈런 비교",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 0.7,
+      "error": null,
+      "name": "일반 타격",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 0.55,
+      "error": null,
+      "name": "새 홈런 타격",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 4.71,
+      "error": null,
+      "name": "헛스윙 수정 전후 비교",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 0.65,
+      "error": null,
+      "name": "기존 헛스윙",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 0.33,
+      "error": null,
+      "name": "새 헛스윙",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 2.72,
+      "error": null,
+      "name": "스트라이크 수정 전후 비교",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 0.65,
+      "error": null,
+      "name": "기존 스트라이크",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 0.62,
+      "error": null,
+      "name": "새 스트라이크",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 3.4,
+      "error": null,
+      "name": "아웃 수정 전후 비교",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 1.1,
+      "error": null,
+      "name": "기존 아웃",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 0.85,
+      "error": null,
+      "name": "새 아웃",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 8.95,
+      "error": null,
+      "name": "홈런 축하 수정 전후 비교",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 3.5,
+      "error": null,
+      "name": "기존 홈런 축하",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    },
+    {
+      "duration": 4,
+      "error": null,
+      "name": "새 홈런 축하",
+      "paused": true,
+      "ready": 4,
+      "time": 0
+    }
+  ]
+}
