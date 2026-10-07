@@ -100,7 +100,7 @@ contents += ['## 기본 플레이 흐름',
 files['README.md'] = '\n\n'.join(contents) + '\n'
 files['향후-구상과-보류.md'] = '# 향후 구상과 보류 항목\n\n현재 기능의 사용 방법과 구별하여, 다음 개발 범위를 정할 때 검토할 항목입니다.\n\n[전체 기능 목차](README.md)\n\n' + '\n\n'.join('## ' + title + '\n\n' + text for title, text in future) + '\n'
 
-if len(features) != 25 or len(files) != 27:
+if len(features) != 26 or len(files) != 28:
     raise ValueError('Unexpected feature count')
 if OUT.exists():
     raise FileExistsError(f'Destination already exists: {OUT}')
