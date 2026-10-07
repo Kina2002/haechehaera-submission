@@ -45,7 +45,7 @@
   tools/import_handoff.py: 최초 추출 작업에만 사용한 도구. 수정한 코드를 초기화하므로 다시 실행하지 마세요.
 
 검사
-  node --test tests/storage.test.cjs tests/player-generation.test.cjs tests/club-events.test.cjs
+  node --test tests/storage.test.cjs tests/player-generation.test.cjs tests/club-events.test.cjs tests/mlb.test.cjs tests/achievements.test.cjs
   python build.py --check
   python -m http.server 18727 --bind 127.0.0.1
   별도 검사 페이지: http://127.0.0.1:18727/tests.html?qa=1
@@ -62,3 +62,10 @@ MLB 진출
   시험값: 성공률 35~85%, 성공 이적료 5천만~1억 5천만 원, 실패 애정도 -20, 재도전 대기 3경기.
   성공 후 최소 9명을 유지하고 선수 기록·당시 모습·마지막 경기 자료를 보존합니다.
   src/mlb.js·mlb.css와 기능별 문서 F25를 참고하세요. 검사 도구는 tests.html에만 있습니다.
+
+구단 업적
+  상단 업적 또는 구단 홈/기록실에서 15개 업적의 진행도·달성 시점을 확인합니다.
+  경기 1/10/50회, 승리 1/10/50/100승, 한 선수 100안타/10홈런, 시설 1/5/10개, MLB 성공 1/3/10명.
+  달성하면 알림 하나로 묶어 표시하고, 확인 상태와 기록을 구단별로 저장합니다.
+  기존 기록으로 조건을 충족한 업적도 인정합니다. 트로피·자금 추가 지급은 없습니다.
+  src/achievements.js·achievements.css와 기능별 문서 F26을 참고하세요.
