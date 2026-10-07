@@ -3,6 +3,9 @@ window.FRAME_BOUNDS=[[{"rect":[30,70,153,276],"runs":[[72,70,85],[73,70,85],[74,
 (()=>{'use strict';
 const D=window.LAB_DATA,P=window.PLAYER_PARTS;
 for(let body=0;body<6;body++)for(let row=0;row<6;row++)for(let col=0;col<6;col++){const f=D.bodies[body].motion.frames[row][col],bounds=window.FRAME_BOUNDS[body][row*6+col];f.rect=bounds.rect;f.runs=bounds.runs;}
+// The sixth body's throw frame had its forearm marked as the face. These
+// landmarks follow the visible face and eyes under the cap in the source art.
+Object.assign(D.bodies[5].motion.frames[2][4],{face:[799,615,63,22],eyes:[[839,618,6,12],[853,618,6,10]]});
 const names={hair:'머리카락',beard:'수염',wear:'안경·선글라스',black:'아이블랙',eyes:'눈 모양',nose:'코',brows:'눈썹',mouth:'입'};
 const variants={hair:['아주 짧은 머리','짧은 옆머리','귀를 덮는 머리','목덜미 머리','귀 뒤로 넘긴 장발','웨이브 장발','낮게 묶은 머리'],beard:['짧은 턱수염','턱선 수염','짧은 전체 수염','풍성한 전체 수염','콧수염+턱수염'],wear:['얇은 둥근 안경','얇은 사각 안경','브라운 안경','반무테 안경','스포츠 선글라스','파란 스포츠 선글라스'],black:['짧은 아이블랙','긴 아이블랙','번진 아이블랙'],eyes:['기본 눈','차분한 눈','부드러운 눈','날카로운 눈','온화한 눈','반쯤 감은 눈'],nose:['기본 코','둥근 코','넓은 코','작은 코','긴 코','각진 코'],brows:['가는 일자','굵은 일자','완만한 아치','각진 눈썹','짧은 눈썹','완만한 사선'],mouth:['기본 입','옅은 미소','일자 입','부드러운 입','도톰한 입','얇은 입']};
 const prefixes={hair:'H',beard:'F',wear:'A',black:'I',eyes:'E',nose:'N',brows:'B',mouth:'M'};
@@ -56,7 +59,15 @@ function renderMotion(config){const b=D.bodies[config.body],row=config.row||0,co
  const es=(f.eyes||[]).map(e=>[e[0]+px,e[1]+py,e[2],e[3]]),ex=es.length?Math.min(...es.map(e=>e[0])):face[0]+face[2]*.12,ey=es.length?Math.min(...es.map(e=>e[1])):face[1]+face[3]*.1,ew=es.length?Math.max(...es.map(e=>e[0]+e[2]))-ex:face[2]*.76,eh=es.length?Math.max(...es.map(e=>e[1]+e[3]))-ey:face[3]*.3,eye=[ex,ey,ew,eh],rects={};
  if(row===5&&col===3&&es.length<2)eye.splice(0,4,face[0]+face[2]*.20,face[1]+face[3]*.08,face[2]*.66,face[3]*.26);
  const angle=es.length===2?Math.atan2((es[1][1]+es[1][3]/2)-(es[0][1]+es[0][3]/2),(es[1][0]+es[1][2]/2)-(es[0][0]+es[0][2]/2)):(f.tilt||0)*Math.PI/180;
- function part(kind){const index=sel[kind];if(index<0)return;const p=P.motion[ident(kind,index)];if(!p)return;const q=motionRect(kind,index,face,eye,cap);rects[kind]=q;if(es.length<2&&kind!=='hair'&&!(row===5&&col===3))return;
+ // A visible side profile can have just one annotated eye. Keep its accessories
+ // across walking frames; only genuinely hidden/downward faces suppress them.
+ if(es.length===1&&!(row===5&&col>=4)&&!(row===5&&col===3)){
+  const e=es[0],ref=b.motion.frames[row].map((pose,i)=>({pose,d:Math.abs(i-col)})).filter(v=>v.pose.eyes?.length===2).sort((a,b)=>a.d-b.d)[0]?.pose;
+  if(ref){const left=Math.min(...ref.eyes.map(v=>v[0])),right=Math.max(...ref.eyes.map(v=>v[0]+v[2]));eye.splice(0,4,face[0]+(left-ref.face[0])/ref.face[2]*face[2],e[1],(right-left)/ref.face[2]*face[2],e[3]);}
+  else eye.splice(0,4,face[0]+face[2]*.3,e[1],face[2]*.6,e[3]);
+ }
+ const hiddenFace=!es.length||(es.length===1&&row===5&&col>=4);
+ function part(kind){const index=sel[kind];if(index<0)return;const p=P.motion[ident(kind,index)];if(!p)return;if(hiddenFace&&kind!=='hair')return;const q=motionRect(kind,index,face,eye,cap);rects[kind]=q;
   // A hidden/downward face must not acquire floating spectacles or a beard on its helmet.
   const sp=crop('motion-'+ident(kind,index),p.views[direction],['hair','beard'].includes(kind)?colors[config.hairColor||0]:null),[x,y,w,h]=q;g.save();if(kind!=='hair'){const cx=eye[0]+eye[2]/2,cy=eye[1]+eye[3]/2;g.translate(cx,cy);g.rotate(angle);g.drawImage(sp,x-cx,y-cy,w,h);}else g.drawImage(sp,x,y,w,h);g.restore();}
  part('hair');g.drawImage(baseCanvas,0,0);eyes(g,f,px,py,eyeColors[config.eyeColor||0]);

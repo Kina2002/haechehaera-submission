@@ -7,6 +7,7 @@ if(TEST_ONLY){
  const setup=()=>{const {t,m}=fixture23();t.name='해체 드림즈';t.funds=1000000;t.balance.fanEventChance=0;t.players.forEach(p=>{p.fans=50;p.loyalty=60;p.contract=20;});m.done=true;m.score=[1,3];activeGame=true;selection=t.players[0].id;return {t,m};};
  panel.querySelector('[data-club-qa-preview]').onclick=()=>{const {t}=setup();t.match=null;screen='settings';render();previewClubEvent('bench-song');};
  panel.querySelector('[data-club-qa-run]').onclick=async()=>{
+  const originalPlayer=clubStoryPlayer;
   const report={events:[],rewardKinds:[],errors:[]},original=clone(data),oldScreen=screen,oldActive=activeGame,oldSelection=selection;
   await new Promise(resolve=>setTimeout(resolve,0));
   try{
@@ -43,14 +44,33 @@ if(TEST_ONLY){
     report.events.push({kind:event.kind,autoOpen:true,distinctFrames:sampleTimes.length,restore:true,seenPersisted:true,replayAndPreviewPreservePlayers:true,storyboardControls:!!CLUB_EVENT_TYPES[index].shots});
    }
    // All six actual body assets must render every cut, including old saves without companions.
-   let storyBodyFrames=0;
+   let storyBodyFrames=0,playerTransforms=0;
+   clubStoryPlayer=function(c,...args){
+    const tr=c.getTransform(),sx=Math.hypot(tr.a,tr.b),sy=Math.hypot(tr.c,tr.d);
+    assert(Math.abs(sx-sy)<.00001,'선수 신체 비율 왜곡');playerTransforms++;
+    const out=originalPlayer(c,...args);assert(Number.isFinite(out.hand.x)&&Number.isFinite(out.hand.y),'손 위치 누락');return out;
+   };
    for(const def of CLUB_EVENT_TYPES.filter(x=>x.shots))for(let body=0;body<6;body++){
-    const {t}=setup(),p=t.players[0];p.appearance.body=body;
+    const {t}=setup(),p=t.players[0];p.appearance.body=body;p.appearance.skin=body;p.appearance.parts={hair:6,beard:3,wear:1,black:1};
     const event={kind:def.id,actor:clone(p),player:p.name,primary:t.primary,secondary:t.secondary};
     const cv=canvasNew(900,460),ctx=cv.getContext('2d');
     for(const ms of [900,3100,5700,10000]){drawClubEventScene(ctx,event,ms);assert(cv.toDataURL().length>1000,'체형 장면 누락');storyBodyFrames++;}
    }
-   report.storyBodyFrames=storyBodyFrames;
+   report.storyBodyFrames=storyBodyFrames;report.playerTransforms=playerTransforms;
+   clubStoryPlayer=originalPlayer;
+   // One visible eye is a profile, not a missing face. Adjacent walking frames
+   // and the teaching pose must keep the selected glasses, beard and eye black.
+   let accessoryFrames=0;
+   for(let body=0;body<6;body++)for(const [row,col] of [[3,2],[3,3],[2,4],[2,1],[5,3]]){
+    const {t}=setup(),p=t.players[0];p.appearance.body=body;p.appearance.parts={hair:6,beard:3,wear:1,black:1};
+    const a=charFrame(p,t,'motion',row,col);
+    for(const kind of ['beard','wear','black'])assert(a.rects[kind]?.every(Number.isFinite),'동작 중 얼굴 장식 사라짐: '+[body,row,col,kind]);
+    assert(a.eye.box[2]>a.face[2]*.2,'한쪽 눈 안경 너비 압축');accessoryFrames++;
+    const cv=a.canvas,pixels=cv.getContext('2d').getImageData(0,0,cv.width,cv.height).data;
+    for(let x=0;x<cv.width;x++)assert(!pixels[x*4+3]&&!pixels[((cv.height-1)*cv.width+x)*4+3],'선수 상하 잘림');
+    for(let y=0;y<cv.height;y++)assert(!pixels[(y*cv.width)*4+3]&&!pixels[(y*cv.width+cv.width-1)*4+3],'선수 좌우 잘림');
+   }
+   report.accessoryFrames=accessoryFrames;
    // Exercise the real reward path, not just direct event application.
    const found=new Set();
    for(let seed=1;seed<=120;seed++){
@@ -66,7 +86,7 @@ if(TEST_ONLY){
    report.runtimeErrors=runtimeErrors.slice();assert(!report.runtimeErrors.length,'화면 오류 발생');
    report.passed=true;
   }catch(e){report.errors.push(e.message);report.passed=false;}
-  finally{if(clubEventView)closeClubEvent();data=original;screen=oldScreen;activeGame=oldActive;selection=oldSelection;render();}
+  finally{clubStoryPlayer=originalPlayer;if(clubEventView)closeClubEvent();data=original;screen=oldScreen;activeGame=oldActive;selection=oldSelection;render();}
   window.clubEventQAReport=report;panel.querySelector('[data-club-qa-report]').textContent=JSON.stringify(report,null,2);
  };
 }

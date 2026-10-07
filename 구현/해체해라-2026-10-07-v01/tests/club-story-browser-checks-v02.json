@@ -1,0 +1,389 @@
+{
+  "events": [
+    {
+      "kind": "autograph",
+      "autoOpen": true,
+      "distinctFrames": 4,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": true
+    },
+    {
+      "kind": "litter",
+      "autoOpen": true,
+      "distinctFrames": 4,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": true
+    },
+    {
+      "kind": "donation",
+      "autoOpen": true,
+      "distinctFrames": 4,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": true
+    },
+    {
+      "kind": "ignore",
+      "autoOpen": true,
+      "distinctFrames": 4,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": true
+    },
+    {
+      "kind": "gift",
+      "autoOpen": true,
+      "distinctFrames": 3,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": false
+    },
+    {
+      "kind": "bench-song",
+      "autoOpen": true,
+      "distinctFrames": 4,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": true
+    },
+    {
+      "kind": "lost-child",
+      "autoOpen": true,
+      "distinctFrames": 4,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": true
+    },
+    {
+      "kind": "flat-interview",
+      "autoOpen": true,
+      "distinctFrames": 4,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": true
+    },
+    {
+      "kind": "youth-lesson",
+      "autoOpen": true,
+      "distinctFrames": 4,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": true
+    },
+    {
+      "kind": "concession-cut",
+      "autoOpen": true,
+      "distinctFrames": 4,
+      "restore": true,
+      "seenPersisted": true,
+      "replayAndPreviewPreservePlayers": true,
+      "storyboardControls": true
+    }
+  ],
+  "rewardKinds": [
+    "donation",
+    "bench-song",
+    "youth-lesson",
+    "litter",
+    "gift",
+    "ignore",
+    "concession-cut",
+    "lost-child",
+    "autograph",
+    "flat-interview"
+  ],
+  "errors": [],
+  "rules": [
+    {
+      "name": "초기 12명 · 출전 9명 · 6체형",
+      "ok": true
+    },
+    {
+      "name": "시작 시설 0 · 시작 자금 3000",
+      "ok": true
+    },
+    {
+      "name": "초기 지급 반복 진입 시 선수 유지",
+      "ok": true
+    },
+    {
+      "name": "등번호 중복 방지",
+      "ok": true
+    },
+    {
+      "name": "35명 한도 초과 저장 거부",
+      "ok": true
+    },
+    {
+      "name": "영입 10~70 · 특별 능력 최대 1개 · 스태미나 40~60",
+      "ok": true
+    },
+    {
+      "name": "부족한 자금 거래는 잔액 유지",
+      "ok": true
+    },
+    {
+      "name": "훈련 연결에 모든 능력 포함",
+      "ok": true
+    },
+    {
+      "name": "100 능력은 성장 비용 0",
+      "ok": true
+    },
+    {
+      "name": "무체력도 출전 가능 · 능력 감소",
+      "ok": true
+    },
+    {
+      "name": "만루 볼넷 · 1득점 · 타수 제외",
+      "ok": true
+    },
+    {
+      "name": "볼넷에서 비강제 2루 주자는 유지",
+      "ok": true
+    },
+    {
+      "name": "1사 1·3루 병살은 득점 없음",
+      "ok": true
+    },
+    {
+      "name": "무사 병살은 아웃 2개",
+      "ok": true
+    },
+    {
+      "name": "만루 홈런 · 4득점과 4개 루 순회",
+      "ok": true
+    },
+    {
+      "name": "희생플라이는 타수 제외",
+      "ok": true
+    },
+    {
+      "name": "도루 실패는 타순 유지",
+      "ok": true
+    },
+    {
+      "name": "안타로 연속 무안타 해제",
+      "ok": true
+    },
+    {
+      "name": "본헤드 회당 3 · 상대에게 발생 없음",
+      "ok": true
+    },
+    {
+      "name": "새 회에서 본헤드 제한 초기화",
+      "ok": true
+    },
+    {
+      "name": "야구센스 비중 70%",
+      "ok": true
+    },
+    {
+      "name": "한 사건 한 멘트 · 팀 흐름 포함 61상황 244개",
+      "ok": true
+    },
+    {
+      "name": "멘트 직전 문구 반복 방지",
+      "ok": true
+    },
+    {
+      "name": "10초 지시 · 5초 반응",
+      "ok": true
+    },
+    {
+      "name": "공격 버튼은 대기 즉시 종료",
+      "ok": true
+    },
+    {
+      "name": "교체 선수는 타순·포지션 유지",
+      "ok": true
+    },
+    {
+      "name": "교체 후 재출전 거부",
+      "ok": true
+    },
+    {
+      "name": "누적 보상 중복 지급 방지",
+      "ok": true
+    },
+    {
+      "name": "피로 적용 후 영구 능력은 유지",
+      "ok": true
+    },
+    {
+      "name": "기준 요구액 재계약",
+      "ok": true
+    },
+    {
+      "name": "낮은 급여 제안 애정도 하락",
+      "ok": true
+    },
+    {
+      "name": "두 슬롯 독립 직렬화 복원",
+      "ok": true
+    },
+    {
+      "name": "손상된 외형 저장 거부",
+      "ok": true
+    },
+    {
+      "name": "6체형 모두 경기용 파츠 소스 존재",
+      "ok": true
+    },
+    {
+      "name": "상세·경기 실제 파츠 6체형 합성",
+      "ok": true
+    },
+    {
+      "name": "눈·머리 색 독립 보존",
+      "ok": true
+    },
+    {
+      "name": "내장 글꼴 두 종과 라이선스",
+      "ok": true
+    },
+    {
+      "name": "급여는 고능력에서 더 가파르게 증가",
+      "ok": true
+    },
+    {
+      "name": "평균40·12명·시설2개는 패배 적자 승리 소폭 흑자",
+      "ok": true
+    },
+    {
+      "name": "입장료50 무조건 유리한 문제 차단",
+      "ok": true
+    },
+    {
+      "name": "기존 급여·영입가 전환은 한 번만 적용",
+      "ok": true
+    },
+    {
+      "name": "진행 중인 경기는 경제 전환 유예",
+      "ok": true
+    },
+    {
+      "name": "선수35명·시설5개 운영비를 모두 합산",
+      "ok": true
+    },
+    {
+      "name": "원화 표시 · 0원·음수·억 단위",
+      "ok": true
+    },
+    {
+      "name": "입장료×실제 관중=표시 입장 수입",
+      "ok": true
+    },
+    {
+      "name": "원화 입력이 급여·입장료 판정값으로 정확히 복원",
+      "ok": true
+    },
+    {
+      "name": "매장 관중당 1000원 수입은 기존 경제와 동일",
+      "ok": true
+    },
+    {
+      "name": "입장 중 투구·체력·경기기록 진행 차단",
+      "ok": true
+    },
+    {
+      "name": "입장 종료 후 10초부터 지시 시작 · 중복 종료 방지",
+      "ok": true
+    },
+    {
+      "name": "입장 중 저장 복원 시 대기 상태 유지",
+      "ok": true
+    },
+    {
+      "name": "입장 → 준비 → 시작 순서와 5초대 길이",
+      "ok": true
+    },
+    {
+      "name": "실제 새 경기 생성 흐름도 첫 투구 전 입장 대기",
+      "ok": true
+    }
+  ],
+  "contracts": {
+    "checks": [
+      {
+        "name": "희망급여 90% 이하는 -3 · 복지로 상쇄하지 않음",
+        "ok": true
+      },
+      {
+        "name": "91%와 119%는 급여 애정도 변화 없음",
+        "ok": true
+      },
+      {
+        "name": "120% 상승확률 100%/0% 경계",
+        "ok": true
+      },
+      {
+        "name": "기본 확률 30% · 2000회 분포와 상한",
+        "ok": true
+      },
+      {
+        "name": "계약 중 능력·애정도 변화에도 희망급여 고정",
+        "ok": true
+      },
+      {
+        "name": "활약과 출전으로 계약 만료 때만 재산정",
+        "ok": true
+      },
+      {
+        "name": "저활약·미출전 선수 희망급여 하락도 가능",
+        "ok": true
+      },
+      {
+        "name": "80% 제안 수락 · 즉시 애정도 보너스 없음",
+        "ok": true
+      },
+      {
+        "name": "낮은 제안으로 애정도 0이면 12명도 즉시 이적",
+        "ok": true
+      },
+      {
+        "name": "9명 중 이적 → 8명과 빈 타순 저장·복원",
+        "ok": true
+      },
+      {
+        "name": "전원 이적 후에도 관리·훈련·홈·협상 화면 생성",
+        "ok": true
+      },
+      {
+        "name": "경기 정산에서 0 이적 · 기존 경기 선수와 기록 보존",
+        "ok": true
+      },
+      {
+        "name": "계약 자료 저장·복원과 9명 미만 영입 가능",
+        "ok": true
+      },
+      {
+        "name": "홈 선수 장식과 기대주 제거",
+        "ok": true
+      },
+      {
+        "name": "관리 상세 캐릭터·접히는 기록·협상 연결",
+        "ok": true
+      }
+    ],
+    "passed": 15,
+    "total": 15,
+    "runtimeErrors": []
+  },
+  "storyBodyFrames": 216,
+  "playerTransforms": 216,
+  "accessoryFrames": 30,
+  "runtimeErrors": [],
+  "passed": true
+}

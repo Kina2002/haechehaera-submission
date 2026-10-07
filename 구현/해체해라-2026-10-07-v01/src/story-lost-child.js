@@ -38,18 +38,17 @@ function drawLostChildStory(c,event,ms,scene){
   bubble('엄마… 어디 있어요?',541,270,true);
   if(u>.4){text('?',px+24,204,34,'#fff0b3');bubble('혼자 있네…?',251,172);}
  }else if(phase===1){
-  // Lower the actual player's body, keeping the original width/uniform, to
-  // bring their face toward the child's eye line before standing up together.
+  // Use the actual crouching pose. Scaling only the vertical axis squashed
+  // the head, glasses and torso on every body type.
   const px=lerp(351,434,part(0,.24));
   const lower=part(.03,.28)*(1-part(.69,.95));
-  c.save();c.translate(px,419);c.scale(1,1-lower*.36);
-  player(0,0,lower>.12?'teach':'idle',183);c.restore();
+  const face=player(px,419,lower>.12?'crouch':'idle',183);
   npc(525,419,'child',u<.3?'sad':'idle');
   if(u<.72){
    bubble('괜찮아. 같이 엄마를 찾아보자.',469,228);
    if(u>.34)bubble('네…!',589,299);
   }else{
-   line(px+37,359,503,368,'#efc49f',6);
+   line(face.hand.x,face.hand.y,503,365,face.skin,5);
    bubble('내 옆에서 같이 걸을까?',470,217);
   }
  }else if(phase===2){
@@ -58,9 +57,9 @@ function drawLostChildStory(c,event,ms,scene){
   const progress=ease(u),px=lerp(434,597,progress),cx=lerp(525,683,progress);
   const mx=lerp(801,754,part(.31,.91));
   npc(mx,416,'mother',u>.31&&u<.91?'walk':'idle');
-  player(px,419,u<.94?'walk':'idle',183);
+  const face=player(px,419,u<.94?'walk':'idle',183);
   npc(cx,419,'child',u<.94?'walk':'cheer');
-  if(u<.64)line(px+36,359,cx-21,367,'#efc49f',6);
+  if(u<.64)line(face.hand.x,face.hand.y,cx-24,365,face.skin,5);
   if(u<.35)bubble('엄마 옷은 무슨 색이니?',458,213);
   else if(u<.7){bubble('분홍색! 저기 엄마예요!',604,224);text('!',mx,233,33,'#ffeab3');}
   else{bubble('엄마!',643,267);bubble('여기 있었구나!',769,211);}

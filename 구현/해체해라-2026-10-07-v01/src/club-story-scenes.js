@@ -3,14 +3,30 @@ function clubStoryMoment(event,ms){
  const phase=clubEventScenePhase(ms,event),start=CLUB_STORY_CUTS[phase],end=CLUB_STORY_CUTS[phase+1]||CLUB_STORY_DURATION;
  return {phase,u:clamp((ms-start)/(end-start),0,1)};
 }
+// Find the exposed hand pixels in the actual recoloured pose, below the face.
+// Props can then follow both walking frames and every body/skin choice.
+function clubStoryHands(a,p){
+ if(a.storyHands)return a.storyHands;
+ const [fx,fy,fw,fh]=a.face,cv=a.baseCanvas,rgba=cv.getContext('2d').getImageData(0,0,cv.width,cv.height).data;
+ const rgb=(SKINS[p.appearance.skin]||SKINS[0]).match(/[a-f0-9]{2}/gi).map(v=>parseInt(v,16)),points=[];
+ for(let y=Math.ceil(fy+fh);y<Math.min(cv.height,a.anchorY-a.standHeight*.13);y++)for(let x=0;x<cv.width;x++){
+  const i=(y*cv.width+x)*4;if(rgba[i+3]<200)continue;
+  const shade=rgba[i]/rgb[0];if(shade<.65||shade>1.07)continue;
+  if(Math.abs(rgba[i+1]-rgb[1]*shade)<4&&Math.abs(rgba[i+2]-rgb[2]*shade)<4)points.push([x,y]);
+ }
+ const centre=fx+fw/2;
+ const tip=right=>{const half=points.filter(v=>right?v[0]>=centre:v[0]<centre);if(!half.length)return [centre+(right?1:-1)*fw*.55,fy+fh*1.5];const edge=(right?Math.max:Math.min)(...half.map(v=>v[0])),end=half.filter(v=>Math.abs(v[0]-edge)<5);return [end.reduce((n,v)=>n+v[0],0)/end.length,end.reduce((n,v)=>n+v[1],0)/end.length];};
+ return a.storyHands={left:tip(false),right:tip(true)};
+}
 function clubStoryPlayer(c,p,tm,x,y,height,pose,ms,flip=false){
- const poses={idle:[1,0],walk:[3,2+Math.floor(ms/190)%2],sad:[5,5],surprised:[5,3],teach:[2,4],bat:[0,0],swing:[0,3],cheer:[4,0]};
+ const poses={idle:[1,0],crouch:[2,1],walk:[3,2+Math.floor(ms/190)%2],sad:[5,5],surprised:[5,3],teach:[2,4],bat:[0,0],swing:[0,3],cheer:[4,0]};
  const [row,col]=poses[pose]||poses.idle,a=charFrame(p,tm,'motion',row,col),s=height/a.standHeight;
  c.save();c.translate(Math.round(x),Math.round(y));if(flip)c.scale(-1,1);
  c.fillStyle='#061c3450';c.fillRect(-height*.19,-3,height*.38,7);
  c.drawImage(a.canvas,Math.round(-a.anchorX*s),Math.round(-a.anchorY*s),Math.round(a.canvas.width*s),Math.round(a.canvas.height*s));c.restore();
- const [fx,fy,fw,fh]=a.face;
- return {x:x+(fx+fw/2-a.anchorX)*s*(flip?-1:1),y:y+(fy+fh*.48-a.anchorY)*s,width:fw*s,height:fh*s};
+ const [fx,fy,fw,fh]=a.face,point=(px,py)=>({x:x+(px-a.anchorX)*s*(flip?-1:1),y:y+(py-a.anchorY)*s});
+ const hands=clubStoryHands(a,p);
+ return {...point(fx+fw/2,fy+fh*.48),width:fw*s,height:fh*s,eyes:a.eye.eyes.map(e=>point(e[0]+e[2]/2,e[1]+e[3])),hand:point(...hands[flip?'left':'right']),skin:SKINS[p.appearance.skin]||SKINS[0]};
 }
 function drawClubStoryScene(c,event,ms){
  const def=clubEventDefinition(event);if(!def?.shots)return false;
@@ -48,7 +64,11 @@ function drawClubStoryScene(c,event,ms){
  const plaque=(s,x,y,w=190)=>{box(x-w/2,y-24,w,36,'#123b50');box(x-w/2,y+12,w,3,'#d4b47b');text(s,x,y,20);};
  c.save();c.imageSmoothingEnabled=false;c.clearRect(0,0,900,460);
  const scene={phase,u,actor,tm,colors,lerp,ease,box,line,text,bubble,player,fan,npc,ball,floor,plaque};
- if(event.kind==='bench-song')drawBenchSongStory(c,event,ms,scene);
+ if(event.kind==='autograph')drawAutographStory(c,event,ms,scene);
+ else if(event.kind==='litter')drawLitterStory(c,event,ms,scene);
+ else if(event.kind==='ignore')drawIgnoreStory(c,event,ms,scene);
+ else if(event.kind==='donation')drawDonationStory(c,event,ms,scene);
+ else if(event.kind==='bench-song')drawBenchSongStory(c,event,ms,scene);
  else if(event.kind==='lost-child')drawLostChildStory(c,event,ms,scene);
  else if(event.kind==='flat-interview')drawFlatInterviewStory(c,event,ms,scene);
  else if(event.kind==='youth-lesson')drawYouthLessonStory(c,event,ms,scene);
