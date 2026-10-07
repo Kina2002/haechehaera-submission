@@ -11,8 +11,10 @@ function clubStoryHands(a,p){
  const rgb=(SKINS[p.appearance.skin]||SKINS[0]).match(/[a-f0-9]{2}/gi).map(v=>parseInt(v,16)),points=[];
  for(let y=Math.ceil(fy+fh);y<Math.min(cv.height,a.anchorY-a.standHeight*.13);y++)for(let x=0;x<cv.width;x++){
   const i=(y*cv.width+x)*4;if(rgba[i+3]<200)continue;
-  const shade=rgba[i]/rgb[0];if(shade<.65||shade>1.07)continue;
-  if(Math.abs(rgba[i+1]-rgb[1]*shade)<4&&Math.abs(rgba[i+2]-rgb[2]*shade)<4)points.push([x,y]);
+  const shade=rgba[i]/rgb[0],shadow=shade>=.34&&shade<=1.02&&Math.abs(rgba[i+1]-rgb[1]*shade)<4&&Math.abs(rgba[i+2]-rgb[2]*shade)<4;
+  const highlights=[255,235,211].map((v,k)=>Math.max(rgb[k],v)),axis=[0,1,2].sort((a,b)=>(highlights[b]-rgb[b])-(highlights[a]-rgb[a]))[0],blend=(rgba[i+axis]-rgb[axis])/Math.max(1,highlights[axis]-rgb[axis]);
+  const lit=blend>=0&&blend<=.21&&rgb.every((v,k)=>Math.abs(rgba[i+k]-(v+(highlights[k]-v)*blend))<4);
+  if(shadow||lit)points.push([x,y]);
  }
  const centre=fx+fw/2;
  const tip=right=>{const half=points.filter(v=>right?v[0]>=centre:v[0]<centre);if(!half.length)return [centre+(right?1:-1)*fw*.55,fy+fh*1.5];const edge=(right?Math.max:Math.min)(...half.map(v=>v[0])),end=half.filter(v=>Math.abs(v[0]-edge)<5);return [end.reduce((n,v)=>n+v[0],0)/end.length,end.reduce((n,v)=>n+v[1],0)/end.length];};
