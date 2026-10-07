@@ -1,0 +1,175 @@
+{
+  "audioMetadata": {
+    "noHorizontalOverflow": true,
+    "tracks": [
+      {
+        "currentTime": 0,
+        "duration": 72.43,
+        "error": null,
+        "id": "00-listen-all",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 32,
+        "error": null,
+        "id": "bgm-01-play-ball",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 31.304354,
+        "error": null,
+        "id": "bgm-02-our-club",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 28.235283,
+        "error": null,
+        "id": "bgm-03-full-count",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 0.7,
+        "error": null,
+        "id": "sfx-bat",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 0.48,
+        "error": null,
+        "id": "sfx-glove",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 0.65,
+        "error": null,
+        "id": "sfx-whoosh",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 0.65,
+        "error": null,
+        "id": "sfx-strike",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 1.1,
+        "error": null,
+        "id": "sfx-out",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 3.5,
+        "error": null,
+        "id": "sfx-homerun",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 4.2,
+        "error": null,
+        "id": "sfx-win",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 3.3,
+        "error": null,
+        "id": "sfx-loss",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 2.3,
+        "error": null,
+        "id": "sfx-achievement",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 2.7,
+        "error": null,
+        "id": "sfx-warm_event",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 1.6,
+        "error": null,
+        "id": "sfx-bad_event",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 3.5,
+        "error": null,
+        "id": "sfx-mlb",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 0.22,
+        "error": null,
+        "id": "sfx-click",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 0,
+        "duration": 0.48,
+        "error": null,
+        "id": "sfx-confirm",
+        "loop": false,
+        "paused": true,
+        "readyState": 4
+      }
+    ]
+  },
+  "playbackAdvanced": true,
+  "exclusivePlayback": true,
+  "loopToggle": true,
+  "stopResetsPosition": true,
+  "volumeControlLabel": "65%",
+  "note": "Audio element volume is not exposed by read-only browser scope; subjective listening remains for the user."
+}
