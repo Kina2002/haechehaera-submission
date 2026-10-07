@@ -86,10 +86,10 @@ function drawBenchSongStory(c,event,ms,scene){
   const bow=ease(Math.min(u*2.4,1))*.085;
   c.save();c.translate(Math.round(x),feet);c.rotate(-bow);
   const face=player(0,0,'sad',205,true);
-  for(const side of [-1,1]){
-   const tx=face.x+face.width*.19*side,ty=face.y+face.height*.015;
+  for(const [index,eye] of face.eyes.entries()){
+   const tx=eye.x,ty=eye.y;
    box(tx,ty,4,Math.max(7,face.height*.15),'#a2eaff');
-   const drop=((ms-7400)/53+(side+1)*4)%15;
+   const drop=((ms-7400)/53+index*8)%15;
    box(tx-1,ty+face.height*.1+drop,5,7,'#8dd9fa');
    box(tx,ty+face.height*.1+drop,2,3,'#e7fbff');
   }

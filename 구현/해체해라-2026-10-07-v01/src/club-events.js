@@ -1,9 +1,13 @@
 // Club events use the game's own players, uniforms, scenery and pixel spectators.
 const CLUB_EVENT_TYPES = [
- {id:'autograph', title:'팬 사인회에 끝까지 남음', fans:18, loyalty:2, place:'구장 앞 · 팬 사인회', action:'마지막 팬의 공에도 정성껏 사인합니다.', response:'끝까지 기다려 줘서 고마워요!', positive:true},
- {id:'litter', title:'구장 주변 쓰레기 무단 투기', fans:-22, loyalty:-2, place:'경기 후 · 구장 앞 광장', action:'쓰레기통을 두고, 빈 컵을 바닥에 버립니다.', response:'방금 쓰레기를 버린 거야…?', positive:false},
- {id:'donation', title:'기부 소식이 알려짐', fans:25, loyalty:3, place:'구장 앞 · 나눔 행사', action:'선수가 기부함에 봉투를 넣습니다.', response:'경기장 밖에서도 멋진 선수네요!', positive:true},
- {id:'ignore', title:'팬의 인사를 무시함', fans:-18, loyalty:-3, place:'경기 후 · 퇴근길', action:'팬이 인사를 건네지만 그대로 지나칩니다.', response:'인사 한 번 해 줬으면 좋았을 텐데…', positive:false},
+ {id:'autograph', title:'팬 사인회에 끝까지 남음', fans:18, loyalty:2, place:"구장 앞 · 마지막 팬 사인회", positive:true,
+  shots:[["마지막 팬","해가 진 사인회장에 마지막 팬이 기다리고 있습니다."],["정성스러운 사인","선수가 책상에 놓인 야구공에 정성껏 사인합니다."],["직접 건네는 공","사인한 공을 마지막 팬의 손에 직접 건넵니다."],["끝까지 함께","선수가 끝까지 자리를 지키자 팬이 공을 품에 안고 감사 인사를 합니다."]]},
+ {id:'litter', title:'구장 주변 쓰레기 무단 투기', fans:-22, loyalty:-2, place:"경기 후 · 구장 출구", positive:false,
+  shots:[["마신 음료","구장 출구를 지나던 선수가 음료를 마십니다."],["바닥에 툭","쓰레기통이 바로 옆인데 빈 컵을 바닥에 버립니다."],["굴러가는 컵","버린 컵이 구장 앞 바닥을 굴러갑니다."],["팬들의 실망","모습을 지켜본 팬들이 실망한 표정을 짓습니다."]]},
+ {id:'donation', title:'기부 소식이 알려짐', fans:25, loyalty:3, place:"지역 유소년 야구 · 나눔 전달식", positive:true,
+  shots:[["나눔 현장","선수가 지역 유소년 야구 지원 전달식을 찾아옵니다."],["마음을 전해요","담당자에게 기부 봉투를 직접 전달합니다."],["아이들의 감사","아이들이 앞으로의 연습을 기대하며 감사 인사를 합니다."],["알려진 소식","구단 게시판에 기부 소식이 올라오고 팬들이 따뜻하게 반응합니다."]]},
+ {id:'ignore', title:'팬의 인사를 무시함', fans:-18, loyalty:-3, place:"경기 후 · 선수 버스 앞", positive:false,
+  shots:[["기다리는 팬","팬들이 선수 출구 앞에서 퇴근하는 선수를 기다립니다."],["반가운 인사","선수를 알아본 팬이 손을 흔들며 인사합니다."],["그대로 지나감","선수는 팬에게 시선을 돌리지 않고 버스 쪽으로 지나갑니다."],["내려가는 손","답을 기다리던 팬이 조용히 손을 내립니다."]]},
  {id:'gift', title:'어린이 팬에게 공을 선물함', fans:20, loyalty:2, place:'구장 앞 · 어린이 팬과의 만남', action:'어린이 팬에게 야구공을 건넵니다.', response:'이 공, 평생 간직할게요!', positive:true},
  {id:'bench-song', title:'후보 선수에게도 응원가가', fans:0, loyalty:3, place:'경기 종료 후 · 관중석 앞 퇴장 통로', positive:true,
   shots:[['퇴장길','경기가 끝나고 선수들이 더그아웃으로 돌아갑니다.'],['갑작스러운 응원가','관중석에서 오늘 뛰지 못한 선수의 응원가가 들립니다.'],['멈춰 선 발걸음','자신의 이름을 들은 선수가 걸음을 멈추고 팬들을 바라봅니다.'],['눈물의 인사','눈물을 흘린 선수가 팬들에게 고개를 숙여 인사합니다.']]},
@@ -162,35 +166,7 @@ function drawClubEventScene(c,event,ms){
  for(let i=0;i<11;i++)box(i*96,427,70,2,'#ae9d7d');
  box(0,442,900,18,'#183b4a');
  let x=mix(140,355,arrival);
- if(def.id==='ignore'){
-  x=phase===0?mix(140,290,arrival):mix(290,760,action);
-  fan(530,387,3.2,1);fan(607,381,2.8,2);
-  athlete(x,405,phase<2?'run':'idle');
-  if(phase===1){bubble('안녕하세요!',567,220);box(505,316+Math.sin(ms*.012)*7,9,28,'#eeb588');}
-  if(phase===2)bubble('…',567,237,true);
- }else if(def.id==='autograph'){
-  fan(mix(685,559,arrival),403,3.2,1,phase===0);fan(668,411,2.9,2);fan(754,399,2.6,3);
-  athlete(x,395,phase===0?'run':'idle');
-  box(301,333,226,14,'#704626');box(310,347,207,30,'#103f69');box(315,377,12,42,'#704626');box(500,377,12,42,'#704626');
-  label('팬 사인회',416,367,'#ffdc78',23);
-  const bx=phase===2?mix(430,530,clamp((ms-4400)/700,0,1)):432;
-  ball(bx,phase===2?316:322);
-  if(phase===1){const px=431+Math.sin(ms*.035)*8,py=310+Math.cos(ms*.025)*4;box(385,303,42,10,SKINS[actor.appearance.skin]||'#eeb588');box(px,py,4,15,'#182c4b');}
-  if(phase===2){bubble('감사합니다!',610,233);label('끝까지 함께한 사인회',450,72,'#fff4d4',25);}
- }else if(def.id==='donation'){
-  fan(620,405,3.2,1);fan(709,395,2.6,2);
-  athlete(x,405,phase===0?'run':phase===1?'throw':'idle');
-  box(467,322,87,79,'#ad703c');box(475,331,71,62,'#f4dca0');box(483,312,58,12,'#684928');box(493,316,36,4,'#112637');label('기부함',510,369,'#563a22',21);
-  if(action<.75){const u=clamp(action/.75,0,1),ex=mix(400,510,u),ey=mix(282,311,u);box(ex-17,ey-10,34,22,'#fff5dc');box(ex-12,ey-4,24,3,'#cfab7e');}
-  if(phase===2){bubble('함께 나눠요!',647,232);for(let i=0;i<4;i++)label('♥',430+i*38,245-((ms-4400)/24+i*14)%55,'#ffcd6e',21);}
- }else if(def.id==='litter'){
-  fan(640,405,3.2,1);fan(730,395,2.7,2);
-  box(517,317,67,85,'#215c61');box(509,310,83,14,'#31797c');box(530,332,42,8,'#102c36');label('휴지통',550,375,'#b6ddd8',17);
-  athlete(x,405,phase===0?'run':phase===1?'throw':'confused');
-  const u=clamp(action/.65,0,1),cx=mix(399,462,u),cy=295+u*112-Math.sin(u*Math.PI)*85;
-  box(cx-8,cy-13,17,22,'#fff2cc');box(cx-10,cy-15,21,5,'#d5765b');box(cx-4,cy-25,3,12,'#dfb662');
-  if(phase===2){bubble('쓰레기통이 바로 옆인데…',651,229,true);box(452,428,26,3,'#7f7768');}
- }else if(def.id==='gift'){
+ if(def.id==='gift'){
   fan(mix(668,558,arrival),405,2.1,1,phase===0);fan(651,398,3.25,2);athlete(x,405,phase===0?'run':phase===1?'throw':'idle');
   const u=clamp(action/.8,0,1);ball(mix(402,554,u),mix(294,358,u)-Math.sin(u*Math.PI)*30);
   if(phase===2){bubble('와! 내 야구공이다!',580,241);label('♥',600,318,'#d65762',28);}

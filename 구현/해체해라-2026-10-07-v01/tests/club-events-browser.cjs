@@ -15,7 +15,8 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
   report.regression=await page.evaluate(()=>({rules:ruleChecks(),contracts:checks26()}));
   assert.ok(report.regression.rules.every(x=>x.ok));
   assert.equal(report.regression.contracts.passed,report.regression.contracts.total);
-  for(let index=0;index<8;index++){
+  const eventCount=await page.evaluate(()=>CLUB_EVENT_TYPES.length);
+  for(let index=0;index<eventCount;index++){
    const initial=await page.evaluate(index=>{
     const {t,m}=fixture23();activeGame=true;t.name='해체 드림즈';t.balance.fanEventChance=0;t.funds=1000000;
     m.done=true;m.score=[1,3];reward(m);
@@ -27,12 +28,13 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
    assert.ok(await page.locator('.club-event-dialog').isVisible());
    const frames=await page.evaluate(()=>{
     cancelAnimationFrame(clubEventView.raf);
-    return [0,2900,6600].map(ms=>{
+    const times=clubEventDefinition(clubEventView.event).shots?[0,3000,5900,10000]:[0,2900,6600];
+    return times.map(ms=>{
      clubEventView.elapsed=ms;paintClubEventView(clubEventView);
      return clubEventView.el.querySelector('canvas').toDataURL();
     });
    });
-   assert.equal(new Set(frames).size,3,'Each animation must visibly progress through all phases');
+   assert.equal(new Set(frames).size,frames.length,'Each animation must visibly progress through all phases');
    assert.ok(await page.locator('.club-event-changes').first().isVisible());
    const canvasBounds=await page.locator('.club-event-dialog canvas').boundingBox();
    assert.ok(canvasBounds.width>300&&canvasBounds.height>100);
@@ -48,7 +50,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
    assert.deepEqual(await page.evaluate(()=>team().players.map(p=>[p.fans,p.loyalty])),after.fans);
    await page.evaluate(()=>render());
    assert.equal(await page.locator('.club-event-dialog').count(),0,'Acknowledged events must not auto-open again');
-   report.events.push({kind:initial.kind,autoOpen:true,distinctFrames:3,seenPersisted:true,replayDoesNotReapply:true});
+   report.events.push({kind:initial.kind,autoOpen:true,distinctFrames:frames.length,seenPersisted:true,replayDoesNotReapply:true});
   }
   // Restored unread data must notify once after returning to the club.
   report.restore=await page.evaluate(()=>{
@@ -65,7 +67,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
   const before=await page.evaluate(()=>JSON.stringify(team()));
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.evaluate(()=>ClubEvents.preview('autograph'));
-  assert.equal(await page.evaluate(()=>clubEventView.elapsed),6600);
+  assert.equal(await page.evaluate(()=>clubEventView.elapsed),10000);
   await page.setViewportSize({width:390,height:844});
   const responsive=await page.evaluate(()=>{
    const el=clubEventView.el,r=el.getBoundingClientRect();

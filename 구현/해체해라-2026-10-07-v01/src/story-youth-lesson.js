@@ -52,11 +52,11 @@ function drawYouthLessonStory(c,event,ms,scene){
   bubble('이렇게요?',672,259);
  }else if(phase===2){
   const hit=u>=.46;
-  player(344,419,'teach',189);
+  const coach=player(344,419,'teach',189);
   npc(500,419,'youth',hit?'swing':'bat',1);
   // A slow underhand toss travels from the coach's hand to the bat. After
   // contact it heads out into the field; a short trail makes its direction clear.
-  const tossPoint=v=>({x:lerp(387,552,v),y:lerp(335,372,v)-Math.sin(v*Math.PI)*43});
+  const tossPoint=v=>({x:lerp(coach.hand.x,552,v),y:lerp(coach.hand.y,372,v)-Math.sin(v*Math.PI)*43});
   const hitPoint=v=>({x:lerp(552,867,v),y:lerp(372,222,v)-Math.sin(v*Math.PI)*47});
   const progress=hit?(u-.46)/.54:u/.46,point=hit?hitPoint:tossPoint;
   for(let i=3;i>0;i--){
@@ -74,17 +74,18 @@ function drawYouthLessonStory(c,event,ms,scene){
   bubble(hit?'맞았다! 공이 날아간다!':'하나, 둘… 공을 보자!',hit?662:401,177);
  }else{
   const close=part(0,.35),px=lerp(344,387,close),cx=lerp(500,467,close);
-  player(px,419,u<.2?'walk':'teach',189);
-  npc(cx,419,'youth','cheer',1);
+  const coach=player(px,419,u<.2?'walk':'teach',189);
+  const childX=lerp(cx,coach.hand.x+27,close),childY=lerp(419,clamp(coach.hand.y+78,380,445),close);
+  npc(childX,childY,'youth','cheer',1);
   if(u>.18){
-   // The coach lowers a palm to the smaller child's raised hand.
-   line(px+35,326,cx-25,342,'#efc49f',7);
-   box(cx-29,335,9,10,'#efc49f');
+   // Bring the child's raised hand to the coach's real hand, without drawing
+   // an extra arm over the player's body or changing their skin colour.
+   const hx=coach.hand.x,hy=coach.hand.y;
    for(let i=0;i<4;i++){
     const a=i*Math.PI/2+.35;
-    line(cx-26+Math.cos(a)*13,338+Math.sin(a)*13,cx-26+Math.cos(a)*20,338+Math.sin(a)*20,'#ffe49a',3);
+    line(hx+Math.cos(a)*13,hy+Math.sin(a)*13,hx+Math.cos(a)*20,hy+Math.sin(a)*20,'#ffe49a',3);
    }
-   text('짝!',cx-26,310,22,'#fff1c3');
+   text('짝!',hx,hy-25,22,'#fff1c3');
   }
   bubble('잘했어! 지금 그 자세야.',438,165);
   bubble('나도 해 볼래요!',724,249);

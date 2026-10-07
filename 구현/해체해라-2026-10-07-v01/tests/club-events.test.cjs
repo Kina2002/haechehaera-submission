@@ -88,13 +88,13 @@ test('departing or unavailable players cannot receive a new event and an empty p
  assert.deepEqual(result,[null,null,null,0]);
 });
 
-test('five story events have four timed shots; original five keep their timing',()=>{
+test('nine story events have four timed shots; the ball gift keeps its timing',()=>{
  const run=fixture();
- for(const kind of ['bench-song','lost-child','flat-interview','youth-lesson','concession-cut']){
+ for(const kind of ['autograph','litter','ignore','donation','bench-song','lost-child','flat-interview','youth-lesson','concession-cut']){
   const result=run(`(()=>{const e={kind:'${kind}'};return [clubEventDuration(e),clubEventSceneEnd(e),[0,2199,2200,4799,4800,7399,7400,10000].map(ms=>clubEventScenePhase(ms,e)),clubEventDefinition(e).shots.length];})()`);
   assert.deepEqual(result,[10000,7400,[0,0,1,1,2,2,3,3],4]);
  }
- assert.deepEqual(run("[clubEventDuration({kind:'autograph'}),clubEventPhaseCount({kind:'autograph'}),clubEventSceneEnd({kind:'autograph'})]"),[6600,3,4400]);
+ assert.deepEqual(run("[clubEventDuration({kind:'gift'}),clubEventPhaseCount({kind:'gift'}),clubEventSceneEnd({kind:'gift'})]"),[6600,3,4400]);
 });
 
 test('companions preserve the actual teammates without aliasing saved players',()=>{
