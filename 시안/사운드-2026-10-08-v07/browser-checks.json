@@ -1,0 +1,83 @@
+{
+  "audio": [
+    {
+      "duration": 7.363424,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/00-revised-all.wav"
+    },
+    {
+      "duration": 1.713424,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/01-commentary-mic-aa.wav"
+    },
+    {
+      "duration": 3.563424,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/00-mic-before-after.wav"
+    },
+    {
+      "duration": 5,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/05-rival-cheer-rising.wav"
+    },
+    {
+      "duration": 10.65,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/00-trumpet-before-after.wav"
+    },
+    {
+      "duration": 0.25,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/06-bat-louder.wav"
+    },
+    {
+      "duration": 0.29,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/07-homerun-bat-louder.wav"
+    },
+    {
+      "duration": 5,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/02-rival-fans-tease.wav"
+    },
+    {
+      "duration": 5,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/03-home-fans-sad.wav"
+    },
+    {
+      "duration": 5,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/04-home-cheer-support.wav"
+    }
+  ],
+  "overflow": false,
+  "playbackObserved": [
+    {
+      "src": "audio/00-revised-all.wav",
+      "time": 0.170353
+    }
+  ],
+  "stopped": true,
+  "consoleErrors": []
+}

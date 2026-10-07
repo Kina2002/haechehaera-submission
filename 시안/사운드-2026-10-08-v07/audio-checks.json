@@ -1,0 +1,195 @@
+{
+  "integrated": false,
+  "tracks": [
+    {
+      "id": "01-commentary-mic-aa",
+      "title": "중계진 · 에코 아, 아",
+      "seconds": 1.713,
+      "true_peak_4x_dbfs": -4.82,
+      "sha256": "ed1c15f21dd28d5a627fd0b33140ec303e8820ec44ab663ed4b25d0b86a8dac5",
+      "passed": true,
+      "state": "new_draft",
+      "kind": "sfx",
+      "echo_delays_seconds": [
+        0.12,
+        0.24,
+        0.36,
+        0.48,
+        0.6
+      ],
+      "voice_source": {
+        "text": "아.",
+        "voice": "ko-KR-HyunsuMultilingualNeural",
+        "rate": "-15%",
+        "pitch": "-3Hz",
+        "provider": "Microsoft Edge TTS via edge-tts",
+        "synthetic": true,
+        "integrated": false,
+        "edit": "One vowel, duration adjusted to 0.34 and 0.40 seconds with pitch preserved; repeated with 0.16 second gap",
+        "sha256": "612c0e1adf443074cc1b67c962409574e089d70180d99b249cc6c939eb8d1c48"
+      }
+    },
+    {
+      "id": "05-rival-cheer-rising",
+      "title": "어머, 또요? · 끝음 올리기",
+      "seconds": 5.0,
+      "true_peak_4x_dbfs": -1.31,
+      "sha256": "a1534e9f9d66887b49a4a7189b634ffb3dde515cda03aafcdecb0572085e5d80",
+      "passed": true,
+      "state": "new_draft",
+      "kind": "bgm",
+      "bpm": 132,
+      "ending_direction": "up",
+      "score_changes": [
+        {
+          "beat": 6.25,
+          "channel": 0,
+          "kind": "note_on",
+          "old": 74,
+          "new": 79
+        },
+        {
+          "beat": 6.791666666666667,
+          "channel": 0,
+          "kind": "pitchwheel",
+          "old": -1400,
+          "new": 1400
+        },
+        {
+          "beat": 6.90625,
+          "channel": 0,
+          "kind": "pitchwheel",
+          "old": -3400,
+          "new": 3400
+        },
+        {
+          "beat": 7.029166666666667,
+          "channel": 0,
+          "kind": "pitchwheel",
+          "old": -6100,
+          "new": 6100
+        },
+        {
+          "beat": 7.069791666666666,
+          "channel": 0,
+          "kind": "note_off",
+          "old": 74,
+          "new": 79
+        },
+        {
+          "beat": 7.2,
+          "channel": 1,
+          "kind": "note_on",
+          "old": 67,
+          "new": 81
+        },
+        {
+          "beat": 7.31875,
+          "channel": 1,
+          "kind": "pitchwheel",
+          "old": -1400,
+          "new": 1400
+        },
+        {
+          "beat": 7.34375,
+          "channel": 1,
+          "kind": "pitchwheel",
+          "old": -3400,
+          "new": 3400
+        },
+        {
+          "beat": 7.370833333333334,
+          "channel": 1,
+          "kind": "pitchwheel",
+          "old": -6100,
+          "new": 6100
+        },
+        {
+          "beat": 7.380208333333333,
+          "channel": 1,
+          "kind": "note_off",
+          "old": 67,
+          "new": 81
+        }
+      ]
+    },
+    {
+      "id": "06-bat-louder",
+      "title": "일반 타격 · 더 크게 딱!",
+      "seconds": 0.25,
+      "true_peak_4x_dbfs": -1.01,
+      "sha256": "efa8392ed30e2fbf0dfc73751f69d950ac3b63065ff80d9a78d56e306422bd1c",
+      "passed": true,
+      "state": "retained",
+      "unchanged_copy": true
+    },
+    {
+      "id": "07-homerun-bat-louder",
+      "title": "홈런 타격 · 더 크게 딱!",
+      "seconds": 0.29,
+      "true_peak_4x_dbfs": -1.01,
+      "sha256": "451765c493cc1cb95a94721ebf02554be6090f7da56557b1fbab789f4675d616",
+      "passed": true,
+      "state": "retained",
+      "unchanged_copy": true
+    },
+    {
+      "id": "02-rival-fans-tease",
+      "title": "상대 관객 · 관중석 한마디",
+      "seconds": 5.0,
+      "true_peak_4x_dbfs": -1.41,
+      "sha256": "5fb6696a7e24b416bfab830e45e0a4dbceb89267748c0751da3ed960f562b0ec",
+      "passed": true,
+      "state": "retained",
+      "unchanged_copy": true
+    },
+    {
+      "id": "03-home-fans-sad",
+      "title": "우리 관객 · 또 놓쳤네…",
+      "seconds": 5.0,
+      "true_peak_4x_dbfs": -4.03,
+      "sha256": "d315ae7189e6c30bc73b5fbae979b2f634c165c8153e2da385f330d85c9fd68f",
+      "passed": true,
+      "state": "retained",
+      "unchanged_copy": true
+    },
+    {
+      "id": "04-home-cheer-support",
+      "title": "우리 치어리더 · 다 같이 박수!",
+      "seconds": 5.0,
+      "true_peak_4x_dbfs": -1.41,
+      "sha256": "b5c6cdef8b4dac187c49806b9d49c67b07b31f30a5fb8ba25db2cbc682aa3f6a",
+      "passed": true,
+      "state": "retained",
+      "unchanged_copy": true
+    },
+    {
+      "id": "00-mic-before-after",
+      "title": "마이크 · 우웅 → 에코 아, 아",
+      "seconds": 3.563,
+      "true_peak_4x_dbfs": -4.82,
+      "sha256": "4f66200c49bbf1fa11e695472efd206862572436aef5a1e90c11e2e3cf14fe92",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "00-trumpet-before-after",
+      "title": "어머, 또요? · 내리는 끝음 → 올리는 끝음",
+      "seconds": 10.65,
+      "true_peak_4x_dbfs": -1.31,
+      "sha256": "1fdf14f17d1731d3b619a7c35854ca85dec9134e1af560bb1b721f0f4bd8c349",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "00-revised-all",
+      "title": "이번 수정 · 에코 아, 아 → 끝음 올린 트럼펫",
+      "seconds": 7.363,
+      "true_peak_4x_dbfs": -1.31,
+      "sha256": "a8e079cd852621bfe87cc184475c5cd86dace407bd44bb7fbf01b868946799e6",
+      "passed": true,
+      "kind": "comparison"
+    }
+  ],
+  "listening_review": "Subjective review pending; objective decoding and waveform checks only"
+}
