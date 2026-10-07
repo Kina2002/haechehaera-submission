@@ -1,0 +1,46 @@
+{
+  "model": "faster-whisper small.en",
+  "automated_transcript": true,
+  "note": "Timing aid only; subjective listening is still required.",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 0.74,
+      "text": " SAVE!",
+      "words": [
+        {
+          "start": 0.0,
+          "end": 0.74,
+          "word": " SAVE!",
+          "probability": 0.4068010598421097
+        }
+      ]
+    },
+    {
+      "start": 1.66,
+      "end": 1.96,
+      "text": " STRIKE!",
+      "words": [
+        {
+          "start": 1.66,
+          "end": 1.96,
+          "word": " STRIKE!",
+          "probability": 0.7165154914061228
+        }
+      ]
+    },
+    {
+      "start": 2.76,
+      "end": 2.92,
+      "text": " OUT!",
+      "words": [
+        {
+          "start": 2.76,
+          "end": 2.92,
+          "word": " OUT!",
+          "probability": 0.9419832825660706
+        }
+      ]
+    }
+  ]
+}

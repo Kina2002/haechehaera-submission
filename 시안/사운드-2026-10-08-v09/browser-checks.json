@@ -1,0 +1,60 @@
+{
+  "audios": [
+    {
+      "duration": 3.284422,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/00-safe-strike-out.wav"
+    },
+    {
+      "duration": 0.674966,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/safe-b.wav"
+    },
+    {
+      "duration": 0.732585,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/strike-new.wav"
+    },
+    {
+      "duration": 1.682562,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/strike-before-after.wav"
+    },
+    {
+      "duration": 0.676871,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/out-new.wav"
+    },
+    {
+      "duration": 2.391882,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/out-before-after.wav"
+    },
+    {
+      "duration": 0.674966,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/safe-a.wav"
+    }
+  ],
+  "overflow": false,
+  "played": {
+    "ended": true,
+    "time": 3.284422
+  },
+  "stopResetsAll": true,
+  "consoleErrors": []
+}

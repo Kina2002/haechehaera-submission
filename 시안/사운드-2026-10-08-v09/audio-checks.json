@@ -1,0 +1,117 @@
+{
+  "draft": true,
+  "integrated": false,
+  "safe_reference_unchanged": true,
+  "reference_choice": "v08 default B; A retained too",
+  "tracks": [
+    {
+      "id": "strike-new",
+      "title": "새 스트라이크",
+      "seconds": 0.733,
+      "peak_4x_dbfs": -1.51,
+      "rms_dbfs": -15.04,
+      "sha256": "841e4755f3750c29f0391efba51f7be17e25bcb3e276c9b818a17ceb1705fa88",
+      "passed": true,
+      "state": "new_draft",
+      "ai_generated": true,
+      "source_file": "strike-101.wav",
+      "source_sha256": "ccdba3d9cd19e59f1f0e97fa9d0c18b3193b48825880f53fb71bef41046a2a94",
+      "removed_outer_silence_seconds": [
+        0.03224489795918367,
+        0.1851700680272109
+      ],
+      "speed_change": false,
+      "pitch_change": false,
+      "reference": "v08 safe-b",
+      "compressor": {
+        "ratio": 4,
+        "threshold": 0.3,
+        "lookahead_ms": 3,
+        "release_ms": 35,
+        "minimum_gain_db": -10.33
+      }
+    },
+    {
+      "id": "out-new",
+      "title": "새 아웃",
+      "seconds": 0.677,
+      "peak_4x_dbfs": -1.51,
+      "rms_dbfs": -15.95,
+      "sha256": "48d31bd49f2c692a7e5d9ccb40b9da16a5233974fea99beb7936c85cdb849253",
+      "passed": true,
+      "state": "new_draft",
+      "ai_generated": true,
+      "source_file": "out-34.wav",
+      "source_sha256": "91819a52487654f003dfccdcc3b5bd1982f9ac0b904f7b32f4eae7f075e32a47",
+      "removed_outer_silence_seconds": [
+        0.04984126984126984,
+        0.18328798185941042
+      ],
+      "speed_change": false,
+      "pitch_change": false,
+      "reference": "v08 safe-b",
+      "compressor": {
+        "ratio": 4,
+        "threshold": 0.3,
+        "lookahead_ms": 3,
+        "release_ms": 35,
+        "minimum_gain_db": -11.86
+      }
+    },
+    {
+      "id": "safe-b",
+      "title": "세이프 B · 기준 그대로",
+      "seconds": 0.675,
+      "peak_4x_dbfs": -4.57,
+      "rms_dbfs": -13.15,
+      "sha256": "d96be2c0103af2fcb1fb43f698d8e98f62148e1ed20cf011c771d3cb1c207f0e",
+      "passed": true,
+      "state": "retained_reference",
+      "unchanged_copy": true,
+      "selected": false
+    },
+    {
+      "id": "safe-a",
+      "title": "세이프 A · 그대로",
+      "seconds": 0.675,
+      "peak_4x_dbfs": -4.33,
+      "rms_dbfs": -13.15,
+      "sha256": "ab61103811720179fb6a10d7fb4d7281c8eae404499bea44ef1f3a58937e76b9",
+      "passed": true,
+      "state": "retained_reference",
+      "unchanged_copy": true,
+      "selected": false
+    },
+    {
+      "id": "00-safe-strike-out",
+      "title": "세이프 → 새 스트라이크 → 새 아웃",
+      "seconds": 3.284,
+      "peak_4x_dbfs": -1.51,
+      "rms_dbfs": -16.54,
+      "sha256": "b4cbe358930a5c414d4a3f82d77950ea96339a41ca0b856790eb04d8ef9f12f3",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "strike-before-after",
+      "title": "스트라이크 이전 → 새 시안",
+      "seconds": 1.683,
+      "peak_4x_dbfs": -1.51,
+      "rms_dbfs": -16.25,
+      "sha256": "c7c47ba78156dcd96a75f59f1659518da29186e93c76b2b24b3e233a917dd1af",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "out-before-after",
+      "title": "아웃 이전 → 새 시안",
+      "seconds": 2.392,
+      "peak_4x_dbfs": -1.51,
+      "rms_dbfs": -15.26,
+      "sha256": "81e84b259d9ed31ae3bf9b8d1e92d569aa34db34cf1d944f8101783bbdadf505",
+      "passed": true,
+      "kind": "comparison"
+    }
+  ],
+  "listening_review": "Word clarity, voice similarity and preference need user listening; signal checks only."
+}
