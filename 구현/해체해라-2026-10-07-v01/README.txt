@@ -25,7 +25,14 @@
   스태미나: 초기·영입 모두 별도 40~60, 특별 능력 추첨에서 제외.
   기존 선수와 이미 생성된 후보는 유지하며 이후 새로 생성할 때 적용합니다.
 
+구단 사건 연출
+  경기 밖 사건 5종을 실제 선수 외형과 유니폼으로 약 6.6초 동안 재생합니다.
+  새 사건은 결과 화면에서 자동으로 알리고, 실제 팬·애정도 변화를 확인한 뒤 닫습니다.
+  결과 바로 보기, 구단 소식에서 다시 보기, 설정에서 미리보기를 제공합니다.
+  재생 때문에 수치가 중복 적용되지 않으며, 미확인 상태도 저장됩니다.
+
 개발용 파일
+  src/club-events.js, src/club-events.css: 사건 알림·5종 애니메이션·확인 상태·다시 보기.
   src/game.js: 기본 경기 규칙과 화면, 저장 연결.
   src/extensions.js: 경영·계약·캐릭터·판정·경기 연출 등 현재 통합 기능.
   src/character-data.js, src/frame-bounds.js: 캐릭터 데이터와 프레임 위치.
@@ -36,7 +43,7 @@
   tools/import_handoff.py: 최초 추출 작업에만 사용한 도구. 수정한 코드를 초기화하므로 다시 실행하지 마세요.
 
 검사
-  node --test tests/storage.test.cjs tests/player-generation.test.cjs
+  node --test tests/storage.test.cjs tests/player-generation.test.cjs tests/club-events.test.cjs
   python build.py --check
   python -m http.server 18727 --bind 127.0.0.1
   별도 검사 페이지: http://127.0.0.1:18727/tests.html?qa=1
