@@ -38,7 +38,7 @@ def build():
         if len(data) >= 25 * 1024 * 1024:
             raise ValueError(f"Static asset too large: {name}")
         if name.endswith((".css", ".js")):
-            for asset in re.findall(r"(?:\.\./)?(assets/[a-f0-9]{20}\.(?:png|woff2?|ttf))", data.decode("utf-8")):
+            for asset in re.findall(r"(?:\.\./)?(assets/[a-f0-9]{20}\.(?:png|woff2?|ttf|mp3|wav))", data.decode("utf-8")):
                 if asset not in files:
                     raise ValueError(f"Missing asset in {name}: {asset}")
 

@@ -1,0 +1,263 @@
+{
+  "date": "2026-10-08",
+  "status": "game_integrated",
+  "request": "최신 사운드 파일과 GitHub 저장 및 게임 상황별 적용",
+  "tracks": [
+    {
+      "id": "bgm-main",
+      "title": "오늘도 해체는 없다",
+      "source": "시안/사운드-2026-10-08-v01/audio/bgm-01-play-ball.wav",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/dcc10d30233b598f03f9.wav",
+      "sha256": "dcc10d30233b598f03f940da74b85b479e90626a427c56e776cda810f309539b",
+      "bytes": 5644844,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "bgm-club",
+      "title": "우리 동네 야구단",
+      "source": "시안/사운드-2026-10-08-v01/audio/bgm-02-our-club.wav",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/870c0fd4b5f61d370e16.wav",
+      "sha256": "870c0fd4b5f61d370e16a012b292aae1c9503451c74acc32bfe90cee04b5ee7f",
+      "bytes": 5522132,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "bgm-tense",
+      "title": "9회말 풀카운트",
+      "source": "시안/사운드-2026-10-08-v01/audio/bgm-03-full-count.wav",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/371bf71b7da0544a2bea.wav",
+      "sha256": "371bf71b7da0544a2beabf7b56593d529afeb90ba2175f129943fa05c3f37bde",
+      "bytes": 4980748,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "pitch",
+      "title": "투구",
+      "source": "시안/사용자-선택-효과음-2026-10-08-v01/local-audio/ElevenLabs_Pitcher_throwing_a_fastball,_whoosh_sound.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/f4b5cf024da11f063e96.mp3",
+      "sha256": "f4b5cf024da11f063e96080548b9b98967cbefd19bbd6af329551105af684219",
+      "bytes": 17181,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "miss",
+      "title": "헛스윙",
+      "source": "시안/사용자-선택-효과음-2026-10-08-v01/local-audio/floraphonic-swing-whoosh-1-198494.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/0b2cdafc966cf78eec36.mp3",
+      "sha256": "0b2cdafc966cf78eec3668674480801721c5dd2804244a7c8ecdb027cda64964",
+      "bytes": 7680,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "crowd-hr",
+      "title": "우리 홈런 관중 환호",
+      "source": "시안/사용자-선택-효과음-2026-10-08-v01/local-audio/homerun-crowd-first4.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/0a4d034aab6d439794a9.mp3",
+      "sha256": "0a4d034aab6d439794a9d44ad43c2ff64030cc6b8f90c1af7e180153a0190be3",
+      "bytes": 97175,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "bat",
+      "title": "일반 타격",
+      "source": "시안/사운드-2026-10-08-v07/audio/06-bat-louder.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/72fb8bdf6382056ac79f.mp3",
+      "sha256": "72fb8bdf6382056ac79ff456fa476bc1d0946c44a0bc2c1a87ad3bd705980b06",
+      "bytes": 6896,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "bat-hr",
+      "title": "홈런 타격",
+      "source": "시안/사운드-2026-10-08-v07/audio/07-homerun-bat-louder.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/081905b241a86d2ef8ad.mp3",
+      "sha256": "081905b241a86d2ef8ad9d65a10f6f500c8dbf0ae4bd507335f969b76139dacf",
+      "bytes": 8150,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "strike",
+      "title": "스트라이크",
+      "source": "시안/사운드-2026-10-08-v09/audio/strike-new.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/373cc69a35264f5d8161.mp3",
+      "sha256": "373cc69a35264f5d816163d4345c07711f9e97f8d60f9d17a233bbc64e8d23ea",
+      "bytes": 18808,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "out",
+      "title": "아웃",
+      "source": "시안/사운드-2026-10-08-v09/audio/out-new.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/4c75e60edbfed2223c42.mp3",
+      "sha256": "4c75e60edbfed2223c42782e2ca0d50997898cc361581392d34baed17e0ddc30",
+      "bytes": 16927,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "safe",
+      "title": "세이프",
+      "source": "시안/사운드-2026-10-08-v09/audio/safe-b.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/08f9b3e29b709684313f.mp3",
+      "sha256": "08f9b3e29b709684313f82c92d8c23204c5554b9780d7c3898d9171bd505f4d7",
+      "bytes": 16927,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "commentary",
+      "title": "중계진 마이크 테스트",
+      "source": "시안/사운드-2026-10-08-v07/audio/01-commentary-mic-aa.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/14acec28e41c81c1cd8b.mp3",
+      "sha256": "14acec28e41c81c1cd8bdfa4f7c645e8f9cb7f6e052631e4f42cada7f406f395",
+      "bytes": 42004,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "rival-fans",
+      "title": "상대 관객 조롱",
+      "source": "시안/사운드-2026-10-08-v07/audio/02-rival-fans-tease.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/420dfaedfd3907b8e1c5.mp3",
+      "sha256": "420dfaedfd3907b8e1c5b037d413ea11f500724c31a6ec42296668a3d91d2401",
+      "bytes": 120999,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "sad-fans",
+      "title": "우리 관객 우울",
+      "source": "시안/사운드-2026-10-08-v07/audio/03-home-fans-sad.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/0646724bc4b385635cf6.mp3",
+      "sha256": "0646724bc4b385635cf6fd8643a29358dbf290ae258ae6cd619afda23714f256",
+      "bytes": 120999,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "home-cheer",
+      "title": "우리 치어리더 응원",
+      "source": "시안/사운드-2026-10-08-v07/audio/04-home-cheer-support.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/645f45605e903392a4b5.mp3",
+      "sha256": "645f45605e903392a4b5ac901c64019280f69d4165b1971baa80f7b5574d75df",
+      "bytes": 120999,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "rival-cheer",
+      "title": "상대 치어리더 트럼펫",
+      "source": "시안/사운드-2026-10-08-v07/audio/05-rival-cheer-rising.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/8239b576aadc73e3c399.mp3",
+      "sha256": "8239b576aadc73e3c399cefcadb02b1fc69cab52eaf909ade7d4e2e5305ba3c9",
+      "bytes": 120999,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "glove",
+      "title": "포구",
+      "source": "시안/사운드-2026-10-08-v01/audio/sfx-glove.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/10df95c2d4e95ef4b577.mp3",
+      "sha256": "10df95c2d4e95ef4b577cee518c268cce718cd22910beddfcd7718b69814249f",
+      "bytes": 12538,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "win",
+      "title": "승리",
+      "source": "시안/사운드-2026-10-08-v01/audio/sfx-win.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/49a08e13d2dbcfa6df04.mp3",
+      "sha256": "49a08e13d2dbcfa6df04ccaf0f312816db27a5f54478b182baab9021cfae934f",
+      "bytes": 101564,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "loss",
+      "title": "패배",
+      "source": "시안/사운드-2026-10-08-v01/audio/sfx-loss.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/aee5c49a86223f2bde61.mp3",
+      "sha256": "aee5c49a86223f2bde61d22dd268b08315a8e41ab55d19c130f12d5e39bdbb8b",
+      "bytes": 80248,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "achievement",
+      "title": "업적 달성",
+      "source": "시안/사운드-2026-10-08-v01/audio/sfx-achievement.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/53f16ccd7a8ecc07a11b.mp3",
+      "sha256": "53f16ccd7a8ecc07a11b89bb8e24b33b911f03b3c2f1f0e2cdd66e44058d5204",
+      "bytes": 56424,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "warm-event",
+      "title": "따뜻한 구단 소식",
+      "source": "시안/사운드-2026-10-08-v01/audio/sfx-warm_event.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/06d41f2333f73ba3fb97.mp3",
+      "sha256": "06d41f2333f73ba3fb9754469389893bb607c56f0ec9781558f2e3615f097923",
+      "bytes": 65828,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "bad-event",
+      "title": "실망스러운 구단 소식",
+      "source": "시안/사운드-2026-10-08-v01/audio/sfx-bad_event.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/193698560da7f27b77fe.mp3",
+      "sha256": "193698560da7f27b77fe4efc8a8423a6d5bc0496dbb6332294d36642effc2afd",
+      "bytes": 39497,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "mlb",
+      "title": "MLB 진출",
+      "source": "시안/사운드-2026-10-08-v01/audio/sfx-mlb.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/69b328c04aa9a313d7be.mp3",
+      "sha256": "69b328c04aa9a313d7be93e8370157328342293ac1238715ac1856cecacf2f27",
+      "bytes": 84636,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "click",
+      "title": "메뉴 선택",
+      "source": "시안/사운드-2026-10-08-v01/audio/sfx-click.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/ab5e99e15317cb3616d1.mp3",
+      "sha256": "ab5e99e15317cb3616d1885ce62b0ee547ea2c9142f3c5f4bf916863c70a830a",
+      "bytes": 6269,
+      "unchanged_copy": true,
+      "repository_included": true
+    },
+    {
+      "id": "confirm",
+      "title": "선택 완료",
+      "source": "시안/사운드-2026-10-08-v01/audio/sfx-confirm.mp3",
+      "game_asset": "구현/해체해라-2026-10-07-v01/assets/b92642de9e1a3818ef3a.mp3",
+      "sha256": "b92642de9e1a3818ef3aed67c2e2553d58d18b03e02aec978230ac9cd00d7263",
+      "bytes": 12538,
+      "unchanged_copy": true,
+      "repository_included": true
+    }
+  ],
+  "excluded": [
+    "이전 스트라이크·아웃·세이프 변형",
+    "보류한 불꽃놀이",
+    "비교용 이어 듣기 파일",
+    "이전 합성 투구·헛스윙"
+  ]
+}

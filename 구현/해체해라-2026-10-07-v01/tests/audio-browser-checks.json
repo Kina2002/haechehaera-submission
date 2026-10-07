@@ -1,0 +1,2517 @@
+{
+  "passed": true,
+  "pitches": 466,
+  "eventTypes": [
+    "ball",
+    "strike",
+    "single",
+    "pb",
+    "wp",
+    "swing",
+    "bb",
+    "cs",
+    "hr",
+    "foul",
+    "ground",
+    "kl",
+    "fly",
+    "line",
+    "hbp",
+    "dp",
+    "sb",
+    "sf",
+    "ks",
+    "error",
+    "double"
+  ],
+  "judgeKinds": [
+    "strike",
+    "safe",
+    "out",
+    "k"
+  ],
+  "checks": 487,
+  "rows": [
+    {
+      "name": "25개 음원 브라우저 해독",
+      "ok": true
+    },
+    {
+      "name": "음원 로딩 오류 없음",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 2 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 4 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 5 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 5 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 6 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 6 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 7 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 8 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 10",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 10 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 12 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 12 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 12 safe",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 13",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 13 out",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 14",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 14 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 15 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 15 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 16",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 16 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 20",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 20 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 21 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 22 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 26 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 27",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 27 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 28 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 30 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 31",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 31 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 36 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 36 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 39 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 39 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 41 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 42 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 42 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 44 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 47 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 53 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 53 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 54 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 55 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 56 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 56 safe",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 60",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 60 out",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 61",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 61 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 64 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 66 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 68 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 70 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 71",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 71 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 76 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 76 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 77 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 78 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 78 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 82 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 82 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 82 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 84 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 88 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 88 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 88 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 88 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 89 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 90 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 91 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 94 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 97",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 97 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 100",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 100 strike",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 101",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 101 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 103 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 104 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 104 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 105",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 105 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 110 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 112 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 113 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 114 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 114 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 115 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 115 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 116 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 117 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 117 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 118 safe",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 120",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 120 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 122 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 123 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 123 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 124 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 124 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 124 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 125 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 125 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 125 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 126 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 127 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 129 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 129 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 130",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 130 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 131",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 131 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 132",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 132 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 133 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 134 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 136 strike",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 140",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 140 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 141 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 142 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 143 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 144 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 144 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 146 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 147 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 149 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 150 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 152 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 153 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 154 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 154 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 159 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 159 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 159 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 160",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 160 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 161 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 161 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 163 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 164 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 164 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 165 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 166 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 166 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 167 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 168 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 169 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 169 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 169 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 170 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 171 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 172",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 172 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 174 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 176 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 178 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 180 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 181 out",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 182",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 182 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 185",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 185 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 187 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 188 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 189 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 191",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 191 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 192",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 192 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 193 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 196 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 198 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 198 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 199 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 199 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 199 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 200 safe",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 202",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 202 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 203 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 208 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 208 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 210 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 211 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 211 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 211 out",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 213",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 213 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 214 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 214 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 216",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 216 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 217 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 219 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 220 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 222",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 222 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 223 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 224 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 225 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 226 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 227 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 228 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 229 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 229 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 230 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 233 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 234 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 235 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 236 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 236 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 237 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 240 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 242",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 242 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 245 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 245 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 245 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 249 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 249 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 249 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 250 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 250 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 251 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 255",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 255 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 256 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 256 safe",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 257",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 257 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 258 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 259 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 260",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 260 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 263",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 263 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 268",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 268 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 269 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 269 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 269 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 270 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 270 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 270 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 270 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 271 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 273 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 274 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 276",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 276 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 277",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 277 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 278 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 279 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 281 strike",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 282",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 282 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 283 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 283 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 284 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 284 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 284 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 285 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 287 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 291 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 292 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 292 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 293 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 296 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 299 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 301 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 302 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 303",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 303 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 306 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 306 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 308 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 308 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 308 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 309",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 309 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 310",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 310 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 311",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 311 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 313 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 314 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 314 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 319 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 323 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 324 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 324 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 326 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 326 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 326 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 327",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 327 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 328 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 328 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 328 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 330 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 330 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 330 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 330 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 331 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 332 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 333 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 334 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 334 out",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 335",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 335 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 336",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 336 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 338",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 338 strike",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 340",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 340 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 344 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 345 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 346 out",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 349",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 349 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 350",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 350 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 351 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 352 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 353",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 353 strike",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 354",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 354 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 355",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 355 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 356 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 357 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 358 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 359 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 359 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 360",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 360 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 361 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 364 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 364 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 364 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 365 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 365 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 365 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 366 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 366 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 368 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 369 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 370 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 373 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 374 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 374 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 377 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 378 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 379",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 379 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 380",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 380 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 381",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 381 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 382 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 383",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 383 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 384",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 384 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 386",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 386 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 389 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 390 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 390 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 391 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 391 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 392 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 393 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 394",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 394 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 395",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 395 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 396 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 397 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 398 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 399 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 399 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 400",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 400 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 402",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 402 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 403",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 403 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 406 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 407 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 408",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 408 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 409",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 409 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 410 safe",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 412",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 412 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 413 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 414 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 414 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 415 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 415 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 417 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 417 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 417 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 417 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 419 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 419 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 419 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 420 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 420 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 420 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 422 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 422 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 422 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 423 out",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 425",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 425 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 426",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 426 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 430",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 430 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 431",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 431 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 432",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 432 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 433 safe",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 434",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 434 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 435 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 436 safe",
+      "ok": true
+    },
+    {
+      "name": "주루 단독 사건에 투구음 없음 437",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 437 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 438 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 440 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 440 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 441 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 445 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 448 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 449 out",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 450",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 450 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 451",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 451 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 452 out",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 453 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 455 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 455 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 457 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 461 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 461 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 461 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 462 strike",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 463 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 463 safe",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 465 strike",
+      "ok": true
+    },
+    {
+      "name": "헛스윙에 타격음 없음 466",
+      "ok": true
+    },
+    {
+      "name": "심판 신호와 음성 시각 일치 466 strike",
+      "ok": true
+    },
+    {
+      "name": "상대 홈런에 우리 환호 없음",
+      "ok": true
+    },
+    {
+      "name": "pitch 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "bat 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "bat-hr 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "miss 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "glove 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "crowd-hr 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "warm-event 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "bad-event 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "commentary 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "sad-fans 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "rival-fans 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "home-cheer 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "rival-cheer 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "strike 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "out 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "safe 실제 재생",
+      "ok": true
+    },
+    {
+      "name": "인물 반응 중복 재생 없음",
+      "ok": true
+    },
+    {
+      "name": "일시정지 시 모든 소리 정지",
+      "ok": true
+    },
+    {
+      "name": "중단 중 신규 소리 없음",
+      "ok": true
+    }
+  ],
+  "decoded": [
+    {
+      "id": "miss",
+      "seconds": 0.24
+    },
+    {
+      "id": "pitch",
+      "seconds": 1.071
+    },
+    {
+      "id": "bat",
+      "seconds": 0.28733333333333333
+    },
+    {
+      "id": "bat-hr",
+      "seconds": 0.33958333333333335
+    },
+    {
+      "id": "safe",
+      "seconds": 0.7052916666666667
+    },
+    {
+      "id": "crowd-hr",
+      "seconds": 4.048979166666666
+    },
+    {
+      "id": "commentary",
+      "seconds": 1.7501875
+    },
+    {
+      "id": "glove",
+      "seconds": 0.5224375
+    },
+    {
+      "id": "achievement",
+      "seconds": 2.351
+    },
+    {
+      "id": "bad-event",
+      "seconds": 1.6457083333333333
+    },
+    {
+      "id": "confirm",
+      "seconds": 0.5224375
+    },
+    {
+      "id": "click",
+      "seconds": 0.2612083333333333
+    },
+    {
+      "id": "warm-event",
+      "seconds": 2.7428541666666666
+    },
+    {
+      "id": "loss",
+      "seconds": 3.3436666666666666
+    },
+    {
+      "id": "strike",
+      "seconds": 0.7836666666666666
+    },
+    {
+      "id": "rival-cheer",
+      "seconds": 5.041625
+    },
+    {
+      "id": "win",
+      "seconds": 4.231833333333333
+    },
+    {
+      "id": "home-cheer",
+      "seconds": 5.041625
+    },
+    {
+      "id": "sad-fans",
+      "seconds": 5.041625
+    },
+    {
+      "id": "mlb",
+      "seconds": 3.5265208333333335
+    },
+    {
+      "id": "rival-fans",
+      "seconds": 5.041625
+    },
+    {
+      "id": "out",
+      "seconds": 0.7052916666666667
+    },
+    {
+      "id": "bgm-club",
+      "seconds": 31.304333333333332
+    },
+    {
+      "id": "bgm-tense",
+      "seconds": 28.235270833333335
+    },
+    {
+      "id": "bgm-main",
+      "seconds": 32
+    }
+  ],
+  "traces": [
+    {
+      "type": "play",
+      "id": "click",
+      "channel": "ui",
+      "bufferSeconds": 0.2612083333333333,
+      "at": 9650
+    },
+    {
+      "type": "play",
+      "id": "pitch",
+      "channel": "field",
+      "bufferSeconds": 1.071,
+      "event": "hit",
+      "scheduledMs": 993.0555555555558,
+      "observedMs": 993.0555555555558,
+      "screen": "match",
+      "at": 10357
+    },
+    {
+      "type": "play",
+      "id": "bat",
+      "channel": "field",
+      "bufferSeconds": 0.28733333333333333,
+      "event": "hit",
+      "scheduledMs": 1680.5555555555557,
+      "observedMs": 1680.5555555555557,
+      "screen": "match",
+      "at": 10373
+    },
+    {
+      "type": "stop",
+      "id": "pitch",
+      "channel": "field",
+      "reason": "play-change",
+      "at": 10389
+    },
+    {
+      "type": "stop",
+      "id": "bat",
+      "channel": "field",
+      "reason": "play-change",
+      "at": 10389
+    },
+    {
+      "type": "play",
+      "id": "pitch",
+      "channel": "field",
+      "bufferSeconds": 1.071,
+      "event": "miss",
+      "scheduledMs": 993.0555555555558,
+      "observedMs": 993.0555555555558,
+      "screen": "match",
+      "at": 10406
+    },
+    {
+      "type": "play",
+      "id": "miss",
+      "channel": "field",
+      "bufferSeconds": 0.24,
+      "event": "miss",
+      "scheduledMs": 1451.388888888889,
+      "observedMs": 1451.388888888889,
+      "screen": "match",
+      "at": 10421
+    },
+    {
+      "type": "play",
+      "id": "glove",
+      "channel": "field",
+      "bufferSeconds": 0.5224375,
+      "event": "miss",
+      "scheduledMs": 2215.277777777778,
+      "observedMs": 2215.277777777778,
+      "screen": "match",
+      "at": 10436
+    },
+    {
+      "type": "stop",
+      "id": "pitch",
+      "channel": "field",
+      "reason": "play-change",
+      "at": 10452
+    },
+    {
+      "type": "stop",
+      "id": "miss",
+      "channel": "field",
+      "reason": "play-change",
+      "at": 10452
+    },
+    {
+      "type": "stop",
+      "id": "glove",
+      "channel": "field",
+      "reason": "play-change",
+      "at": 10452
+    },
+    {
+      "type": "play",
+      "id": "pitch",
+      "channel": "field",
+      "bufferSeconds": 1.071,
+      "event": "hr-home",
+      "scheduledMs": 993.0555555555558,
+      "observedMs": 993.0555555555558,
+      "screen": "match",
+      "at": 10469
+    },
+    {
+      "type": "play",
+      "id": "bat-hr",
+      "channel": "field",
+      "bufferSeconds": 0.33958333333333335,
+      "event": "hr-home",
+      "scheduledMs": 1680.5555555555557,
+      "observedMs": 1680.5555555555557,
+      "screen": "match",
+      "at": 10485
+    },
+    {
+      "type": "play",
+      "id": "crowd-hr",
+      "channel": "crowd",
+      "bufferSeconds": 4.048979166666666,
+      "event": "hr-home",
+      "scheduledMs": 3488.2812500000005,
+      "observedMs": 3488.2812500000005,
+      "screen": "match",
+      "at": 10500
+    },
+    {
+      "type": "stop",
+      "id": "pitch",
+      "channel": "field",
+      "reason": "play-change",
+      "at": 10516
+    },
+    {
+      "type": "stop",
+      "id": "bat-hr",
+      "channel": "field",
+      "reason": "play-change",
+      "at": 10516
+    },
+    {
+      "type": "stop",
+      "id": "crowd-hr",
+      "channel": "crowd",
+      "reason": "play-change",
+      "at": 10516
+    },
+    {
+      "type": "play",
+      "id": "pitch",
+      "channel": "field",
+      "bufferSeconds": 1.071,
+      "event": "hr-away",
+      "scheduledMs": 993.0555555555558,
+      "observedMs": 993.0555555555558,
+      "screen": "match",
+      "at": 10532
+    },
+    {
+      "type": "play",
+      "id": "bat-hr",
+      "channel": "field",
+      "bufferSeconds": 0.33958333333333335,
+      "event": "hr-away",
+      "scheduledMs": 1680.5555555555557,
+      "observedMs": 1680.5555555555557,
+      "screen": "match",
+      "at": 10548
+    },
+    {
+      "type": "stop",
+      "id": "pitch",
+      "channel": "field",
+      "reason": "screen-change",
+      "at": 10564
+    },
+    {
+      "type": "stop",
+      "id": "bat-hr",
+      "channel": "field",
+      "reason": "screen-change",
+      "at": 10564
+    },
+    {
+      "type": "stop",
+      "id": "bgm-main",
+      "channel": "bgm",
+      "reason": "music-change",
+      "at": 10564
+    },
+    {
+      "type": "play",
+      "id": "bgm-club",
+      "channel": "bgm",
+      "bufferSeconds": 31.304333333333332,
+      "at": 10564
+    },
+    {
+      "type": "play",
+      "id": "warm-event",
+      "channel": "stinger",
+      "bufferSeconds": 2.7428541666666666,
+      "event": "positive",
+      "at": 10564
+    },
+    {
+      "type": "stop",
+      "id": "warm-event",
+      "channel": "stinger",
+      "reason": "overlay-change",
+      "at": 10580
+    },
+    {
+      "type": "stop",
+      "id": "bgm-club",
+      "channel": "bgm",
+      "reason": "music-change",
+      "at": 10580
+    },
+    {
+      "type": "play",
+      "id": "bad-event",
+      "channel": "stinger",
+      "bufferSeconds": 1.6457083333333333,
+      "event": "negative",
+      "at": 10580
+    },
+    {
+      "type": "stop",
+      "id": "bad-event",
+      "channel": "stinger",
+      "reason": "screen-change",
+      "at": 10596
+    },
+    {
+      "type": "play",
+      "id": "commentary",
+      "channel": "reaction",
+      "bufferSeconds": 1.7501875,
+      "speaker": "중계진",
+      "group": "g27",
+      "event": "중계진",
+      "at": 10596
+    },
+    {
+      "type": "play",
+      "id": "bgm-main",
+      "channel": "bgm",
+      "bufferSeconds": 32,
+      "at": 10596
+    },
+    {
+      "type": "stop",
+      "id": "commentary",
+      "channel": "reaction",
+      "reason": "speaker-change",
+      "at": 10613
+    },
+    {
+      "type": "play",
+      "id": "sad-fans",
+      "channel": "reaction",
+      "bufferSeconds": 5.041625,
+      "speaker": "우리 관객",
+      "group": "g27",
+      "event": "우리 관객",
+      "at": 10613
+    },
+    {
+      "type": "stop",
+      "id": "sad-fans",
+      "channel": "reaction",
+      "reason": "speaker-change",
+      "at": 10628
+    },
+    {
+      "type": "play",
+      "id": "rival-fans",
+      "channel": "reaction",
+      "bufferSeconds": 5.041625,
+      "speaker": "상대 관객",
+      "group": "g27",
+      "event": "상대 관객",
+      "at": 10628
+    },
+    {
+      "type": "stop",
+      "id": "rival-fans",
+      "channel": "reaction",
+      "reason": "speaker-change",
+      "at": 10645
+    },
+    {
+      "type": "play",
+      "id": "home-cheer",
+      "channel": "reaction",
+      "bufferSeconds": 5.041625,
+      "speaker": "우리 치어리더",
+      "group": "g29",
+      "event": "우리 치어리더",
+      "at": 10645
+    },
+    {
+      "type": "stop",
+      "id": "home-cheer",
+      "channel": "reaction",
+      "reason": "speaker-change",
+      "at": 10661
+    },
+    {
+      "type": "play",
+      "id": "rival-cheer",
+      "channel": "reaction",
+      "bufferSeconds": 5.041625,
+      "speaker": "상대 치어리더",
+      "group": "g27",
+      "event": "상대 치어리더",
+      "at": 10661
+    },
+    {
+      "type": "stop",
+      "id": "rival-cheer",
+      "channel": "reaction",
+      "reason": "speaker-change",
+      "at": 10676
+    },
+    {
+      "type": "play",
+      "id": "strike",
+      "channel": "judge",
+      "bufferSeconds": 0.7836666666666666,
+      "event": "call-strike",
+      "scheduledMs": 1564.4444444444448,
+      "observedMs": 1564.4444444444448,
+      "screen": "match",
+      "at": 10676
+    },
+    {
+      "type": "stop",
+      "id": "strike",
+      "channel": "judge",
+      "reason": "play-change",
+      "at": 10692
+    },
+    {
+      "type": "play",
+      "id": "out",
+      "channel": "judge",
+      "bufferSeconds": 0.7052916666666667,
+      "event": "call-out",
+      "scheduledMs": 1564.4444444444448,
+      "observedMs": 1564.4444444444448,
+      "screen": "match",
+      "at": 10692
+    },
+    {
+      "type": "stop",
+      "id": "out",
+      "channel": "judge",
+      "reason": "play-change",
+      "at": 10708
+    },
+    {
+      "type": "play",
+      "id": "safe",
+      "channel": "judge",
+      "bufferSeconds": 0.7052916666666667,
+      "event": "call-safe",
+      "scheduledMs": 1564.4444444444448,
+      "observedMs": 1564.4444444444448,
+      "screen": "match",
+      "at": 10708
+    },
+    {
+      "type": "stop",
+      "id": "safe",
+      "channel": "judge",
+      "reason": "play-change",
+      "at": 10723
+    },
+    {
+      "type": "play",
+      "id": "strike",
+      "channel": "judge",
+      "bufferSeconds": 0.7836666666666666,
+      "event": "call-k",
+      "scheduledMs": 1564.4444444444448,
+      "observedMs": 1564.4444444444448,
+      "screen": "match",
+      "at": 10724
+    },
+    {
+      "type": "stop",
+      "id": "strike",
+      "channel": "judge",
+      "reason": "replaced",
+      "at": 10740
+    },
+    {
+      "type": "play",
+      "id": "out",
+      "channel": "judge",
+      "bufferSeconds": 0.7052916666666667,
+      "event": "call-k",
+      "scheduledMs": 2384.444444444445,
+      "observedMs": 2384.444444444445,
+      "screen": "match",
+      "at": 10740
+    },
+    {
+      "type": "stop",
+      "id": "bgm-main",
+      "channel": "bgm",
+      "reason": "paused-or-hidden",
+      "at": 10755
+    },
+    {
+      "type": "stop",
+      "id": "out",
+      "channel": "judge",
+      "reason": "paused-or-hidden",
+      "at": 10755
+    }
+  ],
+  "originalStatePreserved": true,
+  "runtimeErrors": []
+}
