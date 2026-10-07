@@ -1,0 +1,90 @@
+{
+  "audio": [
+    {
+      "duration": 3.239955,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/00-b-three.wav"
+    },
+    {
+      "duration": 3.239955,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/00-a-three.wav"
+    },
+    {
+      "duration": 0.349977,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/strike-a.wav"
+    },
+    {
+      "duration": 0.349977,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/strike-b.wav"
+    },
+    {
+      "duration": 1.249955,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/strike-ab.wav"
+    },
+    {
+      "duration": 1.115011,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/out-a.wav"
+    },
+    {
+      "duration": 1.115011,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/out-b.wav"
+    },
+    {
+      "duration": 2.780023,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/out-ab.wav"
+    },
+    {
+      "duration": 0.674966,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/safe-a.wav"
+    },
+    {
+      "duration": 0.674966,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/safe-b.wav"
+    },
+    {
+      "duration": 1.899932,
+      "error": null,
+      "paused": true,
+      "readyState": 4,
+      "src": "audio/safe-ab.wav"
+    }
+  ],
+  "overflow": false,
+  "playbackObserved": [
+    {
+      "src": "audio/00-b-three.wav",
+      "time": 0.146083
+    }
+  ],
+  "stoppedAndReset": true,
+  "consoleErrors": []
+}

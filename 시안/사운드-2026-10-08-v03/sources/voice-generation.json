@@ -1,0 +1,34 @@
+[
+  {
+    "file": "strike-guy.mp3",
+    "text": "Strike!",
+    "voice": "en-US-GuyNeural",
+    "rate": "-8%",
+    "pitch": "+6Hz",
+    "bytes": 11232
+  },
+  {
+    "file": "out-guy.mp3",
+    "text": "Out!",
+    "voice": "en-US-GuyNeural",
+    "rate": "+12%",
+    "pitch": "+3Hz",
+    "bytes": 11232
+  },
+  {
+    "file": "strike-hyunsu.mp3",
+    "text": "스트라이크!",
+    "voice": "ko-KR-HyunsuMultilingualNeural",
+    "rate": "-8%",
+    "pitch": "+6Hz",
+    "bytes": 11232
+  },
+  {
+    "file": "out-hyunsu.mp3",
+    "text": "아웃!",
+    "voice": "ko-KR-HyunsuMultilingualNeural",
+    "rate": "+12%",
+    "pitch": "+6Hz",
+    "bytes": 11232
+  }
+]

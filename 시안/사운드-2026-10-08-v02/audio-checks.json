@@ -1,0 +1,34 @@
+{
+  "draft": true,
+  "integrated": false,
+  "order": [
+    "일반 타격",
+    "홈런 타격",
+    "일반 타격",
+    "홈런 타격"
+  ],
+  "normal_sha256": "4b8ec5b7466ac081e995f12c9e4923e5bf8fdc0235222ea04187d273ae54b43c",
+  "source_sha256": "4b8ec5b7466ac081e995f12c9e4923e5bf8fdc0235222ea04187d273ae54b43c",
+  "normal_presence_db": -7.82,
+  "homerun_presence_db": 3.59,
+  "checks": [
+    {
+      "file": "01-normal-contact.wav",
+      "seconds": 0.7,
+      "peak_dbfs": -1.94,
+      "passed": true
+    },
+    {
+      "file": "02-homerun-contact.wav",
+      "seconds": 0.55,
+      "peak_dbfs": -2.57,
+      "passed": true
+    },
+    {
+      "file": "00-normal-then-homerun.wav",
+      "seconds": 5.25,
+      "peak_dbfs": -1.94,
+      "passed": true
+    }
+  ]
+}

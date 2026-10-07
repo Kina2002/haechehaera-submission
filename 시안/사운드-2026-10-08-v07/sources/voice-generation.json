@@ -1,0 +1,11 @@
+{
+  "text": "아.",
+  "voice": "ko-KR-HyunsuMultilingualNeural",
+  "rate": "-15%",
+  "pitch": "-3Hz",
+  "provider": "Microsoft Edge TTS via edge-tts",
+  "synthetic": true,
+  "integrated": false,
+  "edit": "One vowel, duration adjusted to 0.34 and 0.40 seconds with pitch preserved; repeated with 0.16 second gap",
+  "sha256": "612c0e1adf443074cc1b67c962409574e089d70180d99b249cc6c939eb8d1c48"
+}

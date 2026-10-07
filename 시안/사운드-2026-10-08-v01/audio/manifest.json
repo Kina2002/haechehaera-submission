@@ -1,0 +1,352 @@
+{
+  "draft": true,
+  "integrated": false,
+  "generation": "Original score and procedural synthesis, no sampled music or voices",
+  "tracks": [
+    {
+      "id": "bgm-01-play-ball",
+      "title": "오늘도 해체는 없다",
+      "category": "BGM",
+      "context": "메인 화면 · 일반 경기 / 경쾌한 오르간, 통통 튀는 베이스",
+      "loop": true,
+      "wav": "bgm-01-play-ball.wav",
+      "mp3": "bgm-01-play-ball.mp3",
+      "seconds": 32.0,
+      "peak_dbfs": -3.08,
+      "rms_dbfs": -16.77,
+      "sample_rate": 44100,
+      "channels": 2,
+      "bpm": 120,
+      "bars": 16
+    },
+    {
+      "id": "bgm-02-our-club",
+      "title": "우리 동네 야구단",
+      "category": "BGM",
+      "context": "구단 운영 · 사인회 · 기부 · 어린이 돕기 / 따뜻한 전자 피아노",
+      "loop": true,
+      "wav": "bgm-02-our-club.wav",
+      "mp3": "bgm-02-our-club.mp3",
+      "seconds": 31.304,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -17.56,
+      "sample_rate": 44100,
+      "channels": 2,
+      "bpm": 92,
+      "bars": 12
+    },
+    {
+      "id": "bgm-03-full-count",
+      "title": "9회말 풀카운트",
+      "category": "BGM",
+      "context": "접전 · 득점권 위기 / 촘촘한 리듬과 단조 멜로디",
+      "loop": true,
+      "wav": "bgm-03-full-count.wav",
+      "mp3": "bgm-03-full-count.mp3",
+      "seconds": 28.235,
+      "peak_dbfs": -3.09,
+      "rms_dbfs": -16.77,
+      "sample_rate": 44100,
+      "channels": 2,
+      "bpm": 136,
+      "bars": 16
+    },
+    {
+      "id": "sfx-bat",
+      "title": "배트에 딱!",
+      "category": "효과음",
+      "context": "타격 순간 / 짧고 마른 나무 타격음",
+      "loop": false,
+      "wav": "sfx-bat.wav",
+      "mp3": "sfx-bat.mp3",
+      "seconds": 0.7,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -30.57,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-glove",
+      "title": "글러브에 퍽",
+      "category": "효과음",
+      "context": "포구 순간 / 낮고 둔탁한 포구음",
+      "loop": false,
+      "wav": "sfx-glove.wav",
+      "mp3": "sfx-glove.mp3",
+      "seconds": 0.48,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -21.18,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-whoosh",
+      "title": "헛스윙 휙",
+      "category": "효과음",
+      "context": "스윙했지만 맞히지 못했을 때",
+      "loop": false,
+      "wav": "sfx-whoosh.wav",
+      "mp3": "sfx-whoosh.mp3",
+      "seconds": 0.65,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -20.44,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-strike",
+      "title": "스트라이크",
+      "category": "효과음",
+      "context": "판정 말풍선과 함께 / 짧은 전자 신호",
+      "loop": false,
+      "wav": "sfx-strike.wav",
+      "mp3": "sfx-strike.mp3",
+      "seconds": 0.65,
+      "peak_dbfs": -5.26,
+      "rms_dbfs": -17.72,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-out",
+      "title": "아웃",
+      "category": "효과음",
+      "context": "아웃 판정 / 내려가는 오르간 3음",
+      "loop": false,
+      "wav": "sfx-out.wav",
+      "mp3": "sfx-out.mp3",
+      "seconds": 1.1,
+      "peak_dbfs": -5.46,
+      "rms_dbfs": -17.73,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-homerun",
+      "title": "홈런!",
+      "category": "효과음",
+      "context": "홈런 연출 / 올라가는 선율과 반짝이는 마무리",
+      "loop": false,
+      "wav": "sfx-homerun.wav",
+      "mp3": "sfx-homerun.mp3",
+      "seconds": 3.5,
+      "peak_dbfs": -5.15,
+      "rms_dbfs": -17.73,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-win",
+      "title": "해체는 다음에",
+      "category": "효과음",
+      "context": "승리 결과 / 밝은 경기장 팡파르",
+      "loop": false,
+      "wav": "sfx-win.wav",
+      "mp3": "sfx-win.mp3",
+      "seconds": 4.2,
+      "peak_dbfs": -6.07,
+      "rms_dbfs": -17.72,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-loss",
+      "title": "오늘은 여기까지",
+      "category": "효과음",
+      "context": "패배 결과 / 짧고 씁쓸한 전자 피아노",
+      "loop": false,
+      "wav": "sfx-loss.wav",
+      "mp3": "sfx-loss.mp3",
+      "seconds": 3.3,
+      "peak_dbfs": -5.28,
+      "rms_dbfs": -17.73,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-achievement",
+      "title": "업적 달성",
+      "category": "효과음",
+      "context": "업적 알림 / 작은 반짝임",
+      "loop": false,
+      "wav": "sfx-achievement.wav",
+      "mp3": "sfx-achievement.mp3",
+      "seconds": 2.3,
+      "peak_dbfs": -2.88,
+      "rms_dbfs": -17.75,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-warm_event",
+      "title": "마음이 따뜻해지는 소식",
+      "category": "효과음",
+      "context": "사인회 · 기부 · 어린이 돕기 결과",
+      "loop": false,
+      "wav": "sfx-warm_event.wav",
+      "mp3": "sfx-warm_event.mp3",
+      "seconds": 2.7,
+      "peak_dbfs": -2.66,
+      "rms_dbfs": -17.73,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-bad_event",
+      "title": "어이, 그건 아니지",
+      "category": "효과음",
+      "context": "쓰레기 투기 · 새치기 · 성의 없는 인터뷰 결과",
+      "loop": false,
+      "wav": "sfx-bad_event.wav",
+      "mp3": "sfx-bad_event.mp3",
+      "seconds": 1.6,
+      "peak_dbfs": -6.56,
+      "rms_dbfs": -17.73,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-mlb",
+      "title": "더 큰 무대로",
+      "category": "효과음",
+      "context": "MLB 진출 성공 / 세 단계로 커지는 축하 선율",
+      "loop": false,
+      "wav": "sfx-mlb.wav",
+      "mp3": "sfx-mlb.mp3",
+      "seconds": 3.5,
+      "peak_dbfs": -5.88,
+      "rms_dbfs": -17.72,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-click",
+      "title": "메뉴 선택",
+      "category": "효과음",
+      "context": "선택 이동 / 작은 한 음",
+      "loop": false,
+      "wav": "sfx-click.wav",
+      "mp3": "sfx-click.mp3",
+      "seconds": 0.22,
+      "peak_dbfs": -5.09,
+      "rms_dbfs": -18.48,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "sfx-confirm",
+      "title": "선택 완료",
+      "category": "효과음",
+      "context": "결정 · 저장 완료 / 올라가는 두 음",
+      "loop": false,
+      "wav": "sfx-confirm.wav",
+      "mp3": "sfx-confirm.mp3",
+      "seconds": 0.48,
+      "peak_dbfs": -8.96,
+      "rms_dbfs": -17.84,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    {
+      "id": "00-listen-all",
+      "title": "전체 시안 이어 듣기",
+      "category": "모음",
+      "context": "BGM 3곡의 앞 12초 → 효과음 14종",
+      "loop": false,
+      "wav": "00-listen-all.wav",
+      "mp3": "00-listen-all.mp3",
+      "seconds": 72.43,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -18.14,
+      "sample_rate": 44100,
+      "channels": 2
+    }
+  ],
+  "sampler_timeline": [
+    {
+      "at_seconds": 0,
+      "title": "오늘도 해체는 없다",
+      "duration": 12.0
+    },
+    {
+      "at_seconds": 12.65,
+      "title": "우리 동네 야구단",
+      "duration": 12.0
+    },
+    {
+      "at_seconds": 25.3,
+      "title": "9회말 풀카운트",
+      "duration": 12.0
+    },
+    {
+      "at_seconds": 37.95,
+      "title": "배트에 딱!",
+      "duration": 0.7
+    },
+    {
+      "at_seconds": 39.3,
+      "title": "글러브에 퍽",
+      "duration": 0.48
+    },
+    {
+      "at_seconds": 40.43,
+      "title": "헛스윙 휙",
+      "duration": 0.65
+    },
+    {
+      "at_seconds": 41.73,
+      "title": "스트라이크",
+      "duration": 0.65
+    },
+    {
+      "at_seconds": 43.03,
+      "title": "아웃",
+      "duration": 1.1
+    },
+    {
+      "at_seconds": 44.78,
+      "title": "홈런!",
+      "duration": 3.5
+    },
+    {
+      "at_seconds": 48.93,
+      "title": "해체는 다음에",
+      "duration": 4.2
+    },
+    {
+      "at_seconds": 53.78,
+      "title": "오늘은 여기까지",
+      "duration": 3.3
+    },
+    {
+      "at_seconds": 57.73,
+      "title": "업적 달성",
+      "duration": 2.3
+    },
+    {
+      "at_seconds": 60.68,
+      "title": "마음이 따뜻해지는 소식",
+      "duration": 2.7
+    },
+    {
+      "at_seconds": 64.03,
+      "title": "어이, 그건 아니지",
+      "duration": 1.6
+    },
+    {
+      "at_seconds": 66.28,
+      "title": "더 큰 무대로",
+      "duration": 3.5
+    },
+    {
+      "at_seconds": 70.43,
+      "title": "메뉴 선택",
+      "duration": 0.22
+    },
+    {
+      "at_seconds": 71.3,
+      "title": "선택 완료",
+      "duration": 0.48
+    }
+  ]
+}

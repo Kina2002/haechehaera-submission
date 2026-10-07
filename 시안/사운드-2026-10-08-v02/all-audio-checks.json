@@ -1,0 +1,109 @@
+{
+  "draft": true,
+  "integrated": false,
+  "comparison_seconds": 28.28,
+  "timeline": [
+    {
+      "id": "00-normal-then-homerun",
+      "at": 0
+    },
+    {
+      "id": "00-swing-before-after",
+      "at": 5.9
+    },
+    {
+      "id": "00-strike-before-after",
+      "at": 11.26
+    },
+    {
+      "id": "00-out-before-after",
+      "at": 14.63
+    },
+    {
+      "id": "00-homerun-before-after",
+      "at": 18.68
+    }
+  ],
+  "files": [
+    {
+      "file": "00-all-updates.wav",
+      "seconds": 28.28,
+      "passed": true
+    },
+    {
+      "file": "00-homerun-before-after.wav",
+      "seconds": 8.95,
+      "passed": true
+    },
+    {
+      "file": "00-normal-then-homerun.wav",
+      "seconds": 5.25,
+      "passed": true
+    },
+    {
+      "file": "00-out-before-after.wav",
+      "seconds": 3.4,
+      "passed": true
+    },
+    {
+      "file": "00-strike-before-after.wav",
+      "seconds": 2.72,
+      "passed": true
+    },
+    {
+      "file": "00-swing-before-after.wav",
+      "seconds": 4.71,
+      "passed": true
+    },
+    {
+      "file": "01-normal-contact.wav",
+      "seconds": 0.7,
+      "passed": true
+    },
+    {
+      "file": "02-homerun-contact.wav",
+      "seconds": 0.55,
+      "passed": true
+    },
+    {
+      "file": "03-old-swing.wav",
+      "seconds": 0.65,
+      "passed": true
+    },
+    {
+      "file": "04-short-swing.wav",
+      "seconds": 0.33,
+      "passed": true
+    },
+    {
+      "file": "05-old-strike.wav",
+      "seconds": 0.65,
+      "passed": true
+    },
+    {
+      "file": "06-strong-strike.wav",
+      "seconds": 0.62,
+      "passed": true
+    },
+    {
+      "file": "07-old-out.wav",
+      "seconds": 1.1,
+      "passed": true
+    },
+    {
+      "file": "08-strong-out.wav",
+      "seconds": 0.85,
+      "passed": true
+    },
+    {
+      "file": "09-old-homerun.wav",
+      "seconds": 3.5,
+      "passed": true
+    },
+    {
+      "file": "10-fireworks-homerun.wav",
+      "seconds": 4.0,
+      "passed": true
+    }
+  ]
+}

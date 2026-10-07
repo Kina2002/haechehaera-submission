@@ -1,0 +1,50 @@
+{
+  "audio": [
+    {
+      "error": null,
+      "ready": 4,
+      "seconds": 16.3,
+      "title": "등장 BGM 세 곡 이어 듣기"
+    },
+    {
+      "error": null,
+      "ready": 4,
+      "seconds": 5,
+      "title": "중계진 등장 5초"
+    },
+    {
+      "error": null,
+      "ready": 4,
+      "seconds": 17.551723,
+      "title": "중계진 긴 버전"
+    },
+    {
+      "error": null,
+      "ready": 4,
+      "seconds": 5,
+      "title": "관객 등장 5초"
+    },
+    {
+      "error": null,
+      "ready": 4,
+      "seconds": 18.777778,
+      "title": "관객 긴 버전"
+    },
+    {
+      "error": null,
+      "ready": 4,
+      "seconds": 5,
+      "title": "치어리더 등장 5초"
+    },
+    {
+      "error": null,
+      "ready": 4,
+      "seconds": 15.545465,
+      "title": "치어리더 긴 버전"
+    }
+  ],
+  "overflow": false,
+  "errors": [],
+  "playControlVerified": true,
+  "stopControlVerified": true
+}

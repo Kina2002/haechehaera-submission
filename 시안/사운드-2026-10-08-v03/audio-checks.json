@@ -1,0 +1,76 @@
+{
+  "draft": true,
+  "integrated": false,
+  "tracks": [
+    {
+      "id": "01-strike-voice",
+      "title": "스트~라이크! · 심판 목소리",
+      "seconds": 1.325,
+      "source": "Microsoft Edge TTS / ko-KR-HyunsuMultilingualNeural, duration and dynamics edit",
+      "peak_dbfs": -1.31,
+      "rms_dbfs": -14,
+      "sha256": "b1836cc513a93e2b2a51533624b99309d2cfa417d80286551a5aa3ff4c8c73ac",
+      "passed": true
+    },
+    {
+      "id": "02-out-voice",
+      "title": "아웃! · 심판 목소리",
+      "seconds": 0.626,
+      "source": "Microsoft Edge TTS / ko-KR-HyunsuMultilingualNeural, dynamics edit",
+      "peak_dbfs": -1.31,
+      "rms_dbfs": -17,
+      "sha256": "84b21caebe33b61c5882c178bcaa2d8331d6055ff2d1cfc82eab84eb856fcc9d",
+      "passed": true
+    },
+    {
+      "id": "03-fireworks-show",
+      "title": "홈런 · 실제 불꽃놀이",
+      "seconds": 7.64,
+      "source": "Fireworks Piece / stephan / public domain / 43.35–50.85 sec excerpt, EQ and dynamics edit",
+      "peak_dbfs": -1.6,
+      "rms_dbfs": -14,
+      "sha256": "6bf41292310c84f54e018a30ab2f2c916cf8274bda1e553c9de69791fecd8b14",
+      "passed": true
+    },
+    {
+      "id": "04-strike-english",
+      "title": "Strike! · 영어 발성 비교",
+      "seconds": 0.991,
+      "source": "Microsoft Edge TTS / en-US-GuyNeural, duration and dynamics edit",
+      "peak_dbfs": -1.31,
+      "rms_dbfs": -18,
+      "sha256": "8eb32f7f4dc3681a096740e7c4f2dd086d3e3f6f3dd134657b68afbc5e6f994e",
+      "passed": true
+    },
+    {
+      "id": "05-out-english",
+      "title": "Out! · 영어 발성 비교",
+      "seconds": 0.724,
+      "source": "Microsoft Edge TTS / en-US-GuyNeural, dynamics edit",
+      "peak_dbfs": -1.31,
+      "rms_dbfs": -17,
+      "sha256": "d72e36ee83e9352c915400e2b4f0f99ac7935bae1569748a070007f9db01d164",
+      "passed": true
+    },
+    {
+      "id": "00-new-three",
+      "title": "새 시안 세 가지 이어 듣기",
+      "seconds": 10.891,
+      "source": "New Korean calls followed by fireworks",
+      "peak_dbfs": -1.31,
+      "rms_dbfs": -15,
+      "sha256": "a43ce92be59cc18d238741fd3569166b74012fb9c95f7c39e69fe32dcf284651",
+      "passed": true
+    },
+    {
+      "id": "06-fireworks-before-after",
+      "title": "홈런 폭죽 · 수정 전후",
+      "seconds": 12.29,
+      "source": "Previous synthesized v02 followed by recorded v03",
+      "peak_dbfs": -1.6,
+      "rms_dbfs": -16,
+      "sha256": "105d1e3204cde2e8d21d10e8f0b00832e0cef533b870c957520dce4602e83e2b",
+      "passed": true
+    }
+  ]
+}

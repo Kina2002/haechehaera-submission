@@ -1,0 +1,60 @@
+{
+  "draft": true,
+  "integrated": false,
+  "checks": [
+    {
+      "file": "05-old-strike.wav",
+      "seconds": 0.65,
+      "peak_dbfs": -5.26,
+      "passed": true
+    },
+    {
+      "file": "06-strong-strike.wav",
+      "seconds": 0.62,
+      "peak_dbfs": -2.05,
+      "passed": true
+    },
+    {
+      "file": "00-strike-before-after.wav",
+      "seconds": 2.72,
+      "peak_dbfs": -2.05,
+      "passed": true
+    },
+    {
+      "file": "07-old-out.wav",
+      "seconds": 1.1,
+      "peak_dbfs": -5.46,
+      "passed": true
+    },
+    {
+      "file": "08-strong-out.wav",
+      "seconds": 0.85,
+      "peak_dbfs": -2.05,
+      "passed": true
+    },
+    {
+      "file": "00-out-before-after.wav",
+      "seconds": 3.4,
+      "peak_dbfs": -2.05,
+      "passed": true
+    },
+    {
+      "file": "09-old-homerun.wav",
+      "seconds": 3.5,
+      "peak_dbfs": -5.15,
+      "passed": true
+    },
+    {
+      "file": "10-fireworks-homerun.wav",
+      "seconds": 4.0,
+      "peak_dbfs": -2.05,
+      "passed": true
+    },
+    {
+      "file": "00-homerun-before-after.wav",
+      "seconds": 8.95,
+      "peak_dbfs": -2.05,
+      "passed": true
+    }
+  ]
+}

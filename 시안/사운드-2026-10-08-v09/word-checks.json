@@ -1,0 +1,178 @@
+{
+  "model": "faster-whisper small.en",
+  "automated": true,
+  "note": "No target-word prompt used. Word screening only; timbre, similarity, force and preference need listening.",
+  "results": [
+    {
+      "file": "out-12.wav",
+      "transcript": "Out!",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 0.32,
+          "text": " Out!",
+          "words": [
+            {
+              "word": " Out!",
+              "start": 0.0,
+              "end": 0.32,
+              "probability": 0.684484601020813
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "out-23.wav",
+      "transcript": "Out.",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 0.3,
+          "text": " Out.",
+          "words": [
+            {
+              "word": " Out.",
+              "start": 0.0,
+              "end": 0.3,
+              "probability": 0.4734240174293518
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "out-34.wav",
+      "transcript": "Out!",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 0.32,
+          "text": " Out!",
+          "words": [
+            {
+              "word": " Out!",
+              "start": 0.0,
+              "end": 0.32,
+              "probability": 0.7107536792755127
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "strike-12.wav",
+      "transcript": "STRIKE!",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 0.78,
+          "text": " STRIKE!",
+          "words": [
+            {
+              "word": " STRIKE!",
+              "start": 0.0,
+              "end": 0.78,
+              "probability": 0.3555010457833608
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "strike-23.wav",
+      "transcript": "Shriek!",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 0.78,
+          "text": " Shriek!",
+          "words": [
+            {
+              "word": " Shriek!",
+              "start": 0.0,
+              "end": 0.78,
+              "probability": 0.5191545337438583
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "strike-34.wav",
+      "transcript": "Strict!",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 0.66,
+          "text": " Strict!",
+          "words": [
+            {
+              "word": " Strict!",
+              "start": 0.0,
+              "end": 0.66,
+              "probability": 0.5799296051263809
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "strike-101.wav",
+      "transcript": "STRIKE!",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 0.6,
+          "text": " STRIKE!",
+          "words": [
+            {
+              "word": " STRIKE!",
+              "start": 0.0,
+              "end": 0.6,
+              "probability": 0.5676354269186655
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "strike-41.wav",
+      "transcript": "STERK!",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 0.72,
+          "text": " STERK!",
+          "words": [
+            {
+              "word": " STERK!",
+              "start": 0.0,
+              "end": 0.72,
+              "probability": 0.45239076515038806
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "strike-77.wav",
+      "transcript": "STRIKE!",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 0.6,
+          "text": " STRIKE!",
+          "words": [
+            {
+              "word": " STRIKE!",
+              "start": 0.0,
+              "end": 0.6,
+              "probability": 0.4802013536294301
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

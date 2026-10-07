@@ -1,0 +1,12 @@
+{
+  "event": "pitch_release",
+  "selection": "user_selected",
+  "integrated": false,
+  "file": "ElevenLabs_Pitcher_throwing_a_fastball,_whoosh_sound.mp3",
+  "play_timing": "투수가 공을 놓아 던지는 순간",
+  "seconds": 1.071,
+  "sample_rate": 44100,
+  "channels": 2,
+  "sha256": "f4b5cf024da11f063e96080548b9b98967cbefd19bbd6af329551105af684219",
+  "original_unchanged": true
+}

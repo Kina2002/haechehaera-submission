@@ -1,0 +1,150 @@
+{
+  "passed": 18,
+  "failed": 0,
+  "checks": [
+    {
+      "file": "bgm-01-play-ball.wav",
+      "passed": true,
+      "frames": 1411200,
+      "peak_dbfs": -3.08,
+      "rms_dbfs": -16.77,
+      "sha256": "dcc10d30233b598f03f940da74b85b479e90626a427c56e776cda810f309539b"
+    },
+    {
+      "file": "bgm-02-our-club.wav",
+      "passed": true,
+      "frames": 1380522,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -17.56,
+      "sha256": "870c0fd4b5f61d370e16a012b292aae1c9503451c74acc32bfe90cee04b5ee7f"
+    },
+    {
+      "file": "bgm-03-full-count.wav",
+      "passed": true,
+      "frames": 1245176,
+      "peak_dbfs": -3.09,
+      "rms_dbfs": -16.77,
+      "sha256": "371bf71b7da0544a2beabf7b56593d529afeb90ba2175f129943fa05c3f37bde"
+    },
+    {
+      "file": "sfx-bat.wav",
+      "passed": true,
+      "frames": 30870,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -30.57,
+      "sha256": "4b8ec5b7466ac081e995f12c9e4923e5bf8fdc0235222ea04187d273ae54b43c"
+    },
+    {
+      "file": "sfx-glove.wav",
+      "passed": true,
+      "frames": 21168,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -21.18,
+      "sha256": "0417e0359ded44399e8a18c4c7cd954508d8ede6bf2497dc91fc3254dd6d40d5"
+    },
+    {
+      "file": "sfx-whoosh.wav",
+      "passed": true,
+      "frames": 28665,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -20.44,
+      "sha256": "90c325aa06aacb9f1998edaf1181a8ef20dceeff60f1e9b36c402cbc89b45974"
+    },
+    {
+      "file": "sfx-strike.wav",
+      "passed": true,
+      "frames": 28665,
+      "peak_dbfs": -5.26,
+      "rms_dbfs": -17.72,
+      "sha256": "a10d7d9dadfa6db9251e113653edff7f77c12d04f96cc8471798b6229e623129"
+    },
+    {
+      "file": "sfx-out.wav",
+      "passed": true,
+      "frames": 48510,
+      "peak_dbfs": -5.46,
+      "rms_dbfs": -17.73,
+      "sha256": "0bde6a230c367ac774ec9a6c9b5c0e33fb5acada63143974a899d106d377e3d9"
+    },
+    {
+      "file": "sfx-homerun.wav",
+      "passed": true,
+      "frames": 154350,
+      "peak_dbfs": -5.15,
+      "rms_dbfs": -17.73,
+      "sha256": "4263b14c06aa4142d4c2f1fee906e78ca5d7e340931051579fd5fc0c7115d2e1"
+    },
+    {
+      "file": "sfx-win.wav",
+      "passed": true,
+      "frames": 185220,
+      "peak_dbfs": -6.07,
+      "rms_dbfs": -17.72,
+      "sha256": "36ecf3f7ae7c283a79e1a1131414ff1d6e0ae6bdc938c5f3c404d590d8706ac2"
+    },
+    {
+      "file": "sfx-loss.wav",
+      "passed": true,
+      "frames": 145530,
+      "peak_dbfs": -5.28,
+      "rms_dbfs": -17.73,
+      "sha256": "7f343a80856d264ac9c8815d846e2c837c9668d2edc92443468c61a3a1d68105"
+    },
+    {
+      "file": "sfx-achievement.wav",
+      "passed": true,
+      "frames": 101430,
+      "peak_dbfs": -2.88,
+      "rms_dbfs": -17.75,
+      "sha256": "5ac90e137a460b0c6b0eb0a50ee297fc917287774c1180c1fe6fceb102d0ebe9"
+    },
+    {
+      "file": "sfx-warm_event.wav",
+      "passed": true,
+      "frames": 119070,
+      "peak_dbfs": -2.66,
+      "rms_dbfs": -17.73,
+      "sha256": "d48d423ccf54d445f10f5620d18dccd72955c41f056fe24b0d0c99098dd11b9b"
+    },
+    {
+      "file": "sfx-bad_event.wav",
+      "passed": true,
+      "frames": 70560,
+      "peak_dbfs": -6.56,
+      "rms_dbfs": -17.73,
+      "sha256": "bea04a14b31ce107495a0869855c87338cf3f57afe2ad7de2acde4de71ba9b9f"
+    },
+    {
+      "file": "sfx-mlb.wav",
+      "passed": true,
+      "frames": 154350,
+      "peak_dbfs": -5.88,
+      "rms_dbfs": -17.72,
+      "sha256": "2c62797b8d9bec7301b7cc7f888eabac3fde50f99827a45c71ae818b8dc984d3"
+    },
+    {
+      "file": "sfx-click.wav",
+      "passed": true,
+      "frames": 9702,
+      "peak_dbfs": -5.09,
+      "rms_dbfs": -18.48,
+      "sha256": "d42826f9bd54d90aaa0b4ec16b5886e71326c6e9adb4aafe3de1278c60914bd0"
+    },
+    {
+      "file": "sfx-confirm.wav",
+      "passed": true,
+      "frames": 21168,
+      "peak_dbfs": -8.96,
+      "rms_dbfs": -17.84,
+      "sha256": "4bc058033025bca7301e93c8306b39c0a7f07f6788c0b6c7f1df059982852240"
+    },
+    {
+      "file": "00-listen-all.wav",
+      "passed": true,
+      "frames": 3194163,
+      "peak_dbfs": -1.94,
+      "rms_dbfs": -18.14,
+      "sha256": "02b1cfa9807c7da6df2286f726f39aeb927850daddb2a369ee185a505c6dc298"
+    }
+  ]
+}

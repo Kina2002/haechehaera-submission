@@ -1,0 +1,149 @@
+{
+  "integrated": false,
+  "bat_gain": {
+    "06-bat-louder": 5.17,
+    "07-homerun-bat-louder": 5.36
+  },
+  "tracks": [
+    {
+      "id": "01-commentary-mic-hum",
+      "title": "중계진 · 딸깍, 우웅",
+      "seconds": 1.2,
+      "peak_dbfs": -5.55,
+      "true_peak_4x_dbfs": -5.35,
+      "rms_dbfs": -18.54,
+      "sha256": "b62c54351aae075613d4e88ce57482c34c6af1b1898c3c954f3edf7d5f6ce265",
+      "passed": true,
+      "state": "new_draft",
+      "kind": "sfx"
+    },
+    {
+      "id": "06-bat-louder",
+      "title": "일반 타격 · 더 크게 딱!",
+      "seconds": 0.25,
+      "peak_dbfs": -1.04,
+      "true_peak_4x_dbfs": -1.01,
+      "rms_dbfs": -19.54,
+      "sha256": "efa8392ed30e2fbf0dfc73751f69d950ac3b63065ff80d9a78d56e306422bd1c",
+      "passed": true,
+      "state": "new_draft",
+      "kind": "sfx",
+      "first_100ms_rms_gain_db": 5.17,
+      "duration_preserved": true
+    },
+    {
+      "id": "07-homerun-bat-louder",
+      "title": "홈런 타격 · 더 크게 딱!",
+      "seconds": 0.29,
+      "peak_dbfs": -1.09,
+      "true_peak_4x_dbfs": -1.01,
+      "rms_dbfs": -20.82,
+      "sha256": "451765c493cc1cb95a94721ebf02554be6090f7da56557b1fbab789f4675d616",
+      "passed": true,
+      "state": "new_draft",
+      "kind": "sfx",
+      "first_100ms_rms_gain_db": 5.36,
+      "duration_preserved": true
+    },
+    {
+      "id": "05-rival-cheer-trumpet",
+      "title": "상대 치어리더 · 어머, 또요? 트럼펫",
+      "seconds": 5.0,
+      "peak_dbfs": -1.35,
+      "true_peak_4x_dbfs": -1.31,
+      "rms_dbfs": -15.86,
+      "sha256": "619248bb1685131605d9e08636f77bcc4d8cb653ebca5295d15807c3a22a7e79",
+      "passed": true,
+      "state": "new_draft",
+      "kind": "bgm",
+      "bpm": 132,
+      "lead": "Trumpet / GM 56",
+      "reply": "Muted Trumpet / GM 59"
+    },
+    {
+      "id": "02-rival-fans-tease",
+      "title": "상대 관객 · 관중석 한마디",
+      "seconds": 5.0,
+      "peak_dbfs": -1.43,
+      "true_peak_4x_dbfs": -1.41,
+      "rms_dbfs": -14.75,
+      "sha256": "5fb6696a7e24b416bfab830e45e0a4dbceb89267748c0751da3ed960f562b0ec",
+      "passed": true,
+      "state": "retained",
+      "kind": "bgm",
+      "unchanged_copy": true
+    },
+    {
+      "id": "03-home-fans-sad",
+      "title": "우리 관객 · 또 놓쳤네…",
+      "seconds": 5.0,
+      "peak_dbfs": -4.04,
+      "true_peak_4x_dbfs": -4.03,
+      "rms_dbfs": -17.96,
+      "sha256": "d315ae7189e6c30bc73b5fbae979b2f634c165c8153e2da385f330d85c9fd68f",
+      "passed": true,
+      "state": "retained",
+      "kind": "bgm",
+      "unchanged_copy": true
+    },
+    {
+      "id": "04-home-cheer-support",
+      "title": "우리 치어리더 · 다 같이 박수!",
+      "seconds": 5.0,
+      "peak_dbfs": -1.42,
+      "true_peak_4x_dbfs": -1.41,
+      "rms_dbfs": -15.83,
+      "sha256": "b5c6cdef8b4dac187c49806b9d49c67b07b31f30a5fb8ba25db2cbc682aa3f6a",
+      "passed": true,
+      "state": "retained",
+      "kind": "bgm",
+      "unchanged_copy": true
+    },
+    {
+      "id": "00-mic-before-after",
+      "title": "마이크 · 이전 → 클릭과 우웅",
+      "seconds": 2.27,
+      "peak_dbfs": -5.55,
+      "true_peak_4x_dbfs": -5.35,
+      "rms_dbfs": -21.12,
+      "sha256": "aea63db4c8f0870f0033950738e161176bfcc038d98a3a37effd5fa2ced04281",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "00-bat-before-after",
+      "title": "일반 이전 → 큰 일반 → 홈런 이전 → 큰 홈런",
+      "seconds": 3.03,
+      "peak_dbfs": -1.04,
+      "true_peak_4x_dbfs": -1.01,
+      "rms_dbfs": -26.54,
+      "sha256": "d99162ecbe875482a9c66354dc6a0f4eea6c5d996a62e04e3bccace1a947d5f9",
+      "passed": true,
+      "kind": "comparison",
+      "independent_normalization": false
+    },
+    {
+      "id": "00-trumpet-before-after",
+      "title": "어머, 또요? · 이전 → 새 트럼펫",
+      "seconds": 10.65,
+      "peak_dbfs": -1.35,
+      "true_peak_4x_dbfs": -1.31,
+      "rms_dbfs": -16.54,
+      "sha256": "a6db36f6edbe64cd772b00fd98c238ca4bf762004d4e6e099089e7194eb2ad47",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "00-revised-all",
+      "title": "수정본 · 마이크 → 일반 타격 → 홈런 타격 → 트럼펫",
+      "seconds": 8.69,
+      "peak_dbfs": -1.04,
+      "true_peak_4x_dbfs": -1.01,
+      "rms_dbfs": -17.58,
+      "sha256": "f08c98ca67df3c7c3728010516263ca647b7b7a054d5721a997890e3e175c1b7",
+      "passed": true,
+      "kind": "comparison"
+    }
+  ],
+  "listening_review": "Subjective review pending; objective decoding and waveform checks only"
+}
