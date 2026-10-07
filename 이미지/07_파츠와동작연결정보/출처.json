@@ -1,0 +1,8 @@
+{
+  "source_version": "v27",
+  "source_index_sha256": "0c3bf6fb2a4a38af02de04f1d9562fdc9ae20be38c9115d38548dd95d5d99917",
+  "source_image_count": 87,
+  "image_bytes_unchanged": true,
+  "image_paths_relative_to": "이 JSON 파일이 있는 폴더",
+  "notes": "팀 컬러·피부색·헤어색·파츠 조합은 게임 코드에서 처리합니다. 시트에서 개별 동작과 파츠를 잘라 쓰는 좌표를 포함합니다. Godot 연결을 완료한 자료는 아닙니다."
+}

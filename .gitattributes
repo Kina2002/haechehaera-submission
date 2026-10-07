@@ -1,0 +1,8 @@
+# Preserve the supplied files byte for byte, including embedded game assets.
+* -text
+*.png binary
+*.woff binary
+*.woff2 binary
+*.pyc binary
+/index.html -diff
+/구현/해체해라-2026-10-07-v01/index.html -diff
