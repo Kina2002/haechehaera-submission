@@ -1,0 +1,177 @@
+{
+  "draft": true,
+  "integrated": false,
+  "tracks": [
+    {
+      "id": "strike-a",
+      "title": "스트라이크! / 원래 발성",
+      "seconds": 0.35,
+      "peak_4x_dbfs": -2.78,
+      "rms_dbfs": -13.15,
+      "sha256": "0f8ab24c0e07bd267d880c2067d645db2b3546e49e50905815c156c6b23d22b0",
+      "passed": true,
+      "kind": "call",
+      "version": "a",
+      "source_excerpt_seconds": [
+        4.94,
+        5.205
+      ],
+      "spoken_word": "Strike!",
+      "pitch_changed": false,
+      "time_stretched": false,
+      "source": "jcookvoice / CC0 1.0",
+      "comparison_rms_matched": true
+    },
+    {
+      "id": "strike-b",
+      "title": "스트라이크! / 굵고 힘 있게",
+      "seconds": 0.35,
+      "peak_4x_dbfs": -3.25,
+      "rms_dbfs": -13.15,
+      "sha256": "8c0f41052ba20a9cd016bfac6e51486b7ada7bdc18ccfbcc929d48469c31a394",
+      "passed": true,
+      "kind": "call",
+      "version": "b",
+      "source_excerpt_seconds": [
+        4.94,
+        5.205
+      ],
+      "spoken_word": "Strike!",
+      "pitch_changed": false,
+      "time_stretched": false,
+      "source": "jcookvoice / CC0 1.0",
+      "comparison_rms_matched": true
+    },
+    {
+      "id": "out-a",
+      "title": "아웃! / 원래 발성",
+      "seconds": 1.115,
+      "peak_4x_dbfs": -5.11,
+      "rms_dbfs": -13.15,
+      "sha256": "af4e732389f8c646d85de85fc2a9c78f45ee8c86f2ffcdc9928806fbe410ba60",
+      "passed": true,
+      "kind": "call",
+      "version": "a",
+      "source_excerpt_seconds": [
+        2.105,
+        3.135
+      ],
+      "spoken_word": "Out!",
+      "pitch_changed": false,
+      "time_stretched": false,
+      "source": "jcookvoice / CC0 1.0",
+      "comparison_rms_matched": true
+    },
+    {
+      "id": "out-b",
+      "title": "아웃! / 굵고 힘 있게",
+      "seconds": 1.115,
+      "peak_4x_dbfs": -5.11,
+      "rms_dbfs": -13.15,
+      "sha256": "0556083ab2e55dec436fc795920e5128f02cac12dc2755926e9af0545e92bb72",
+      "passed": true,
+      "kind": "call",
+      "version": "b",
+      "source_excerpt_seconds": [
+        2.105,
+        3.135
+      ],
+      "spoken_word": "Out!",
+      "pitch_changed": false,
+      "time_stretched": false,
+      "source": "jcookvoice / CC0 1.0",
+      "comparison_rms_matched": true
+    },
+    {
+      "id": "safe-a",
+      "title": "세이프! / 원래 발성",
+      "seconds": 0.675,
+      "peak_4x_dbfs": -4.33,
+      "rms_dbfs": -13.15,
+      "sha256": "ab61103811720179fb6a10d7fb4d7281c8eae404499bea44ef1f3a58937e76b9",
+      "passed": true,
+      "kind": "call",
+      "version": "a",
+      "source_excerpt_seconds": [
+        11.475,
+        12.065
+      ],
+      "spoken_word": "Safe!",
+      "pitch_changed": false,
+      "time_stretched": false,
+      "source": "jcookvoice / CC0 1.0",
+      "comparison_rms_matched": true
+    },
+    {
+      "id": "safe-b",
+      "title": "세이프! / 굵고 힘 있게",
+      "seconds": 0.675,
+      "peak_4x_dbfs": -4.57,
+      "rms_dbfs": -13.15,
+      "sha256": "d96be2c0103af2fcb1fb43f698d8e98f62148e1ed20cf011c771d3cb1c207f0e",
+      "passed": true,
+      "kind": "call",
+      "version": "b",
+      "source_excerpt_seconds": [
+        11.475,
+        12.065
+      ],
+      "spoken_word": "Safe!",
+      "pitch_changed": false,
+      "time_stretched": false,
+      "source": "jcookvoice / CC0 1.0",
+      "comparison_rms_matched": true
+    },
+    {
+      "id": "00-a-three",
+      "title": "A 판정 세 가지",
+      "seconds": 3.24,
+      "peak_4x_dbfs": -2.78,
+      "rms_dbfs": -14.95,
+      "sha256": "7568a3e1444e91df1d2079adea64aa24f9386ab5e1df1fa2f427fa492f691ca7",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "00-b-three",
+      "title": "B 판정 세 가지",
+      "seconds": 3.24,
+      "peak_4x_dbfs": -3.25,
+      "rms_dbfs": -14.95,
+      "sha256": "f4ac3ef34704ec22ea423d82365328c553e25b7546fc2f84e304b9c3437541ac",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "strike-ab",
+      "title": "스트라이크! A → B",
+      "seconds": 1.25,
+      "peak_4x_dbfs": -2.78,
+      "rms_dbfs": -15.67,
+      "sha256": "c8c41820d2b639fd9912f2d0c90aa787b85c2d1b80f62c6288a34f45f1f416e3",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "out-ab",
+      "title": "아웃! A → B",
+      "seconds": 2.78,
+      "peak_4x_dbfs": -5.11,
+      "rms_dbfs": -14.11,
+      "sha256": "ba5e2eeef8ce7c386d77693e788db40ac20fc360427535465236058cd381d3af",
+      "passed": true,
+      "kind": "comparison"
+    },
+    {
+      "id": "safe-ab",
+      "title": "세이프! A → B",
+      "seconds": 1.9,
+      "peak_4x_dbfs": -4.33,
+      "rms_dbfs": -14.64,
+      "sha256": "daab871b42dd5e1edd965ec210edc7f670d711a024c50452c5205c8e7a5656de",
+      "passed": true,
+      "kind": "comparison"
+    }
+  ],
+  "listening_review": "Subjective listening review is pending; checks cover decoding and waveform properties."
+}
