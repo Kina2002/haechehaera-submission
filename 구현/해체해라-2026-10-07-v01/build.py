@@ -21,8 +21,8 @@ def build():
         return re.sub(r"(?:\.\./)?assets/[a-f0-9]{20}\.(?:png|woff2?|ttf)", lambda m: urls[m.group(0).removeprefix("../")], text)
 
     html = (ROOT / "dev.html").read_text(encoding="utf-8")
-    html = re.sub(r'<link rel="stylesheet" href="([^"]+)">', lambda m: "<style>" + embed_assets((ROOT / m.group(1)).read_text(encoding="utf-8")) + "</style>", html)
-    html = re.sub(r'<script src="([^"]+)"></script>', lambda m: "<script>" + embed_assets((ROOT / m.group(1)).read_text(encoding="utf-8")).replace("</script", "<\\/script") + "</script>", html)
+    html = re.sub(r'<link rel="stylesheet" href="([^"]+)">', lambda m: "<style>" + embed_assets((ROOT / m.group(1).split("?", 1)[0]).read_text(encoding="utf-8")) + "</style>", html)
+    html = re.sub(r'<script src="([^"]+)"></script>', lambda m: "<script>" + embed_assets((ROOT / m.group(1).split("?", 1)[0]).read_text(encoding="utf-8")).replace("</script", "<\\/script") + "</script>", html)
     return html
 
 if __name__ == "__main__":

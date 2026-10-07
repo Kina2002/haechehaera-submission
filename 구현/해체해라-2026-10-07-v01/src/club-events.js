@@ -4,15 +4,33 @@ const CLUB_EVENT_TYPES = [
  {id:'litter', title:'구장 주변 쓰레기 무단 투기', fans:-22, loyalty:-2, place:'경기 후 · 구장 앞 광장', action:'쓰레기통을 두고, 빈 컵을 바닥에 버립니다.', response:'방금 쓰레기를 버린 거야…?', positive:false},
  {id:'donation', title:'기부 소식이 알려짐', fans:25, loyalty:3, place:'구장 앞 · 나눔 행사', action:'선수가 기부함에 봉투를 넣습니다.', response:'경기장 밖에서도 멋진 선수네요!', positive:true},
  {id:'ignore', title:'팬의 인사를 무시함', fans:-18, loyalty:-3, place:'경기 후 · 퇴근길', action:'팬이 인사를 건네지만 그대로 지나칩니다.', response:'인사 한 번 해 줬으면 좋았을 텐데…', positive:false},
- {id:'gift', title:'어린이 팬에게 공을 선물함', fans:20, loyalty:2, place:'구장 앞 · 어린이 팬과의 만남', action:'어린이 팬에게 야구공을 건넵니다.', response:'이 공, 평생 간직할게요!', positive:true}
+ {id:'gift', title:'어린이 팬에게 공을 선물함', fans:20, loyalty:2, place:'구장 앞 · 어린이 팬과의 만남', action:'어린이 팬에게 야구공을 건넵니다.', response:'이 공, 평생 간직할게요!', positive:true},
+ {id:'bench-song', title:'후보 선수에게도 응원가가', fans:0, loyalty:3, place:'경기 후 · 벤치 앞 관중석', intro:'오늘 출전하지 못한 선수에게도 응원가가 들려옵니다.', action:'팬들이 이름을 부르자, 벤치 앞으로 나와 손을 흔듭니다.', response:'나를 기억해 주는 팬들이 있구나. 다음엔 꼭 보답할게요!', positive:true},
+ {id:'lost-child', title:'길 잃은 어린이 돕기', fans:20, loyalty:0, place:'경기 후 · 구장 안내소 앞', intro:'구장 앞에서 보호자를 찾는 어린이를 만납니다.', action:'어린이와 함께 안내소로 가서 보호자를 기다립니다.', response:'보호자와 다시 만났어요. 함께 기다려 줘서 고마워요!', positive:true},
+ {id:'flat-interview', title:'성의 없는 패배 인터뷰', fans:-12, loyalty:0, place:'패배 후 · 경기장 인터뷰 구역', intro:'경기를 마친 선수에게 기자가 소감을 묻습니다.', action:'시선을 피한 채 짧게 답하고, 질문이 끝나기 전에 자리를 뜹니다.', response:'아쉬운 경기였어도, 조금 더 성의 있게 답해 줬으면…', positive:false}
 ];
 const CLUB_EVENT_DURATION = 6600;
 let clubEventView = null;
 
+function clubEventEligible(p,m,def){
+ if(!p||!def||p.loyalty<=0||p.exitPending26)return false;
+ // The complete used list includes starters, substitutes and players already taken out.
+ if(def.id==='bench-song')return !!m.done&&Array.isArray(m.used)&&m.used.length>0&&!m.used.includes(p.id);
+ if(def.id==='flat-interview')return !!m.done&&m.score?.[0]<m.score?.[1]&&Array.isArray(m.used)&&m.used.includes(p.id);
+ return true;
+}
+function rollClubEvent(t,m){
+ if(m.clubEvent)return m.clubEvent;
+ const choices=CLUB_EVENT_TYPES.map((def,index)=>({index,players:t.players.filter(p=>clubEventEligible(p,m,def))})).filter(x=>x.players.length);
+ if(!choices.length)return null;
+ // Draw a valid story first so larger player pools do not make a story more common.
+ const choice=pick(m,choices);
+ return applyClubEvent(t,m,pick(m,choice.players),choice.index);
+}
 function applyClubEvent(t,m,p,typeIndex){
  if(m.clubEvent)return m.clubEvent;
  const def=CLUB_EVENT_TYPES[typeIndex];
- if(!def)return null;
+ if(!clubEventEligible(p,m,def))return null;
  const before={fans:p.fans,loyalty:p.loyalty};
  p.fans=Math.max(0,p.fans+def.fans);
  p.loyalty=clamp(p.loyalty+def.loyalty,0,100);
@@ -93,7 +111,7 @@ function paintClubEventView(state){
  if(phase!==state.phase){
   state.phase=phase;
   state.el.querySelector('.club-event-step').textContent=['01 만남','02 무슨 일이 있었을까','03 팬들의 반응'][phase];
-  state.el.querySelector('#club-event-caption').textContent=[state.event.player+' 선수에게 팬들의 시선이 모입니다.',def.action,def.response][phase];
+  state.el.querySelector('#club-event-caption').textContent=[def.intro||state.event.player+' 선수에게 팬들의 시선이 모입니다.',def.action,def.response][phase];
   state.el.querySelector('.club-event-changes').hidden=!done;
   state.el.querySelector('[data-club-event-skip]').hidden=done;
   state.el.querySelector('[data-club-event-replay]').hidden=!done;
@@ -118,9 +136,9 @@ function drawClubEventScene(c,event,ms){
  const ball=(x,y)=>{box(x-7,y-7,14,14,'#fff6da');box(x-5,y-5,3,4,'#c94b48');box(x+2,y+1,3,4,'#c94b48');};
  const bubble=(text,x,y,negative=false)=>{c.font='21px NeoDunggeunmo';const w=c.measureText(text).width+30;box(x-w/2,y-30,w,42,negative?'#ffe1d8':'#fff7d8');box(x-3,y+12,8,9,negative?'#ffe1d8':'#fff7d8');label(text,x,y,negative?'#6f2e36':'#183956',21);};
  const fan=(x,y,scale,index,moving=false)=>entranceFan(c,x,y,scale,tm,moving?ms:0,index);
- const athlete=(x,y,pose='idle',flip=false)=>sprite(c,x,y,2.85,tm,actor.number,'player',pose,ms,actor.id,flip);
+ const athlete=(x,y,pose='idle',flip=false)=>(def.intro?matchSprite25:sprite)(c,x,y,2.85,tm,actor.number,'player',pose,ms,actor.id,flip);
  c.save();c.imageSmoothingEnabled=false;c.clearRect(0,0,900,460);
- sceneImage(c,0,0,-190,900,675);
+ sceneImage(c,def.id==='bench-song'?3:0,0,-190,900,675);
  box(0,0,900,460,'#061c3744');box(0,308,900,152,'#c9b894');
  for(let i=0;i<10;i++)box(i*110-40,365,85,2,'#ae9d7d');
  for(let i=0;i<11;i++)box(i*96,427,70,2,'#ae9d7d');
@@ -158,8 +176,33 @@ function drawClubEventScene(c,event,ms){
   fan(mix(668,558,arrival),405,2.1,1,phase===0);fan(651,398,3.25,2);athlete(x,405,phase===0?'run':phase===1?'throw':'idle');
   const u=clamp(action/.8,0,1);ball(mix(402,554,u),mix(294,358,u)-Math.sin(u*Math.PI)*30);
   if(phase===2){bubble('와! 내 야구공이다!',580,241);label('♥',600,318,'#d65762',28);}
+ }else if(def.id==='bench-song'){
+  box(203,314,252,15,'#795332');box(218,329,15,80,'#63422a');box(424,329,15,80,'#63422a');
+  box(205,263,250,29,'#976c43');box(220,290,12,28,'#63422a');box(426,290,12,28,'#63422a');
+  athlete(mix(310,370,action),mix(390,407,action),phase===0?'sad':Math.floor(ms/280)%2?'celebrate':'throw');
+  fan(590,399,3.2,1,phase>0);fan(682,405,3,2,phase>0);fan(773,397,2.8,3,phase>0);
+  if(phase===0)bubble('오늘은 출전하지 못했지만…',325,213);
+  else{bubble(event.player+'! 힘내라!',648,208);for(let i=0;i<3;i++)label('♪',530+i*100,268-Math.sin(ms*.005+i)*12,'#ffdf78',28);}
+  if(phase===2)bubble('내 응원가도… 고마워요!',302,147);
+ }else if(def.id==='lost-child'){
+  box(607,164,205,46,'#215572');label('구장 안내소',710,196,'#ffedbe',24);box(625,210,14,193,'#486f79');box(780,210,14,193,'#486f79');
+  const walk=clamp(action/.65,0,1),childX=mix(479,612,walk),playerX=phase===0?mix(170,369,arrival):mix(369,498,walk);
+  athlete(playerX,408,phase===0||(phase===1&&action<.65)?'run':'idle');
+  fan(childX,408,2.05,1,phase===1&&action<.65);
+  if(phase===0)bubble('보호자가 안 보여요…',491,266,true);
+  else if(phase===1)bubble('안내소에서 함께 기다리자.',419,224);
+  if(action>.65||phase===2){fan(mix(855,694,clamp((action-.65)/.35,0,1)),404,3.2,4,phase===1);}
+  if(phase===2){bubble('찾았다! 고마워요!',681,252);label('♥',654,310,'#d65762',27);}
+ }else if(def.id==='flat-interview'){
+  box(175,136,393,153,'#244a69');for(let i=0;i<3;i++)for(let j=0;j<4;j++)label('BASEBALL',224+j*97,168+i*45,'#7196aa',14);
+  const leaving=clamp((action-.5)/.5,0,1),playerX=phase===0?mix(165,363,arrival):mix(363,785,leaving);
+  fan(535,409,3.1,5);box(469,307,5,96,'#2b303e');box(450,403,43,5,'#2b303e');box(466,283,10,35,'#2b303e');box(460,276,22,16,'#91a2aa');
+  athlete(playerX,409,leaving>0&&phase===1?'run':'idle',phase>0);
+  if(phase===0)bubble('오늘 경기, 어떠셨나요?',532,216);
+  else if(phase===1)bubble(action<.5?'네… 뭐, 다음에요.':'저 먼저 가볼게요.',playerX,202,true);
+  else{bubble('아직 질문이 남았는데…',496,218,true);bubble('…',785,234,true);}
  }
- if(phase===0)label(event.player+' 선수가 다가옵니다',450,85,'#fff4d4',25);
+ if(phase===0)label(def.intro?'경기 후, '+event.player+'의 이야기':event.player+' 선수가 다가옵니다',450,85,'#fff4d4',25);
  const width=220+Math.min(180,event.player.length*13);box(450-width/2,420,width,30,'#092c46ec');label('#'+actor.number+' '+event.player,450,442,'#fff5d2',22);
  c.restore();
 }
@@ -183,7 +226,7 @@ const renderBeforeClubEvents=render;
 render=function(){
  renderBeforeClubEvents();
  const t=activeGame?team():null;
- if(screen==='settings'&&t?.players.length)$('#app').insertAdjacentHTML('beforeend','<section class="panel settings-extra"><h3>구단 사건 연출</h3><p>실제 선수 모습으로 경기장 밖의 다섯 가지 이야기를 봅니다.</p><button data-club-event-preview>구단 사건 연출 미리보기</button></section>');
+ if(screen==='settings'&&t?.players.length)$('#app').insertAdjacentHTML('beforeend','<section class="panel settings-extra"><h3>구단 사건 연출</h3><p>실제 선수 모습으로 경기장 밖의 '+CLUB_EVENT_TYPES.length+'가지 이야기를 봅니다.</p><button data-club-event-preview>구단 사건 연출 미리보기</button></section>');
  if(t&&['result','home','news'].includes(screen)&&!clubEventView&&!$('#dialog')?.open&&!entrance){const event=pendingClubEvent(t);if(event)showClubEvent(event);}
 };
 document.addEventListener('click',e=>{

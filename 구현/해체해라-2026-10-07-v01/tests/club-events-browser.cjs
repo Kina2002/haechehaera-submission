@@ -15,11 +15,11 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
   report.regression=await page.evaluate(()=>({rules:ruleChecks(),contracts:checks26()}));
   assert.ok(report.regression.rules.every(x=>x.ok));
   assert.equal(report.regression.contracts.passed,report.regression.contracts.total);
-  for(let index=0;index<5;index++){
+  for(let index=0;index<8;index++){
    const initial=await page.evaluate(index=>{
     const {t,m}=fixture23();activeGame=true;t.name='해체 드림즈';t.balance.fanEventChance=0;t.funds=1000000;
-    m.done=true;m.score=[4,2];reward(m);
-    const p=t.players[index];p.fans=50;p.loyalty=60;
+    m.done=true;m.score=[1,3];reward(m);
+    const p=t.players[index===5?9:0];p.fans=50;p.loyalty=60;
     const event=applyClubEvent(t,m,p,index);screen='result';render();
     return {kind:event.kind,event:clone(event),team:JSON.stringify(t),open:!!clubEventView};
    },index);
