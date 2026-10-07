@@ -44,7 +44,7 @@
 ```text
 python build.py
 python build.py --check
-node --test tests/storage.test.cjs
+node --test tests/storage.test.cjs tests/player-generation.test.cjs
 ```
 
 개발용 화면은 `dev.html`이며, `src/`와 `assets/`를 수정한 뒤 `build.py`로 단일 `index.html`을 만들 수 있습니다.
@@ -52,6 +52,8 @@ node --test tests/storage.test.cjs
 기록된 확인 결과는 경기·운영 규칙 52/52, 심판 판정 16/16, 계약·이적 15/15, 저장 보호 9/9 통과, 자동 3경기 규칙 위반 0입니다. 모든 그림 조합의 시각 품질과 장기 난이도 검증을 완료했다는 뜻은 아닙니다.
 
 별도 검사 페이지 `tests.html?qa=1`은 실제 구단 저장을 읽거나 쓰지 않습니다. 플레이 화면에는 하단 검사 도구를 표시하지 않습니다.
+
+선수 생성은 초기 일반 강점 60~80, 야구센스 강점 55~65, 스태미나 40~60입니다. 영입 선수의 기존 9개 능력은 각각 10~70이며, 선수 한 명당 0.1% 확률로 딱 하나만 80~100이 됩니다. 상세 범위는 F03·F17 SPEC을 참고하세요.
 
 ## 글꼴
 

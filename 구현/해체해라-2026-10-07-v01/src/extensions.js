@@ -20,8 +20,8 @@ return '<section class="panel settings-extra"><h3>다음 경기 운영비</h3><d
 function appearance(){return {version:12,body:randomInt(0,5),skin:randomInt(0,5),hairColor:randomInt(1,6),eyeColor:randomInt(0,5),parts:{hair:Math.random()<.3?-1:randomInt(0,6),beard:Math.random()<.65?-1:randomInt(0,4),wear:Math.random()<.7?-1:randomInt(0,5),black:Math.random()<.65?-1:randomInt(0,2),eyes:randomInt(0,5),nose:randomInt(0,5),brows:randomInt(0,5),mouth:randomInt(0,5)}};}
 function migrateAppearance(a){if(!a)return;if(!a.parts)a.parts={};const p=a.parts;if(a.version!==12){if(p.beard>=0)p.beard=[4,0,1,2,3][p.beard]??p.beard;if(p.wear>=0)p.wear=[0,1,4,5][p.wear]??p.wear;if(p.brows>=0)p.brows=[0,1,4,2,3,5,5][p.brows]??p.brows;a.version=12;}p.black??=-1;}
 
-function enrich(p){p.appearance??=appearance();migrateAppearance(p.appearance);p.a.stamina??=randomInt(40,80);p.energy??=p.a.stamina;p.loyalty??=randomInt(45,70);p.fans??=randomInt(15,85);p.salary??=Math.max(3,Math.round(abilityPrice(p)*balance().salaryFactor));p.contract??=balance().contractGames;p.lowOffers??=0;return p;}
-const oldPlayer=player;player=function(...args){const p=oldPlayer(...args);p.a.stamina=randomInt(40,80);return enrich(p);};
+function enrich(p){p.appearance??=appearance();migrateAppearance(p.appearance);p.a.stamina??=randomInt(40,60);p.energy??=p.a.stamina;p.loyalty??=randomInt(45,70);p.fans??=randomInt(15,85);p.salary??=Math.max(3,Math.round(abilityPrice(p)*balance().salaryFactor));p.contract??=balance().contractGames;p.lowOffers??=0;return p;}
+const oldPlayer=player;player=function(...args){const p=oldPlayer(...args);p.a.stamina=randomInt(40,args[2]?80:60);return enrich(p);};
 function ensureClub(t){if(!t)return;t.funds??=BALANCE.startFunds;t.balance??={...BALANCE};t.facilities??=[];t.stadium??=1;t.ticket??=10;t.debt??=0;t.ledger??=[];t.news??=[];t.departed??=[];t.market??=[];t.players.forEach(enrich);if(t.match?.opp){t.match.opp.players.forEach(enrich);t.match.used??=t.lineup.map(x=>x.id);t.match.subs??=[];}t.coins=0;t.trophies=t.w;adjustEconomy(t);}
 const oldNewTeam=newTeam;newTeam=function(...args){const t=oldNewTeam(...args);ensureClub(t);t.players.forEach((p,i)=>p.appearance.body=i%6);return t;};
 const oldInitial=ensureInitialRoster;ensureInitialRoster=function(t){const empty=!t.players.length;oldInitial(t);ensureClub(t);if(empty)t.players.forEach((p,i)=>p.appearance.body=i%6);};
@@ -261,7 +261,7 @@ check('시작 시설 0 · 시작 자금 3000',()=>{const {t}=fixture();return t.
 check('초기 지급 반복 진입 시 선수 유지',()=>{const t=newTeam('준비',11,5,true);ensureInitialRoster(t);const ids=t.players.map(p=>p.id).join();ensureInitialRoster(t);return t.players.length===12&&ids===t.players.map(p=>p.id).join();});
 check('등번호 중복 방지',()=>{const {t}=fixture();t.setupDraft=t.players.map(p=>({id:p.id,name:p.name,number:p.number}));t.setupDraft[1].number=t.setupDraft[0].number;return !!setupIdentityError(t,t.setupDraft);});
 check('35명 한도 초과 저장 거부',()=>{const {t}=fixture();t.match=null;while(t.players.length<36)t.players.push(player(false,t.players.map(p=>p.number)));try{validateTeam(t);return false;}catch{return true;}});
-check('영입 야구센스 상한 70',()=>Array.from({length:100},()=>player(false)).every(p=>p.a.sense<=70));
+check('영입 10~70 · 특별 능력 최대 1개 · 스태미나 40~60',()=>Array.from({length:100},()=>player(false)).every(p=>{const values=KEYS.filter(k=>k!=='stamina').map(k=>p.a[k]);return p.strong===null&&p.weak===null&&p.a.stamina>=40&&p.a.stamina<=60&&values.every(v=>Number.isInteger(v)&&(v>=10&&v<=70||v>=80&&v<=100))&&values.filter(v=>v>70).length<=1;}));
 check('부족한 자금 거래는 잔액 유지',()=>{const {t}=fixture(),a=t.funds;return !spend(t,a+1,'검사')&&t.funds===a;});
 check('훈련 연결에 모든 능력 포함',()=>KEYS.every(k=>trainingFacility(k)));
 check('100 능력은 성장 비용 0',()=>{const {t}=fixture(),p=t.players[0];p.a.contact=100;return costGrowth(p,'contact')===0;});
