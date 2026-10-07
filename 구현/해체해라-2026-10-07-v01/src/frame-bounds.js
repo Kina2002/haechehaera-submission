@@ -30,6 +30,13 @@ function capBounds(base,face){const g=ctx(base),im=g.getImageData(0,0,base.width
  for(let y=Math.max(0,Math.floor(fy-fw));y<Math.min(base.height,fy+fh*.28);y++)for(let x=Math.max(0,Math.floor(fx-fw*.32));x<Math.min(base.width,fx+fw*1.25);x++){const i=(y*base.width+x)*4;if(d[i+3]>96&&blue(d[i],d[i+1],d[i+2])){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}}
  return right>left?[left,top,right+1,bottom+1]:[fx-fw*.08,fy-fw*.64,fx+fw*1.08,fy+fh*.12];
 }
+// Preserve the source's full luminance: red alone is nearly saturated in the
+// face art and erased nose/mouth shading when applying darker skin palettes.
+function skinPixel(r,g,b,tone){
+ const light=Math.max(-.65,Math.min(.3,((r*.2126+g*.7152+b*.0722)-185)/185));
+ const highlight=[255,235,211];
+ return tone.map((v,k)=>Math.round(light<0?v*(1+light):v+(Math.max(v,highlight[k])-v)*light*.65));
+}
 function uniformBase(source,config,face,cap,detail=false){
  const cv=canvas(source.width,source.height),g=ctx(cv);g.drawImage(source,0,0);if(!config.palette)return cv;
  const im=g.getImageData(0,0,cv.width,cv.height),d=im.data,primary=rgb(config.palette.primary),secondary=rgb(config.palette.secondary),skin=rgb(config.palette.skin),[cx,cy,cr,cb]=cap;
@@ -43,7 +50,7 @@ function uniformBase(source,config,face,cap,detail=false){
   else if(detail&&r>145&&v>145&&b>145&&Math.max(r,v,b)-Math.min(r,v,b)<65&&y>face[1]+face[3]&&y<waist-16){target=primary;shade=Math.max(.50,Math.min(1.1,(r+v+b)/720));}
   else if(inCap&&Math.min(r,v,b)>175){target=secondary;shade=1;}
   else if(!detail&&Math.min(r,v,b)>170&&y>face[1]+face[3]&&y<face[1]+face[3]*1.62){target=secondary;shade=.95;}
-  else if(r>185&&v>108&&b>48&&r>v*1.13&&v>b*1.14&&r-v<100&&v-b<105){target=skin;shade=Math.max(.66,Math.min(1.05,r/245));}
+  else if((r>185&&v>108&&b>48&&r>v*1.13&&v>b*1.14&&r-v<100&&v-b<105)||(x>=face[0]-face[2]*.18&&x<face[0]+face[2]*1.18&&y>=face[1]-face[3]*.18&&y<face[1]+face[3]*1.12&&r>90&&v>40&&b>12&&r>v*1.15&&v>b*1.18&&r-v<150&&v-b<125)){target=skinPixel(r,v,b,skin);}
   if(target)for(let k=0;k<3;k++)d[i+k]=Math.min(255,Math.round(target[k]*shade));
  }
  g.putImageData(im,0,0);return cv;
