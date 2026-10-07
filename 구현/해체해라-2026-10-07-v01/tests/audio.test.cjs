@@ -97,3 +97,25 @@ test('decode completing after a pause, scene change or channel cancellation is d
 test('decode failure leaves gameplay available and produces a diagnostic',async()=>{
  const {e}=fakeAudio(()=>Promise.resolve({ok:false,status:404}));await e.unlock();assert.equal(await e.play('strike'),false);assert.ok(e.snapshot().errors.some(x=>x.id==='strike'));
 });
+
+test('entrance murmur plays once, resumes at scene time and cancels on skip',async()=>{
+ const calls=[],playing=new Set(),settings={enabled:true};
+ const engine={mix(){},music(){},stopEffects(){playing.clear();},stopAll(){playing.clear();},stopChannel(c){playing.delete(c);},isPlaying:c=>playing.has(c),play(id,options){calls.push({id,options});playing.add('ambience');return Promise.resolve(true);}};
+ const d=Driver.create({engine,rules,settings:()=>settings,sadGroups:{}}),view={};
+ const s={screen:'match',entrance:{view,elapsed:0,duration:5400}};
+ d.update(s);await turn();s.entrance.elapsed=1000;d.update(s);await turn();assert.equal(calls.length,1);
+ playing.clear();d.update(s);await turn();assert.equal(calls.length,1,'a finished clip never restarts in the same entrance');
+ s.blocked=true;d.update(s);assert.equal(playing.size,0);
+ s.blocked=false;s.entrance.elapsed=2400;d.update(s);await turn();assert.equal(calls.length,2);assert.equal(calls[1].options.offset(),2.4);
+ s.entrance=null;d.update(s);assert.equal(playing.size,0);assert.equal(calls[1].options.valid(),false);
+ s.entrance={view:{},elapsed:0,duration:5400,preview:true};d.update(s);await turn();assert.equal(calls.length,3);
+ settings.enabled=false;d.update(s);assert.equal(playing.size,0);
+});
+
+test('delayed entrance decoding uses the latest animation position',async()=>{
+ let release,elapsed=.25;const pending=new Promise(r=>{release=r;});const {e,logs}=fakeAudio(()=>pending);
+ await e.unlock();const cue=e.play('strike',{offset:()=>elapsed,fadeIn:.1});elapsed=1.2;
+ release({ok:true,arrayBuffer:()=>Promise.resolve(new ArrayBuffer(4))});assert.equal(await cue,true);
+ assert.equal(logs.find(x=>x.type==='play').offsetSeconds,1.2);
+ assert.equal(await e.play('strike',{offset:2.1}),false);
+});

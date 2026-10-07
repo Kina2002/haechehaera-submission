@@ -78,8 +78,9 @@ function achievementsHTML(t){
   '<div class="ach-grid">'+(defs.length?defs.map(d=>achievementCard(d,t,metrics)).join(''):'<section class="panel ach-empty"><h3>'+(achievementFilter==='earned'?'아직 달성한 업적이 없습니다.':'표시할 업적이 없습니다.')+'</h3><p>전체 목록에서 다음 목표를 찾아보세요.</p><button data-ach-filter="all">전체 업적 보기</button></section>')+'</div>'+
   '<p class="ach-footnote">업적은 구단별로 저장하며 한 번 달성하면 유지됩니다. 승리 트로피와 자금은 별도로 유지합니다.<br>이전 구단은 남아 있는 경기·선수·시설·MLB 기록으로 인정합니다. 선수 활약에는 이적한 선수의 보존된 기록도 포함합니다.</p>';
 }
-function achievementSummaryHTML(t){
+function achievementSummaryHTML(t,compact=false){
  const n=t.achievements?.unlocked.length||0,pending=pendingAchievements(t).length;
+ if(compact)return '<section class="panel ach-summary home-achievements"><h3>구단 업적</h3><div class="row between"><span>달성한 업적</span><b class="gold">'+n+' / '+ACHIEVEMENTS.length+'</b></div><button class="small" data-go="achievements">업적 보기'+(pending?' · 새 업적 '+pending+'개':'')+'</button></section>';
  return '<section class="panel ach-summary"><div><span class="eyebrow">CLUB MILESTONES</span><h3>구단 업적 <b>'+n+' / '+ACHIEVEMENTS.length+'</b></h3><p>'+(pending?'새 업적 '+pending+'개를 확인하세요.':'경기와 육성의 발자취를 모아 보세요.')+'</p></div><button data-go="achievements">업적 보기'+(pending?' · NEW':'')+'</button></section>';
 }
 const navBeforeAchievements=buttonsNav;
@@ -116,7 +117,12 @@ render=function(){
   if(saveError)$('#app').insertAdjacentHTML('afterbegin','<div class="error-banner">'+esc(saveError)+'</div>');
  }else{
   renderBeforeAchievements();
-  if(t&&['home','records'].includes(screen))$('#app').insertAdjacentHTML(screen==='records'?'afterbegin':'beforeend',achievementSummaryHTML(t));
+  if(t&&screen==='records')$('#app').insertAdjacentHTML('afterbegin',achievementSummaryHTML(t));
+  if(t&&screen==='home'){
+   const report=$('.club-report'),summary=report?.firstElementChild,budget=$('#app > .operating-budget');
+   if(summary){summary.classList.add('home-club-summary');summary.insertAdjacentHTML('afterend',achievementSummaryHTML(t,true));}
+   if(report&&budget)report.append(budget);
+  }
  }
  if(changed)save();scheduleAchievementNotice();
 };

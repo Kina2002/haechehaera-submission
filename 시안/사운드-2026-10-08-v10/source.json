@@ -1,0 +1,20 @@
+{
+  "approved_for_game": true,
+  "author": "trezz77",
+  "source_page": "https://freesound.org/people/trezz77/sounds/546676/",
+  "download_url": "https://cdn.freesound.org/previews/546/546676_5637404-hq.mp3",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "duration_seconds": 5.4,
+  "source_start_seconds": 12,
+  "files": {
+    "sources/crowd-talking-murmur-trezz77.mp3": {
+      "bytes": 1471872,
+      "sha256": "314108ecca45259fc9f8a3eadaa203396676d0c3d21850e14bcd4b0efc00bf33"
+    },
+    "audio/entrance-crowd-murmur.mp3": {
+      "bytes": 109235,
+      "sha256": "65990aa1b83191089842442ee0311fdb2036caec8073bbaa2c1d7129a74641da"
+    }
+  }
+}

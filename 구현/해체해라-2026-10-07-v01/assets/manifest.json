@@ -573,5 +573,10 @@
     "mime": "audio/mpeg",
     "sha256": "b92642de9e1a3818ef3aed67c2e2553d58d18b03e02aec978230ac9cd00d7263",
     "bytes": 12538
+  },
+  "assets/65990aa1b83191089842.mp3": {
+    "mime": "audio/mpeg",
+    "sha256": "65990aa1b83191089842442ee0311fdb2036caec8073bbaa2c1d7129a74641da",
+    "bytes": 109235
   }
 }

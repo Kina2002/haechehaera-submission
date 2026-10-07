@@ -1,0 +1,32 @@
+/* Keep the club overview, achievements and next-game budget in one viewport. */
+body[data-screen="home"]{height:100dvh;min-height:640px;display:flex;flex-direction:column}
+body[data-screen="home"]>header,body[data-screen="home"]>footer{flex-shrink:0}
+body[data-screen="home"]>footer{width:100%;margin:0 auto;align-items:center;padding-top:0;padding-bottom:5px}
+body[data-screen="home"] #app{flex:1;min-height:0;width:100%;display:flex;flex-direction:column;padding-top:8px;padding-bottom:8px}
+body[data-screen="home"] .pagehead{flex-shrink:0;min-height:42px;margin-bottom:8px;padding:5px 14px}
+body[data-screen="home"] .pagehead h2{font-size:23px}
+body[data-screen="home"] .club-stage{flex:1;min-height:0}
+body[data-screen="home"] .club-report{top:12px;bottom:12px;right:12px;width:clamp(280px,25vw,340px);gap:8px}
+body[data-screen="home"] .club-report>.panel{flex-shrink:0;margin:0;padding:10px 12px;gap:7px}
+body[data-screen="home"] .club-report h2{font-size:19px;line-height:1.25;overflow-wrap:anywhere}
+body[data-screen="home"] .club-report h3{font-size:18px;margin:0;padding-bottom:5px;line-height:1.2}
+body[data-screen="home"] .club-report .row{font-size:13px;gap:8px;line-height:1.45}
+body[data-screen="home"] .club-report .row b,body[data-screen="home"] .club-report .row strong{white-space:nowrap}
+body[data-screen="home"] .home-club-summary{min-height:110px}
+body[data-screen="home"] .home-club-summary .tiny{font-size:11px;line-height:1.4;color:#c1d7e8}
+body[data-screen="home"] .home-achievements{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;min-height:110px}
+body[data-screen="home"] .home-achievements .small{font-size:13px;padding:5px 9px;min-height:30px}
+body[data-screen="home"] .home-budget{display:flex;flex-direction:column;gap:5px!important;flex:1;justify-content:space-between}
+body[data-screen="home"] .home-budget .budget-total{padding-top:5px;border-top:1px solid #3e98c2}
+body[data-screen="home"] .home-budget .budget-forecast{font-size:12px;line-height:1.5;color:#dceef8}
+body[data-screen="home"] .home-budget .budget-note{font-size:11px;line-height:1.5;color:#b6cbdc}
+body[data-screen="home"] .home-budget .budget-warning{font-size:11px;line-height:1.45}
+body[data-screen="home"] .club-stage .club-menu{top:12px;bottom:12px;left:12px;gap:4px!important;justify-content:space-between}
+body[data-screen="home"] .club-stage .club-menu button{height:auto;flex:1;min-height:28px!important;font-size:15px!important;padding:4px 8px}
+body[data-screen="home"] .club-stage .field-note{left:calc(50% - 145px)!important;bottom:20px!important;width:220px;font-size:12px;padding:10px 12px}
+@media(max-height:710px){
+ body[data-screen="home"] .club-report>.panel{padding:8px 11px;gap:5px}
+ body[data-screen="home"] .home-club-summary,body[data-screen="home"] .home-achievements{min-height:102px}
+ body[data-screen="home"] .club-report .row{font-size:12px}
+ body[data-screen="home"] .home-budget .budget-note{font-size:10px}
+}

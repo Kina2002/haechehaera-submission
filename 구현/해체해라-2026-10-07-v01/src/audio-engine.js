@@ -8,7 +8,7 @@
   function enabled(){return unlocked&&ctx?.state==='running'&&settings().enabled&&allowed();}
   function mix(){
    if(!ctx)return;
-   const s=settings(),duck=[...voices].some(v=>['judge','reaction','stinger'].includes(v.channel)) ? .24 : 1;
+   const s=settings(),duck=[...voices].some(v=>['judge','reaction','stinger'].includes(v.channel)) ? .24 : [...voices].some(v=>v.channel==='ambience') ? .42 : 1;
    const key=[s.enabled,s.music,s.effects,duck,allowed()].join(':');if(key===lastMix)return;lastMix=key;
    master.gain.setTargetAtTime(s.enabled&&allowed() ? .8 : 0,ctx.currentTime,.025);
    musicBus.gain.setTargetAtTime(s.music*duck,ctx.currentTime,.07);
@@ -46,29 +46,32 @@
    mix();
   }
   function stopEffects(reason='scene-change'){
-   for(const channel of ['field','judge','crowd','reaction','stinger','ui'])stopChannel(channel,reason);
+   for(const channel of ['field','judge','crowd','reaction','stinger','ui','ambience'])stopChannel(channel,reason);
   }
   function stopAll(reason='muted'){
    epoch++;musicToken++;desiredMusic=null;for(const v of [...voices])stopVoice(v,reason);mix();
   }
   function start(id,buffer,options){
    const spec=assets[id],channel=options.channel||spec.channel;
+   const offset=Math.max(0,Number(typeof options.offset==='function'?options.offset():options.offset)||0);
+   if(offset>=buffer.duration)return false;
    if(['judge','reaction','stinger','ui','bgm'].includes(channel))for(const v of [...voices])if(v.channel===channel)stopVoice(v,'replaced');
    if(channel==='field'&&[...voices].filter(v=>v.channel==='field').length>=4)stopVoice([...voices].find(v=>v.channel==='field'),'field-limit');
    const source=ctx.createBufferSource(),gain=ctx.createGain(),now=ctx.currentTime;
    source.buffer=buffer;source.loop=!!options.loop;
    if(options.loop){source.loopStart=0;source.loopEnd=buffer.duration;}
-   gain.gain.setValueAtTime(options.loop?0:spec.gain,now);
-   if(options.loop)gain.gain.linearRampToValueAtTime(spec.gain,now+.18);
+   const fadeIn=options.loop ? .18 : Math.max(0,options.fadeIn||0);
+   gain.gain.setValueAtTime(fadeIn?0:spec.gain,now);
+   if(fadeIn)gain.gain.linearRampToValueAtTime(spec.gain,now+fadeIn);
    source.connect(gain);gain.connect(channel==='bgm'?musicBus:effectBus);
    const v={id,channel,source,gain};voices.add(v);
    source.onended=()=>{voices.delete(v);try{source.disconnect();gain.disconnect();}catch(_){}mix();};
-   source.start(now);
-   if(!options.loop&&Number.isFinite(options.maxDuration)&&options.maxDuration<buffer.duration){
+   source.start(now,offset);
+   if(!options.loop&&Number.isFinite(options.maxDuration)&&options.maxDuration<buffer.duration-offset){
     const end=now+Math.max(.05,options.maxDuration);
     gain.gain.setValueAtTime(spec.gain,Math.max(now,end-.035));gain.gain.linearRampToValueAtTime(0,end);source.stop(end);
    }
-   log('play',{id,channel,bufferSeconds:buffer.duration,...options.meta});mix();return true;
+   log('play',{id,channel,bufferSeconds:buffer.duration,offsetSeconds:offset,...options.meta});mix();return true;
   }
   async function play(id,options={}){
    if(!enabled()||!assets[id])return false;
