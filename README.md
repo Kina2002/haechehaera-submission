@@ -44,7 +44,7 @@
 ```text
 python build.py
 python build.py --check
-node --test tests/storage.test.cjs tests/player-generation.test.cjs
+node --test tests/storage.test.cjs tests/player-generation.test.cjs tests/club-events.test.cjs
 ```
 
 개발용 화면은 `dev.html`이며, `src/`와 `assets/`를 수정한 뒤 `build.py`로 단일 `index.html`을 만들 수 있습니다.
@@ -54,6 +54,8 @@ node --test tests/storage.test.cjs tests/player-generation.test.cjs
 별도 검사 페이지 `tests.html?qa=1`은 실제 구단 저장을 읽거나 쓰지 않습니다. 플레이 화면에는 하단 검사 도구를 표시하지 않습니다.
 
 선수 생성은 초기 일반 강점 60~80, 야구센스 강점 55~65, 스태미나 40~60입니다. 영입 선수의 기존 9개 능력은 각각 10~70이며, 선수 한 명당 0.1% 확률로 딱 하나만 80~100이 됩니다. 상세 범위는 F03·F17 SPEC을 참고하세요.
+
+경기 밖 사건 5종은 실제 선수 캐릭터가 움직이는 알림으로 표시합니다. 경기 결과에서 자동으로 열리고 팬·애정도 변화를 확인할 때까지 유지됩니다. 구단 소식의 다시 보기와 설정의 구단 사건 연출 미리보기를 사용할 수 있습니다. [F21 팬·애정도와 구단 소식](구현/해체해라-2026-10-07-v01/문서/SPEC-기능별-2026-10-07-v01/F21-팬-애정도와-구단-소식.md)을 참고하세요.
 
 ## 글꼴
 
