@@ -1,0 +1,691 @@
+{
+  "natural": {
+    "audio": {
+      "engine": {
+        "unlocked": true,
+        "state": "running",
+        "desiredMusic": null,
+        "voices": [],
+        "loaded": [
+          {
+            "id": "bat",
+            "seconds": 0.28733333333333333
+          },
+          {
+            "id": "miss",
+            "seconds": 0.24
+          },
+          {
+            "id": "bat-hr",
+            "seconds": 0.33958333333333335
+          },
+          {
+            "id": "strike",
+            "seconds": 0.7836666666666666
+          },
+          {
+            "id": "pitch",
+            "seconds": 1.071
+          },
+          {
+            "id": "safe",
+            "seconds": 0.7052916666666667
+          },
+          {
+            "id": "out",
+            "seconds": 0.7052916666666667
+          },
+          {
+            "id": "glove",
+            "seconds": 0.5224375
+          },
+          {
+            "id": "commentary",
+            "seconds": 1.7501875
+          },
+          {
+            "id": "bad-event",
+            "seconds": 1.6457083333333333
+          },
+          {
+            "id": "achievement",
+            "seconds": 2.351
+          },
+          {
+            "id": "crowd-hr",
+            "seconds": 4.048979166666666
+          },
+          {
+            "id": "warm-event",
+            "seconds": 2.7428541666666666
+          },
+          {
+            "id": "click",
+            "seconds": 0.2612083333333333
+          },
+          {
+            "id": "confirm",
+            "seconds": 0.5224375
+          },
+          {
+            "id": "loss",
+            "seconds": 3.3436666666666666
+          },
+          {
+            "id": "sad-fans",
+            "seconds": 5.041625
+          },
+          {
+            "id": "crowd-entrance",
+            "seconds": 5.4
+          },
+          {
+            "id": "rival-fans",
+            "seconds": 5.041625
+          },
+          {
+            "id": "win",
+            "seconds": 4.231833333333333
+          },
+          {
+            "id": "home-cheer",
+            "seconds": 5.041625
+          },
+          {
+            "id": "rival-cheer",
+            "seconds": 5.041625
+          },
+          {
+            "id": "mlb",
+            "seconds": 3.5265208333333335
+          },
+          {
+            "id": "bgm-club",
+            "seconds": 31.304333333333332
+          },
+          {
+            "id": "bgm-tense",
+            "seconds": 28.235270833333335
+          },
+          {
+            "id": "bgm-main",
+            "seconds": 32
+          }
+        ],
+        "errors": []
+      },
+      "driver": {
+        "screen": "match",
+        "blocked": true,
+        "consumed": [
+          "0:pitch",
+          "1:bat",
+          "2:glove",
+          "3:safe"
+        ],
+        "reactionKey": null
+      },
+      "traces": [
+        {
+          "type": "play",
+          "id": "click",
+          "channel": "ui",
+          "bufferSeconds": 0.2612083333333333,
+          "offsetSeconds": 0,
+          "at": 2252
+        },
+        {
+          "type": "play",
+          "id": "bgm-club",
+          "channel": "bgm",
+          "bufferSeconds": 31.304333333333332,
+          "offsetSeconds": 0,
+          "at": 2331
+        },
+        {
+          "type": "play",
+          "id": "click",
+          "channel": "ui",
+          "bufferSeconds": 0.2612083333333333,
+          "offsetSeconds": 0,
+          "at": 3561
+        },
+        {
+          "type": "stop",
+          "id": "click",
+          "channel": "ui",
+          "reason": "screen-change",
+          "at": 3594
+        },
+        {
+          "type": "stop",
+          "id": "bgm-club",
+          "channel": "bgm",
+          "reason": "music-change",
+          "at": 3594
+        },
+        {
+          "type": "play",
+          "id": "crowd-entrance",
+          "channel": "ambience",
+          "bufferSeconds": 5.4,
+          "offsetSeconds": 0.0365,
+          "scene": "entrance",
+          "preview": false,
+          "at": 3595
+        },
+        {
+          "type": "play",
+          "id": "bgm-main",
+          "channel": "bgm",
+          "bufferSeconds": 32,
+          "offsetSeconds": 0,
+          "at": 3595
+        },
+        {
+          "type": "play",
+          "id": "click",
+          "channel": "ui",
+          "bufferSeconds": 0.2612083333333333,
+          "offsetSeconds": 0,
+          "at": 13578
+        },
+        {
+          "type": "play",
+          "id": "pitch",
+          "channel": "field",
+          "bufferSeconds": 1.071,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:0",
+          "scheduledMs": 635.5555555555557,
+          "observedMs": 649.7999999999993,
+          "screen": "match",
+          "at": 14240
+        },
+        {
+          "type": "play",
+          "id": "miss",
+          "channel": "field",
+          "bufferSeconds": 0.24,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:0",
+          "scheduledMs": 928.8888888888889,
+          "observedMs": 933,
+          "screen": "match",
+          "at": 14524
+        },
+        {
+          "type": "play",
+          "id": "glove",
+          "channel": "field",
+          "bufferSeconds": 0.5224375,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:0",
+          "scheduledMs": 1417.7777777777778,
+          "observedMs": 1432.8999999999996,
+          "screen": "match",
+          "at": 15020
+        },
+        {
+          "type": "play",
+          "id": "strike",
+          "channel": "judge",
+          "bufferSeconds": 0.7836666666666666,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:0",
+          "scheduledMs": 1564.4444444444448,
+          "observedMs": 1566.0999999999985,
+          "screen": "match",
+          "at": 15155
+        },
+        {
+          "type": "play",
+          "id": "pitch",
+          "channel": "field",
+          "bufferSeconds": 1.071,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:1",
+          "scheduledMs": 834.1666666666669,
+          "observedMs": 849.2999999999993,
+          "screen": "match",
+          "at": 20185
+        },
+        {
+          "type": "play",
+          "id": "bat",
+          "channel": "field",
+          "bufferSeconds": 0.28733333333333333,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:1",
+          "scheduledMs": 1411.6666666666667,
+          "observedMs": 1415.8999999999978,
+          "screen": "match",
+          "at": 20759
+        },
+        {
+          "type": "play",
+          "id": "glove",
+          "channel": "field",
+          "bufferSeconds": 0.5224375,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:1",
+          "scheduledMs": 3963.7500000000005,
+          "observedMs": 3965.0999999999985,
+          "screen": "match",
+          "at": 23301
+        },
+        {
+          "type": "play",
+          "id": "safe",
+          "channel": "judge",
+          "bufferSeconds": 0.7052916666666667,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:1",
+          "scheduledMs": 4052.34375,
+          "observedMs": 4064.7999999999993,
+          "screen": "match",
+          "at": 23400
+        },
+        {
+          "type": "play",
+          "id": "click",
+          "channel": "ui",
+          "bufferSeconds": 0.2612083333333333,
+          "offsetSeconds": 0,
+          "at": 23408
+        },
+        {
+          "type": "stop",
+          "id": "bgm-main",
+          "channel": "bgm",
+          "reason": "paused-or-hidden",
+          "at": 23416
+        },
+        {
+          "type": "stop",
+          "id": "glove",
+          "channel": "field",
+          "reason": "paused-or-hidden",
+          "at": 23416
+        },
+        {
+          "type": "stop",
+          "id": "safe",
+          "channel": "judge",
+          "reason": "paused-or-hidden",
+          "at": 23416
+        },
+        {
+          "type": "stop",
+          "id": "click",
+          "channel": "ui",
+          "reason": "paused-or-hidden",
+          "at": 23416
+        }
+      ]
+    },
+    "runtimeErrors": [],
+    "entrance": null,
+    "paused": true
+  },
+  "previewSkip": {
+    "audio": {
+      "engine": {
+        "unlocked": true,
+        "state": "running",
+        "desiredMusic": "bgm-club",
+        "voices": [
+          {
+            "id": "bgm-club",
+            "channel": "bgm"
+          }
+        ],
+        "loaded": [
+          {
+            "id": "bat",
+            "seconds": 0.28733333333333333
+          },
+          {
+            "id": "miss",
+            "seconds": 0.24
+          },
+          {
+            "id": "bat-hr",
+            "seconds": 0.33958333333333335
+          },
+          {
+            "id": "strike",
+            "seconds": 0.7836666666666666
+          },
+          {
+            "id": "pitch",
+            "seconds": 1.071
+          },
+          {
+            "id": "safe",
+            "seconds": 0.7052916666666667
+          },
+          {
+            "id": "out",
+            "seconds": 0.7052916666666667
+          },
+          {
+            "id": "glove",
+            "seconds": 0.5224375
+          },
+          {
+            "id": "commentary",
+            "seconds": 1.7501875
+          },
+          {
+            "id": "bad-event",
+            "seconds": 1.6457083333333333
+          },
+          {
+            "id": "achievement",
+            "seconds": 2.351
+          },
+          {
+            "id": "crowd-hr",
+            "seconds": 4.048979166666666
+          },
+          {
+            "id": "warm-event",
+            "seconds": 2.7428541666666666
+          },
+          {
+            "id": "click",
+            "seconds": 0.2612083333333333
+          },
+          {
+            "id": "confirm",
+            "seconds": 0.5224375
+          },
+          {
+            "id": "loss",
+            "seconds": 3.3436666666666666
+          },
+          {
+            "id": "sad-fans",
+            "seconds": 5.041625
+          },
+          {
+            "id": "crowd-entrance",
+            "seconds": 5.4
+          },
+          {
+            "id": "rival-fans",
+            "seconds": 5.041625
+          },
+          {
+            "id": "win",
+            "seconds": 4.231833333333333
+          },
+          {
+            "id": "home-cheer",
+            "seconds": 5.041625
+          },
+          {
+            "id": "rival-cheer",
+            "seconds": 5.041625
+          },
+          {
+            "id": "mlb",
+            "seconds": 3.5265208333333335
+          },
+          {
+            "id": "bgm-club",
+            "seconds": 31.304333333333332
+          },
+          {
+            "id": "bgm-tense",
+            "seconds": 28.235270833333335
+          },
+          {
+            "id": "bgm-main",
+            "seconds": 32
+          }
+        ],
+        "errors": []
+      },
+      "driver": {
+        "screen": "settings",
+        "blocked": false,
+        "consumed": [],
+        "reactionKey": null
+      },
+      "traces": [
+        {
+          "type": "play",
+          "id": "click",
+          "channel": "ui",
+          "bufferSeconds": 0.2612083333333333,
+          "offsetSeconds": 0,
+          "at": 2252
+        },
+        {
+          "type": "play",
+          "id": "bgm-club",
+          "channel": "bgm",
+          "bufferSeconds": 31.304333333333332,
+          "offsetSeconds": 0,
+          "at": 2331
+        },
+        {
+          "type": "play",
+          "id": "click",
+          "channel": "ui",
+          "bufferSeconds": 0.2612083333333333,
+          "offsetSeconds": 0,
+          "at": 3561
+        },
+        {
+          "type": "stop",
+          "id": "click",
+          "channel": "ui",
+          "reason": "screen-change",
+          "at": 3594
+        },
+        {
+          "type": "stop",
+          "id": "bgm-club",
+          "channel": "bgm",
+          "reason": "music-change",
+          "at": 3594
+        },
+        {
+          "type": "play",
+          "id": "crowd-entrance",
+          "channel": "ambience",
+          "bufferSeconds": 5.4,
+          "offsetSeconds": 0.0365,
+          "scene": "entrance",
+          "preview": false,
+          "at": 3595
+        },
+        {
+          "type": "play",
+          "id": "bgm-main",
+          "channel": "bgm",
+          "bufferSeconds": 32,
+          "offsetSeconds": 0,
+          "at": 3595
+        },
+        {
+          "type": "play",
+          "id": "click",
+          "channel": "ui",
+          "bufferSeconds": 0.2612083333333333,
+          "offsetSeconds": 0,
+          "at": 13578
+        },
+        {
+          "type": "play",
+          "id": "pitch",
+          "channel": "field",
+          "bufferSeconds": 1.071,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:0",
+          "scheduledMs": 635.5555555555557,
+          "observedMs": 649.7999999999993,
+          "screen": "match",
+          "at": 14240
+        },
+        {
+          "type": "play",
+          "id": "miss",
+          "channel": "field",
+          "bufferSeconds": 0.24,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:0",
+          "scheduledMs": 928.8888888888889,
+          "observedMs": 933,
+          "screen": "match",
+          "at": 14524
+        },
+        {
+          "type": "play",
+          "id": "glove",
+          "channel": "field",
+          "bufferSeconds": 0.5224375,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:0",
+          "scheduledMs": 1417.7777777777778,
+          "observedMs": 1432.8999999999996,
+          "screen": "match",
+          "at": 15020
+        },
+        {
+          "type": "play",
+          "id": "strike",
+          "channel": "judge",
+          "bufferSeconds": 0.7836666666666666,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:0",
+          "scheduledMs": 1564.4444444444448,
+          "observedMs": 1566.0999999999985,
+          "screen": "match",
+          "at": 15155
+        },
+        {
+          "type": "play",
+          "id": "pitch",
+          "channel": "field",
+          "bufferSeconds": 1.071,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:1",
+          "scheduledMs": 834.1666666666669,
+          "observedMs": 849.2999999999993,
+          "screen": "match",
+          "at": 20185
+        },
+        {
+          "type": "play",
+          "id": "bat",
+          "channel": "field",
+          "bufferSeconds": 0.28733333333333333,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:1",
+          "scheduledMs": 1411.6666666666667,
+          "observedMs": 1415.8999999999978,
+          "screen": "match",
+          "at": 20759
+        },
+        {
+          "type": "play",
+          "id": "glove",
+          "channel": "field",
+          "bufferSeconds": 0.5224375,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:1",
+          "scheduledMs": 3963.7500000000005,
+          "observedMs": 3965.0999999999985,
+          "screen": "match",
+          "at": 23301
+        },
+        {
+          "type": "play",
+          "id": "safe",
+          "channel": "judge",
+          "bufferSeconds": 0.7052916666666667,
+          "offsetSeconds": 0,
+          "event": "fb7b7b04-839f-40c8-825b-ce4247255cde:1",
+          "scheduledMs": 4052.34375,
+          "observedMs": 4064.7999999999993,
+          "screen": "match",
+          "at": 23400
+        },
+        {
+          "type": "play",
+          "id": "click",
+          "channel": "ui",
+          "bufferSeconds": 0.2612083333333333,
+          "offsetSeconds": 0,
+          "at": 23408
+        },
+        {
+          "type": "stop",
+          "id": "bgm-main",
+          "channel": "bgm",
+          "reason": "paused-or-hidden",
+          "at": 23416
+        },
+        {
+          "type": "stop",
+          "id": "glove",
+          "channel": "field",
+          "reason": "paused-or-hidden",
+          "at": 23416
+        },
+        {
+          "type": "stop",
+          "id": "safe",
+          "channel": "judge",
+          "reason": "paused-or-hidden",
+          "at": 23416
+        },
+        {
+          "type": "stop",
+          "id": "click",
+          "channel": "ui",
+          "reason": "paused-or-hidden",
+          "at": 23416
+        },
+        {
+          "type": "play",
+          "id": "bgm-club",
+          "channel": "bgm",
+          "bufferSeconds": 31.304333333333332,
+          "offsetSeconds": 0,
+          "at": 24250
+        },
+        {
+          "type": "play",
+          "id": "crowd-entrance",
+          "channel": "ambience",
+          "bufferSeconds": 5.4,
+          "offsetSeconds": 0.02589999999990687,
+          "scene": "entrance",
+          "preview": true,
+          "at": 25126
+        },
+        {
+          "type": "stop",
+          "id": "crowd-entrance",
+          "channel": "ambience",
+          "reason": "entrance-change",
+          "at": 26132
+        }
+      ]
+    },
+    "runtimeErrors": [],
+    "entrance": null,
+    "paused": true
+  },
+  "homeViewport": {
+    "width": 1194,
+    "height": 668,
+    "scrollWidth": 1194,
+    "scrollHeight": 668
+  }
+}

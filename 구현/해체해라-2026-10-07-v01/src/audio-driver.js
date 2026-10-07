@@ -3,6 +3,7 @@
  function create({engine,rules,settings,sadGroups}){
   let latest={},lastScreen=null,lastAnim=null,plan=[],fired=new Set(),reactionKey=null,wasAllowed=false,lastOverlay=null;
   const seen=new Set(),clubRounds=new WeakMap();
+  let entranceView=null,entranceToken=0,entrancePending=false,entrancePlayed=false,entranceAttemptAt=-Infinity;
   const remember=key=>{seen.add(key);if(seen.size>300)seen.delete(seen.values().next().value);};
   const allowed=()=>!latest.blocked&&settings().enabled;
   const rkey=r=>r?[r.matchId,r.eventId,r.speaker,r.group].join(':'):null;
@@ -12,8 +13,19 @@
    if(lastScreen!==s.screen){engine.stopEffects('screen-change');lastScreen=s.screen;}
    const overlay=s.club?.view||s.mlb?.id||null;
    if(overlay!==lastOverlay){engine.stopChannel('stinger','overlay-change');lastOverlay=overlay;}
-   if(!can&&wasAllowed)engine.stopAll(s.blocked?'paused-or-hidden':'muted');
+   if(!can&&wasAllowed){engine.stopAll(s.blocked?'paused-or-hidden':'muted');entranceToken++;entrancePending=false;entrancePlayed=false;entranceAttemptAt=-Infinity;}
    wasAllowed=can;engine.mix();
+   const nextEntrance=s.entrance?.view||null;
+   if(nextEntrance!==entranceView){
+    engine.stopChannel('ambience','entrance-change');entranceView=nextEntrance;
+    entranceToken++;entrancePending=false;entrancePlayed=false;entranceAttemptAt=-Infinity;
+   }
+   if(nextEntrance&&can&&!entrancePending&&!entrancePlayed&&s.entrance.elapsed<s.entrance.duration-80&&s.entrance.elapsed-entranceAttemptAt>=250){
+    const ticket=entranceToken;entrancePending=true;entranceAttemptAt=s.entrance.elapsed;
+    void engine.play('crowd-entrance',{offset:()=>latest.entrance?.elapsed/1000,fadeIn:.1,
+     valid:()=>ticket===entranceToken&&latest.entrance?.view===nextEntrance&&allowed()&&latest.entrance.elapsed<latest.entrance.duration-80,
+     meta:{scene:'entrance',preview:!!s.entrance.preview}}).then(ok=>{if(ticket===entranceToken){entrancePending=false;entrancePlayed=ok;}});
+   }
    if(lastAnim!==s.anim){
     engine.stopChannel('field','play-change');engine.stopChannel('judge','play-change');engine.stopChannel('crowd','play-change');
     lastAnim=s.anim;fired=new Set();plan=s.anim?rules.eventPlan(s.anim.e,s.anim.duration,s.judges||[]):[];

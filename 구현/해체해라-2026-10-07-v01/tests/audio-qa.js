@@ -23,7 +23,7 @@ if(TEST_ONLY){
   try{
    const {m}=fixture23();m.paused=true;activeGame=true;screen='slots';anim=null;reaction=null;data.settings={sound:true,speed:1,musicVolume:0,effectsVolume:0};
    await GameAudio.unlock();GameAudio.testMode(true);GameAudio.testUpdate(state());await GameAudio.preload();
-   check('25개 음원 브라우저 해독',GameAudio.inspect().engine.loaded.length===25);
+   check('전체 음원 브라우저 해독',GameAudio.inspect().engine.loaded.length===Object.keys(HAECHE_AUDIO_ASSETS).length);
    check('음원 로딩 오류 없음',GameAudio.inspect().engine.errors.length===0);
    const types=new Set(),calls=new Set();let pitches=0;
    for(let game=0;game<3;game++){
@@ -61,5 +61,18 @@ if(TEST_ONLY){
   }catch(e){rows.push({name:e.message,ok:false});window.audioQA={passed:false,rows,stack:e.stack};}
   finally{GameAudio.stop();data=keep.data;screen=keep.screen;activeGame=keep.activeGame;anim=keep.anim;reaction=keep.reaction;shiftLead=keep.shiftLead;suppressPersist--;GameAudio.testMode(false);render();}
   window.audioQA.originalStatePreserved=JSON.stringify(data)===before;window.audioQA.runtimeErrors=runtimeErrors.slice();report.textContent=JSON.stringify(window.audioQA,null,2);
+ };
+}
+
+if(TEST_ONLY){
+ const homeCheck=document.createElement('button');homeCheck.textContent='홈 배치·입장 소리 확인';document.body.append(homeCheck);
+ homeCheck.onclick=async()=>{
+  const {t}=fixture23();t.name='해체 드림즈';t.match=null;t.funds=4942;t.w=0;t.l=2;t.d=0;t.facilities=[];t.debt=0;
+  t.players.forEach(p=>{p.salary=121;p.contract=100;});t.balance.fanEventChance=0;
+  activeGame=true;screen='home';anim=null;reaction=null;shiftLead=null;
+  data.settings={sound:true,speed:1,musicVolume:.3,effectsVolume:.85};syncAchievements(t);acknowledgeAchievements(t,pendingAchievements(t).map(x=>x.id));removeAchievementNotice();
+  for(const section of document.querySelectorAll('body > section'))section.style.display='none';homeCheck.remove();
+  GameAudio.testMode(false);GameAudio.clearTrace();render();await GameAudio.unlock();
+  setInterval(()=>{const status=document.querySelector('#saveStatus');if(status)status.dataset.audioQa=JSON.stringify({audio:GameAudio.inspect(),runtimeErrors,entrance:entrance?{elapsed:entrance.elapsed,preview:entrance.preview}:null,paused:!!team()?.match?.paused});},200);
  };
 }

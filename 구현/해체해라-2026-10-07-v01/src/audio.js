@@ -11,7 +11,8 @@
  function snapshot(){
   const t=team(),m=t?.match,club=clubEventView;
   return {screen,active:activeGame,match:m,
-   blocked:document.hidden||!!skipJob||screen==='match'&&!!m?.paused,
+   blocked:document.hidden||!!skipJob||screen==='match'&&!!m?.paused&&!entrance,
+   entrance:entrance?{view:entrance,elapsed:entrance.elapsed+(document.hidden?0:Math.max(0,performance.now()-entrance.last)),duration:ENTRANCE_MS,preview:entrance.preview}:null,
    anim:screen==='match'?anim:null,clock:screen==='match'&&anim?umpireClock18():0,
    judges:screen==='match'&&anim?judgePlan18(anim.e):[],visible:screen==='match'&&m?visibleMatchState(m):null,
    reaction:screen==='match'&&reaction?{...reaction,matchId:m?.id}:null,

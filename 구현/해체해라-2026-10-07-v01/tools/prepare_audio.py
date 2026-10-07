@@ -19,6 +19,7 @@ tracks = [
  ('pitch','투구',selected+'ElevenLabs_Pitcher_throwing_a_fastball,_whoosh_sound.mp3','field',.70),
  ('miss','헛스윙',selected+'floraphonic-swing-whoosh-1-198494.mp3','field',.75),
  ('crowd-hr','우리 홈런 관중 환호',selected+'homerun-crowd-first4.mp3','crowd',.70),
+ ('crowd-entrance','경기 입장 관중 웅성거림','사운드-2026-10-08-v10/audio/entrance-crowd-murmur.mp3','ambience',.90),
  ('bat','일반 타격',v7+'06-bat-louder.mp3','field',.80),
  ('bat-hr','홈런 타격',v7+'07-homerun-bat-louder.mp3','field',.85),
  ('strike','스트라이크',v9+'strike-new.mp3','judge',.85),

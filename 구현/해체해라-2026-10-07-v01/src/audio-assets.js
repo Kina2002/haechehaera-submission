@@ -35,6 +35,12 @@ window.HAECHE_AUDIO_ASSETS = {
     "channel": "crowd",
     "gain": 0.7
   },
+  "crowd-entrance": {
+    "src": "assets/65990aa1b83191089842.mp3",
+    "title": "경기 입장 관중 웅성거림",
+    "channel": "ambience",
+    "gain": 0.9
+  },
   "bat": {
     "src": "assets/72fb8bdf6382056ac79f.mp3",
     "title": "일반 타격",
