@@ -218,3 +218,5 @@ body[data-screen=setup] main{background-image:linear-gradient(#031b3540,#031b354
 
 body[data-screen=records] main{background-image:none}.result-next button[data-action=review-game]{min-width:180px;font-size:15px}.game-summary{scroll-margin-top:20px}
 .summary-story{margin:14px 0;padding:13px 16px;border-left:3px solid #e7c666;background:#092036;color:#e3eff1;line-height:1.9;font-size:14px}.summary-innings summary:hover{color:#ffdb68}
+
+.match-top .match-speed{display:flex;align-items:center;gap:6px;white-space:nowrap;margin:0;font-size:12px}.match-speed select{padding:6px;width:79px}.match-speed select:disabled{opacity:.45;cursor:not-allowed}
