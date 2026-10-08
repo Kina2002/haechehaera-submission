@@ -927,10 +927,25 @@ function visibleHistory21(m,current=anim){
   seen.add(e.id);return true;
  });
 }
+// Classify a resolved play from our club's perspective without changing saved events.
+function historyTone21(e){
+ if(!e||![0,1].includes(e.attack))return 'neutral';
+ let positive=false,negative=false;
+ const mark=(side,benefit)=>{if((side===0)===benefit)positive=true;else negative=true;};
+ const before=e.before?.score,after=e.after?.score;
+ if(Array.isArray(before)&&Array.isArray(after)&&before.length===2&&after.length===2&&[...before,...after].every(Number.isFinite)){
+  for(let side=0;side<2;side++)if(after[side]>before[side])mark(side,true);
+ }else if(e.runs?.length)mark(e.attack,true);
+ const advanced=(e.moves||[]).some(move=>!move.out&&move.to>move.from&&(e.runs?.includes(move.id)||e.after?.bases?.includes(move.id)));
+ if(advanced||['ball','single','double','triple','hr','bb','hbp','sb','error','wp','pb'].includes(e.type))mark(e.attack,true);
+ if(e.outsAdded>0||(e.moves||[]).some(move=>move.out)||['strike','swing','ks','kl','ground','fly','line','dp','flydp','cs','sf'].includes(e.type))mark(e.attack,false);
+ if(e.bh&&[0,1].includes(e.bhSide))mark(e.bhSide,false);
+ return positive===negative?'neutral':positive?'positive':'negative';
+}
 function historyHTML21(m){
  const rows=visibleHistory21(m).map(e=>{
-  const stage=eventStage21(e),label=stage==='plate'?'타석':'경기',player=e.batterName?e.batterName+' · ':'';
-  return '<div class="history-row21" data-event="'+esc(e.id)+'"><time>'+e.inning+'회 '+(e.half?'말':'초')+'</time><span class="history-phase21 '+stage+'">'+label+'</span><span class="history-team21">'+(e.attack===0?'우리':'상대')+'</span><span>'+esc(player+eventCaption(e))+'</span></div>';
+  const stage=eventStage21(e),label=stage==='plate'?'타석':'경기',player=e.batterName?e.batterName+' · ':'',tone=historyTone21(e);
+  return '<div class="history-row21" data-tone="'+tone+'" title="'+({positive:'우리 팀에 유리한 결과',negative:'우리 팀에 불리한 결과',neutral:'중립 또는 유리·불리가 섞인 결과'}[tone])+'" data-event="'+esc(e.id)+'"><time>'+e.inning+'회 '+(e.half?'말':'초')+'</time><span class="history-phase21 '+stage+'">'+label+'</span><span class="history-team21">'+(e.attack===0?'우리':'상대')+'</span><span>'+esc(player+eventCaption(e))+'</span></div>';
  }).join('');
  return '<section class="play-history21"><div class="history-heading21"><b>경기 기록</b><span>스크롤로 이전 플레이 보기</span></div><div class="history-scroll21" role="region" aria-label="이번 경기의 지난 플레이 기록" tabindex="0" data-match="'+esc(m.id)+'">'+(rows||'<p class="history-empty21">첫 플레이가 끝나면 기록이 여기에 쌓입니다.</p>')+'</div></section>';
 }
@@ -956,6 +971,10 @@ const style21=document.createElement('style');style21.textContent=`
 .history-scroll21{max-height:92px;overflow-y:auto;overscroll-behavior:contain;scrollbar-color:#55788d #0a2234;scrollbar-width:thin}
 .history-scroll21:focus-visible{outline:2px solid #ffe28b;outline-offset:2px}
 .history-row21{display:grid;grid-template-columns:48px 34px 28px minmax(0,1fr);gap:7px;align-items:baseline;font-size:11px;line-height:1.7;padding:4px 0;border-bottom:1px solid #274050;color:#ebf2ef;word-break:keep-all;overflow-wrap:anywhere}
+.history-row21{padding:4px 6px;border-left:3px solid transparent}
+.history-row21[data-tone="positive"]{color:#86caff;border-left-color:#64b5ff;background:#102d48}
+.history-row21[data-tone="negative"]{color:#ff9aa6;border-left-color:#ff7487;background:#362333}
+.history-row21[data-tone="positive"] time,.history-row21[data-tone="negative"] time,.history-row21[data-tone="positive"] .history-team21,.history-row21[data-tone="negative"] .history-team21{color:inherit}
 .history-row21:last-child{border-bottom:0}.history-row21 time,.history-team21{color:#91aabe}.history-phase21{border-radius:3px;text-align:center;font-size:10px}.history-phase21.plate{background:#243859;color:#c4ddff}.history-phase21.field{background:#123f38;color:#b9f4d9}.history-empty21{font-size:11px;color:#8da6b5;margin:5px 0}
 `;document.head.append(style21);
 
