@@ -120,7 +120,8 @@ else{
 const power=b.a.power+(m.command==="power"?18:m.command==="contact"?-10:0);
 const hr=deep&&r(m)<clamp(.018+power/920,.025,.15);
 if(hr){e.target=[clamp(x,220,680),94];reachHit(m,e,4)}
-else{const catchChance=clamp((deep?.79:.73)+(e.fielder.a.speed+e.fielder.a.sense-100)/450-dist/380+(m.command==="contact"?-.04:0),.15,.94);
+// Contact also affects how difficult a fair ball is to field; defense and positioning still resolve the out.
+else{const catchChance=clamp((deep?.99:.95)+(e.fielder.a.speed+e.fielder.a.sense-100)/450-dist/380-(b.a.contact-50)/400+(m.command==="contact"?-.04:0),.15,.94);
 if(dist<=70+e.fielder.a.speed*1.2&&r(m)<catchChance){if(r(m)<clamp((100-e.fielder.a.catch)/1800,.006,.065)){reachHit(m,e,1,true);e.reason="도달한 타구의 포구 실패"}else if(deep)flyOut(m,e);else if(r(m)<(100-e.fielder.a.throw)/2300){reachHit(m,e,1,true);e.badThrow=true;e.reason="1루 방향 악송구"}else groundOut(m,e,m.bases[0]&&m.outs<2&&r(m)<clamp(.34+(e.fielder.a.throw-b.a.speed)/230,.1,.7))}
 else{let bases=deep&&power>35&&r(m)<.42?2:1;if(bases===2&&b.a.speed>65&&r(m)<.15)bases=3;reachHit(m,e,bases)}}
 }
@@ -137,7 +138,7 @@ if(m.command==="take")sw*=inZone?.62:.34;if(m.command==="power")sw=Math.min(.97,
 if(r(m)<.009){e.fielder=c;e.ball=[[450,340],[420,452]];walk(m,e,"hbp")}
 else if(m.bases.some(Boolean)&&m.balls<3&&r(m)<TUNE.wp*(1+(100-p.a.control)/50)){e.type="wp";e.text="폭투 · 주자 진루";e.reason="포수가 잡기 어려운 투구 · 제구";e.fielder=c;p.stats.wp++;m.balls++;advanceLoose(m,e)}
 else if(m.bases.some(Boolean)&&m.balls<3&&r(m)<TUNE.pb*(1+(100-c.a.catch)/50)){e.type="pb";e.text="포일 · 주자 진루";e.reason="잡을 수 있던 공을 놓침 · 포구";e.fielder=c;c.stats.pb++;m.balls++;advanceLoose(m,e)}
-else if(r(m)<sw){e.swing=true;const contact=clamp(.65+(b.a.contact-p.a.velocity)/190+(m.command==="contact"?.12:m.command==="power"?-.14:0),.20,.95);if(r(m)>contact){m.strikes++;b.stats.whiff++;e.type="swing";e.text="헛스윙 스트라이크";if(m.strikes===3){e.type="ks";e.text="헛스윙 삼진";b.stats.k++;p.stats.pk++;addOut(m,e,b.id);finishPA(m,e,"ab")}}
+else if(r(m)<sw){e.swing=true;const contact=clamp(.52+b.a.contact*.0035-(p.a.velocity-50)*.0025+(m.command==="contact"?.07:m.command==="power"?-.10:0),.20,.97);if(r(m)>contact){m.strikes++;b.stats.whiff++;e.type="swing";e.text="헛스윙 스트라이크";if(m.strikes===3){e.type="ks";e.text="헛스윙 삼진";b.stats.k++;p.stats.pk++;addOut(m,e,b.id);finishPA(m,e,"ab")}}
 else if(r(m)<.23){e.type="foul";e.contact=true;e.text="파울 · 타석 계속";m.strikes=Math.min(2,m.strikes+1);e.target=[r(m)<.5?155:745,415]}
 else ballInPlay(m,e,null)}
 else if(inZone){m.strikes++;e.type="strike";e.text="루킹 스트라이크";if(m.strikes===3){e.type="kl";e.text="루킹 삼진";b.stats.k++;p.stats.pk++;addOut(m,e,b.id);finishPA(m,e,"ab")}}

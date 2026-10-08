@@ -1,0 +1,194 @@
+{
+  "source": "src/game.js",
+  "sourceSha256": "f18e6f8ad7419183e9dd4c8a2c55242e5b0bb04ac4e2d26e3d5e02f6fc5449cc",
+  "conditions": {
+    "otherBatterStats": 50,
+    "opponentStats": 50,
+    "command": "contact",
+    "hand": "우타",
+    "tendency": "중앙",
+    "defense": "중앙/보통",
+    "fatigue": false,
+    "boneheads": false,
+    "eachPlateAppearanceStartsWithEmptyBases": true,
+    "plateAppearancesPerContact": 100000,
+    "seed": 20261008
+  },
+  "results": [
+    {
+      "contact": 30,
+      "plateAppearances": 100000,
+      "atBats": 94440,
+      "hits": 18913,
+      "average": 0.20026471833968656,
+      "approx95PercentHalfWidth": 0.0025524276009311325,
+      "homeRuns": 2139,
+      "doubles": 3590,
+      "triples": 0,
+      "strikeouts": 14665,
+      "walks": 3173,
+      "hitByPitch": 2387,
+      "pitches": 264592,
+      "swings": 149692,
+      "contacts": 103779,
+      "swingContactRate": 0.6932835422066643,
+      "fairBalls": 79775,
+      "ordinaryFairHitRate": 0.23707928549044185,
+      "violations": 0,
+      "done": false,
+      "score": [
+        0,
+        0
+      ],
+      "errors": [
+        0,
+        2466
+      ],
+      "boneheads": [
+        0,
+        0
+      ],
+      "eventsChecked": 264592
+    },
+    {
+      "contact": 50,
+      "plateAppearances": 100000,
+      "atBats": 94854,
+      "hits": 23588,
+      "average": 0.24867691399413835,
+      "approx95PercentHalfWidth": 0.0027508021043545147,
+      "homeRuns": 2241,
+      "doubles": 4408,
+      "triples": 0,
+      "strikeouts": 11020,
+      "walks": 2897,
+      "hitByPitch": 2249,
+      "pitches": 251643,
+      "swings": 142140,
+      "contacts": 108814,
+      "swingContactRate": 0.765541015899817,
+      "fairBalls": 83834,
+      "ordinaryFairHitRate": 0.28136555574110744,
+      "violations": 0,
+      "done": false,
+      "score": [
+        0,
+        0
+      ],
+      "errors": [
+        0,
+        2413
+      ],
+      "boneheads": [
+        0,
+        0
+      ],
+      "eventsChecked": 251643
+    },
+    {
+      "contact": 80,
+      "plateAppearances": 100000,
+      "atBats": 95484,
+      "hits": 31426,
+      "average": 0.32912320388756233,
+      "approx95PercentHalfWidth": 0.0029805156451208873,
+      "homeRuns": 2435,
+      "doubles": 5747,
+      "triples": 0,
+      "strikeouts": 6638,
+      "walks": 2472,
+      "hitByPitch": 2044,
+      "pitches": 233101,
+      "swings": 131953,
+      "contacts": 114894,
+      "swingContactRate": 0.870719119686555,
+      "fairBalls": 88846,
+      "ordinaryFairHitRate": 0.3537131666028859,
+      "violations": 0,
+      "done": false,
+      "score": [
+        0,
+        0
+      ],
+      "errors": [
+        0,
+        2359
+      ],
+      "boneheads": [
+        0,
+        0
+      ],
+      "eventsChecked": 233101
+    },
+    {
+      "contact": 85,
+      "plateAppearances": 100000,
+      "atBats": 95551,
+      "hits": 32729,
+      "average": 0.342529120574353,
+      "approx95PercentHalfWidth": 0.0030090226980822306,
+      "homeRuns": 2432,
+      "doubles": 5938,
+      "triples": 0,
+      "strikeouts": 6048,
+      "walks": 2435,
+      "hitByPitch": 2014,
+      "pitches": 230571,
+      "swings": 130601,
+      "contacts": 115928,
+      "swingContactRate": 0.8876501711319209,
+      "fairBalls": 89503,
+      "ordinaryFairHitRate": 0.3656748935789862,
+      "violations": 0,
+      "done": false,
+      "score": [
+        0,
+        0
+      ],
+      "errors": [
+        0,
+        2350
+      ],
+      "boneheads": [
+        0,
+        0
+      ],
+      "eventsChecked": 230571
+    },
+    {
+      "contact": 100,
+      "plateAppearances": 100000,
+      "atBats": 95866,
+      "hits": 36560,
+      "average": 0.3813656562284856,
+      "approx95PercentHalfWidth": 0.0030747624680456105,
+      "homeRuns": 2492,
+      "doubles": 6530,
+      "triples": 0,
+      "strikeouts": 4561,
+      "walks": 2220,
+      "hitByPitch": 1914,
+      "pitches": 222588,
+      "swings": 126131,
+      "contacts": 118559,
+      "swingContactRate": 0.9399671769826609,
+      "fairBalls": 91305,
+      "ordinaryFairHitRate": 0.4004161875034226,
+      "violations": 0,
+      "done": false,
+      "score": [
+        0,
+        0
+      ],
+      "errors": [
+        0,
+        2248
+      ],
+      "boneheads": [
+        0,
+        0
+      ],
+      "eventsChecked": 222588
+    }
+  ]
+}
