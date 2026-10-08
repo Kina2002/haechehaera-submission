@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "자동 배치 안내",
+      "ok": true
+    },
+    {
+      "name": "경기 시작 안내",
+      "ok": true
+    },
+    {
+      "name": "진행 방식 안내",
+      "ok": true
+    },
+    {
+      "name": "공격 지시 안내",
+      "ok": true
+    },
+    {
+      "name": "교체 창 안내",
+      "ok": true
+    },
+    {
+      "name": "결과·운영비 안내",
+      "ok": true
+    },
+    {
+      "name": "실제 안내 완료",
+      "ok": true
+    },
+    {
+      "name": "선수 교체 강요 없음",
+      "ok": true
+    },
+    {
+      "name": "안내 중 경기 정지",
+      "ok": true
+    },
+    {
+      "name": "화면 오류 없음",
+      "ok": true
+    }
+  ],
+  "seen": [
+    "lineup",
+    "start",
+    "mode",
+    "batting",
+    "substitution",
+    "result",
+    "home"
+  ],
+  "freezeChecks": 168,
+  "failures": [],
+  "errors": [],
+  "backupCheck": {
+    "status": "completed",
+    "ownSubstitutions": 0,
+    "opponentSubstitutions": 1,
+    "note": "교체 강요 검사를 실제 다운로드 백업으로 재검증. 상대 투수 자동 교체는 제외하도록 검사 코드 수정."
+  }
+}

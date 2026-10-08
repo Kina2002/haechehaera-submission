@@ -1,0 +1,9 @@
+.tutorial-layer{position:fixed;inset:0;z-index:2000;pointer-events:none;color:#eaf4ff;font-family:inherit}
+.tutorial-shade{position:fixed;background:rgba(2,10,21,.74);pointer-events:auto}
+.tutorial-focus{position:fixed;border:3px solid #ffe18a;border-radius:9px;box-shadow:0 0 0 2px #162c44,0 0 22px #ffe18a55;pointer-events:none}
+.tutorial-card{position:fixed;box-sizing:border-box;padding:20px;background:#0b2540;border:2px solid #ffe18a;border-radius:12px;box-shadow:0 14px 50px #0009;pointer-events:auto;overflow:auto;line-height:1.65}
+.tutorial-card h2{font-size:20px;line-height:1.45;margin:12px 0;color:#fff2be}.tutorial-card p{margin:12px 0;font-size:14px}
+.tutorial-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:#b0d8fc}.tutorial-meta b{padding:2px 6px;border:1px solid #4a7392;border-radius:4px;color:#ffe18a;font-weight:normal}
+.tutorial-card .tutorial-goal{color:#ffe18a;font-weight:bold}.tutorial-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.tutorial-actions button{font-size:13px;min-height:38px}
+.tutorial-sub-note{padding:10px;border:1px solid #ffe18a;color:#ffe18a;background:#0b2540}
+@media(max-width:600px){.tutorial-card{padding:14px}.tutorial-card h2{font-size:17px}.tutorial-card p{font-size:12px;line-height:1.6;margin:9px 0}.tutorial-actions{gap:6px;margin-top:10px}.tutorial-actions button{padding:8px 10px;font-size:12px}}

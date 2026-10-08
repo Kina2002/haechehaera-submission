@@ -1,0 +1,35 @@
+{
+  "reloadRestoredLineup": true,
+  "skipAndSettingsReplay": true,
+  "narrowTargetVisible": true,
+  "narrowNoOverlap": true,
+  "narrowGeometry": {
+    "card": {
+      "bottom": 416.9125061035156,
+      "height": 238.40000915527344,
+      "left": 12,
+      "right": 363,
+      "top": 178.5124969482422,
+      "width": 351,
+      "x": 12,
+      "y": 178.5124969482422
+    },
+    "height": 844,
+    "target": {
+      "bottom": 157.8000030517578,
+      "height": 68.20000457763672,
+      "left": 137.97500610351562,
+      "right": 236.98751068115232,
+      "top": 89.5999984741211,
+      "width": 99.01250457763672,
+      "x": 137.97500610351562,
+      "y": 89.5999984741211
+    },
+    "width": 390
+  },
+  "guide": "첫 경기 안내 · 1 / 5\n감독님 가이드\n선발 9명을 먼저 정해요\n\n선수는 12명, 출전은 9명입니다. 자동 배치가 현재 능력치와 체력에 맞춰 선발·수비 위치·타순을 추천합니다. 나머지 선수는 후보로 남아요.\n\n빛나는 자동 배치 버튼을 눌러 보세요.\n\n안내 건너뛰기",
+  "screen": "lineup",
+  "funds": "3,000만 원",
+  "describedBy": "tutorial-title tutorial-description tutorial-goal",
+  "consoleErrors": []
+}
