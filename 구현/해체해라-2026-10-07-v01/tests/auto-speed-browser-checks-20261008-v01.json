@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-10-08",
+  "uiChecks": [
+    {
+      "name": "경기 상단에서 2배속 선택",
+      "ok": true
+    },
+    {
+      "name": "반자동에서 배속 선택 비활성화",
+      "ok": true
+    },
+    {
+      "name": "자동경기 재전환 시 2배속 유지",
+      "ok": true
+    },
+    {
+      "name": "일시정지·모드 전환 중 경기 기록 유지",
+      "ok": true
+    },
+    {
+      "name": "2배속 재개 후 새 경기 기록 생성",
+      "ok": true
+    },
+    {
+      "name": "경기 배속과 설정 값 동기화",
+      "ok": true
+    },
+    {
+      "name": "2배속에서 투구 효과음 시점 단축 및 판정음 동기화",
+      "ok": true
+    },
+    {
+      "name": "화면·음원 오류 없음",
+      "ok": true
+    }
+  ],
+  "passed": true,
+  "runtimeErrors": [],
+  "audioErrors": [],
+  "audioTiming": {
+    "cueCount": 28,
+    "maxLateMs": 16.650000000008504,
+    "pitchScheduledMs": [
+      635.5555555555557,
+      317.7777777777778
+    ]
+  },
+  "regression": {
+    "passed": true,
+    "browserChecks": 34,
+    "rulesPassed": 52,
+    "rulesTotal": 52,
+    "contractsPassed": 17,
+    "contractsTotal": 17,
+    "errors": []
+  }
+}
