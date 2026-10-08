@@ -7,3 +7,5 @@
 @keyframes ach-arrive{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.achievement-notice{animation:none}}
 @media(max-width:1150px){.ach-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ach-hero{padding:28px}.ach-card{min-height:168px}}
+
+.ach-card.locked{min-height:145px}.ach-card .ach-hidden-condition{color:#8ba9b9;margin-top:18px}.ach-card .ach-proof{color:#ffe1a0;margin-bottom:10px}.ach-toolbar{flex-wrap:wrap}@media(max-width:700px){.ach-grid{grid-template-columns:1fr}.ach-hero{gap:16px;padding:22px 18px}.ach-hero h1{font-size:27px}.ach-total{min-width:95px;padding-left:15px}.ach-total strong{font-size:40px}.ach-total small{font-size:18px}.ach-filters button{padding:9px 12px}.ach-toolbar label{width:100%}.ach-card{min-height:145px}}

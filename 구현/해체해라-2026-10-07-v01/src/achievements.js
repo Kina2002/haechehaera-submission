@@ -16,24 +16,90 @@ const ACHIEVEMENTS=[
  {id:'mlb-3',group:'MLB 진출',metric:'mlb',target:3,title:'빅리그의 산실',goal:'선수 3명 MLB 진출 성공',mark:'M',tier:'II'},
  {id:'mlb-10',group:'MLB 진출',metric:'mlb',target:10,title:'세계로 보내는 구단',goal:'선수 10명 MLB 진출 성공',mark:'M',tier:'III'}
 ];
+const ORIGINAL_ACHIEVEMENT_IDS=new Set(ACHIEVEMENTS.map(d=>d.id));
+ACHIEVEMENTS.push(
+ {id:'game-hits-3',group:'선수 활약',metric:'gameHits',target:3,title:'오늘 공이 수박만 하네',goal:'한 선수가 한 경기 3안타 이상 · 승패 무관 · 홈런 포함',mark:'H',tier:'III'},
+ ...[['contact','컨택','배트에 자석'],['power','파워','담장은 거들 뿐'],['eye','선구안','그 공은 안 삽니다'],['speed','주력','발에 모터 달았냐'],['sense','야구센스','야구는 머리로'],['catch','포구','글러브에 접착제'],['throw','송구','레이저 배송'],['velocity','구속','공이 안 보이는데요'],['control','제구','주문하신 코너입니다'],['stamina','스태미나','퇴근이 뭔데요']].map(([key,label,title])=>({id:'stat-'+key+'-100',group:'선수 성장',metric:'stat-'+key,key,target:100,title,goal:label+' 100인 선수를 최초 보유 · 훈련·실제 영입 모두 인정',mark:'A',tier:'I'})),
+ ...[[1,'이것도 야구냐'],[10,'내일은 이기겠지'],[50,'보살의 경지'],[100,'그래도 우리 팀']].map(([target,title],i)=>({id:'losses-'+target,group:'패배',metric:'losses',target,title,goal:'누적 '+target+'패 달성 · 콜드패 포함',mark:'L',tier:['I','II','III','IV'][i]})),
+ ...[['winStreak','연승',['이게 우리 팀이라고?','승리가 체질','해체 금지 구역']],['lossStreak','연패',['내일은 이긴다며','야구 끊습니다','근데 다음 경기 몇 시죠?']]].flatMap(([metric,label,titles])=>[3,5,10].map((target,i)=>({id:metric+'-'+target,group:'연승·연패',metric,target,title:titles[i],goal:target+label+' 달성 · 무승부는 연속 기록 유지',mark:metric==='winStreak'?'W':'L',tier:['I','II','III'][i]}))),
+ {id:'pinch-winner',group:'감독의 순간',metric:'pinchWinner',target:1,title:'감독의 한 수',goal:'대타의 첫 타석 안타로 앞선 뒤 동점·역전 없이 승리 · 홈런 포함',mark:'P',tier:'I'},
+ {id:'comeback-3',group:'야구의 드라마',metric:'comeback',target:1,title:'아직 안 끝났다',goal:'경기 중 3점 차 이상 뒤졌다가 최종 승리',mark:'D',tier:'I'},
+ {id:'break-losses-3',group:'야구의 드라마',metric:'breakLosses',target:1,title:'드디어 이겼다',goal:'3연패 이상 이후 승리 · 무승부는 연패 유지',mark:'D',tier:'II'},
+ {id:'bonehead-win-3',group:'이 게임다운 목표',metric:'boneheadWin',target:1,title:'이걸 이기네',goal:'우리 팀이 한 경기 본헤드 3회 이상을 저지르고도 승리',mark:'!',tier:'I'},
+ {id:'bonehead-redemption',group:'이 게임다운 목표',metric:'redemption',target:1,title:'오늘만 봐준다',goal:'본헤드 당사자가 같은 경기에서 이후 결승 안타로 만회하고 승리',mark:'!',tier:'II'},
+ {id:'mercy-loss-1',group:'야구의 드라마',metric:'mercyLoss',target:1,title:'오늘은 여기까지',goal:'우리 팀의 첫 콜드패 · 3회 종료부터 양 팀 공격 완료 후 10점 차 이상',mark:'L',tier:'I'}
+);
+function achievementPlayers(t){return [...(t.players||[]),...(t.departed||[]),...(t.mlbHistory||[]).filter(h=>h.success).map(h=>h.player)].filter(Boolean);}
+function achievementOutcome(m){return Array.isArray(m.score)?Math.sign(m.score[0]-m.score[1]):m.result==='승리'?1:m.result==='패배'?-1:0;}
+function achievementProof(m,p,detail=''){
+ const out={};if(m){if(typeof m.id==='string')out.gameId=m.id;const opponent=typeof m.opp==='string'?m.opp:m.opp?.name;if(opponent)out.opponent=opponent;if(Array.isArray(m.score))out.score=m.score.slice();}
+ if(p){if(typeof p.id==='string')out.playerId=p.id;if(typeof p.name==='string')out.playerName=p.name;if(Number.isInteger(p.number))out.number=p.number;}
+ if(detail)out.detail=detail;return out;
+}
+function emptyAchievementFacts(){return {version:1,maxDeficit:0,failedIds:[],leadHit:null};}
+function applyAchievementEvent(f,e,subs=[]){
+ if(f.lastEvent===e.id)return;const before=e.before?.score,after=e.after?.score;if(!before||!after)return;
+ const prev=before[0]-before[1],next=after[0]-after[1];f.maxDeficit=Math.max(f.maxDeficit,-prev,-next);
+ if(next<=0)f.leadHit=null;
+ else if(prev<=0)f.leadHit=e.attack===0&&e.hit>0?{eventId:e.id,playerId:e.batter,playerName:e.batterName||'',number:e.batterNumber,
+  pinchFirst:subs.some(s=>s.pinch&&s.inId===e.batter&&s.firstPAEvent===e.id),redeemed:f.failedIds.includes(e.batter)}:null;
+ // A mistake on this same play cannot count as an earlier mistake.
+ if(e.bh&&e.bhSide===0)for(const id of e.bhActors||[])if(!f.failedIds.includes(id))f.failedIds.push(id);
+ f.lastEvent=e.id;
+}
+function achievementGameFacts(m){
+ if(m.achievementStats?.version===1)return JSON.parse(JSON.stringify(m.achievementStats));
+ const f=emptyAchievementFacts(),events=new Map();
+ for(const e of [...(m.recap?.highlights||[]),...(m.events||[])])events.set(e.id,{...events.get(e.id),...e});
+ const index=e=>Number(String(e.id).split(':').pop());
+ for(const e of [...events.values()].sort((a,b)=>index(a)-index(b)))applyAchievementEvent(f,e,m.subs||[]);
+ return f;
+}
+function achievementStreaks(t){
+ if(t.achievementStreaks)return {...t.achievementStreaks};
+ const s={version:1,win:0,loss:0,bestWin:0,bestLoss:0,lastGame:null};
+ for(const m of [...(t.history||[])].reverse()){const outcome=achievementOutcome(m);if(outcome>0){s.win++;s.loss=0;}else if(outcome<0){s.loss++;s.win=0;}s.bestWin=Math.max(s.bestWin,s.win);s.bestLoss=Math.max(s.bestLoss,s.loss);s.lastGame=m.id||null;}
+ return s;
+}
 function achievementMetrics(t){
- const players=[...(t.players||[]),...(t.departed||[]),...(t.mlbHistory||[]).filter(h=>h.success).map(h=>h.player)];
+ const players=achievementPlayers(t);
  const best=key=>players.reduce((n,p)=>Math.max(n,p?.stats?.[key]||0),0);
  const facilities=new Set((t.facilities||[]).filter(id=>FACILITIES.some(f=>f[0]===id)));
- return {games:t.w+t.l+t.d,wins:t.w,hits:best('h'),homers:best('hr'),facilities:facilities.size,
-  mlb:new Set((t.mlbHistory||[]).filter(h=>h.success).map(h=>h.player.id)).size};
+ const streaks=achievementStreaks(t),metrics={games:t.w+t.l+t.d,wins:t.w,losses:t.l,hits:best('h'),homers:best('hr'),facilities:facilities.size,
+  mlb:new Set((t.mlbHistory||[]).filter(h=>h.success).map(h=>h.player.id)).size,winStreak:streaks.bestWin,lossStreak:streaks.bestLoss,
+  gameHits:0,pinchWinner:0,comeback:0,breakLosses:0,boneheadWin:0,redemption:0,mercyLoss:0,proofs:{}};
+ for(const def of ACHIEVEMENTS.filter(d=>d.key)){const p=players.find(p=>p.a?.[def.key]===100);metrics[def.metric]=p?100:0;if(p)metrics.proofs[def.metric]=achievementProof(null,p);}
+ for(const [metric,key]of [['hits','h'],['homers','hr']]){const p=players.find(p=>p.stats?.[key]===metrics[metric]);if(p)metrics.proofs[metric]=achievementProof(null,p);}
+ let losses=0;
+ for(const m of [...(t.history||[])].reverse()){
+  const outcome=achievementOutcome(m),f=achievementGameFacts(m),lead=f.leadHit,proof=achievementProof(m);
+  const record=(metric,yes,p=null,detail='')=>{if(yes){metrics[metric]=1;metrics.proofs[metric]=achievementProof(m,p,detail);}};
+  for(const p of Object.values(m.recap?.box||{}))if(p.h>metrics.gameHits){metrics.gameHits=p.h;metrics.proofs.gameHits=achievementProof(m,p,p.h+'안타');}
+  const hitter=lead?{id:lead.playerId,name:lead.playerName,number:lead.number}:null;
+  record('comeback',outcome>0&&f.maxDeficit>=3,null,'최대 '+f.maxDeficit+'점 차 열세');
+  record('breakLosses',outcome>0&&(f.breakLosses||losses>=3));
+  record('pinchWinner',outcome>0&&lead?.pinchFirst,hitter);
+  record('redemption',outcome>0&&lead?.redeemed,hitter);
+  record('boneheadWin',outcome>0&&(Array.isArray(m.bh)?m.bh[0]:m.bh??m.boneheads?.[0]??0)>=3);
+  record('mercyLoss',outcome<0&&!!m.mercy,null,m.mercy?m.mercy.inning+'회 · '+m.mercy.margin+'점 차':'');
+  if(outcome<0)losses++;else if(outcome>0)losses=0;
+  if(m.achievementStats?.streakWin===metrics.winStreak)metrics.proofs.winStreak=proof;
+  if(m.achievementStats?.streakLoss===metrics.lossStreak)metrics.proofs.lossStreak=proof;
+ }
+ return metrics;
 }
 function syncAchievements(t,now=Date.now()){
  // Personal statistics change during play; recognize them only after the game ends.
  if(!t||live(t))return {changed:false,added:[]};
- const retroactive=t.achievements===undefined,metrics=achievementMetrics(t);
- t.achievements??={version:1,unlocked:[]};
+ const retroactive=t.achievements===undefined,upgrade=t.achievements?.catalog!==2,metrics=achievementMetrics(t);
+ t.achievements??={version:1,unlocked:[]};t.achievements.catalog=2;
  const owned=new Set(t.achievements.unlocked.map(x=>x.id)),added=[];
  for(const def of ACHIEVEMENTS)if(!owned.has(def.id)&&metrics[def.metric]>=def.target){
-  const entry={id:def.id,at:now,atGame:metrics.games,seen:false,retroactive};
+  const entry={id:def.id,at:now,atGame:metrics.games,seen:false,retroactive:retroactive||(upgrade&&!ORIGINAL_ACHIEVEMENT_IDS.has(def.id))};
+  if(metrics.proofs[def.metric])entry.proof=metrics.proofs[def.metric];
   t.achievements.unlocked.push(entry);added.push(entry);
  }
- return {changed:retroactive||added.length>0,added};
+ return {changed:upgrade||added.length>0,added};
 }
 function pendingAchievements(t){return t?.achievements?.unlocked.filter(x=>!x.seen)||[];}
 function acknowledgeAchievements(t,ids){
@@ -42,41 +108,74 @@ function acknowledgeAchievements(t,ids){
  return changed;
 }
 function validateAchievementState(t){
+ const streaks=t.achievementStreaks;
+ if(streaks!==undefined&&(!streaks||streaks.version!==1||!['win','loss','bestWin','bestLoss'].every(k=>Number.isSafeInteger(streaks[k])&&streaks[k]>=0)||streaks.win>streaks.bestWin||streaks.loss>streaks.bestLoss||(streaks.win>0&&streaks.loss>0)||(streaks.lastGame!==null&&typeof streaks.lastGame!=='string')))throw Error('연승·연패 저장 형식 오류');
+ for(const m of [t.match,...(t.history||[])].filter(Boolean))if(m.achievementStats!==undefined)validateAchievementFacts(m.achievementStats);
  const state=t.achievements;if(state===undefined)return;
- if(!state||state.version!==1||!Array.isArray(state.unlocked)||state.unlocked.length>ACHIEVEMENTS.length)throw Error('업적 저장 형식 오류');
+ if(!state||state.version!==1||(state.catalog!==undefined&&state.catalog!==2)||!Array.isArray(state.unlocked)||state.unlocked.length>ACHIEVEMENTS.length)throw Error('업적 저장 형식 오류');
  const ids=new Set();
  for(const h of state.unlocked){
   if(!h||!ACHIEVEMENTS.some(d=>d.id===h.id)||ids.has(h.id)||
    !Number.isSafeInteger(h.at)||h.at<0||h.at>8640000000000000||
    !Number.isSafeInteger(h.atGame)||h.atGame<0||typeof h.seen!=='boolean'||typeof h.retroactive!=='boolean')throw Error('업적 달성 기록 오류');
   ids.add(h.id);
+  if(h.proof!==undefined)validateAchievementProof(h.proof);
  }
+}
+function validateAchievementProof(p){
+ if(!p||typeof p!=='object'||Array.isArray(p))throw Error('업적 장면 기록 오류');
+ for(const k of ['gameId','opponent','playerId','playerName','detail'])if(p[k]!==undefined&&(typeof p[k]!=='string'||p[k].length>200))throw Error('업적 장면 기록 오류');
+ if(p.number!==undefined&&(!Number.isInteger(p.number)||p.number<0||p.number>99))throw Error('업적 선수 등번호 오류');
+ if(p.score!==undefined&&(!Array.isArray(p.score)||p.score.length!==2||!p.score.every(n=>Number.isSafeInteger(n)&&n>=0)))throw Error('업적 점수 기록 오류');
+}
+function validateAchievementFacts(f){
+ if(!f||f.version!==1||!Number.isSafeInteger(f.maxDeficit)||f.maxDeficit<0||!Array.isArray(f.failedIds)||f.failedIds.length>35||new Set(f.failedIds).size!==f.failedIds.length||f.failedIds.some(id=>typeof id!=='string'||id.length>200))throw Error('경기 업적 판정 기록 오류');
+ if(f.lastEvent!==undefined&&typeof f.lastEvent!=='string')throw Error('경기 업적 사건 기록 오류');
+ if(f.leadHit!==null){const hit=f.leadHit;if(!hit||typeof hit.eventId!=='string'||typeof hit.playerId!=='string'||typeof hit.pinchFirst!=='boolean'||typeof hit.redeemed!=='boolean')throw Error('결승타 업적 기록 오류');validateAchievementProof(hit);}
+ if(f.breakLosses!==undefined&&typeof f.breakLosses!=='boolean')throw Error('연패 탈출 기록 오류');
+ for(const k of ['streakWin','streakLoss'])if(f[k]!==undefined&&(!Number.isSafeInteger(f[k])||f[k]<0))throw Error('경기 연속 기록 오류');
 }
 
 // UI integration. One grouped notification stays until acknowledged, without a modal.
+const recapBeforeAchievements=recordRecap;
+recordRecap=function(m,e){
+ for(const s of m.subs||[])if(e.attack===0&&e.pa&&s.inId===e.batter&&s.firstPAEvent===null)s.firstPAEvent=e.id;
+ m.achievementStats??=achievementGameFacts(m);applyAchievementEvent(m.achievementStats,e,m.subs||[]);return recapBeforeAchievements(m,e);
+};
+const rewardBeforeAchievements=reward;
+reward=function(m){
+ if(m.rewarded)return rewardBeforeAchievements(m);
+ const t=team(),streaks=achievementStreaks(t),previousLosses=streaks.loss;
+ const result=rewardBeforeAchievements(m);if(!m.rewarded)return result;
+ const outcome=achievementOutcome(m);m.achievementStats??=achievementGameFacts(m);
+ if(streaks.lastGame!==m.id){if(outcome>0){streaks.win++;streaks.loss=0;}else if(outcome<0){streaks.loss++;streaks.win=0;}streaks.bestWin=Math.max(streaks.bestWin,streaks.win);streaks.bestLoss=Math.max(streaks.bestLoss,streaks.loss);streaks.lastGame=m.id;}
+ m.achievementStats.breakLosses=outcome>0&&previousLosses>=3;m.achievementStats.streakWin=streaks.win;m.achievementStats.streakLoss=streaks.loss;t.achievementStreaks=streaks;
+ const h=(t.history||[]).find(h=>h.id===m.id);if(h)h.achievementStats=JSON.parse(JSON.stringify(m.achievementStats));
+ syncAchievements(t);return result;
+};
 const validateBeforeAchievements=validateTeam;
 validateTeam=function(t){validateBeforeAchievements(t);validateAchievementState(t);};
 const saveBeforeAchievements=save;
 save=function(force=false){if(activeGame)syncAchievements(team());return saveBeforeAchievements(force);};
 let achievementFilter='all',achievementGroup='all',achievementViewTeam=null,achievementNotice=null,achievementNoticeTimer=0;
-function achievementBadge(def){return '<span class="ach-badge" aria-hidden="true"><b>'+def.mark+'</b><small>'+def.tier+'</small></span>';}
+function achievementBadge(def,hidden=false){return '<span class="ach-badge" aria-hidden="true"><b>'+(hidden?'?':def.mark)+'</b><small>'+(hidden?'':def.tier)+'</small></span>';}
 function achievementDate(h){return (h.retroactive?'기존 기록 인정 · 확인일 ':'달성일 ')+new Date(h.at).toLocaleDateString('ko-KR')+' · 구단 '+h.atGame+'경기';}
 function achievementCard(def,t,metrics){
- const h=t.achievements?.unlocked.find(x=>x.id===def.id),value=h?def.target:Math.min(metrics[def.metric],def.target);
- return '<article class="ach-card '+(h?'earned':'locked')+'" data-achievement="'+def.id+'">'+achievementBadge(def)+
-  '<div class="ach-card-content"><div class="ach-card-top"><span>'+def.group+'</span><span class="ach-state">'+(h?'✓ 달성'+(!h.seen?' · NEW':''):'진행 중')+'</span></div><h3>'+def.title+'</h3><p>'+def.goal+'</p>'+
-  '<div class="ach-progress"><progress max="'+def.target+'" value="'+value+'" aria-label="'+def.goal+'"></progress><b>'+value+' / '+def.target+'</b></div>'+
-  '<small class="ach-date">'+(h?achievementDate(h):'앞으로 '+(def.target-value)+(def.metric==='mlb'?'명':def.metric==='facilities'?'개':def.metric==='wins'?'승':def.metric==='games'?'경기':def.metric==='hits'?'안타':'홈런'))+'</small></div></article>';
+ const h=t.achievements?.unlocked.find(x=>x.id===def.id);
+ return '<article class="ach-card '+(h?'earned':'locked')+'" data-achievement="'+def.id+'">'+achievementBadge(def,!h)+
+  '<div class="ach-card-content"><div class="ach-card-top"><span>'+def.group+'</span><span class="ach-state">'+(h?'✓ 달성'+(!h.seen?' · NEW':''):'미달성')+'</span></div><h3>'+esc(def.title)+'</h3>'+
+  (h?'<p>'+esc(def.goal)+'</p>'+achievementProofHTML(h.proof)+'<small class="ach-date">'+achievementDate(h)+'</small>':'<p class="ach-hidden-condition">달성하면 조건이 공개됩니다.</p>')+'</div></article>';
 }
+function achievementProofHTML(p){if(!p)return '';const parts=[];if(p.playerName)parts.push(p.playerName+(p.number!==undefined?' #'+p.number:''));if(p.opponent)parts.push('상대 '+p.opponent);if(p.score)parts.push(p.score.join(' : '));if(p.detail)parts.push(p.detail);return parts.length?'<p class="ach-proof">'+parts.map(esc).join(' · ')+'</p>':'';}
 function achievementsHTML(t){
  if(achievementViewTeam!==t.id){achievementViewTeam=t.id;achievementFilter='all';achievementGroup='all';}
  const metrics=achievementMetrics(t),owned=new Set((t.achievements?.unlocked||[]).map(x=>x.id)),pending=pendingAchievements(t),total=ACHIEVEMENTS.length;
  const defs=ACHIEVEMENTS.filter(d=>(achievementGroup==='all'||d.group===achievementGroup)&&(achievementFilter==='all'||owned.has(d.id)===(achievementFilter==='earned')));
  return '<section class="ach-hero"><div><p class="eyebrow">CLUB MILESTONES</p><h1>우리 구단의 업적</h1><p>한 경기, 한 선수. 해체하지 않고 쌓아 온 이야기.</p><span class="ach-club-name">'+esc(t.name)+'</span></div><div class="ach-total"><strong>'+owned.size+'<small> / '+total+'</small></strong><span>획득한 업적 배지</span></div></section>'+
-  '<div class="ach-toolbar"><div class="ach-filters" aria-label="업적 상태">'+[['all','전체',total],['progress','진행 중',total-owned.size],['earned','달성',owned.size]].map(([id,label,n])=>'<button data-ach-filter="'+id+'" aria-pressed="'+(achievementFilter===id)+'">'+label+' <b>'+n+'</b></button>').join('')+'</div><label>분야 <select data-ach-group>'+['all',...new Set(ACHIEVEMENTS.map(d=>d.group))].map(g=>'<option value="'+g+'" '+(g===achievementGroup?'selected':'')+'>'+(g==='all'?'모든 분야':g)+'</option>').join('')+'</select></label></div>'+
+  '<div class="ach-toolbar"><div class="ach-filters" aria-label="업적 상태">'+[['all','전체',total],['progress','미달성',total-owned.size],['earned','달성',owned.size]].map(([id,label,n])=>'<button data-ach-filter="'+id+'" aria-pressed="'+(achievementFilter===id)+'">'+label+' <b>'+n+'</b></button>').join('')+'</div><label>분야 <select data-ach-group>'+['all',...new Set(ACHIEVEMENTS.map(d=>d.group))].map(g=>'<option value="'+g+'" '+(g===achievementGroup?'selected':'')+'>'+(g==='all'?'모든 분야':g)+'</option>').join('')+'</select></label></div>'+
   (pending.length?'<div class="ach-unread"><span>새 업적 '+pending.length+'개를 달성했습니다.</span><button class="small" data-ach-read-all>새 업적 모두 확인</button></div>':'')+
   '<div class="ach-grid">'+(defs.length?defs.map(d=>achievementCard(d,t,metrics)).join(''):'<section class="panel ach-empty"><h3>'+(achievementFilter==='earned'?'아직 달성한 업적이 없습니다.':'표시할 업적이 없습니다.')+'</h3><p>전체 목록에서 다음 목표를 찾아보세요.</p><button data-ach-filter="all">전체 업적 보기</button></section>')+'</div>'+
-  '<p class="ach-footnote">업적은 구단별로 저장하며 한 번 달성하면 유지됩니다. 승리 트로피와 자금은 별도로 유지합니다.<br>이전 구단은 남아 있는 경기·선수·시설·MLB 기록으로 인정합니다. 선수 활약에는 이적한 선수의 보존된 기록도 포함합니다.</p>';
+  '<p class="ach-footnote">이름을 단서로 업적을 찾아보세요. 조건은 달성한 뒤 공개됩니다.<br>업적은 구단별로 저장하며 한 번 달성하면 유지됩니다. 이전 구단은 남아 있는 경기·선수·시설·MLB 기록으로 인정합니다.</p>';
 }
 function achievementSummaryHTML(t,compact=false){
  const n=t.achievements?.unlocked.length||0,pending=pendingAchievements(t).length;
