@@ -10,11 +10,11 @@ function fixture(){
  vm.runInContext("let t={id:'club',w:0,l:0,d:0,funds:3000,trophies:0,players:[{id:'p1',stats:{h:0,hr:0}}],departed:[],facilities:[],mlbHistory:[]};",ctx);
  return code=>JSON.parse(vm.runInContext('JSON.stringify('+code+')',ctx));
 }
-test('new club has 15 goals and no instant achievements',()=>{
- assert.deepEqual(fixture()('(()=>{const a=syncAchievements(t,100);return [ACHIEVEMENTS.length,a.changed,a.added.length,t.achievements.version];})()'),[15,true,0,1]);
+test('new club has 42 goals and no instant achievements',()=>{
+ assert.deepEqual(fixture()('(()=>{const a=syncAchievements(t,100);return [ACHIEVEMENTS.length,a.changed,a.added.length,t.achievements.version];})()'),[42,true,0,1]);
 });
 test('every goal unlocks at its threshold, not one below',()=>{
- const defs=fixture()('ACHIEVEMENTS');
+ const defs=fixture()('ACHIEVEMENTS.filter(d=>ORIGINAL_ACHIEVEMENT_IDS.has(d.id))');
  for(const d of defs){
   const set=n=>d.metric==='games'?`t.l=${n}`:d.metric==='wins'?`t.w=${n}`:d.metric==='hits'?`t.players[0].stats.h=${n}`:d.metric==='homers'?`t.players[0].stats.hr=${n}`:d.metric==='facilities'?`t.facilities=Array.from({length:${n}},(_,i)=>'f'+i)`:`t.mlbHistory=Array.from({length:${n}},(_,i)=>({success:true,player:{id:'m'+i,stats:{h:0,hr:0}}}))`;
   const run=fixture();
@@ -23,7 +23,7 @@ test('every goal unlocks at its threshold, not one below',()=>{
  }
 });
 test('draws and losses count for participation but never wins',()=>{
- assert.deepEqual(fixture()('(()=>{t.l=5;t.d=5;syncAchievements(t,100);return t.achievements.unlocked.map(x=>x.id);})()'),['games-1','games-10']);
+ assert.deepEqual(fixture()('(()=>{t.l=5;t.d=5;syncAchievements(t,100);return t.achievements.unlocked.map(x=>x.id);})()'),['games-1','games-10','losses-1']);
 });
 test('first victory unlocks both badges in one batch without changing resources',()=>{
  const out=fixture()('(()=>{syncAchievements(t,90);t.w=1;t.trophies=1;const before=JSON.stringify(t);const a=syncAchievements(t,100);const after={...t};delete after.achievements;const original=JSON.parse(before);delete original.achievements;return [a.added.map(x=>x.id),JSON.stringify(after)===JSON.stringify(original),a.added.every(x=>!x.retroactive)];})()');
@@ -47,7 +47,7 @@ test('facilities count only distinct supported buildings',()=>{
 });
 test('unfinished and paused games cannot unlock achievements from live stats',()=>{
  const run=fixture();assert.equal(run('(()=>{t.match={done:false,paused:true};t.players[0].stats.hr=10;syncAchievements(t,100);return t.achievements===undefined;})()'),true);
- assert.deepEqual(run('(()=>{t.match.done=true;t.l=1;syncAchievements(t,101);return t.achievements.unlocked.map(x=>x.id);})()'),['games-1','homers-10']);
+ assert.deepEqual(run('(()=>{t.match.done=true;t.l=1;syncAchievements(t,101);return t.achievements.unlocked.map(x=>x.id);})()'),['games-1','homers-10','losses-1']);
 });
 test('repeat scans preserve dates and acknowledged status; new badges stay unread',()=>{
  const out=fixture()('(()=>{t.w=1;syncAchievements(t,100);acknowledgeAchievements(t,["games-1"]);t.w=10;syncAchievements(t,200);syncAchievements(t,300);return [t.achievements.unlocked.length,t.achievements.unlocked[0].at,pendingAchievements(t).map(x=>x.id)];})()');
