@@ -1,0 +1,52 @@
+{
+  "route": "추천 편성 → 직접 수정 → 자동 경기 → 2배속 → 스킵",
+  "checks": [
+    {
+      "name": "진행 방식 안내에 실제 자동·스킵 버튼 열림",
+      "ok": true
+    },
+    {
+      "name": "자동 경기 중 비차단 안내와 배속 선택 가능",
+      "ok": true
+    },
+    {
+      "name": "자동 경기 2배속 설정 적용",
+      "ok": true
+    },
+    {
+      "name": "실제 규칙으로 스킵한 결과와 기록 표시",
+      "ok": true
+    },
+    {
+      "name": "스킵 후 마지막 결과 안내 연결",
+      "ok": true
+    },
+    {
+      "name": "홈의 다음 경기 운영비 안내 연결",
+      "ok": true
+    },
+    {
+      "name": "튜토리얼 완료 저장 및 화면 오류 없음",
+      "ok": true
+    }
+  ],
+  "state": {
+    "snapshot": {
+      "state": {
+        "version": 1,
+        "status": "completed",
+        "step": "wrapup",
+        "matchId": "d8f2bd17-320d-461a-b6f9-62ba7d7d5d6b",
+        "defenseSeen": false
+      },
+      "scene": null,
+      "held": false
+    },
+    "screen": "home",
+    "setup": "complete",
+    "activeGame": true,
+    "errors": [],
+    "match": true
+  },
+  "passed": true
+}

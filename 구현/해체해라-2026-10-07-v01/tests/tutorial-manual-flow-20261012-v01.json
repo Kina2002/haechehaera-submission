@@ -1,0 +1,94 @@
+{
+  "manualCounts": [
+    "타순 1 / 9",
+    "타순 2 / 9",
+    "타순 3 / 9",
+    "타순 4 / 9",
+    "타순 5 / 9",
+    "타순 6 / 9",
+    "타순 7 / 9",
+    "타순 8 / 9",
+    "타순 9 / 9"
+  ],
+  "manualPositions": [
+    "C",
+    "P",
+    "1B",
+    "2B",
+    "3B",
+    "SS",
+    "LF",
+    "CF",
+    "RF"
+  ],
+  "manualStartEnabled": true,
+  "modeText": "{\"snapshot\":{\"state\":{\"version\":1,\"status\":\"active\",\"step\":\"player-info\",\"matchId\":\"929bb1f3-81c3-4855-86e8-91248f0c72d8\",\"defenseSeen\":false},\"scene\":\"info\",\"held\":true},\"screen\":\"match\",\"setup\":\"complete\",\"activeGame\":true,\"errors\":[],\"match\":true}",
+  "infoText": "첫 경기 안내 · 3 / 5\n경기 · 지시 시간 정지\n선수 정보를 보고 지시를 정해요\n\n우리 타자의 컨택·파워·선구안과 상대 투수의 구속·제구를 보고 선택하세요. 컨택은 맞히기, 풀스윙은 강한 타구, 참아는 좋은 공 기다리기에 유리합니다. 체력이 줄면 경기 능력도 감소하고, 어떤 지시든 실패할 수 있어요.\n\n우리 타자 · 윤태양 #0\n컨택 31 · 파워 45 · 선구안 50\n체력 43 / 43\n상대 투수 · 강철민 #0\n구속 22 · 제구 49\n체력 56 / 56\n\n양쪽 선수 정보와 체력을 확인한 뒤 지시 선택하기를 누르세요.\n\n지시 선택하기\n안내 건너뛰기",
+  "playerCards": [
+    "현재 타자 · 윤태양 #0컨택 31파워 45선구안 50체력 43 / 43",
+    "현재 투수 · 강철민 #0구속 22제구 49야구센스 30체력 56 / 56"
+  ],
+  "flow": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "편성 방식 선택 안내",
+        "ok": true
+      },
+      {
+        "name": "직접 또는 자동 편성으로 경기 시작",
+        "ok": true
+      },
+      {
+        "name": "진행 방식 안내",
+        "ok": true
+      },
+      {
+        "name": "현재 선수 정보 안내",
+        "ok": true
+      },
+      {
+        "name": "공격 지시 안내",
+        "ok": true
+      },
+      {
+        "name": "교체 창 안내",
+        "ok": true
+      },
+      {
+        "name": "결과·운영비 안내",
+        "ok": true
+      },
+      {
+        "name": "실제 안내 완료",
+        "ok": true
+      },
+      {
+        "name": "선수 교체 강요 없음",
+        "ok": true
+      },
+      {
+        "name": "안내 중 경기 정지",
+        "ok": true
+      },
+      {
+        "name": "화면 오류 없음",
+        "ok": true
+      }
+    ],
+    "seen": [
+      "lineup",
+      "manual",
+      "mode",
+      "info",
+      "batting",
+      "substitution",
+      "result",
+      "home"
+    ],
+    "autoAssignments": 0,
+    "freezeChecks": 1272,
+    "failures": [],
+    "errors": []
+  }
+}
