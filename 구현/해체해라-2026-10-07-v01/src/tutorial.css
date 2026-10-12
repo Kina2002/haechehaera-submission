@@ -6,4 +6,8 @@
 .tutorial-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:#b0d8fc}.tutorial-meta b{padding:2px 6px;border:1px solid #4a7392;border-radius:4px;color:#ffe18a;font-weight:normal}
 .tutorial-card .tutorial-goal{color:#ffe18a;font-weight:bold}.tutorial-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.tutorial-actions button{font-size:13px;min-height:38px}
 .tutorial-sub-note{padding:10px;border:1px solid #ffe18a;color:#ffe18a;background:#0b2540}
+.tutorial-manual{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 16px;margin:12px 0;background:#0b2540;border:1px solid #ffe18a;border-radius:9px;color:#eaf4ff}.tutorial-manual b{color:#ffe18a}.tutorial-manual p{font-size:12px;margin:5px 0}.tutorial-manual .tutorial-actions{flex-shrink:0;margin:0;max-width:210px}
+.tutorial-stat-summary{display:grid;gap:8px;font-size:12px}.tutorial-stat-summary>div{padding:8px 10px;border:1px solid #4a7392;background:#061a2f;border-radius:6px}.tutorial-stat-summary b,.tutorial-stat-summary span,.tutorial-stat-summary small{display:block}.tutorial-stat-summary b{color:#ffe18a}.tutorial-stat-summary small{color:#a9cbdf}
+.tutorial-auto-note{margin:8px 0 14px;padding:8px 12px;border:1px solid #ffe18a;border-radius:7px;font-size:12px;color:#ffe18a}.tutorial-auto-note button{margin-left:8px}
+@media(max-width:800px){.tutorial-manual{align-items:flex-start;flex-wrap:wrap}.tutorial-manual .tutorial-actions{max-width:none}.tutorial-stat-summary{font-size:11px}}
 @media(max-width:600px){.tutorial-card{padding:14px}.tutorial-card h2{font-size:17px}.tutorial-card p{font-size:12px;line-height:1.6;margin:9px 0}.tutorial-actions{gap:6px;margin-top:10px}.tutorial-actions button{padding:8px 10px;font-size:12px}}

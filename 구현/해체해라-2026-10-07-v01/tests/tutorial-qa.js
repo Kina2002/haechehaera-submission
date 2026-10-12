@@ -8,8 +8,9 @@ if(TEST_ONLY)(()=>{
   data={saveVersion:1,slots:[newTeam('첫 경기 검사',11,5,true),null],current:0,settings:{sound:false,speed:1}};
   activeGame=true;anim=null;reaction=null;shiftLead=null;waitMs=0;selection=null;
   document.body.dataset.tutorialQaPlay='';
-  run={seen:[],freezeChecks:0,failures:[],before:null,errors:runtimeErrors.length};go('home');
+  run={seen:[],freezeChecks:0,failures:[],before:null,errors:runtimeErrors.length,autoAssignments:0};go('home');
  };
+ const beforeAssign=autoAssignLineup;autoAssignLineup=function(t){if(run&&t===team())run.autoAssignments++;return beforeAssign(t);};
  panel.querySelector('[data-tutorial-qa-tools]').onclick=()=>{delete document.body.dataset.tutorialQaPlay;go('settings');};
  function collect(){
   if(!run)return;const snap=HaecheTutorial28.snapshot(),m=team()?.match;
@@ -23,11 +24,12 @@ if(TEST_ONLY)(()=>{
  const before=render;render=function(){before();collect();};setInterval(collect,200);
  panel.querySelector('[data-tutorial-qa-report]').onclick=()=>{
   collect();const s=HaecheTutorial28.snapshot(),checks=[
-   ['자동 배치 안내',run?.seen.includes('lineup')],['경기 시작 안내',run?.seen.includes('start')],['진행 방식 안내',run?.seen.includes('mode')],
+   ['편성 방식 선택 안내',run?.seen.includes('lineup')],['직접 또는 자동 편성으로 경기 시작',run?.seen.includes('manual')||run?.seen.includes('start')],['진행 방식 안내',run?.seen.includes('mode')],
+   ['현재 선수 정보 안내',run?.seen.includes('info')],
    ['공격 지시 안내',run?.seen.includes('batting')],['교체 창 안내',run?.seen.includes('substitution')],['결과·운영비 안내',run?.seen.includes('result')&&run?.seen.includes('home')],
    ['실제 안내 완료',s.state?.status==='completed'],['선수 교체 강요 없음',team()?.match?.subs.filter(x=>x.side!==1).length===0],
    ['안내 중 경기 정지',run?.freezeChecks>=3&&run.failures.length===0],['화면 오류 없음',run&&runtimeErrors.length===run.errors]
   ].map(([name,ok])=>({name,ok:!!ok}));
-  panel.querySelector('pre').textContent=JSON.stringify({passed:checks.every(x=>x.ok),checks,seen:run?.seen,freezeChecks:run?.freezeChecks,failures:run?.failures,errors:runtimeErrors.slice(run?.errors||0)});
+  panel.querySelector('pre').textContent=JSON.stringify({passed:checks.every(x=>x.ok),checks,seen:run?.seen,autoAssignments:run?.autoAssignments,freezeChecks:run?.freezeChecks,failures:run?.failures,errors:runtimeErrors.slice(run?.errors||0)});
  };
 })();
