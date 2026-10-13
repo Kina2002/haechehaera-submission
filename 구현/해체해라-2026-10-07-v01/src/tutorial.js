@@ -49,7 +49,7 @@ if(typeof window!=='undefined'&&typeof document!=='undefined')(()=>{
    detail:'<div class="tutorial-stat-summary">'+(a===0?subject('우리 타자',b,['contact','power','eye'])+subject('상대 투수',p,['velocity','control']):subject('우리 투수',p,['velocity','control'])+'<div><b>상대 타자 · '+esc(b.name)+' #'+b.number+'</b><span>'+esc(b.hand)+' · '+esc(b.tendency)+' · 파워 '+b.a.power+'</span></div>')+'</div>'};
  }
  function state(t=team()){return rules.normalize(t?.tutorial28);}
- function busy(){return starting||!!entrance||!!clubEventView||!!mlbDialog||!!achievementNotice||!!$('#dialog')?.open||document.hidden||!!skipJob;}
+ function busy(){return starting||!!entrance||!!clubEventView||!!mlbDialog||!!achievementNotice||!!$('#dialog')?.open||document.hidden||!!skipJob||!!sideSwitch;}
  function hold(m){if(!m||m.done||held?.m===m)return;release(false);held={m,prior:m.paused};m.paused=true;save();window.GameAudio?.update();}
  function release(resume=true){
   if(!held)return;const h=held;held=null;

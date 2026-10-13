@@ -6,7 +6,7 @@ function fixture(rate=1,auto=true){
  const context=vm.createContext({Math});
  vm.runInContext(`
   let data={settings:{speed:${rate}}},m={auto:${auto},paused:false,done:false,inputLeft:10,command:'contact',defense:{side:1,depth:1},score:[0,0],rng:123};
-  let anim=null,reaction=null,shiftLead=null,waitMs=0,lastFrame=0,screen='match',skipJob=null;
+  let anim=null,reaction=null,shiftLead=null,sideSwitch=null,waitMs=0,lastFrame=0,screen='match',skipJob=null;
   let draws=0,renders=0,audioUpdates=0;
   const team=()=>({match:m}),attack=()=>0,clone=x=>JSON.parse(JSON.stringify(x));
   const render=()=>renders++,drawField=()=>{},paintOutcome=()=>{},renderReaction=()=>{},updateControls=()=>{},drawDecorations=()=>{},requestAnimationFrame=()=>{};

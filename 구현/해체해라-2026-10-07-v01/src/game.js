@@ -21,7 +21,7 @@ function player(initial,used=[],bot=false,level=0){let a={},strong=KEYS[randomIn
 function newTeam(name,primary,secondary,deferRoster=false){let ps=[];for(let i=0;i<(deferRoster?0:12);i++){const p=player(true,ps.map(p=>p.number));p.name=NAMES[i];ps.push(p)}return {id:uid(),name,primary,secondary,setupStage:deferRoster?"pending":"complete",players:ps,lineup:ps.slice(0,9).map((p,i)=>({id:p.id,pos:POS[i]})),coins:0,trophies:0,w:0,l:0,d:0,boneheads:0,history:[],match:null,offer:null,created:Date.now(),updated:Date.now()}}
 function opponent(t){let candidates=COLORS.map((c,i)=>i).filter(i=>colorDistance(COLORS[i][1],COLORS[t.primary][1])>125),primary=candidates[randomInt(0,candidates.length-1)],secondary=primary===5?4:5;let o=newTeam(["막강 베어즈","불꽃 나인","낭만 유니온","철벽 스타즈","동네 히어로즈"][randomInt(0,4)],primary,secondary);o.players=[];for(let i=0;i<9;i++){const p=player(false,o.players.map(p=>p.number),true,Math.floor(t.w/5)+randomInt(-1,1));p.name=NAMES[13+i%11];o.players.push(p)}o.lineup=o.players.map((p,i)=>({id:p.id,pos:POS[i]}));return o}
 function colorDistance(a,b){const rgb=x=>[1,3,5].map(i=>parseInt(x.slice(i,i+2),16));const x=rgb(a),y=rgb(b);return Math.hypot(...x.map((v,i)=>v-y[i]))}
-let skipJob=null,suppressPersist=0;
+let skipJob=null,suppressPersist=0,sideSwitch=null;
 const saveStore=GameStorage.create({key:KEY,storage:()=>window.localStorage,validate:value=>validateRoot(value)});
 function save(force=false){
  if(DESIGN_ONLY||TEST_ONLY||suppressPersist&&!force)return;
@@ -77,7 +77,7 @@ function startMatch(){const t=team();if(t.battingDraft&&(!t.match||t.match.done)
 if(t.offer){go("recruit");return}const err=lineupError(t);if(err){toast(err);go("lineup");return}if(t.match&&!t.match.done){t.match.paused=true;go("match");return}
 t.setupStage="complete";delete t.setupDraft;delete t.battingDraft;const opp=opponent(t);const m={id:uid(),opp,home:Math.random()<.5?0:1,inning:1,half:0,outs:0,balls:0,strikes:0,bases:[null,null,null],score:[0,0],hits:[0,0],errors:[0,0],order:[0,0],last:[null,null],innings:[Array(7).fill(null),Array(7).fill(null)],paPitches:0,pitches:0,bh:[0,0],bhBase:[randomInt(1,3),randomInt(1,2)],bhBaseUsed:[0,0],opportunities:[0,0],events:[],rng:(crypto.getRandomValues(new Uint32Array(1))[0]|0)||9137,paused:false,auto:false,done:false,rewarded:false,lastLines:{},reactionCount:0,checks:{events:0,violations:[],motions:0,reactions:0},phase:"ready"};
 t.match=m;for(const tm of [t,opp]){tm.lineup.forEach(x=>ply(tm,x.id).stats.games++);pitcher(tm).stats.appearances++}
-m.innings[attack(m)][0]=0;prepare(m);save();screen="match";anim=null;reaction=null;shiftLead=null;render();showReaction("g01",m,"start");waitMs=TUNE.autoGap}
+m.innings[attack(m)][0]=0;prepare(m);save();screen="match";anim=null;reaction=null;shiftLead=null;sideSwitch=null;render();showReaction("g01",m,"start");waitMs=TUNE.autoGap}
 function snap(m){return {fieldStarts:clone(m.formation||{}),inning:m.inning,half:m.half,outs:m.outs,balls:m.balls,strikes:m.strikes,bases:m.bases.slice(),score:m.score.slice(),order:m.order.slice(),last:m.last.slice(),attack:attack(m),defense:clone(m.defense)}}
 function emptyEvent(m){return {id:m.id+":"+(m.checks?.events??m.events.length),inning:m.inning,half:m.half,attack:attack(m),batter:batter(m).id,pitcher:pitcher(tside(m,1-attack(m))).id,before:snap(m),type:"ball",text:"볼",group:null,bh:0,bhSide:null,ball:[],moves:[],fieldMoves:[],runs:[],outIds:[],outsAdded:0,ab:false,pa:false,swing:false,fair:false,pitchThrown:true,hit:0,errors:[],reason:"",tag:false,pitchIndex:m.pitches+1}}
 function route(e,id,from,to,options={}){const pts=[];if(options.custom)pts.push(...options.custom);else{pts.push(BASES[from]);for(let i=from+1;i<=to;i++)pts.push(BASES[i])}e.moves.push({id,from,to,points:pts.map(p=>p.slice()),out:!!options.out,delay:options.delay??.25,until:options.until??.94,skip:options.skip??false});return e.moves[e.moves.length-1]}
@@ -323,9 +323,9 @@ function auditHTML(m){let counts={};for(const e of m.events){counts[e.type]=(cou
 
 
 let shiftLead=null;
-function canInstruct(m){return !!m&&!m.done&&!m.paused&&!m.auto&&!anim&&!reaction&&!shiftLead&&waitMs<=0}
+function canInstruct(m){return !!m&&!m.done&&!m.paused&&!m.auto&&!anim&&!reaction&&!shiftLead&&!sideSwitch&&waitMs<=0}
 function commitInstruction(m,kind,value,advance){
- if(!m||m.done||m.paused||m.auto)return false;
+ if(!m||m.done||m.paused||m.auto||sideSwitch)return false;
  if(kind==="attack"){if(attack(m)!==0||m.chosen||!["power","contact","take"].includes(value))return false;m.command=value;m.chosen=true}
  else if(kind==="defense"){if(attack(m)!==1||m.defChosen||m.defLocked||![0,1,2].includes(value.depth)||![0,1,2].includes(value.side))return false;m.defense={...value};m.defChosen=true}
  else if(kind!=="skip"||attack(m)===1&&m.defLocked)return false;
@@ -348,7 +348,7 @@ function visibleMatchState(m){if(!anim)return snap(m);const e=anim.e;if(!anim.re
 function outcomeCard(e,preview=false){const info=outcomeInfo(e);return '<div class="play-result '+info.mood+'" role="status" aria-live="polite"><small>'+(preview?"연출 미리보기":(e.inning+"회 "+(e.half?"말":"초")+" · "+(e.attack===0?"우리 팀 공격":"상대 팀 공격")))+'</small><strong>'+esc(info.title)+'</strong>'+(e.bh?'<span class="culprit">'+esc(boneheadAttribution(e))+'</span>':'')+'<p>'+esc(info.description)+'</p><span class="pitch-verdict">'+esc(pitchExplanation(e))+'</span><span>'+esc(info.detail)+'</span></div>'}
 function paintOutcome(){if(screen!=="match")return;const host=$("#bigPlay");if(!host)return;const key=anim?.resultShown?anim.e.id+":result":anim?.e.type==="hr"&&anim.elapsed>anim.duration*.36?anim.e.id+":hr":"";if(host.dataset.shown===key)return;host.dataset.shown=key;host.innerHTML=anim?.resultShown?outcomeCard(anim.e):key?'<div class="bigplay">홈런!<small>담장을 넘었습니다!</small></div>':""}
 function launchPitch(skipShift=false){
- const m=team()?.match;if(!m||m.done||m.paused||anim||reaction||shiftLead||waitMs>0)return;
+ const m=team()?.match;if(!m||m.done||m.paused||anim||reaction||shiftLead||sideSwitch||waitMs>0)return;
  if(!skipShift&&attack(m)===1&&m.defChosen&&!m.defLocked){
   const df=tside(m,0),from={},to={};for(const item of df.lineup){from[item.id]=(m.formation?.[item.id]||fieldPosition(item.pos)).slice();to[item.id]=fieldPosition(item.pos,m.defense)}
   shiftLead={left:550,total:550,from,to};m.inputLeft=0;render();return;
@@ -361,6 +361,7 @@ function tick(now){
  const dt=Math.min(100,now-lastFrame);lastFrame=now;const m=team()?.match;
  if(screen==="match"&&m&&!m.paused&&!skipJob){
   const paceDt=dt*matchPlaybackRate(m);
+  if(sideSwitch)advanceSideSwitch(m,paceDt);
   if(shiftLead){shiftLead.left=Math.max(0,shiftLead.left-paceDt);drawField(now);if(shiftLead.left===0){m.formation=clone(shiftLead.to);shiftLead=null;launchPitch(true)}}
   if(anim){
    anim.judgeClock18=(anim.judgeClock18??anim.elapsed)+dt;
@@ -375,8 +376,8 @@ function tick(now){
    paintOutcome();
   }
   if(reaction){const was=reaction.left;reaction.left-=paceDt;if(reaction.left<=0){reaction=null;renderReaction()}else if(was>=250&&reaction.left<250)renderReaction()}
-  if(anim?.resultShown&&anim.holdLeft<=0&&!reaction){anim=null;waitMs=300;render()}
-  if(!anim&&!reaction&&!shiftLead){
+  if(anim?.resultShown&&anim.holdLeft<=0&&!reaction){const completed=anim.e;anim=null;waitMs=300;if(completed.inningChange&&!m.done)beginSideSwitch(m,completed);render()}
+  if(!anim&&!reaction&&!shiftLead&&!sideSwitch){
    if(waitMs>0){waitMs=Math.max(0,waitMs-paceDt);updateControls()}
    else if(m.done)go("result");
    else if(m.announcement){const group=m.announcement;m.announcement=null;showReaction(group,m,m.id+":last-attack");waitMs=0}
@@ -394,15 +395,15 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("button,[data-
 case"home":go("home");break;
 case"new-slot":createSlot=i;previewColors=[11,5];screen="create";render();break;
 case"create-team":{const name=$("#teamName").value.trim();if(!name||name.length>12){toast("팀 이름은 1~12자로 입력해 주세요.");break}if(data.slots[createSlot]){toast("이 저장칸은 이미 사용 중입니다.");break}data.slots[createSlot]=newTeam(name,...previewColors,true);data.current=createSlot;activeGame=true;selection=team().players[0]?.id;save();go("home");break}
-case"load-slot":confirmBox("저장 "+(i+1)+" 불러오기",data.slots[i].name+"의 진행을 불러옵니다. 진행 중인 경기는 정지 상태에서 시작합니다.",()=>{data.current=i;activeGame=true;anim=null;reaction=null;shiftLead=null;waitMs=0;selection=team().players[0]?.id;if(team().match&&!team().match.done)team().match.paused=true;save();go(team().match&&!team().match.done?"match":"home")});break;
-case"delete-slot":case"reset-slot":confirmBox(act==="delete-slot"?"저장 삭제":"처음부터 다시 하기","저장 "+(i+1)+" · "+data.slots[i].name+"의 선수·기록·진행이 사라집니다. 다른 저장칸은 유지됩니다.",()=>{data.slots[i]=null;anim=null;reaction=null;shiftLead=null;save();if(act==="reset-slot"){createSlot=i;previewColors=[11,5];go("create")}else go("slots")},act==="delete-slot"?"삭제":"새 팀 시작");break;
+case"load-slot":confirmBox("저장 "+(i+1)+" 불러오기",data.slots[i].name+"의 진행을 불러옵니다. 진행 중인 경기는 정지 상태에서 시작합니다.",()=>{data.current=i;activeGame=true;anim=null;reaction=null;shiftLead=null;sideSwitch=null;waitMs=0;selection=team().players[0]?.id;if(team().match&&!team().match.done)team().match.paused=true;save();go(team().match&&!team().match.done?"match":"home")});break;
+case"delete-slot":case"reset-slot":confirmBox(act==="delete-slot"?"저장 삭제":"처음부터 다시 하기","저장 "+(i+1)+" · "+data.slots[i].name+"의 선수·기록·진행이 사라집니다. 다른 저장칸은 유지됩니다.",()=>{data.slots[i]=null;anim=null;reaction=null;shiftLead=null;sideSwitch=null;save();if(act==="reset-slot"){createSlot=i;previewColors=[11,5];go("create")}else go("slots")},act==="delete-slot"?"삭제":"새 팀 시작");break;
 case"close-dialog":$("#dialog").close();modalAction=null;break;
 case"confirm-dialog":{const fn=modalAction;$("#dialog").close();modalAction=null;fn?.();break}
 case"start":if(activeGame)startMatch();break;
 case"setup-next":{const problem=commitInitialIdentity(t);if(problem){$("#setupError").textContent=problem;break}save();go("lineup");break}
 case"setup-back":if(needsSetup(t)){t.setupStage="identity";save();go("setup")}break;
 case"setup-stats":{const p=ply(t,el.dataset.id);note(p.name+" · 능력치",statBars(p));break}
-case"resume-home":confirmBox("경기 불러오기","마지막으로 판정이 끝난 공 이후 상태를 불러옵니다. 경기 재개를 누르면 계속됩니다.",()=>{m.paused=true;anim=null;reaction=null;shiftLead=null;waitMs=0;go("match")});break;
+case"resume-home":confirmBox("경기 불러오기","마지막으로 판정이 끝난 공 이후 상태를 불러옵니다. 경기 재개를 누르면 계속됩니다.",()=>{m.paused=true;anim=null;reaction=null;shiftLead=null;sideSwitch=null;waitMs=0;go("match")});break;
 case"pause":if(m&&!m.done){m.paused=!m.paused;save();render()}break;
 case"auto":if(m&&!m.done){m.auto=!m.auto;save();render()}break;
 case"command":if(canInstruct(m))commitInstruction(m,"attack",el.dataset.kind,launchPitch);break;
@@ -430,7 +431,7 @@ case"rule-check":{const checks=ruleChecks();$("#ruleResults").innerHTML='<p styl
 document.addEventListener("input",ev=>{const el=ev.target,t=team();if(!t||screen!=="setup"||!el.dataset.setupId)return;const row=t.setupDraft.find(x=>x.id===el.dataset.setupId);if(row&&["name","number"].includes(el.dataset.setupField)){row[el.dataset.setupField]=el.value;if($("#setupError"))$("#setupError").textContent="";save()}});
 document.addEventListener("change",ev=>{const el=ev.target,t=team();if(el.id==="speed"||el.id==="matchSpeed"){const rate=Number(el.value);if([1,2,3].includes(rate)){data.settings.speed=rate;save();updateControls()}}if(el.dataset.lineup!==undefined&&t&&(!t.match||t.match.done)){const i=Number(el.dataset.lineup),other=t.lineup.findIndex(x=>x.id===el.value),old=t.lineup[i].id;t.lineup[i].id=el.value;if(other>=0&&other!==i)t.lineup[other].id=old;save();render()}if(el.dataset.position!==undefined&&t&&(!t.match||t.match.done)){const i=Number(el.dataset.position),other=t.lineup.findIndex(x=>x.pos===el.value),old=t.lineup[i].pos;t.lineup[i].pos=el.value;if(other>=0&&other!==i)t.lineup[other].pos=old;save();render()}});
 document.addEventListener("click",ev=>{const el=ev.target.closest("button");if(!el)return;const act=el.dataset.action;if(!["order-up","order-down"].includes(act))return;const t=team();if(t.match&&!t.match.done)return;const i=Number(el.dataset.i),j=i+(act==="order-up"?-1:1);if(j<0||j>=9)return;[t.lineup[i],t.lineup[j]]=[t.lineup[j],t.lineup[i]];save();render()});
-$("#backupFile").addEventListener("change",async ev=>{const file=ev.target.files[0];if(!file)return;const slot=Number(ev.target.dataset.slot);try{if(file.size>12*1024*1024)throw Error("백업 파일이 너무 큽니다.");const backup=JSON.parse(await file.text());if(backup.saveVersion!==1)throw Error("지원하지 않는 저장 버전입니다.");validateTeam(backup.team);confirmBox("백업 파일 불러오기","저장 "+(slot+1)+"에 "+backup.team.name+"의 진행을 복원합니다."+(data.slots[slot]?" 기존 "+data.slots[slot].name+"의 진행은 대체됩니다.":""),()=>{data.slots[slot]=backup.team;data.current=slot;activeGame=true;anim=null;reaction=null;shiftLead=null;waitMs=0;if(team().match&&!team().match.done)team().match.paused=true;save();go(team().match&&!team().match.done?"match":"home")})}catch(e){toast("불러오기 실패: "+e.message+" 기존 저장은 유지됩니다.")}ev.target.value=""});
+$("#backupFile").addEventListener("change",async ev=>{const file=ev.target.files[0];if(!file)return;const slot=Number(ev.target.dataset.slot);try{if(file.size>12*1024*1024)throw Error("백업 파일이 너무 큽니다.");const backup=JSON.parse(await file.text());if(backup.saveVersion!==1)throw Error("지원하지 않는 저장 버전입니다.");validateTeam(backup.team);confirmBox("백업 파일 불러오기","저장 "+(slot+1)+"에 "+backup.team.name+"의 진행을 복원합니다."+(data.slots[slot]?" 기존 "+data.slots[slot].name+"의 진행은 대체됩니다.":""),()=>{data.slots[slot]=backup.team;data.current=slot;activeGame=true;anim=null;reaction=null;shiftLead=null;sideSwitch=null;waitMs=0;if(team().match&&!team().match.done)team().match.paused=true;save();go(team().match&&!team().match.done?"match":"home")})}catch(e){toast("불러오기 실패: "+e.message+" 기존 저장은 유지됩니다.")}ev.target.value=""});
 document.addEventListener("visibilitychange",()=>{if(document.hidden&&team()?.match&&!team().match.done){team().match.paused=true;save();if(screen==="match")render()}});
 window.addEventListener("pagehide",()=>{if(team()?.match&&!team().match.done)team().match.paused=true;save()});
 function ruleChecks(){const original=data,rows=[];const assert=(name,fn)=>{try{if(!fn())throw Error("기대 결과와 다름");rows.push({name,ok:true})}catch(e){rows.push({name,ok:false,error:e.message})}};
@@ -682,7 +683,7 @@ function gameSummaryHTML(m){const ev=m.events||[],hs=m.hits||[0,1].map(side=>ev.
 function recordsArtworkHTML(t){return head("기록실","경기 결과와 이닝별 흐름을 다시 살펴보세요.")+'<div class="records-layout"><figure class="records-art" style="margin:0"><canvas id="recordsArt" width="900" height="675" role="img" aria-label="전체 구장 정면 배경"></canvas><figcaption>'+esc(t.name)+' · '+t.w+'승 '+t.l+'패 '+t.d+'무<br><small>한 경기씩 쌓인, 우리 팀의 이야기.</small></figcaption></figure><section class="records-list">'+(t.history.length?t.history.map((h,i)=>'<details class="panel" '+(i===0?'open':'')+'><summary><b class="'+(h.result==='승리'?'gold':h.result==='패배'?'bad':'good')+'">'+gameResultLabel(h)+'　'+h.score.join(' : ')+'</b>　'+esc(h.opp)+'<small class="muted">　'+new Date(h.at).toLocaleDateString('ko-KR')+'</small></summary>'+gameSummaryHTML(h)+'<details class="audit"><summary>플레이·멘트 상세 기록</summary>'+auditHTML(h)+'</details></details>').join(''):'<div class="panel stack"><h3>첫 경기를 기다립니다.</h3><p class="muted">경기를 마치면 결과, 이닝별 득점, 주요 장면이 이곳에 남습니다.</p><button data-go="home">구단 홈으로</button></div>')+'</section></div>'}
 function skipChunk(m,limit=16){let n=0;while(!m.done&&n<limit){resolvePitch(m);n++}return n}
 function paintSkipProgress(m,count){let host=$("#skipProgress");if(!host){host=document.createElement('div');host.id='skipProgress';host.className='skip-progress';host.setAttribute('role','status');document.body.append(host)}host.innerHTML='<div class="panel"><span class="eyebrow">FAST FORWARD</span><h2>남은 경기를 진행합니다</h2><span class="skip-spinner"></span><strong>'+m.score.join(' : ')+'</strong><p>'+m.inning+'회 '+(m.half?'말':'초')+' · '+count+'개 장면 진행</p><p class="tiny">기본 판단으로 진행한 뒤 기록과 주요 장면을 보여드립니다.</p></div>'}
-async function skipRemainingMatch(){const m=team()?.match;if(!m||skipJob)return;if(m.done){anim=null;reaction=null;shiftLead=null;waitMs=0;go('result');return}const job={m};skipJob=job;m.skipped=true;m.paused=true;anim=null;reaction=null;shiftLead=null;waitMs=0;m.announcement=null;save(true);let count=0;paintSkipProgress(m,count);
+async function skipRemainingMatch(){const m=team()?.match;if(!m||skipJob)return;if(m.done){anim=null;reaction=null;shiftLead=null;sideSwitch=null;waitMs=0;go('result');return}const job={m};skipJob=job;m.skipped=true;m.paused=true;anim=null;reaction=null;shiftLead=null;sideSwitch=null;waitMs=0;m.announcement=null;save(true);let count=0;paintSkipProgress(m,count);
  try{await new Promise(r=>setTimeout(r,80));while(!m.done&&count<2000){suppressPersist++;try{count+=skipChunk(m,16)}finally{suppressPersist--}save(true);paintSkipProgress(m,count);await new Promise(r=>setTimeout(r,16))}if(!m.done)throw Error('진행량이 많아 잠시 멈췄습니다. 마지막 판정부터 이어갈 수 있습니다.');}
  catch(err){m.paused=true;runtimeErrors.push('경기 스킵: '+err.message);toast(err.message)}
  finally{skipJob=null;$("#skipProgress")?.remove();save(true);go(m.done?'result':'match');if(m.done)requestAnimationFrame(()=>$(".game-summary")?.scrollIntoView({block:'start'}))}

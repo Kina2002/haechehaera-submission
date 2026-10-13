@@ -39,7 +39,7 @@ function integration(){
   createElement:()=>{const e={...element(),querySelector:()=>element()};created.push(e);return e;},querySelector:s=>nodes[s]||null,querySelectorAll:()=>[],addEventListener:(type,fn)=>{(events[type]??=[]).push(fn);}};
  const ctx=vm.createContext({Math,performance:{now:()=>123},document:doc,module:undefined});
  ctx.window=ctx;ctx.globalThis=ctx;ctx.innerHeight=900;ctx.addEventListener=(type,fn)=>{(winEvents[type]??=[]).push(fn);};
- vm.runInContext(`let data={slots:[]},activeGame=false,screen='slots',lastFrame=0,anim=null,reaction=null,shiftLead=null,waitMs=0,entrance=null,clubEventView=null,mlbDialog=null,achievementNotice=null,skipJob=null,t=null,saves=0,ticks=0;
+ vm.runInContext(`let data={slots:[]},activeGame=false,screen='slots',lastFrame=0,anim=null,reaction=null,shiftLead=null,sideSwitch=null,waitMs=0,entrance=null,clubEventView=null,mlbDialog=null,achievementNotice=null,skipJob=null,t=null,saves=0,ticks=0;
   const $=s=>document.querySelector(s),team=()=>t,attack=m=>m.side,esc=s=>s,clone=x=>JSON.parse(JSON.stringify(x));
   const POS=['P','C','1B','2B','3B','SS','LF','CF','RF'],STATS={contact:'컨택',power:'파워',eye:'선구안',velocity:'구속',control:'제구'};
   const needsSetup=x=>x.setupStage!=='complete',lineupError=x=>new Set(x.lineup.map(s=>s.id)).size===9?'':'invalid';
