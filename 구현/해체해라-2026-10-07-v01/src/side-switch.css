@@ -1,0 +1,7 @@
+#sideSwitchHost{position:absolute;inset:0;display:grid;place-items:center;z-index:6;pointer-events:none}
+#sideSwitchHost[hidden]{display:none}
+.side-switch-card{width:calc(100% - 44px);max-width:380px;padding:18px 20px;text-align:center;background:#071c36f5;color:#eef7ff;border:2px solid #ffd65a;border-radius:7px;box-shadow:0 4px 0 #041326}
+.side-switch-card small{display:block;color:#ffd65a;font-size:13px}
+.side-switch-card strong{display:block;margin:10px 0;font-family:NeoDunggeunmo,"Malgun Gothic",sans-serif;font-size:26px;font-weight:400;line-height:1.25}
+.side-switch-card p{margin:0;font-size:14px;line-height:1.5}
+@media(max-width:650px){.side-switch-card{padding:12px 14px}.side-switch-card strong{font-size:22px;margin:7px 0}.side-switch-card p{font-size:12px}}

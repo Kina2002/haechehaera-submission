@@ -1113,7 +1113,7 @@ function autoRelief23(m){
 const tickBefore23=tick;
 tick=function(now){
  const m=team()?.match;
- if(screen==='match'&&m&&!m.paused&&!m.pendingEntrance&&!anim&&!reaction&&!shiftLead&&!skipJob){
+ if(screen==='match'&&m&&!m.paused&&!m.pendingEntrance&&!anim&&!reaction&&!shiftLead&&!sideSwitch&&!skipJob){
   const changed=autoRelief23(m);if(changed){waitMs=Math.max(waitMs,2000);save();render();}
  }
  tickBefore23(now);
