@@ -4,7 +4,7 @@ import shutil
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = ROOT / "deployment-output" / "site"
+SITE = ROOT / "deployment-output" / "site-20261013-v01"
 
 if __name__ == "__main__":
     if not (ROOT / "dist/index.html").is_file():
