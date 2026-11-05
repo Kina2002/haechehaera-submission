@@ -92,7 +92,7 @@ function drawSideSwitch(c,m,time){
  const beforeField=drawField;
  drawField=function(time){
   const m=team()?.match;if(!sideSwitch||sideSwitch.match!==m)return beforeField(time);
-  const cv=$('#field');if(!cv)return;const c=cv.getContext('2d');c.imageSmoothingEnabled=false;
+  const cv=$('#field');if(!cv)return;const c=cv.getContext('2d');fitField15(cv,c);
   const s=sideSwitch,u=s.reduced?(sideSwitchProgress()<.55?0:1):smoothProgress(sideSwitchProgress()),zoom=s.fromZoom+(s.toZoom-s.fromZoom)*u;
   c.save();c.translate(450*(1-zoom),490*(1-zoom));c.scale(zoom,zoom);drawStadium(c,900,530,time);drawSideSwitch(c,m,time);c.restore();lastDrawTime=time;paintSideSwitch();
  };

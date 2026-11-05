@@ -1472,7 +1472,7 @@ const demoPlayer={id:'uniform-demo',name:'선수',number:10,a:{contact:50,power:
 function paintDetail(cv,p,tm){if(!charsReady)return;const a=charFrame(p,tm,'detail'),g=cv.getContext('2d');cv.width=240;cv.height=320;g.imageSmoothingEnabled=false;g.clearRect(0,0,240,320);g.fillStyle='#031b244a';g.beginPath();g.ellipse(120,306,55,8,0,0,Math.PI*2);g.fill();const s=300/1536;g.drawImage(a.canvas,120-a.foot[0]*s,306-a.foot[1]*s,a.canvas.width*s,a.canvas.height*s);}
 portraitCanvases=function(){$$('canvas[data-portrait]').forEach(cv=>{const t=cv.dataset.side==='opp'?team()?.match?.opp:team();const p=t?.players?.find(p=>p.id===cv.dataset.portrait)||t?.market?.find(p=>p.id===cv.dataset.portrait);if(p){paintDetail(cv,p,t);if(cv.getBoundingClientRect().width<85){const a=charFrame(p,t,'detail'),g=cv.getContext('2d'),f=a.face;g.clearRect(0,0,240,320);g.drawImage(a.canvas,f[0]-f[2]*.45,f[1]-f[3]*1.05,f[2]*1.9,f[3]*2.85,0,0,240,320);}}});};
 drawJersey=function(){const host=$('#jerseyPreview');if(!host)return;host.innerHTML='<div class="uniform-view"><canvas id="fittingPlayer" width="240" height="320" style="width:260px;height:347px;image-rendering:pixelated"></canvas><p>팀 유니폼</p></div>';paintDetail($('#fittingPlayer'),demoPlayer,{primary:previewColors[0],secondary:previewColors[1]});};
-drawActorLabel=function(c,actor,labels){const text='#'+actor.p.number+' '+actor.p.name;c.save();c.font='11px Galmuri9';c.textAlign='center';const width=c.measureText(text).width+10,y=actor.y+12;c.fillStyle='#042034dd';c.fillRect(actor.x-width/2,y-9,width,15);c.fillStyle='#fff4d2';c.fillText(text,actor.x,y+2);c.restore();};
+drawActorLabel=function(c,actor,labels){const text='#'+actor.p.number+' '+actor.p.name;c.save();c.font='11px Galmuri9';c.textAlign='center';const width=c.measureText(text).width+10,y=actor.y+11+5.6*fieldScale(actor.y);c.fillStyle='#042034dd';c.fillRect(actor.x-width/2,y-9,width,15);c.fillStyle='#fff4d2';c.fillText(text,actor.x,y+2);c.restore();};
 textAt=function(c,text,x,y,size=13,color='#fff',align='center'){c.fillStyle=color;c.textAlign=align;c.font=size+'px '+(size>=20?'NeoDunggeunmo':'Galmuri9');c.fillText(text,x,y);};
 // Present attack closer to home plate; all positions, shadows and balls share one transform.
 const fieldSource=drawField.toString().replace('c.imageSmoothingEnabled=false;drawStadium(c,900,530,time);','c.imageSmoothingEnabled=false;').replace('const actors=[];','c.save();const zoom=a===0&&!e?.contact?1.16:1;c.translate(450*(1-zoom),490*(1-zoom));c.scale(zoom,zoom);drawStadium(c,900,530,time);if(e?.arc>30&&e.target&&t>.22&&t<.56&&e.type!=="hr"){const u=clamp((t-.22)/.33,0,1);c.save();c.globalAlpha=.2+.7*u;c.strokeStyle="#ffe879";c.lineWidth=2;c.beginPath();c.ellipse(e.target[0],e.target[1],34-22*u,12-7*u,0,0,Math.PI*2);c.stroke();c.restore();}const actors=[];').replace('effectsForEvent(c,e,t,time);','effectsForEvent(c,e,t,time);c.restore();');
@@ -1674,6 +1674,8 @@ check('끝내기 만루 홈런은 4득점 모두 인정',()=>{const {m,ids}=fixt
 check('초 공격·4회 이전 리드와 3아웃 득점은 끝내기 아님',()=>{let {m,ids}=fixture();m.inning=5;m.score=[2,2];m.bases=ids;reachHit(m,emptyEvent(m),4);const top=!m.walkoff&&m.score[0]===6;({m,ids}=fixture());m.home=0;m.half=1;m.inning=4;m.score=[2,2];m.bases=ids;reachHit(m,emptyEvent(m),4);const early=!m.walkoff&&m.score[0]===6;({m,ids}=fixture(2));m.home=0;m.half=1;m.inning=5;m.score=[2,2];m.bases[2]=ids[0];const e=emptyEvent(m);groundOut(m,e);resolveInningEnd(m,e);return top&&early&&!m.walkoff&&m.score[0]===2&&m.inning===6;});
 check('땅볼: 강제 주자만 반드시 진루 · 야수선택 · 2사 득점 없음',()=>{let {m,ids}=fixture();m.bases[0]=ids[0];const b=batter(m).id;let e=emptyEvent(m);e.fieldPos='SS';e.fielder=fielder(m.opp,'SS');groundOut(m,e);const forced=m.outs===1&&(e.fc?m.bases[0]===b&&!m.bases[1]&&e.outIds[0]===ids[0]:m.bases[1]===ids[0]&&!m.bases[0]);({m,ids}=fixture(2));m.bases=[ids[0],null,ids[2]];e=emptyEvent(m);e.fieldPos='SS';e.fielder=fielder(m.opp,'SS');groundOut(m,e);return forced&&m.outs===3&&m.score[0]===0&&!e.fc;});
 check('뜬공 태그업: 2사 진루 없음 · 주자 중복·유실 없음',()=>{let {m,ids}=fixture(2);m.bases=[null,ids[1],ids[2]];let e=emptyEvent(m);e.fieldPos='CF';e.fielder=fielder(m.opp,'CF');flyOut(m,e);const twoOut=m.outs===3&&m.score[0]===0;({m,ids}=fixture());m.bases=ids.slice();e=emptyEvent(m);e.fieldPos='RF';e.fielder=fielder(m.opp,'RF');flyOut(m,e);const on=m.bases.filter(Boolean);return twoOut&&new Set(on).size===on.length&&e.runs.length+on.length+e.outIds.length-1===3;});
+check('서 있는 수비수는 홈 쪽을, 베이스 위 주자는 다음 베이스 쪽을 봄',()=>standingFlip15('ready',650,300,false)&&!standingFlip15('ready',250,300,true)&&standingFlip15('lead',650,336,false)&&standingFlip15('lead',450,230,false)&&!standingFlip15('lead',250,336,true)&&standingFlip15('run',700,300,true));
+check('경기장은 화면 픽셀 크기로 그리고 좌표는 900×530 유지',()=>{const cv=document.createElement('canvas');cv.width=900;cv.height=530;const c=cv.getContext('2d');fitField15(cv,c);const k=c.getTransform();return cv.width>=900&&cv.width<=1920&&Math.abs(cv.width/cv.height-900/530)<.01&&Math.abs(k.a-cv.width/900)<1e-5&&Math.abs(k.d-cv.height/530)<1e-5;});
 check('공격 중인 팀의 포수는 주자로 그리고 수비 팀 포수만 포수 자세',()=>{const {t,m}=fixture();const was=screen;screen='match';try{return attack(m)===0&&battingTeam15(t)&&!battingTeam15(m.opp);}finally{screen=was;}});
 check('도루 실패는 타순 유지',()=>{const {m,ids}=fixture();m.bases[0]=ids[0];const e=emptyEvent(m);runnerEvent(m,e,'steal',6);return m.outs===1&&m.order[0]===0&&!e.pitchThrown;});
 check('안타로 연속 무안타 해제',()=>{const {m}=fixture(),p=batter(m);p.stats.hitless=9;reachHit(m,emptyEvent(m),1);return p.stats.hitless===0;});
@@ -1807,6 +1809,14 @@ const silhouettes15=new WeakMap();
 function silhouette15(img){let s=silhouettes15.get(img);if(!s){s=canvasNew(img.width,img.height);const g=s.getContext('2d');g.drawImage(img,0,0);g.globalCompositeOperation='source-in';g.fillStyle='#0b1916';g.fillRect(0,0,s.width,s.height);silhouettes15.set(img,s);}return s;}
 function plainImage15(c,img,x,y,w,h){c.drawImage(img,x,y,w,h);}
 function outlinedImage15(c,img,x,y,w,h){const s=silhouette15(img);c.save();c.globalAlpha*=.8;for(const [dx,dy] of [[-1,0],[1,0],[0,-1],[0,1]])c.drawImage(s,x+dx,y+dy,w,h);c.restore();c.drawImage(img,x,y,w,h);}
+// Umpire frames come from a shared sheet; a cropped copy lets them get the same field outline as players.
+const frameCrops15=new WeakMap();
+function frameCrop15(img,r){let crops=frameCrops15.get(img);if(!crops){crops=new Map();frameCrops15.set(img,crops);}const key=r.join(',');let cv=crops.get(key);if(!cv){cv=canvasNew(r[2],r[3]);cv.getContext('2d').drawImage(img,r[0],r[1],r[2],r[3],0,0,r[2],r[3]);crops.set(key,cv);}return cv;}
+// Action frames face right. A waiting fielder turns toward home plate, and a runner on a base leans toward the next base.
+function standingFlip15(pose,x,y,flip){if(pose==='ready')return x>BASES[0][0];if(pose!=='lead')return flip;let i=0,best=40;for(let k=1;k<4;k++){const d=Math.hypot(BASES[k][0]-x,BASES[k][1]-y);if(d<best){best=d;i=k;}}return i?BASES[i+1][0]<x:flip;}
+// The field is drawn at the screen's real pixel size. A 900px canvas stretched about 1.3x by the browser doubled every
+// other pixel row and column, which made small players look broken. Game code keeps using 900x530 field coordinates.
+function fitField15(cv,c){const W=clamp(Math.round((cv.clientWidth||900)*(window.devicePixelRatio||1)),900,1920),H=Math.round(W*530/900);if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H;}c.setTransform(W/900,0,0,H/530,0,0);c.imageSmoothingEnabled=false;}
 // Standing players on the field: runners lean off the bag, fielders wait in a ready crouch (the pitcher keeps his set),
 // and a fielder who has fielded the ball straightens up holding it instead of staying in the scoop.
 function standingPose15(pose,tm,p,t){if(pose==='idle')return battingTeam15(tm)?'lead':tm.lineup?.find(x=>x.id===p.id)?.pos==='P'?'idle':'ready';if(pose==='glove'&&(!anim||t>=.7))return 'hold';return pose;}
@@ -1829,7 +1839,7 @@ sprite=function(c,x,y,scale,tm,number=0,role='player',pose='idle',tick=0,id='',f
  let distance=0;if(pose==='run'){const step=prior?Math.hypot(x-prior.x,y-prior.y):0;distance=(prior?.pose==='run'?prior.distance:0)+(step<70?step:0);if(c.canvas.id!=='field'&&step===0)distance=tick*(.025+effective(p,'speed')*.00035);}
  motionSamples.set(key,{x,y,pose,distance});if(motionSamples.size>300)motionSamples.clear();
  if(pose==='catcher')return drawCatcher15(c,x,y,scale,tm,p,t);
- if(c.canvas.id==='field')pose=standingPose15(pose,tm,p,t);
+ if(c.canvas.id==='field'){pose=standingPose15(pose,tm,p,t);flip=standingFlip15(pose,x,y,flip);}
  let [row,col]=actionFrame15(pose,t,p,distance);
  if(pose==='pitch')flip=true;if(['bat','swing'].includes(pose))flip=p.hand==='좌타';
  const a=charFrame(p,tm,'motion',row,col),height=[45,57,50,52,49,57][a.body]*scale,s=height/a.standHeight;
@@ -1855,6 +1865,7 @@ let field15=drawField.toString();
 function fieldReplace15(a,b){if(!field15.includes(a))throw Error('v15 경기 연결 누락: '+a);field15=field15.replace(a,b);}
 // Keep camera scale constant throughout each pitch; the prior contact-based zoom jumped.
 fieldReplace15('const zoom=a===0&&!e?.contact?1.16:1','const zoom=1');
+fieldReplace15('const c=cv.getContext("2d");','const c=cv.getContext("2d");fitField15(cv,c);');
 fieldReplace15('t<.22?"pitch"','t<.29?"pitch"');
 fieldReplace15('smoothProgress(mt)','travelProgress15(mt)');
 fieldReplace15('pose=mt>0&&mt<1?"run":"glove"','pose=t<move.start?"idle":mt<1?"run":"glove"');
@@ -2076,7 +2087,7 @@ drawUmpire15=function(c,e,t){
   // A normal strike is a restrained raised fist, not the full strikeout sequence.
   if(call?.kind==='strike')frame=frame>=2&&frame<=4?1:0;
   const f=seq[frame],scale=(base===0?40:base===2?48:45)*fieldScale(xy[1])/seq[0].rect[3];
-  c.save();c.translate(...xy);groundShadow15(c,fieldScale(xy[1])*(base===2?.85:1.1));fieldHaze15(c,xy[1]);if(spec.flip)c.scale(-1,1);c.imageSmoothingEnabled=false;c.drawImage(umpireImages18[spec.file],...f.rect,-f.foot[0]*scale,-f.foot[1]*scale,f.rect[2]*scale,f.rect[3]*scale);c.restore();
+  c.save();c.translate(Math.round(xy[0]),Math.round(xy[1]));groundShadow15(c,fieldScale(xy[1])*(base===2?.85:1.1));fieldHaze15(c,xy[1]);if(spec.flip)c.scale(-1,1);c.imageSmoothingEnabled=false;(c.canvas.id==='field'?outlinedImage15:plainImage15)(c,frameCrop15(umpireImages18[spec.file],f.rect),-f.foot[0]*scale,-f.foot[1]*scale,f.rect[2]*scale,f.rect[3]*scale);c.restore();
  }
 };
 function judgeBubble18(c,official){
@@ -2467,7 +2478,7 @@ function paintPlayerSpeech22(e,t,actors){
  if(!bubble){bubble=document.createElement('div');bubble.className='player-speech22';field.append(bubble);}
  if(bubble.dataset.event!==e.id){bubble.dataset.event=e.id;bubble.textContent=p.line;bubble.dataset.kind=p.key;bubble.dataset.side=p.side;bubble.setAttribute('aria-label',(p.side===0?'우리 팀 ':'상대 팀 ')+actor.p.name+': '+p.line);}
  // Follow the actual rendered actor, including running, without changing sprite size.
- const box=field.getBoundingClientRect(),cr=cv.getBoundingClientRect(),sx=cr.width/cv.width,sy=cr.height/cv.height;
+ const box=field.getBoundingClientRect(),cr=cv.getBoundingClientRect(),sx=cr.width/900,sy=cr.height/530;
  const x=cr.left-box.left+actor.x*sx,y=cr.top-box.top+(actor.y-49*fieldScale(actor.y))*sy;
  const w=bubble.offsetWidth,h=bubble.offsetHeight,margin=8;
  const obstacles=[field.querySelector('.reaction'),field.querySelector('.event-popup19'),field.querySelector('.score-ribbon')].filter(Boolean).map(el=>el.getBoundingClientRect());
@@ -5016,7 +5027,7 @@ function drawSideSwitch(c,m,time){
  const beforeField=drawField;
  drawField=function(time){
   const m=team()?.match;if(!sideSwitch||sideSwitch.match!==m)return beforeField(time);
-  const cv=$('#field');if(!cv)return;const c=cv.getContext('2d');c.imageSmoothingEnabled=false;
+  const cv=$('#field');if(!cv)return;const c=cv.getContext('2d');fitField15(cv,c);
   const s=sideSwitch,u=s.reduced?(sideSwitchProgress()<.55?0:1):smoothProgress(sideSwitchProgress()),zoom=s.fromZoom+(s.toZoom-s.fromZoom)*u;
   c.save();c.translate(450*(1-zoom),490*(1-zoom));c.scale(zoom,zoom);drawStadium(c,900,530,time);drawSideSwitch(c,m,time);c.restore();lastDrawTime=time;paintSideSwitch();
  };
