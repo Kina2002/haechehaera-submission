@@ -402,10 +402,24 @@ function actionFrame15(pose,t,p,distance=0){
  if(pose==='glove'||pose==='catcher')return[2,1];
  if(pose==='catch'||pose==='celebrate')return[4,0];
  if(pose==='slide')return[4,3];
+ if(pose==='ready')return[2,0];
+ if(pose==='lead')return[3,0];
+ if(pose==='hold')return[2,2];
  if(pose==='sad')return[5,5];
  if(pose==='confused')return[5,3];
  return[1,0];
 }
+// Field look: a soft wide shadow with a darker patch under the feet keeps players on the grass, far players fade slightly,
+// and a thin dark outline keeps any uniform colour readable against the field.
+function groundShadow15(c,scale){const rx=19*scale,ry=5.6*scale;c.save();c.translate(0,1);c.scale(1,ry/rx);const g=c.createRadialGradient(0,0,0,0,0,rx);g.addColorStop(0,'rgba(5,22,12,.66)');g.addColorStop(.45,'rgba(5,22,12,.42)');g.addColorStop(1,'rgba(5,22,12,0)');c.fillStyle=g;c.beginPath();c.arc(0,0,rx,0,Math.PI*2);c.fill();c.fillStyle='rgba(3,16,8,.45)';c.beginPath();c.arc(0,0,rx*.42,0,Math.PI*2);c.fill();c.restore();}
+function fieldHaze15(c,y){const f=c.canvas?.id==='field'?clamp((300-y)/110,0,1):0;if(f>0)c.filter='saturate('+(1-.3*f).toFixed(2)+') brightness('+(1+.05*f).toFixed(2)+')';}
+const silhouettes15=new WeakMap();
+function silhouette15(img){let s=silhouettes15.get(img);if(!s){s=canvasNew(img.width,img.height);const g=s.getContext('2d');g.drawImage(img,0,0);g.globalCompositeOperation='source-in';g.fillStyle='#0b1916';g.fillRect(0,0,s.width,s.height);silhouettes15.set(img,s);}return s;}
+function plainImage15(c,img,x,y,w,h){c.drawImage(img,x,y,w,h);}
+function outlinedImage15(c,img,x,y,w,h){const s=silhouette15(img);c.save();c.globalAlpha*=.8;for(const [dx,dy] of [[-1,0],[1,0],[0,-1],[0,1]])c.drawImage(s,x+dx,y+dy,w,h);c.restore();c.drawImage(img,x,y,w,h);}
+// Standing players on the field: runners lean off the bag, fielders wait in a ready crouch (the pitcher keeps his set),
+// and a fielder who has fielded the ball straightens up holding it instead of staying in the scoop.
+function standingPose15(pose,tm,p,t){if(pose==='idle')return battingTeam15(tm)?'lead':tm.lineup?.find(x=>x.id===p.id)?.pos==='P'?'idle':'ready';if(pose==='glove'&&(!anim||t>=.7))return 'hold';return pose;}
 function drawCatcher15(c,x,y,scale,tm,p,t){
  const a=charFrame(p,tm,'motion',2,1),s=[45,57,50,52,49,57][a.body]*scale/a.standHeight;
  c.save();c.translate(Math.round(x),Math.round(y));c.scale(s,s);c.drawImage(a.canvas,-a.anchorX,-a.anchorY);
@@ -425,11 +439,12 @@ sprite=function(c,x,y,scale,tm,number=0,role='player',pose='idle',tick=0,id='',f
  let distance=0;if(pose==='run'){const step=prior?Math.hypot(x-prior.x,y-prior.y):0;distance=(prior?.pose==='run'?prior.distance:0)+(step<70?step:0);if(c.canvas.id!=='field'&&step===0)distance=tick*(.025+effective(p,'speed')*.00035);}
  motionSamples.set(key,{x,y,pose,distance});if(motionSamples.size>300)motionSamples.clear();
  if(pose==='catcher')return drawCatcher15(c,x,y,scale,tm,p,t);
+ if(c.canvas.id==='field')pose=standingPose15(pose,tm,p,t);
  let [row,col]=actionFrame15(pose,t,p,distance);
  if(pose==='pitch')flip=true;if(['bat','swing'].includes(pose))flip=p.hand==='좌타';
  const a=charFrame(p,tm,'motion',row,col),height=[45,57,50,52,49,57][a.body]*scale,s=height/a.standHeight;
- c.save();c.translate(Math.round(x),Math.round(y));c.fillStyle='#06241f65';c.beginPath();c.ellipse(0,2,12*scale,3*scale,0,0,Math.PI*2);c.fill();
- if(flip)c.scale(-1,1);c.imageSmoothingEnabled=false;c.drawImage(a.canvas,Math.round(-a.anchorX*s),Math.round(-a.anchorY*s),Math.round(a.canvas.width*s),Math.round(a.canvas.height*s));c.restore();
+ c.save();c.translate(Math.round(x),Math.round(y));groundShadow15(c,scale);fieldHaze15(c,y);
+ if(flip)c.scale(-1,1);c.imageSmoothingEnabled=false;(c.canvas.id==='field'?outlinedImage15:plainImage15)(c,a.canvas,Math.round(-a.anchorX*s),Math.round(-a.anchorY*s),Math.round(a.canvas.width*s),Math.round(a.canvas.height*s));c.restore();
 };
 function drawUmpire15(c,e,t){
  const signal=!!e&&t>.72&&['strike','ks','kl','ground','fly','line','dp','flydp','cs'].includes(e.type);
@@ -579,7 +594,7 @@ function officialFrame16(kind,index,tm,p){
  for(let y=Math.max(0,cv.height-38);y<cv.height;y++)for(let x=0;x<cv.width;x++){const i=(y*cv.width+x)*4;if(d[i+3]>128){sx+=x;n++;bottom=Math.max(y,bottom);}}
  const result={canvas:cv,foot:[n?sx/n:cv.width/2,bottom+1]};officialFrames16.set(key,result);return result;
 }
-function blitOfficial16(c,a,x,y,s,wide=1){c.save();c.translate(Math.round(x),Math.round(y));c.fillStyle='#082c3055';c.beginPath();c.ellipse(0,2,13*wide,3,0,0,Math.PI*2);c.fill();c.imageSmoothingEnabled=false;c.drawImage(a.canvas,-a.foot[0]*s*wide,-a.foot[1]*s,a.canvas.width*s*wide,a.canvas.height*s);c.restore();}
+function blitOfficial16(c,a,x,y,s,wide=1){c.save();c.translate(Math.round(x),Math.round(y));groundShadow15(c,a.canvas.height*s*wide/40);c.imageSmoothingEnabled=false;(c.canvas.id==='field'?outlinedImage15:plainImage15)(c,a.canvas,-a.foot[0]*s*wide,-a.foot[1]*s,a.canvas.width*s*wide,a.canvas.height*s);c.restore();}
 drawUmpire15=function(c,e,t){if(!officialImages16.umpire)return;const judged=!!e&&t>.72,idx=judged&&['ks','kl','ground','fly','line','dp','flydp','cs'].includes(e.type)?2:judged&&['strike','swing'].includes(e.type)?1:0;const a=officialFrame16('umpire',idx);blitOfficial16(c,a,501,517,65/OFFICIAL_DATA.umpire.frames[0][3]);};
 drawCatcher15=function(c,x,y,scale,tm,p,t,throwing=false){if(!officialImages16.catcher)return;const e=anim?.e,idx=throwing?2:e?.pitchThrown&&!e.contact&&t>.22?1:0,a=officialFrame16('catcher',idx,tm,p),body=p.appearance.body,s=(33+[0,5,3,4,4,6][body])*scale/OFFICIAL_DATA.catcher.frames[0][3];blitOfficial16(c,a,x,y,s,[.90,.88,1,1.12,1.22,1.12][body]);};
 const playerSprite16=sprite;
@@ -670,8 +685,8 @@ drawUmpire15=function(c,e,t){
   let frame=state.frame;
   // A normal strike is a restrained raised fist, not the full strikeout sequence.
   if(call?.kind==='strike')frame=frame>=2&&frame<=4?1:0;
-  const f=seq[frame],scale=(base===0?62:base===2?44:52)/seq[0].rect[3];
-  c.save();c.translate(...xy);c.fillStyle='#102b3455';c.beginPath();c.ellipse(0,2,base===2?12:16,3,0,0,7);c.fill();if(spec.flip)c.scale(-1,1);c.imageSmoothingEnabled=false;c.drawImage(umpireImages18[spec.file],...f.rect,-f.foot[0]*scale,-f.foot[1]*scale,f.rect[2]*scale,f.rect[3]*scale);c.restore();
+  const f=seq[frame],scale=(base===0?40:base===2?48:45)*fieldScale(xy[1])/seq[0].rect[3];
+  c.save();c.translate(...xy);groundShadow15(c,fieldScale(xy[1])*(base===2?.85:1.1));fieldHaze15(c,xy[1]);if(spec.flip)c.scale(-1,1);c.imageSmoothingEnabled=false;c.drawImage(umpireImages18[spec.file],...f.rect,-f.foot[0]*scale,-f.foot[1]*scale,f.rect[2]*scale,f.rect[3]*scale);c.restore();
  }
 };
 function judgeBubble18(c,official){
