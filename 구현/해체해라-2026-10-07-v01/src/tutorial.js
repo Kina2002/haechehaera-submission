@@ -32,7 +32,7 @@ if(typeof window!=='undefined'&&typeof document!=='undefined')(()=>{
  const rules=window.TutorialRules28;
  let view=null,held=null,starting=false;
  const content={
-  lineup:{n:1,title:'선발 9명을 먼저 정해요',text:'선수는 12명, 출전은 9명입니다. 능력치와 체력을 보고 직접 선발·수비 위치·타순을 정하거나, 자동 배치로 추천받을 수 있어요. 남은 선수는 후보입니다.',goal:'자동 배치 버튼을 누르거나 직접 편성하기를 선택하세요.',target:'[data-action="lineup-auto"]',allow:'[data-action="lineup-auto"]',manual:'직접 편성하기'},
+  lineup:{n:1,title:'선발 10명을 먼저 정해요',text:'선수는 12명, 출전은 타자 9명과 선발 투수 1명입니다. 투수는 타석에 서지 않고 지명타자가 대신 칩니다. 능력치와 체력을 보고 직접 선발·수비 위치·타순을 정하거나, 자동 배치로 추천받을 수 있어요. 남은 선수는 후보입니다.',goal:'자동 배치 버튼을 누르거나 직접 편성하기를 선택하세요.',target:'[data-action="lineup-auto"]',allow:'[data-action="lineup-auto"]',manual:'직접 편성하기'},
   start:{n:2,title:'이 편성으로 첫 경기를 시작해요',text:'출전 선수와 타순이 준비됐습니다. 경기 시작 버튼을 누르면 입장 연출을 거쳐 경기에 들어갑니다. 추천받은 편성을 직접 수정해도 됩니다.',goal:'경기를 시작하거나 직접 편성 수정으로 선수를 바꿔 보세요.',target:'[data-action="lineup-start"], [data-action="start"]',allow:'[data-action="lineup-start"], [data-action="start"]',manual:'직접 편성 수정'},
   mode:{n:2,title:'경기를 어떻게 진행할까요?',text:'반자동은 선수 정보를 보고 공마다 최대 10초 동안 지시합니다. 위의 자동 경기 버튼은 선수에게 판단을 맡기는 기능이며, 켠 뒤 1·2·3배속을 고를 수 있어요. 남은 경기 스킵은 같은 경기 규칙으로 끝까지 계산해 곧바로 결과를 보여 줍니다.',goal:'반자동 안내를 이어가거나, 위의 자동 경기·남은 경기 스킵 버튼을 직접 사용해도 됩니다.',target:'.match-top .row',allow:'[data-action="auto"], [data-action="skip-match"]',button:'반자동으로 시작',action:'play'},
   info:{n:3,title:'선수 정보를 보고 지시를 정해요',text:'',goal:'양쪽 선수 정보와 체력을 확인한 뒤 지시 선택하기를 누르세요.',target:'.match-layout > .dugout .current-card',button:'지시 선택하기',action:'choose'},
@@ -63,7 +63,7 @@ if(typeof window!=='undefined'&&typeof document!=='undefined')(()=>{
  function showManual(){
   if($('#tutorialManual'))return;const target=$('.simple-lineup');if(!target)return;
   const d=battingDraft(team()),count=d.filter(x=>x.id).length;
-  target.insertAdjacentHTML('beforebegin','<section class="tutorial-manual" id="tutorialManual" aria-label="직접 라인업 편성 안내"><div><b>첫 경기 안내 · 1 / 5　직접 편성 '+count+' / 9</b><p>① 왼쪽 타순 칸을 누르고 → ② 오른쪽 선수의 능력치를 보고 고르세요. 선수 옆에서 수비 위치를 바꿀 수 있습니다.</p><p>투수는 구속·제구, 수비수는 포구·송구·야구센스도 확인하세요. 9명을 채우면 위의 경기 시작 버튼을 누르세요.</p></div><div class="tutorial-actions"><button data-tutorial="manual-auto">자동 배치로 추천받기</button><button class="small ghost" data-tutorial="skip">안내 건너뛰기</button></div></section>');
+  target.insertAdjacentHTML('beforebegin','<section class="tutorial-manual" id="tutorialManual" aria-label="직접 라인업 편성 안내"><div><b>첫 경기 안내 · 1 / 5　직접 편성 '+count+' / 10</b><p>① 왼쪽 타순 칸을 누르고 → ② 오른쪽 선수의 능력치를 보고 고르세요. 선수 옆에서 수비 위치를 바꿀 수 있습니다.</p><p>투수는 구속·제구, 지명타자는 컨택·파워, 수비수는 포구·송구·야구센스도 확인하세요. 마지막 투수 칸까지 10명을 채우면 위의 경기 시작 버튼을 누르세요.</p></div><div class="tutorial-actions"><button data-tutorial="manual-auto">자동 배치로 추천받기</button><button class="small ghost" data-tutorial="skip">안내 건너뛰기</button></div></section>');
  }
  function refresh(){
   const t=team(),s=state(t),m=t?.match;

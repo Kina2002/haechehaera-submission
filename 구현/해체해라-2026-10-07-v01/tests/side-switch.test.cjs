@@ -101,7 +101,7 @@ test('skip and leaving the match clear the effect and settle the actual next def
  for(const action of ['skipRemainingMatch()','go("home")']){
   const run=fixture();run(enter);run('('+action+',true)');assert.equal(run('sideSwitch'),null);
   assert.equal(run('Object.keys(m.formation).length'),9);
-  assert.ok(run('tside(m,1-attack(m)).lineup.every(item=>m.formation[item.id])'));
+  assert.ok(run('tside(m,1-attack(m)).lineup.filter(item=>item.pos!=="DH").every(item=>m.formation[item.id])'));
  }
 });
 

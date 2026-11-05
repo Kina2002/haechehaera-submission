@@ -10,7 +10,7 @@ function beginSideSwitch(m,e){
  const to=snap(m),outgoing=[],incoming=[];
  const add=(list,tm,id,pos,pose='idle')=>{const p=ply(tm,id);if(p&&!list.some(x=>x.p.id===id))list.push({p,tm,x:pos[0],y:pos[1],pose});};
  const oldDefense=tside(m,1-e.attack),oldAttack=tside(m,e.attack);
- oldDefense.lineup.forEach(item=>add(outgoing,oldDefense,item.id,m.formation?.[item.id]||fieldPosition(item.pos,from.defense)));
+ oldDefense.lineup.filter(x=>x.pos!=='DH').forEach(item=>add(outgoing,oldDefense,item.id,m.formation?.[item.id]||fieldPosition(item.pos,from.defense)));
  const battingIds=[e.batter,...e.before.bases.filter(Boolean),...e.moves.map(move=>move.id)];
  for(const id of battingIds){
   const move=e.moves.find(x=>x.id===id),p=ply(oldAttack,id);
@@ -19,7 +19,7 @@ function beginSideSwitch(m,e){
   add(outgoing,oldAttack,id,pos);
  }
  const newDefense=tside(m,1-to.attack),newAttack=tside(m,to.attack);
- newDefense.lineup.forEach(item=>add(incoming,newDefense,item.id,fieldPosition(item.pos,to.defense),item.pos==='C'?'catcher':'idle'));
+ newDefense.lineup.filter(x=>x.pos!=='DH').forEach(item=>add(incoming,newDefense,item.id,fieldPosition(item.pos,to.defense),item.pos==='C'?'catcher':'idle'));
  const next=newAttack.lineup[to.order[to.attack]],p=ply(newAttack,next.id);
  add(incoming,newAttack,next.id,[p.hand==='좌타'?478:422,455],'bat');
  const reduced=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
@@ -30,7 +30,7 @@ function beginSideSwitch(m,e){
 function settleSideSwitch(){
  if(!sideSwitch)return;
  const m=sideSwitch.match;
- if(!m.done){const df=tside(m,1-attack(m));m.formation=Object.fromEntries(df.lineup.map(item=>[item.id,fieldPosition(item.pos,m.defense)]));}
+ if(!m.done){const df=tside(m,1-attack(m));m.formation=Object.fromEntries(df.lineup.filter(x=>x.pos!=='DH').map(item=>[item.id,fieldPosition(item.pos,m.defense)]));}
  sideSwitch=null;
 }
 function advanceSideSwitch(m,dt){

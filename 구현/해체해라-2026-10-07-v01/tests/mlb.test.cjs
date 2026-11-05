@@ -9,12 +9,13 @@ const source=readFileSync(join(__dirname,'../src/mlb.js'),'utf8').split('// UI i
 function fixture(){
  let next=0;
  const ctx=vm.createContext({BALANCE:{},BALANCE_LABELS:{},COLORS:Array(14).fill(['color','#000']),CharacterRenderer:{variants:{hair:Array(7)}},
-  KEYS:['contact','power','eye','speed','sense','catch','throw','velocity','control','stamina'],POS:['P','C','1B','2B','3B','SS','LF','CF','RF'],
+  KEYS:['contact','power','eye','speed','sense','catch','throw','velocity','control','stamina'],POS:['P','C','1B','2B','3B','SS','LF','CF','RF'],BAT_POS:['C','1B','2B','3B','SS','LF','CF','RF','DH'],
   clone:x=>JSON.parse(JSON.stringify(x)),clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),uid:()=>`attempt-${++next}`,money:n=>n+'만원',
   selection:'p0',live:t=>!!(t.match&&!t.match.done),needsSetup:t=>t.setupStage!=='complete'});
  vm.runInContext('function balance(t){return {...BALANCE,...t?.balance};}',ctx);
  vm.runInContext(game.match(/const freshStats=\(\)=>\([^\n]+/)[0],ctx);
  vm.runInContext(game.slice(game.indexOf('function validatePlayer('),game.indexOf('\nfunction validateTeam(')),ctx);
+ vm.runInContext(game.split(/\r?\n/).filter(line=>/^function (dhLineup|legacyLineup|lineupSlots|adoptDH)\(/.test(line)).join('\n'),ctx);
  for(const name of ['ledger','gain','news'])vm.runInContext(extensions.match(new RegExp('function '+name+'\\([^\\n]+'))[0],ctx);
  vm.runInContext(extensions.slice(extensions.indexOf('function snapshotRoster26('),extensions.indexOf('function validVacancy26(')),ctx);
  vm.runInContext(source,ctx);
@@ -39,13 +40,13 @@ test('opening a quote is read only; no random draw or mutation happens',()=>{
 test('success pays once, frees the roster slot, repairs lineup and preserves match/graduate records',()=>{
  const out=fixture()(`(()=>{const q=mlbQuote(t,p.id),result=completeMlbAttempt(t,q,()=>0);const again=completeMlbAttempt(t,q,()=>0);validateMlbState(t);return {ok:result.ok,success:result.result.success,again:again.ok,funds:t.funds,count:t.players.length,lineup:t.lineup,archive:t.mlbHistory,departed:t.departed,match:t.match,selection};})()`);
  assert.equal(out.success,true);assert.equal(out.again,false);assert.equal(out.funds,8000);assert.equal(out.count,11);
- assert.equal(new Set(out.lineup.map(x=>x.id)).size,9);assert.equal(out.lineup[0].id,'p9');assert.equal(out.lineup[0].pos,'P');
+ assert.equal(new Set(out.lineup.map(x=>x.id)).size,10);assert.deepEqual(out.lineup[0],{id:'p9',pos:'DH'});assert.deepEqual(out.lineup[9],{id:'p10',pos:'P'});
  assert.equal(out.archive.length,1);assert.equal(out.archive[0].player.stats.h,3);assert.equal(out.archive[0].seen,false);
  assert.equal(out.departed[0].departureKind,'mlb');assert.equal(out.match.completedLineup26[0].id,'p0');assert.equal(out.match.completedRoster26.length,12);assert.equal(out.selection,'p1');
 });
-test('ten players may transfer down to nine; nine cannot submit or roll',()=>{
- const out=fixture()(`(()=>{t.players=t.players.slice(0,10);const a=completeMlbAttempt(t,mlbQuote(t,p.id),()=>0);let draws=0;const b=completeMlbAttempt(t,mlbQuote(t,'p1'),()=>{draws++;return 0;});return [a.ok,t.players.length,b.ok,draws,t.funds];})()`);
- assert.deepEqual(out,[true,9,false,0,8000]);
+test('eleven players may transfer down to ten; ten cannot submit or roll',()=>{
+ const out=fixture()(`(()=>{t.players=t.players.slice(0,11);const a=completeMlbAttempt(t,mlbQuote(t,p.id),()=>0);let draws=0;const b=completeMlbAttempt(t,mlbQuote(t,'p1'),()=>{draws++;return 0;});return [a.ok,t.players.length,b.ok,draws,t.funds];})()`);
+ assert.deepEqual(out,[true,10,false,0,8000]);
 });
 test('failure lowers only loyalty, gives no money and refuses repeated or early attempts',()=>{
  const out=fixture()(`(()=>{const original=clone(p),q=mlbQuote(t,p.id),a=completeMlbAttempt(t,q,()=>.35);const b=completeMlbAttempt(t,q,()=>0);t.w+=2;const early=mlbQuote(t,p.id);t.w++;const ready=mlbQuote(t,p.id);validateMlbState(t);return {success:a.result.success,again:b.ok,loyalty:p.loyalty,funds:t.funds,roster:t.players.length,early:early.remaining,ready:ready.eligible,stats:p.stats,a:p.a,original};})()`);

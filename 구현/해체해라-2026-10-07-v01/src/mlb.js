@@ -28,7 +28,7 @@ function mlbQuote(t,id){
  const remaining=Math.max(0,(p.mlbAttempt?.nextGame||0)-games);
  if(live(t))reasons.push('경기가 끝난 뒤 도전할 수 있습니다.');
  if(needsSetup(t))reasons.push('첫 선수 준비와 라인업 편성을 마쳐 주세요.');
- if(t.players.length<=9)reasons.push('진출 뒤에도 9명이 남도록 선수를 먼저 영입해 주세요.');
+ if(t.players.length<=10)reasons.push('진출 뒤에도 지명타자를 포함한 10명이 남도록 선수를 먼저 영입해 주세요.');
  if(p.loyalty<=0||p.exitPending26)reasons.push('팀을 떠날 예정인 선수는 도전할 수 없습니다.');
  if(p.contract<=0)reasons.push('계약이 만료되었습니다. 먼저 재계약해 주세요.');
  if(p.stats.games<rules.minGames)reasons.push('출전 '+p.stats.games+'/'+rules.minGames+'경기 · 경기 경험이 더 필요합니다.');
@@ -103,7 +103,7 @@ let mlbDialog=null;
 function mlbNumber(n){return n.toFixed(1);}
 function mlbConditionsHTML(q){
  return '<div class="mlb-conditions"><div><span>타격 · 컨택 / 파워 / 선구안</span><b>'+mlbNumber(q.batting)+'</b></div><div><span>투구 · 구속 / 제구 / 스태미나</span><b>'+mlbNumber(q.pitching)+'</b></div></div>'+
-  '<p class="tiny muted">둘 중 높은 평균 '+q.rules.minAbility+' 이상 · '+q.rules.minGames+'경기 이상 출전 · 진출 후 최소 9명 유지</p>';
+  '<p class="tiny muted">둘 중 높은 평균 '+q.rules.minAbility+' 이상 · '+q.rules.minGames+'경기 이상 출전 · 진출 후 최소 10명 유지</p>';
 }
 function mlbProfileHTML(t,p){
  const q=mlbQuote(t,p.id);

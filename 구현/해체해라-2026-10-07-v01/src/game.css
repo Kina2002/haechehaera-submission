@@ -96,6 +96,7 @@ body[data-screen=setup] main{background-image:linear-gradient(#031b3540,#031b354
 .batting-slot{position:relative;background:#092d4d;border:2px solid #35749d;border-radius:7px;overflow:hidden;min-width:0}
 .batting-slot.focused{border-color:#ffe05c;box-shadow:0 0 0 2px #ffe05c35}
 .batting-slot.vacant{background:#082541a3;border-style:dashed}
+.batting-slot.pitcher-slot{margin-top:6px;border-color:#c99732}.batting-slot.pitcher-slot .slot-order{color:#ffcf35}.slot-role{align-self:center;font-size:11px;color:#b6dee2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .slot-pick{width:100%;min-height:109px;display:grid;grid-template-columns:54px 1fr;gap:4px;align-items:center;padding:26px 9px 5px;text-align:left;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:13px}
 .slot-order{position:absolute;top:5px;left:9px;color:#ffe26d;font-size:14px}
 .slot-pick canvas{width:47px;height:57px;image-rendering:pixelated;border-radius:4px}
