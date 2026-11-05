@@ -41,17 +41,17 @@ function integration(){
  ctx.window=ctx;ctx.globalThis=ctx;ctx.innerHeight=900;ctx.addEventListener=(type,fn)=>{(winEvents[type]??=[]).push(fn);};
  vm.runInContext(`let data={slots:[]},activeGame=false,screen='slots',lastFrame=0,anim=null,reaction=null,shiftLead=null,sideSwitch=null,waitMs=0,entrance=null,clubEventView=null,mlbDialog=null,achievementNotice=null,skipJob=null,t=null,saves=0,ticks=0;
   const $=s=>document.querySelector(s),team=()=>t,attack=m=>m.side,esc=s=>s,clone=x=>JSON.parse(JSON.stringify(x));
-  const POS=['P','C','1B','2B','3B','SS','LF','CF','RF'],STATS={contact:'컨택',power:'파워',eye:'선구안',velocity:'구속',control:'제구'};
-  const needsSetup=x=>x.setupStage!=='complete',lineupError=x=>new Set(x.lineup.map(s=>s.id)).size===9?'':'invalid';
+  const POS=['P','C','1B','2B','3B','SS','LF','CF','RF'],BAT_POS=['C','1B','2B','3B','SS','LF','CF','RF','DH'],STATS={contact:'컨택',power:'파워',eye:'선구안',velocity:'구속',control:'제구'};
+  const needsSetup=x=>x.setupStage!=='complete',lineupError=x=>new Set(x.lineup.map(s=>s.id)).size===10?'':'invalid';
   const pitcher=x=>x.pitcher,batter=m=>m.side===0?t.currentBatter:m.opp.batter;
   function save(){saves++}function render(){}function tick(){ticks++;if(t?.match&&!t.match.paused){t.match.inputLeft--;t.match.rng++;t.match.pitches++;}}function go(s){screen=s;render()}
-  function newTeam(name,a,b,defer){const players=Array.from({length:12},(_,i)=>({id:'p'+i,name:'선수'+i,number:i,a:{contact:20+i,power:40+i,eye:50+i,velocity:60+i,control:70+i,stamina:50},energy:50}));return {name,match:null,defer,players,lineup:players.slice(0,9).map((p,i)=>({id:p.id,pos:POS[i]})),setupStage:'lineup',pitcher:players[0],currentBatter:players[1]}}
+  function newTeam(name,a,b,defer){const players=Array.from({length:12},(_,i)=>({id:'p'+i,name:'선수'+i,number:i,a:{contact:20+i,power:40+i,eye:50+i,velocity:60+i,control:70+i,stamina:50},energy:50}));return {name,match:null,defer,players,lineup:[...players.slice(0,9).map((p,i)=>({id:p.id,pos:BAT_POS[i]})),{id:players[9].id,pos:'P'}],setupStage:'lineup',pitcher:players[9],currentBatter:players[1]}}
   function validateTeam(){}function autoAssignLineup(x){return x.invalid?'invalid':''}
   function startMatch(){}function subDialog(){}
   function commitInstruction(m,kind,value,fn){if(m.paused||m.auto)return false;if(kind==='attack'&&m.side!==0||kind==='defense'&&m.side!==1)return false;fn();return true}
  `,ctx);
  const game=fs.readFileSync(path.join(__dirname,'../src/game.js'),'utf8');
- vm.runInContext(game.split('\n').filter(line=>/^function (validBattingDraft|battingDraft|assignBattingSlot|commitBattingDraft)\(/.test(line)).join('\n'),ctx);
+ vm.runInContext(game.split(/\r?\n/).filter(line=>/^function (validBattingDraft|battingDraft|assignBattingSlot|commitBattingDraft|dhLineup|legacyLineup|lineupSlots|adoptDH)\(/.test(line)).join('\n'),ctx);
  vm.runInContext(fs.readFileSync(path.join(__dirname,'../src/tutorial.js'),'utf8'),ctx);
  const run=code=>JSON.parse(vm.runInContext('JSON.stringify('+code+')',ctx));
  const click=a=>winEvents.click[0]({target:{closest:()=>({dataset:{tutorial:a}})},preventDefault(){},stopImmediatePropagation(){}});
@@ -76,14 +76,15 @@ test('successful real commands advance and failed commands leave the lesson pend
  assert.equal(run('t.tutorial28.step'),'player-info');click('choose');
  assert.equal(run('(t.match.side=0,commitInstruction(t.match,"attack","contact",()=>{}),t.tutorial28.step)'),'substitution');
 });
-test('direct selection keeps nine-player draft controls free until the user starts the game',()=>{
+test('direct selection keeps ten-player draft controls free until the user starts the game',()=>{
  const {run,click,gameClick}=integration();run('(t=newTeam("manual",1,2,true),activeGame=true,screen="lineup",true)');
  click('manual');assert.equal(run('t.tutorial28.step'),'lineup-manual');assert.equal(gameClick('lineup-assign'),false);
- run('(()=>{for(let i=0;i<8;i++)assignBattingSlot(t,i,t.players[11-i].id);return true;})()');
+ run('(()=>{for(let i=0;i<9;i++)assignBattingSlot(t,i,t.players[11-i].id);return true;})()');
  assert.notEqual(run('commitBattingDraft(t)'),'');assert.equal(run('t.tutorial28.step'),'lineup-manual');
- run('(assignBattingSlot(t,8,t.players[0].id),true)');assert.equal(run('commitBattingDraft(t)'),'');
- run('(t.battingDraft[0].pos="C",t.battingDraft[1].pos="P",true)');assert.equal(run('commitBattingDraft(t)'),'');
- assert.equal(run('t.lineup[0].id'),'p11');assert.equal(run('t.lineup[0].pos'),'C');assert.equal(run('t.tutorial28.step'),'lineup-manual');
+ run('(assignBattingSlot(t,9,t.players[0].id),true)');assert.equal(run('commitBattingDraft(t)'),'');
+ const swapped=run('(()=>{const d=t.battingDraft;[d[0].pos,d[1].pos]=[d[1].pos,d[0].pos];return d[0].pos;})()');assert.equal(run('commitBattingDraft(t)'),'');
+ assert.equal(run('t.lineup[0].id'),'p11');assert.equal(run('t.lineup[0].pos'),swapped);
+ assert.deepEqual(run('t.lineup[9]'),{id:'p0',pos:'P'});assert.equal(run('assignBattingSlot(t,0,t.players[0].id)'),false);assert.equal(run('t.tutorial28.step'),'lineup-manual');
  assert.equal(gameClick('lineup-start'),false);
 });
 test('mode coach permits actual automatic and skip buttons and releases its pause',()=>{

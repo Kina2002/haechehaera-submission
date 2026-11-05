@@ -1,9 +1,9 @@
 /* Cue timing shares the visual animation clock; no timers or game randomness. */
 (function(root){
  'use strict';
- const positive=new Set(['g02','g03','g10','g13','g15','g17','g20','g25','g26','g29',
+ const positive=new Set(['g02','g03','g10','g13','g15','g17','g20','g25','g26','g29','g33','g34',
   'f23-lead','f23-tie','f23-chase','f23-extend','f23-scoreOut','f23-advance','f23-awayStrand','f23-awayMixed']);
- const taunting=new Set(['g01','g02','g04','g05','g06','g07','g08','g09','g10','g12','g14','g15','g16','g18','g19','g21','g22','g23','g24','g27','g30','g31','g32',
+ const taunting=new Set(['g01','g02','g04','g05','g06','g07','g08','g09','g10','g12','g14','g15','g16','g18','g19','g21','g22','g23','g24','g27','g30','g31','g32','g35',
   ...Array.from({length:12},(_,i)=>'b'+String(i+1).padStart(2,'0')),
   'f23-awayLead','f23-awayTie','f23-awayChase','f23-awayExtend','f23-mixed','f23-awayScoreOut','f23-awayAdvance','f23-awayChance']);
  const inverse=t=>t<=.36?t/.36*.55:.55+(t-.36)/.64*.45;

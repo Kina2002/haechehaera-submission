@@ -63,7 +63,9 @@ test('initial players: every strong/weak role reaches the new inclusive boundari
 test('new clubs receive 12 players with the updated ability ranges', () => {
   const t = fixture().run('newTeam("생성 검사", 11, 5)');
   assert.equal(t.players.length, 12);
-  assert.equal(t.lineup.length, 9);
+  assert.equal(t.lineup.length, 10);
+  assert.equal(t.lineup[9].pos, 'P');
+  assert.ok(t.lineup.slice(0, 9).some(x => x.pos === 'DH'));
   for (const p of t.players) {
     assert.notEqual(p.strong, p.weak);
     assert.ok(p.a[p.strong] >= (p.strong === 'sense' ? 55 : 60));
