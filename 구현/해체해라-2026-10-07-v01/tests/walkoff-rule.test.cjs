@@ -93,7 +93,7 @@ test('a run crossing on the third out never creates a walk-off',()=>{
 });
 
 test('sacrifice flies, wild pitches and ground-ball double plays can end the game',()=>{
- const sf=fixture({outs:1})(`(()=>{runners(2);r=()=>0;const b=batter(m),e=emptyEvent(m);flyOut(m,e);resolveInningEnd(m,e);return [m.score,m.done,e.type,b.stats.sf,b.stats.rbi,b.stats.ab];})()`);
+ const sf=fixture({outs:1})(`(()=>{runners(2);const rolls=[0,.99];r=()=>rolls.length>1?rolls.shift():rolls[0];const b=batter(m),e=emptyEvent(m);flyOut(m,e);resolveInningEnd(m,e);return [m.score,m.done,e.type,b.stats.sf,b.stats.rbi,b.stats.ab];})()`);
  assert.deepEqual(sf,[[3,2],true,'sf',1,1,0]);
  const wp=fixture()(`(()=>{runners(0,2);const b=batter(m),e=emptyEvent(m);advanceLoose(m,e);resolveInningEnd(m,e);return [m.score,m.done,b.stats.rbi,e.runs.length];})()`);
  assert.deepEqual(wp,[[3,2],true,0,1]);

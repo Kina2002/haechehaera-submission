@@ -283,6 +283,7 @@ check('5회 말 동점 만루 안타 · 끝내기 1득점 · 단타 기록',()=>
 check('끝내기 만루 홈런은 4득점 모두 인정',()=>{const {m,ids}=fixture();m.home=0;m.half=1;m.inning=6;m.score=[2,2];m.bases=ids;const e=emptyEvent(m);reachHit(m,e,4);resolveInningEnd(m,e);return m.done&&m.score[0]===6&&chooseGroup(m,e)==='g34';});
 check('초 공격·4회 이전 리드와 3아웃 득점은 끝내기 아님',()=>{let {m,ids}=fixture();m.inning=5;m.score=[2,2];m.bases=ids;reachHit(m,emptyEvent(m),4);const top=!m.walkoff&&m.score[0]===6;({m,ids}=fixture());m.home=0;m.half=1;m.inning=4;m.score=[2,2];m.bases=ids;reachHit(m,emptyEvent(m),4);const early=!m.walkoff&&m.score[0]===6;({m,ids}=fixture(2));m.home=0;m.half=1;m.inning=5;m.score=[2,2];m.bases[2]=ids[0];const e=emptyEvent(m);groundOut(m,e);resolveInningEnd(m,e);return top&&early&&!m.walkoff&&m.score[0]===2&&m.inning===6;});
 check('땅볼: 강제 주자만 반드시 진루 · 야수선택 · 2사 득점 없음',()=>{let {m,ids}=fixture();m.bases[0]=ids[0];const b=batter(m).id;let e=emptyEvent(m);e.fieldPos='SS';e.fielder=fielder(m.opp,'SS');groundOut(m,e);const forced=m.outs===1&&(e.fc?m.bases[0]===b&&!m.bases[1]&&e.outIds[0]===ids[0]:m.bases[1]===ids[0]&&!m.bases[0]);({m,ids}=fixture(2));m.bases=[ids[0],null,ids[2]];e=emptyEvent(m);e.fieldPos='SS';e.fielder=fielder(m.opp,'SS');groundOut(m,e);return forced&&m.outs===3&&m.score[0]===0&&!e.fc;});
+check('뜬공 태그업: 2사 진루 없음 · 주자 중복·유실 없음',()=>{let {m,ids}=fixture(2);m.bases=[null,ids[1],ids[2]];let e=emptyEvent(m);e.fieldPos='CF';e.fielder=fielder(m.opp,'CF');flyOut(m,e);const twoOut=m.outs===3&&m.score[0]===0;({m,ids}=fixture());m.bases=ids.slice();e=emptyEvent(m);e.fieldPos='RF';e.fielder=fielder(m.opp,'RF');flyOut(m,e);const on=m.bases.filter(Boolean);return twoOut&&new Set(on).size===on.length&&e.runs.length+on.length+e.outIds.length-1===3;});
 check('도루 실패는 타순 유지',()=>{const {m,ids}=fixture();m.bases[0]=ids[0];const e=emptyEvent(m);runnerEvent(m,e,'steal',6);return m.outs===1&&m.order[0]===0&&!e.pitchThrown;});
 check('안타로 연속 무안타 해제',()=>{const {m}=fixture(),p=batter(m);p.stats.hitless=9;reachHit(m,emptyEvent(m),1);return p.stats.hitless===0;});
 check('본헤드 회당 3 · 상대에게 발생 없음',()=>{const {m}=fixture();m.bhBase=[99,0];m.opportunities=[999,0];for(let i=0;i<3;i++)if(chooseBH(m,emptyEvent(m))?.side!==0)return false;m.half=1;return chooseBH(m,emptyEvent(m))===null&&m.bh[1]===0;});
@@ -722,7 +723,7 @@ function planMotion19(m,e){
  plan.pickup=Math.max(plan.land,e.bh===7?.50:primary?.end||.55);
  if(steal){plan.land=.22;plan.pickup=.29;}
  if(['wp','pb'].includes(e.type)){plan.land=.43;plan.pickup=Math.max(.43,...e.fieldMoves.map(x=>x.end));}
- if(e.type==='sf')for(const mv of e.moves)mv.delay=Math.max(mv.delay,plan.land+.025);
+ if(['sf','fly','line'].includes(e.type))for(const mv of e.moves)mv.delay=Math.max(mv.delay,plan.land+.025);
  let bases=[...(e.throwBases||[])];
  // Covering an empty base was the mistake: no imaginary receiver or completed throw.
  if([7,10,12].includes(e.bh)||['hr','foul','wp','pb'].includes(e.type))bases=[];
