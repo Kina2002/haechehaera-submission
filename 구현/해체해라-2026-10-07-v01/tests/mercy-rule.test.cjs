@@ -53,25 +53,6 @@ test('a mid-inning 10-run margin keeps going and a comeback below 10 prevents me
  assert.deepEqual(r,[false,null,4,0]);
 });
 
-test('home team go-ahead runs in innings 5 through 7 never end the game immediately',()=>{
- for(const inning of [5,6,7])for(const home of [0,1]){
-  const run=fixture({inning,home,score:[2,2],outs:1});
-  const r=run(`(()=>{const at=tside(m,${home});m.bases=at.players.slice(1,4).map(p=>p.id);r=()=>0;
-    const e=resolvePitch(m);return {done:m.done,score:m.score,type:e.type,walkoff:!!m.walkoff};})()`);
-  assert.equal(r.type,'hbp');assert.equal(r.done,false);assert.equal(r.walkoff,false);
-  assert.equal(r.score[home],3);assert.equal(r.score[1-home],2);
- }
-});
-
-test('go-ahead hits count every legal run instead of stopping at a one-run lead',()=>{
- for(const bases of [2,4]){
-  const run=fixture({inning:5,score:[2,2],outs:0});
-  const r=run(`(()=>{m.bases=t.players.slice(1,4).map(p=>p.id);r=()=>.99;const e=emptyEvent(m);
-    reachHit(m,e,${bases});resolveInningEnd(m,e);return [m.score[0],e.runs.length,m.done];})()`);
-  assert.deepEqual(r,bases===2?[4,2,false]:[6,4,false]);
- }
-});
-
 test('normal fifth-inning endings, tied extra innings and seventh-inning draws still work',()=>{
  const cases=[
   [{inning:5,half:0,score:[3,2]},[true,5,0]],
@@ -93,10 +74,3 @@ test('mercy records survive save roundtrip and repeated settlement cannot grant 
  assert.deepEqual(r.before,r.after);assert.equal(r.label,'콜드승');assert.equal(r.note,'3회 종료 · 10점 차 콜드게임');
 });
 
-test('legacy records retain normal results and generated dialogue no longer mentions walk-offs',()=>{
- const run=fixture();
- assert.equal(run('gameResultLabel({result:"승리",score:[3,2],walkoff:true})'),'승리');
- assert.equal(run('gameEndDetails({result:"승리",score:[12,2]})'),'');
- assert.equal(run('JSON.stringify(DIALOGUES).includes("끝내기")'),false);
- assert.ok(!game.includes('m.walkoff'));
-});

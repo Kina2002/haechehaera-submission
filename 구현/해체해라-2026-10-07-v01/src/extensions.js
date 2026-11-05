@@ -64,7 +64,7 @@ reward=function(m){if(m.rewarded)return;const t=team(),b=balance(t);m.rewarded=t
 gain(t,total,'경기 수입 · '+gameResultLabel(m));const due=salary+maint+t.debt,paid=Math.min(t.funds,due);spend(t,paid,'급여·시설·미지급금 결산');t.debt=due-paid;m.reward=reward;m.finance={reward,ticket,stores,crowd,salary,maintenance:maint,paid,debt:t.debt,net:total-paid};
 const welfare=t.facilities.filter(id=>FACILITIES.find(f=>f[0]===id)?.[4]==='복지').length;for(const p of t.players){settleContract26(t,p,m,welfare);p.fans=Math.max(0,p.fans+(win?3:0)+(t.facilities.includes('fans')?2:0));}if(t.debt)news(t,'급여·유지비 일부 미지급','미지급금 '+money(t.debt)+'가 다음 결산으로 이어집니다. 선수 애정도가 8 감소했습니다.');
 if(r(m)<b.fanEventChance)rollClubEvent(t,m);t.market=[];
-t.history.unshift({id:m.id,opp:m.opp.name,score:m.score.slice(),result:m.result,mercy:clone(m.mercy||null),coins:0,funds:reward,finance:clone(m.finance),bh:m.bh[0],pitches:m.pitches,events:clone(m.events),checks:clone(m.checks),innings:clone(m.innings),home:m.home,hits:m.hits.slice(),errors:m.errors.slice(),boneheads:m.bh.slice(),skipped:!!m.skipped,recap:clone(m.recap||{box:{},highlights:[],events:0}),subs:clone(m.subs||[]),at:Date.now()});t.history=t.history.slice(0,20);departUnhappy26(t);};
+t.history.unshift({id:m.id,opp:m.opp.name,score:m.score.slice(),result:m.result,mercy:clone(m.mercy||null),walkoff:clone(m.walkoff||null),coins:0,funds:reward,finance:clone(m.finance),bh:m.bh[0],pitches:m.pitches,events:clone(m.events),checks:clone(m.checks),innings:clone(m.innings),home:m.home,hits:m.hits.slice(),errors:m.errors.slice(),boneheads:m.bh.slice(),skipped:!!m.skipped,recap:clone(m.recap||{box:{},highlights:[],events:0}),subs:clone(m.subs||[]),at:Date.now()});t.history=t.history.slice(0,20);departUnhappy26(t);};
 
 // Composite the final, body-specific assets once per visible pose, not per animation tick.
 const charImages=[],charCache=new Map();let charsReady=false;
@@ -279,12 +279,15 @@ check('1사 1·3루 병살은 득점 없음',()=>{const {m,ids}=fixture(1);m.bas
 check('무사 병살은 아웃 2개',()=>{const {m,ids}=fixture();m.bases[0]=ids[0];groundOut(m,emptyEvent(m),true);return m.outs===2&&m.order[0]===1;});
 check('만루 홈런 · 4득점과 4개 루 순회',()=>{const {m,ids}=fixture();m.bases=ids;const e=emptyEvent(m);reachHit(m,e,4);return m.score[0]===4&&e.moves.find(x=>x.from===0).points.length===5;});
 check('희생플라이는 타수 제외',()=>{const {m,ids}=fixture();m.bases[2]=ids[0];const p=batter(m);flyOut(m,emptyEvent(m),10);return m.score[0]===1&&p.stats.sf===1&&p.stats.ab===0;});
+check('5회 말 동점 만루 안타 · 끝내기 1득점 · 단타 기록',()=>{const {m,ids}=fixture();m.home=0;m.half=1;m.inning=5;m.score=[2,2];m.bases=ids;const p=batter(m),e=emptyEvent(m);reachHit(m,e,2);resolveInningEnd(m,e);return m.done&&m.score[0]===3&&e.runs.length===1&&e.hit===1&&p.stats.doubles===0&&m.bases.filter(Boolean).length===3;});
+check('끝내기 만루 홈런은 4득점 모두 인정',()=>{const {m,ids}=fixture();m.home=0;m.half=1;m.inning=6;m.score=[2,2];m.bases=ids;const e=emptyEvent(m);reachHit(m,e,4);resolveInningEnd(m,e);return m.done&&m.score[0]===6&&chooseGroup(m,e)==='g34';});
+check('초 공격·4회 이전 리드와 3아웃 득점은 끝내기 아님',()=>{const a=fixture(),b=fixture(2);a.m.inning=5;a.m.score=[2,2];a.m.bases=a.ids;reachHit(a.m,emptyEvent(a.m),4);b.m.home=0;b.m.half=1;b.m.inning=5;b.m.score=[2,2];b.m.bases[2]=b.ids[0];const e=emptyEvent(b.m);groundOut(b.m,e);resolveInningEnd(b.m,e);return !a.m.walkoff&&!b.m.walkoff&&b.m.score[0]===2&&b.m.inning===6;});
 check('도루 실패는 타순 유지',()=>{const {m,ids}=fixture();m.bases[0]=ids[0];const e=emptyEvent(m);runnerEvent(m,e,'steal',6);return m.outs===1&&m.order[0]===0&&!e.pitchThrown;});
 check('안타로 연속 무안타 해제',()=>{const {m}=fixture(),p=batter(m);p.stats.hitless=9;reachHit(m,emptyEvent(m),1);return p.stats.hitless===0;});
 check('본헤드 회당 3 · 상대에게 발생 없음',()=>{const {m}=fixture();m.bhBase=[99,0];m.opportunities=[999,0];for(let i=0;i<3;i++)if(chooseBH(m,emptyEvent(m))?.side!==0)return false;m.half=1;return chooseBH(m,emptyEvent(m))===null&&m.bh[1]===0;});
 check('새 회에서 본헤드 제한 초기화',()=>{const {m}=fixture();m.bhByInning={1:3};m.bhBase=[99,0];m.opportunities=[999,0];m.inning=2;return chooseBH(m,emptyEvent(m))?.side===0;});
 check('야구센스 비중 70%',()=>{const p=player(false);KEYS.forEach(k=>p.a[k]=0);p.a.sense=100;return Object.keys(BH_OTHER).every(n=>bhScore(p,+n)===70);});
-check('한 사건 한 멘트 · 팀 흐름 포함 61상황 244개',()=>DIALOGUES.length===61&&DIALOGUES.every(x=>x[4].length===4));
+check('한 사건 한 멘트 · 팀 흐름 포함 64상황 256개',()=>DIALOGUES.length===64&&DIALOGUES.every(x=>x[4].length===4));
 check('멘트 직전 문구 반복 방지',()=>{const {m}=fixture();let a=pickReaction(m,'g05'),ok=true;for(let i=0;i<30;i++){const n=pickReaction(m,'g05');ok&&=n.index!==a.index;a=n;}return ok;});
 check('10초 지시 · 5초 반응',()=>RULES.decisionSeconds===10&&TUNE.reactionMs===5000);
 check('공격 버튼은 대기 즉시 종료',()=>{const {m}=fixture();m.inputLeft=9;let ran=0;return commitInstruction(m,'attack','contact',()=>ran++)&&ran===1&&m.inputLeft===0;});

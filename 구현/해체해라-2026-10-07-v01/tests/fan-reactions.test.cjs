@@ -13,7 +13,7 @@ const flow=vm.runInNewContext('('+read('extensions.js').match(/const FLOW_LINES2
 for(const [key,lines] of Object.entries(flow))dialogues.push(['f23-'+key,'','', '', [['우리 관객',lines[2]]]]);
 
 test('every disappointed portrait is backed by a real own-fan line',()=>{
- assert.equal(Object.keys(groups).length,38);
+ assert.equal(Object.keys(groups).length,39);
  for(const id of Object.keys(groups)){const group=dialogues.find(g=>g[0]===id);assert.ok(group,id);assert.ok(group[4].some(([speaker,line])=>speaker==='우리 관객'&&line.length),id);assert.equal(pose('우리 관객',id),'sad');}
 });
 test('positive outcomes, sacrifice scores, neutral draws and unknown saved groups keep normal fans',()=>{
@@ -21,7 +21,7 @@ test('positive outcomes, sacrifice scores, neutral draws and unknown saved group
 });
 test('opposing fans and other speakers never borrow our disappointed image',()=>{
  for(const id of Object.keys(groups)){assert.equal(pose('상대 관객',id),'tease');assert.equal(pose('우리 치어리더',id),'idle');assert.equal(pose('중계진',id),'idle');}
- assert.equal(pose('우리 치어리더','g29'),'celebrate');assert.equal(pose('상대 치어리더','g03'),'tease');
+ assert.equal(pose('우리 치어리더','g29'),'celebrate');assert.equal(pose('우리 치어리더','g33'),'celebrate');assert.equal(pose('우리 치어리더','g34'),'celebrate');assert.equal(pose('우리 관객','g35'),'sad');assert.equal(pose('상대 치어리더','g03'),'tease');
 });
 test('mood selection does not rewrite saved reactions or consume game randomness',()=>{
  const reaction=Object.freeze({speaker:'우리 관객',group:'g27',line:'아 진짜… 한 판 더 하면 이긴다!',index:3});

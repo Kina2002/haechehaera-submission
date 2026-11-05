@@ -2,7 +2,7 @@
 const SAD_FAN_GROUPS=Object.freeze({
  g04:'상대 홈런',g05:'헛스윙 삼진',g06:'루킹 삼진',g07:'땅볼 아웃',g08:'플라이·직선타 아웃',g09:'병살',
  g14:'득점 기회 무산',g16:'도루 실패',g18:'상대 호수비',g19:'우리 실책',g21:'폭투',g22:'포일',
- g23:'연속 무안타',g24:'뒤진 채 마지막 공격',g27:'패배',g30:'콜드패',g31:'상대 안타',g32:'상대 득점',
+ g23:'연속 무안타',g24:'뒤진 채 마지막 공격',g27:'패배',g30:'콜드패',g31:'상대 안타',g32:'상대 득점',g35:'상대 끝내기',
  b01:'홈런인 줄 알고 구경',b02:'페어를 파울로 착각',b03:'잡혔는데 계속 뛰기',b04:'베이스 누락',b05:'한 베이스에 두 주자',b06:'무리한 도루',
  b07:'아웃카운트 착각',b08:'엉뚱한 송구',b09:'태그를 깜빡함',b10:'성급한 세리머니',b11:'서로 포구 양보',b12:'베이스 커버 누락',
  'f23-awayLead':'리드 허용','f23-awayTie':'동점 허용','f23-awayChase':'추격 허용','f23-awayExtend':'점수 차 확대',
@@ -11,7 +11,7 @@ const SAD_FAN_GROUPS=Object.freeze({
 function fanReactionPose(speaker,group){
  if(speaker==='우리 관객'&&Object.hasOwn(SAD_FAN_GROUPS,group))return 'sad';
  if(speaker?.startsWith('상대'))return 'tease';
- if(speaker==='우리 치어리더'&&['g03','g29'].includes(group))return 'celebrate';
+ if(speaker==='우리 치어리더'&&['g03','g29','g33','g34'].includes(group))return 'celebrate';
  return 'idle';
 }
 
