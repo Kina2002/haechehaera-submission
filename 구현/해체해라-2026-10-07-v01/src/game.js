@@ -344,7 +344,8 @@ function commitInstruction(m,kind,value,advance){
  else if(kind!=="skip"||attack(m)===1&&m.defLocked)return false;
  m.inputLeft=0;advance();return true;
 }
-function fieldScale(y){return .76+.80*clamp((y-190)/300,0,1)}
+// Perspective on the field: far outfielders are drawn at about 0.6x, players near home plate at about 1.5x.
+function fieldScale(y){return .55+.95*Math.pow(clamp((y-190)/290,0,1),.85)}
 function smoothProgress(u){u=clamp(u,0,1);return u*u*(3-2*u)}
 function runnerProgress(move,t,e){const delay=move.from===0&&e.swing?Math.max(.34,move.delay):move.delay;return clamp((t-delay)/(move.until-delay),0,1)}
 function runnerPoint(move,u){const points=move.points.map(p=>p.slice());if(move.from===0&&Math.hypot(points[0][0]-450,points[0][1]-450)<30)points[0]=[ply(tside(team().match,anim?.e.attack??attack(team().match)),move.id)?.hand==="좌타"?478:422,455];return pointAlong(points,smoothProgress(u))}
