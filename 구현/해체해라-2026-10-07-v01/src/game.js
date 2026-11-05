@@ -344,8 +344,9 @@ function commitInstruction(m,kind,value,advance){
  else if(kind!=="skip"||attack(m)===1&&m.defLocked)return false;
  m.inputLeft=0;advance();return true;
 }
-// Perspective on the field: far outfielders are drawn at about 0.6x, players near home plate at about 1.5x.
-function fieldScale(y){return .55+.95*Math.pow(clamp((y-190)/290,0,1),.85)}
+// Perspective by zone: the home plate area about 1.45-1.5x, the whole infield (bases, infielders, runners, base umpires)
+// about 0.86-0.98x so players at a similar depth look alike, the outfield about 0.6x. Smooth steps join the zones.
+function fieldScale(y){const Y=[190,200,226,345,450,480],S=[.58,.6,.86,.98,1.45,1.5];if(y<=Y[0])return S[0];for(let i=1;i<Y.length;i++)if(y<=Y[i]){const u=(y-Y[i-1])/(Y[i]-Y[i-1]);return S[i-1]+(S[i]-S[i-1])*u*u*(3-2*u)}return S[S.length-1]}
 function smoothProgress(u){u=clamp(u,0,1);return u*u*(3-2*u)}
 function runnerProgress(move,t,e){const delay=move.from===0&&e.swing?Math.max(.34,move.delay):move.delay;return clamp((t-delay)/(move.until-delay),0,1)}
 function runnerPoint(move,u){const points=move.points.map(p=>p.slice());if(move.from===0&&Math.hypot(points[0][0]-450,points[0][1]-450)<30)points[0]=[ply(tside(team().match,anim?.e.attack??attack(team().match)),move.id)?.hand==="좌타"?478:422,455];return pointAlong(points,smoothProgress(u))}

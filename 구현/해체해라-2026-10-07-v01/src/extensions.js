@@ -82,7 +82,7 @@ const demoPlayer={id:'uniform-demo',name:'선수',number:10,a:{contact:50,power:
 function paintDetail(cv,p,tm){if(!charsReady)return;const a=charFrame(p,tm,'detail'),g=cv.getContext('2d');cv.width=240;cv.height=320;g.imageSmoothingEnabled=false;g.clearRect(0,0,240,320);g.fillStyle='#031b244a';g.beginPath();g.ellipse(120,306,55,8,0,0,Math.PI*2);g.fill();const s=300/1536;g.drawImage(a.canvas,120-a.foot[0]*s,306-a.foot[1]*s,a.canvas.width*s,a.canvas.height*s);}
 portraitCanvases=function(){$$('canvas[data-portrait]').forEach(cv=>{const t=cv.dataset.side==='opp'?team()?.match?.opp:team();const p=t?.players?.find(p=>p.id===cv.dataset.portrait)||t?.market?.find(p=>p.id===cv.dataset.portrait);if(p){paintDetail(cv,p,t);if(cv.getBoundingClientRect().width<85){const a=charFrame(p,t,'detail'),g=cv.getContext('2d'),f=a.face;g.clearRect(0,0,240,320);g.drawImage(a.canvas,f[0]-f[2]*.45,f[1]-f[3]*1.05,f[2]*1.9,f[3]*2.85,0,0,240,320);}}});};
 drawJersey=function(){const host=$('#jerseyPreview');if(!host)return;host.innerHTML='<div class="uniform-view"><canvas id="fittingPlayer" width="240" height="320" style="width:260px;height:347px;image-rendering:pixelated"></canvas><p>팀 유니폼</p></div>';paintDetail($('#fittingPlayer'),demoPlayer,{primary:previewColors[0],secondary:previewColors[1]});};
-drawActorLabel=function(c,actor,labels){const text='#'+actor.p.number+' '+actor.p.name;c.save();c.font='11px Galmuri9';c.textAlign='center';const width=c.measureText(text).width+10,y=actor.y+11+5.6*fieldScale(actor.y);c.fillStyle='#042034dd';c.fillRect(actor.x-width/2,y-9,width,15);c.fillStyle='#fff4d2';c.fillText(text,actor.x,y+2);c.restore();};
+drawActorLabel=function(c,actor,labels){const text='#'+actor.p.number+' '+actor.p.name;c.save();c.font='11px Galmuri9';c.textAlign='center';const width=c.measureText(text).width+10;let y=actor.y+11+5.6*zoneScale15(actor.tm,actor.p,actor.y,fieldScale(actor.y));for(let n=0;n<3&&labels?.some(r=>Math.abs(r.x-actor.x)<(r.w+width)/2+2&&Math.abs(r.y-y)<16);n++)y+=16;labels?.push({x:actor.x,y,w:width});c.fillStyle='#042034dd';c.fillRect(actor.x-width/2,y-9,width,15);c.fillStyle='#fff4d2';c.fillText(text,actor.x,y+2);c.restore();};
 textAt=function(c,text,x,y,size=13,color='#fff',align='center'){c.fillStyle=color;c.textAlign=align;c.font=size+'px '+(size>=20?'NeoDunggeunmo':'Galmuri9');c.fillText(text,x,y);};
 // Present attack closer to home plate; all positions, shadows and balls share one transform.
 const fieldSource=drawField.toString().replace('c.imageSmoothingEnabled=false;drawStadium(c,900,530,time);','c.imageSmoothingEnabled=false;').replace('const actors=[];','c.save();const zoom=a===0&&!e?.contact?1.16:1;c.translate(450*(1-zoom),490*(1-zoom));c.scale(zoom,zoom);drawStadium(c,900,530,time);if(e?.arc>30&&e.target&&t>.22&&t<.56&&e.type!=="hr"){const u=clamp((t-.22)/.33,0,1);c.save();c.globalAlpha=.2+.7*u;c.strokeStyle="#ffe879";c.lineWidth=2;c.beginPath();c.ellipse(e.target[0],e.target[1],34-22*u,12-7*u,0,0,Math.PI*2);c.stroke();c.restore();}const actors=[];').replace('effectsForEvent(c,e,t,time);','effectsForEvent(c,e,t,time);c.restore();');
@@ -286,6 +286,8 @@ check('땅볼: 강제 주자만 반드시 진루 · 야수선택 · 2사 득점 
 check('뜬공 태그업: 2사 진루 없음 · 주자 중복·유실 없음',()=>{let {m,ids}=fixture(2);m.bases=[null,ids[1],ids[2]];let e=emptyEvent(m);e.fieldPos='CF';e.fielder=fielder(m.opp,'CF');flyOut(m,e);const twoOut=m.outs===3&&m.score[0]===0;({m,ids}=fixture());m.bases=ids.slice();e=emptyEvent(m);e.fieldPos='RF';e.fielder=fielder(m.opp,'RF');flyOut(m,e);const on=m.bases.filter(Boolean);return twoOut&&new Set(on).size===on.length&&e.runs.length+on.length+e.outIds.length-1===3;});
 check('서 있는 수비수는 홈 쪽을, 베이스 위 주자는 다음 베이스 쪽을 봄',()=>standingFlip15('ready',650,300,false)&&!standingFlip15('ready',250,300,true)&&standingFlip15('lead',650,336,false)&&standingFlip15('lead',450,230,false)&&!standingFlip15('lead',250,336,true)&&standingFlip15('run',700,300,true));
 check('경기장은 화면 픽셀 크기로 그리고 좌표는 900×530 유지',()=>{const cv=document.createElement('canvas');cv.width=900;cv.height=530;const c=cv.getContext('2d');fitField15(cv,c);const k=c.getTransform();return cv.width>=900&&cv.width<=1920&&Math.abs(cv.width/cv.height-900/530)<.01&&Math.abs(k.a-cv.width/900)<1e-5&&Math.abs(k.d-cv.height/530)<1e-5;});
+check('1·2·3루심은 어떤 수비 시프트에서도 수비수와 겹치지 않음',()=>{const {m}=fixture();const was=anim;anim=null;try{for(let side=0;side<3;side++)for(let depth=0;depth<3;depth++){m.defense={side,depth};const df=tside(m,1-attack(m)),spots=umpireSpots15();for(const it of df.lineup)if(!['DH','P','C'].includes(it.pos))for(const u of spots.slice(1))if(boxOverlap15(spriteBox15(u,.9),spriteBox15(fieldPosition(it.pos,m.defense)))>0)return false;}return true;}finally{anim=was;}});
+check('구역별 원근: 내야끼리 크기 차이 16% 이내 · 외야수는 내야보다 작게',()=>{const inf=[223,230,250,277,284,311,336,338,340].map(fieldScale),of=[196,200,214,227,241].map(y=>Math.min(fieldScale(y),outfieldScale15(y)));return Math.max(...inf)/Math.min(...inf)<1.16&&Math.max(...of)<Math.min(...inf)&&fieldScale(455)>1.4;});
 check('공격 중인 팀의 포수는 주자로 그리고 수비 팀 포수만 포수 자세',()=>{const {t,m}=fixture();const was=screen;screen='match';try{return attack(m)===0&&battingTeam15(t)&&!battingTeam15(m.opp);}finally{screen=was;}});
 check('도루 실패는 타순 유지',()=>{const {m,ids}=fixture();m.bases[0]=ids[0];const e=emptyEvent(m);runnerEvent(m,e,'steal',6);return m.outs===1&&m.order[0]===0&&!e.pitchThrown;});
 check('안타로 연속 무안타 해제',()=>{const {m}=fixture(),p=batter(m);p.stats.hitless=9;reachHit(m,emptyEvent(m),1);return p.stats.hitless===0;});
@@ -424,6 +426,12 @@ const frameCrops15=new WeakMap();
 function frameCrop15(img,r){let crops=frameCrops15.get(img);if(!crops){crops=new Map();frameCrops15.set(img,crops);}const key=r.join(',');let cv=crops.get(key);if(!cv){cv=canvasNew(r[2],r[3]);cv.getContext('2d').drawImage(img,r[0],r[1],r[2],r[3],0,0,r[2],r[3]);crops.set(key,cv);}return cv;}
 // Action frames face right. A waiting fielder turns toward home plate, and a runner on a base leans toward the next base.
 function standingFlip15(pose,x,y,flip){if(pose==='ready')return x>BASES[0][0];if(pose!=='lead')return flip;let i=0,best=40;for(let k=1;k<4;k++){const d=Math.hypot(BASES[k][0]-x,BASES[k][1]-y);if(d<best){best=d;i=k;}}return i?BASES[i+1][0]<x:flip;}
+// Outfielders keep an outfield size while they stand in their zone, even when a shallow shift brings them down the
+// screen next to the infielders (a shallow centre fielder stands just behind second base on this field).
+function outfieldScale15(y){return .58+.0031*(y-190);}
+function zoneScale15(tm,p,y,scale){return !battingTeam15(tm)&&['LF','CF','RF'].includes(tm.lineup?.find(x=>x.id===p.id)?.pos)?Math.min(scale,outfieldScale15(y)):scale;}
+// Umpires are drawn in depth order with the players (see drawUmpire15); the cursor is the last depth drawn this frame.
+let judgeCursor15=-Infinity,judgeList15=null;
 // The field is drawn at the screen's real pixel size. A 900px canvas stretched about 1.3x by the browser doubled every
 // other pixel row and column, which made small players look broken. Game code keeps using 900x530 field coordinates.
 function fitField15(cv,c){const W=clamp(Math.round((cv.clientWidth||900)*(window.devicePixelRatio||1)),900,1920),H=Math.round(W*530/900);if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H;}c.setTransform(W/900,0,0,H/530,0,0);c.imageSmoothingEnabled=false;}
@@ -449,7 +457,7 @@ sprite=function(c,x,y,scale,tm,number=0,role='player',pose='idle',tick=0,id='',f
  let distance=0;if(pose==='run'){const step=prior?Math.hypot(x-prior.x,y-prior.y):0;distance=(prior?.pose==='run'?prior.distance:0)+(step<70?step:0);if(c.canvas.id!=='field'&&step===0)distance=tick*(.025+effective(p,'speed')*.00035);}
  motionSamples.set(key,{x,y,pose,distance});if(motionSamples.size>300)motionSamples.clear();
  if(pose==='catcher')return drawCatcher15(c,x,y,scale,tm,p,t);
- if(c.canvas.id==='field'){pose=standingPose15(pose,tm,p,t);flip=standingFlip15(pose,x,y,flip);}
+ if(c.canvas.id==='field'){pose=standingPose15(pose,tm,p,t);flip=standingFlip15(pose,x,y,flip);scale=zoneScale15(tm,p,y,scale);}
  let [row,col]=actionFrame15(pose,t,p,distance);
  if(pose==='pitch')flip=true;if(['bat','swing'].includes(pose))flip=p.hand==='좌타';
  const a=charFrame(p,tm,'motion',row,col),height=[45,57,50,52,49,57][a.body]*scale,s=height/a.standHeight;
@@ -476,6 +484,8 @@ function fieldReplace15(a,b){if(!field15.includes(a))throw Error('v15 경기 연
 // Keep camera scale constant throughout each pitch; the prior contact-based zoom jumped.
 fieldReplace15('const zoom=a===0&&!e?.contact?1.16:1','const zoom=1');
 fieldReplace15('const c=cv.getContext("2d");','const c=cv.getContext("2d");fitField15(cv,c);');
+fieldReplace15('actors.sort((a,b)=>a.y-b.y);','actors.sort((a,b)=>a.y-b.y);judgeCursor15=-Infinity;');
+fieldReplace15('sprite(c,actor.x,actor.y,fieldScale(actor.y)','drawUmpire15(c,e,t,actor.y);sprite(c,actor.x,actor.y,fieldScale(actor.y)');
 fieldReplace15('t<.22?"pitch"','t<.29?"pitch"');
 fieldReplace15('smoothProgress(mt)','travelProgress15(mt)');
 fieldReplace15('pose=mt>0&&mt<1?"run":"glove"','pose=t<move.start?"idle":mt<1?"run":"glove"');
@@ -637,6 +647,15 @@ window.UMPIRE_ART18={"out-sheet.png": {"size": [1536, 1024], "rows": [[{"rect": 
 // v18: derive presentation calls from resolved events; never decide game outcomes here.
 const umpireImages18={},umpirePlans18=new WeakMap();
 const UMPIRE_SPOTS18=[[400,514],[706,344],[548,248],[194,344]];
+// Base umpires pick, from a few realistic spots (1B/3B in foul ground past the bag, 2B on the infield grass or behind the
+// bag), the one that overlaps the current fielder shift and base runners the least, so they never stand on a fielder.
+const UMPIRE_CHOICES15=[[[400,514]],[[772,300],[798,338],[744,262]],[[506,292],[394,292],[505,208],[395,208]],[[128,300],[102,338],[156,262]]];
+function spriteBox15(xy,k=1){const s=fieldScale(xy[1])*k,w=34*s,h=55*s;return [xy[0]-w/2,xy[1]-h,xy[0]+w/2,xy[1]+2];}
+function boxOverlap15(a,b,pad=0){return Math.max(0,Math.min(a[2],b[2])-Math.max(a[0],b[0])+pad)*Math.max(0,Math.min(a[3],b[3])-Math.max(a[1],b[1])+pad);}
+function umpireSpots15(){const m=team()?.match;if(!m)return UMPIRE_SPOTS18;const e=anim?.e,pre=e?.before||m,df=tside(m,1-(e?e.attack:attack(m))),shift=pre.defense||m.defense||{side:1,depth:1},people=[FIELD.P];
+ for(const it of df?.lineup||[])if(!['DH','P','C'].includes(it.pos))people.push(pre.fieldStarts?.[it.id]||fieldPosition(it.pos,shift));
+ (pre.bases||[]).forEach((id,i)=>{if(id)people.push(BASES[i+1]);});
+ return UMPIRE_CHOICES15.map(list=>list.reduce((best,xy,i)=>{const cost=people.reduce((n,p)=>n+boxOverlap15(spriteBox15(xy,.9),spriteBox15(p),4),0)+i*30;return cost<best.cost?{xy,cost}:best;},{xy:list[0],cost:Infinity}).xy);}
 async function loadUmpires18(){await Promise.all(Object.entries(UMPIRE_ART18).map(async([name,entry])=>{const im=new Image();im.src=entry.uri;await im.decode();umpireImages18[name]=im;}));}
 function judgeBase18(base){return base===4?0:base;}
 function catchJudge18(e){return ['LF','3B','SS'].includes(e.fieldPos)?3:['RF','1B'].includes(e.fieldPos)?1:2;}
@@ -688,10 +707,13 @@ function umpireAsset18(base,kind){
  // Rows 1 and 4 of the v03 source were rejected for changing arms mid-motion.
  return {file:'out-dynamic.png',row:base===2?2:1,flip:base===3};
 }
-function activeJudges18(e){const clock=umpireClock18(),duration=anim?.duration||3200,calls=judgePlan18(e);return UMPIRE_SPOTS18.map((xy,base)=>{const relevant=calls.filter(x=>x.base===base);let call=null,state={frame:0,speaking:false};for(const c of relevant){const s=judgeState18(c,clock,duration);if(s.frame){call=c;state=s;}}return {base,xy,call,state};});}
-drawUmpire15=function(c,e,t){
+function activeJudges18(e){const clock=umpireClock18(),duration=anim?.duration||3200,calls=judgePlan18(e);return umpireSpots15().map((xy,base)=>{const relevant=calls.filter(x=>x.base===base);let call=null,state={frame:0,speaking:false};for(const c of relevant){const s=judgeState18(c,clock,duration);if(s.frame){call=c;state=s;}}return {base,xy,call,state};});}
+drawUmpire15=function(c,e,t,upTo=Infinity){
  if(!umpireImages18['out-dynamic.png'])return;
- for(const official of activeJudges18(e)){
+ // Called before each player (upTo = that player's feet) and once after all of them, so nearer players cover umpires behind them.
+ const from=judgeCursor15;judgeCursor15=upTo===Infinity?-Infinity:upTo;if(from===-Infinity||!judgeList15)judgeList15=activeJudges18(e);
+ for(const official of judgeList15){
+  if(!(official.xy[1]>from&&official.xy[1]<=upTo))continue;
   const {base,xy,call,state}=official,spec=umpireAsset18(base,call?.kind||'out'),entry=UMPIRE_ART18[spec.file],seq=entry.rows[spec.row];
   let frame=state.frame;
   // A normal strike is a restrained raised fist, not the full strikeout sequence.
@@ -1089,7 +1111,7 @@ function paintPlayerSpeech22(e,t,actors){
  if(bubble.dataset.event!==e.id){bubble.dataset.event=e.id;bubble.textContent=p.line;bubble.dataset.kind=p.key;bubble.dataset.side=p.side;bubble.setAttribute('aria-label',(p.side===0?'우리 팀 ':'상대 팀 ')+actor.p.name+': '+p.line);}
  // Follow the actual rendered actor, including running, without changing sprite size.
  const box=field.getBoundingClientRect(),cr=cv.getBoundingClientRect(),sx=cr.width/900,sy=cr.height/530;
- const x=cr.left-box.left+actor.x*sx,y=cr.top-box.top+(actor.y-49*fieldScale(actor.y))*sy;
+ const x=cr.left-box.left+actor.x*sx,y=cr.top-box.top+(actor.y-49*zoneScale15(actor.tm,actor.p,actor.y,fieldScale(actor.y)))*sy;
  const w=bubble.offsetWidth,h=bubble.offsetHeight,margin=8;
  const obstacles=[field.querySelector('.reaction'),field.querySelector('.event-popup19'),field.querySelector('.score-ribbon')].filter(Boolean).map(el=>el.getBoundingClientRect());
  const candidates=[[x-w/2,y-h-14],[x-w-24,y-h/2],[x+24,y-h/2],[x-w/2,y+24]];
