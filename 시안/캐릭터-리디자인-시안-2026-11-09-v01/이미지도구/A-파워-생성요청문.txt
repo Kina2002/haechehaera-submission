@@ -1,0 +1,22 @@
+Built-in GPT image generation. Transparent background requested.
+Exact generation prompt:
+
+Use case: stylized-concept.
+Asset type: first style-approval character pose sheet for an original baseball management game; one PNG sheet, four isolated full-body poses of ONLY the same A Power character.
+
+Background: genuinely transparent alpha; no scenery, no ground, no cast shadows, no decorative elements. If actual transparency cannot be produced, use solid white only.
+
+Style: cute and quirky 2D chibi illustration, about 2.5 heads tall, head roughly 40–45 percent of standing body height. Bold very dark outlines, large simple eyes and thick expressive eyebrows, simple solid chunky shapes, short thick limbs, flat color fills and minimal shading. Prioritize readability after reducing a full player to just 40 pixels tall. Use broad facial features, large blue wristbands and one simple visible cheek bandage; avoid fine patterns and texture. Create an original new design without borrowing any existing game or comic character, franchise, artist or team.
+
+Character A Power, show-off personality, right-handed batter: big round heavy build, thick arms, chunky blue wristbands, a bandage on one cheek, a smug grin with one eyebrow raised. The same face, body mass, head size, features, uniform and wristbands across all four poses.
+Uniform: baseball cap, shirt and socks green (#08654E); white pants. Thin white stripes ONLY on the cap band and sleeve ends. No writing, no number, no letters, no logos, no real team insignia. Simple dark baseball shoes.
+
+Composition: a wide horizontal sheet, exactly FOUR full-body figures in ONE evenly spaced row with generous transparent separation, no panels or separators, no labels. Left to right in precisely this order:
+1. Standing upright facing directly toward the viewer. Full frontal face and torso. Confident smug relaxed pose.
+2. Fielding-ready crouch facing RIGHT (toward the right edge of the picture), knees bent, a brown baseball glove on the character's anatomical LEFT hand ready in front. Face and cap brim point right; body turned right.
+3. Batting-ready stance facing RIGHT, knees slightly bent, wooden bat held up BEHIND the shoulder, hands together in a natural right-handed grip (right hand above left on the bat handle). Face and cap brim point right. Keep the bat completely visible and separate from neighboring figures.
+4. Running toward the RIGHT with one knee lifted, arms pumping and one shoe touching the common baseline. Face, torso and cap brim point right. Keep the character recognizable and wristbands visible. No bat or glove in this running pose.
+
+All four use exactly the same character scale and body proportions; crouching naturally lowers the head without shrinking the person. All four have the lowest tip/sole of their shoe at EXACTLY the same image y-coordinate, a single invisible horizontal baseline. In the running pose the lifted shoe is higher but the lowest shoe touches this same baseline. Full bodies, shoes, cap and props entirely inside the canvas with comfortable margins. Only pose 1 is front-facing; all other three unambiguously look and move toward the image's RIGHT edge.
+
+Text: none. Avoid text, labels, title, logo, watermark, signatures, numbers, background props, speed lines, ground lines, gradients, excessive highlights, tiny detail, photorealism, 3D rendering, pixel-art dithering, extra poses, extra people, extra limbs or disconnected hands.

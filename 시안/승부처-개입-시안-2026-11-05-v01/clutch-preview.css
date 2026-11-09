@@ -1,0 +1,28 @@
+/* 승부처 개입 시안 · 2026-11-05 v01 — 게임 기본 색(남색 판넬·하늘색 테두리·노란 강조)을 따릅니다. */
+.clutch-panel{position:fixed;left:50%;top:250px;transform:translateX(-50%);z-index:1001;width:min(560px,calc(100vw - 32px));
+ background:#071f38f2;border:2px solid #ffe05c;border-radius:9px;box-shadow:0 0 0 4px #ffe05c2e,0 18px 40px #000a;padding:14px 16px;color:#fff;animation:clutchIn .28s ease-out}
+@keyframes clutchIn{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
+.clutch-badge{display:inline-block;background:#ffe05c;color:#14222a;font-size:12px;padding:3px 8px;border-radius:4px;margin-bottom:6px}
+.clutch-panel h3{margin:4px 0 6px;font-size:20px;color:#ffe05c}
+.clutch-situation{margin:0 0 4px;font-size:14px}
+.clutch-who{margin:0 0 10px;font-size:12px;color:#b6dee2;line-height:1.6}
+.clutch-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px}
+.clutch-option{display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;padding:9px 10px;background:#092d4d;border:2px solid #35749d;border-radius:7px;color:#fff;cursor:pointer;font:inherit}
+.clutch-option:hover,.clutch-option:focus-visible{border-color:#ffe05c;outline:none}
+.clutch-option.suggested{border-color:#68d2a4}
+.clutch-option em{font-style:normal;font-size:10px;color:#14222a;background:#68d2a4;border-radius:3px;padding:1px 4px;margin-left:4px;vertical-align:2px}
+.clutch-option b{font-size:15px}
+.clutch-option small{font-size:11px;color:#b6dee2;line-height:1.4}
+.clutch-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:#b6dee2}
+.clutch-foot b{color:#ffe05c}
+.clutch-dock{position:fixed;right:12px;bottom:12px;z-index:1000;width:236px;display:flex;flex-direction:column;gap:7px;padding:10px 12px;
+ background:#061a2fef;border:1px solid #35749d;border-radius:8px;color:#fff;font-size:12px;box-shadow:0 8px 24px #0008}
+.clutch-dock>b{color:#ffe05c;font-size:13px;cursor:pointer}
+.clutch-dock.collapsed>:not(.clutch-title){display:none}
+.clutch-dock small{color:#8fb7c8;line-height:1.4}
+.clutch-dock label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.clutch-row{display:flex;gap:5px;align-items:center}
+.clutch-row.wrap{flex-wrap:wrap}
+.clutch-row>span{color:#b6dee2;min-width:52px}
+.clutch-dock button.active{border-color:#ffe05c;color:#ffe05c}
+@media (max-width:700px){.clutch-dock{left:12px;right:12px;width:auto}.clutch-panel{top:80px}}

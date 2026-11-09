@@ -1,0 +1,22 @@
+Built-in GPT image editing / style transfer.
+Reference: A-파워.png (v01).
+Transparent background requested.
+Exact generation prompt:
+
+Use case: style-transfer.
+Edit target: the supplied A Power four-pose character sheet. Redraw the entire illustration as genuine CHUNKY LOW-RESOLUTION PIXEL ART for an in-game sprite sheet. The previous image is too smoothly drawn and the user specifically wants the pixel-image feeling restored.
+
+CHANGE ONLY the rendering style. Preserve the same original A Power character design, big round heavy body, 2.5-head proportions (large head 40–45 percent of height), short thick limbs, blue chunky wristbands, cheek bandage, smug grin with one eyebrow raised, colors, all four actions and directions, one-row layout and common shoe baseline. No other character.
+
+Pixel art is the essential requirement: deliberately coarse visible SQUARE pixels on one consistent grid, strong staircase silhouettes, block-built facial features, one-logical-pixel dark outlines, clean compact color clusters and a limited palette (about 12–16 colors total including skin, green, white, blue, brown and outlines). Imagine the standing player was hand-pixeled at ONLY 40 pixels tall with a roughly 16-pixel-high head, then enlarged 8x with nearest-neighbor scaling so every little square remains sharp. The logical whole sheet is about 192x64 pixels, enlarged for viewing. Show real coarse sprite pixel clusters throughout the eyes, face, cap, hands, glove, bat, uniform and outlines. Two or three pixels must suffice for each eyebrow and eye, and the cheek bandage and blue wristbands should be bold visible blocks. At most one flat shadow color per material. Absolutely no smooth vector curves, no antialiasing, no soft edge pixels, no blur, no gradients, no painterly texture, no 3D, no fake grid overlay or checkerboard texture. Do not simply put pixel texture over the previous smooth illustration; rebuild the actual silhouette and face with large crisp square pixels.
+
+Preserve uniform: cap, shirt and socks green #08654E, white pants, thin white stripes only on cap band and sleeve ends. Dark shoes. Blue wristbands visible. No letters, numbers, text, captions, labels, logos or watermarks. Original design, no references to existing game/comic characters.
+
+Exactly FOUR full-body sprites in one horizontal evenly spaced row with transparent gaps:
+1) Standing, full front view toward the viewer.
+2) Fielding ready crouch facing the image RIGHT, brown glove on anatomical LEFT hand.
+3) Right-handed batting ready facing RIGHT, wooden bat raised behind shoulder, right hand above left hand on the grip.
+4) Running toward RIGHT, one knee raised and the lower shoe touching the baseline.
+
+All use the SAME logical pixel size, head/body scale and design. Crouching is naturally shorter without shrinking the sprite. All four lowest shoe tips lie on EXACTLY the same invisible horizontal baseline. Full figures and bat remain entirely within the canvas, comfortable margins. Only the standing pose faces front; other three look unmistakably RIGHT.
+Background genuinely transparent alpha. No drawn checkerboard, no ground or shadows. If transparency is impossible, solid white only.

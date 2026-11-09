@@ -1,0 +1,17 @@
+/* 원근감 개선 시안 · 2026-11-05 v01 — 게임 기본 색(남색 판넬·하늘색 테두리·노란 강조)을 따릅니다. */
+.persp-dock{position:fixed;right:12px;bottom:12px;z-index:1000;width:244px;display:flex;flex-direction:column;gap:7px;padding:10px 12px;
+ background:#061a2fef;border:1px solid #35749d;border-radius:8px;color:#fff;font-size:12px;box-shadow:0 8px 24px #0008}
+.persp-dock>b{color:#ffe05c;font-size:13px;cursor:pointer}
+.persp-dock.collapsed>:not(.persp-title){display:none}
+.persp-dock small{color:#8fb7c8;line-height:1.4}
+.persp-dock label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.persp-ab{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.persp-ab button{padding:8px 0;font-size:14px;border:2px solid #35749d;border-radius:6px;background:#092d4d;color:#b6dee2;cursor:pointer;font-family:inherit}
+.persp-ab button.active{border-color:#ffe05c;color:#14222a;background:#ffe05c}
+.persp-range input{flex:1}
+.persp-range span{min-width:36px;text-align:right;color:#ffe05c}
+.persp-row{display:flex;gap:6px}
+.persp-row button{flex:1}
+@media (max-width:700px){.persp-dock{left:12px;right:12px;width:auto}}
+/* A frozen comparison scene hides the game's pause card so the whole field stays visible. */
+.persp-frozen #fieldStatus,.persp-frozen .pausedveil{display:none!important}

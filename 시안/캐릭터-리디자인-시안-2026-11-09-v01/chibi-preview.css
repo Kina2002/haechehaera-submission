@@ -1,0 +1,25 @@
+/* 캐릭터 리디자인 시안 · 2026-11-09 v01 — 게임 기본 색(남색 판넬·하늘색 테두리·노란 강조)을 따릅니다. */
+.chibi-page>header,.chibi-page>main,.chibi-page>footer,.chibi-page .loading8,.chibi-page #toast{display:none!important}
+.chibi-page{background:#061523;color:#e8f1f4;overflow-x:hidden}
+.chibi-root{max-width:1140px;margin:0 auto;padding:20px 24px 60px}
+.cv-head h1{color:#ffe05c;font-size:26px;margin:0 0 6px}
+.cv-head p{margin:2px 0;color:#b6dee2}
+.cv-small{font-size:12px;color:#8fb7c8!important}
+.cv-section{margin-top:28px;padding:16px 18px;background:#08243c;border:1px solid #35749d;border-radius:8px}
+.cv-section h2{color:#ffe05c;font-size:19px;margin:0 0 6px}
+.cv-desc{color:#b6dee2;margin:0 0 12px;line-height:1.5}
+.cv-card{margin:14px 0 6px;padding-top:10px;border-top:1px dashed #2b5a78}
+.cv-card h3{margin:0;font-size:16px;color:#fff}
+.cv-note{margin:2px 0 8px;color:#8fb7c8;font-size:13px}
+.cv-pair{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start}
+.cv-fig{margin:0 0 8px;max-width:100%;overflow-x:auto}
+.cv-fig canvas{display:block;border:1px solid #2b5a78;border-radius:4px;image-rendering:pixelated}
+.cv-fig figcaption{font-size:12px;color:#8fb7c8;margin-top:4px}
+.cv-strip-names{display:flex;font-size:11px;color:#8fb7c8;margin:-4px 0 6px}
+.cv-strip-names span{width:110px;text-align:center}
+.cv-bar{display:flex;gap:8px;margin:0 0 10px}
+.cv-bar button{padding:7px 14px;border:2px solid #35749d;border-radius:6px;background:#092d4d;color:#b6dee2;cursor:pointer;font-family:inherit;font-size:14px}
+.cv-bar button.primary{border-color:#ffe05c;color:#14222a;background:#ffe05c}
+.cv-info{display:flex;flex-wrap:wrap;margin-top:6px}
+.cv-info>div{width:150px;display:flex;flex-direction:column;gap:2px;font-size:12px;color:#b6dee2;text-align:center}
+.cv-info b{color:#ffe05c;font-size:13px}
