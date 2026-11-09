@@ -1,0 +1,32 @@
+Built-in GPT image editing / style transfer.
+Image 1 style reference: 표정-자세-비교-섬세한도트-v01.png.
+Image 2 body-type and order reference: 체형별-기본얼굴-6종-v01.png.
+Order: 보통 / 크고 둥근형 / 날렵형 / 어깨 넓은형 / 키 큰형 / 작고 단정한형.
+Visual concept study; shared-part alignment, 40-pixel display and animation have not been verified.
+Exact generation prompt:
+
+Use case: style-transfer.
+Primary request: redraw a SIX-BODY-TYPE full-character comparison sheet in the REFINED PIXEL ART style of reference Image 1. Exactly SIX complete baseball players in one horizontal row, one of each body type, all using the SAME shared basic face and neutral front-facing standing pose.
+
+Input images and roles:
+Image 1 (three expressions above three full-body poses): STYLE reference. Use its finer pixel density, appealing facial design, delicate outlines, expressive clear eyes, short dark hair, green cap and charming chibi finish. Ignore its six-panel layout and all personality acting.
+Image 2 (six crude front-facing players): BODY-SHAPE and ORDER reference. Preserve the six different body silhouettes and their left-to-right order. Replace its coarse blocks and thick outlines with Image 1's refined style. Do not copy its crude face rendering.
+
+Style: charming original 2D game pixel art, with a fine consistent square-pixel grid, as if a normal complete player were hand-pixeled at approximately 80–96 native pixels tall with a roughly 32–38-pixel head, enlarged sharply for viewing. Small deliberate pixel steps, clean thin dark 1–2-native-pixel outline, careful eye highlights, readable eyebrows and tiny clear mouth; rounded-looking pixel contours and compact flat color clusters. All six have EXACTLY the same physical pixel size and outline weight. Avoid the previous huge block pixels, thick black bands, clumsy square hands, realistic anatomy and rigid box-like faces. Avoid smooth vector art, antialiasing, blurred painting, gradients, 3D or a fake pixel-texture overlay. Mostly flat colors with at most one simple flat shadow shade per material.
+
+Shared head: the same appealing ORIGINAL face on all six, same head shape and dimensions, warm medium skin, big simple dark eyes with tiny highlights, gently relaxed eyebrows, small warm closed-mouth smile, short dark hair, small rosy cheek pixel accents. Green #08654E baseball cap with a thin white band and no logo. No show-off raised eyebrow, worried expression, sweat, open shouting mouth, bandage, glasses or personality accessories. The identical head should look like one reusable asset attached to six body types. Heads stay the same physical size, regardless of body width and height.
+
+Uniform: green #08654E short-sleeved shirt and socks, white trousers, simple dark baseball shoes. One narrow white stripe at each sleeve end only. Same skin color, same uniform design and palette on every figure. Minimal waistband. No lettering, logos, numbers, jewelry, tape, wristbands, baseball bats or gloves.
+
+Body types left to right, all unmistakably DIFFERENT:
+1. NORMAL: medium compact build, balanced torso and limbs; the baseline player.
+2. BIG ROUND: substantially wider and softer circular belly/hips, thick arms, short thick legs, rounded plump shoulders. Cute heavy bulk, not a muscular inverted triangle.
+3. SLIM ATHLETIC: narrow waist and lean torso, slim arms and long legs relative to torso, nimble athletic silhouette. Taller than small/normal but shorter than type 5.
+4. BROAD SHOULDERS: significantly wide shoulders and upper chest, sturdy arms, torso visibly tapering inward to a relatively small waist and hips. Inverted triangle. NO large round belly.
+5. TALL ELONGATED: visibly tallest overall body, long narrow straight torso and elongated legs; straighter and taller than the slim athletic type. Still large-headed cute chibi, roughly up to 2.6 heads tall, not adult realism.
+6. SMALL NEAT: visibly shortest, compact small tidy torso, narrow shoulders, short stubby arms and legs, with the same large head as everyone else. Not a scaled-down copy of another whole character.
+
+Pose and layout: exactly SIX full-body sprites in ONE wide horizontal row, all fully front-facing with a relaxed symmetrical standing pose, arms slightly away from sides, empty hands down, feet slightly apart. No extra portraits, no second row, no expression studies, no personality gestures. Use the same overall art scale, NOT equal-height fitting: the tall body must be taller and the small body shorter. All lowest shoe soles sit on EXACTLY ONE common invisible horizontal baseline. Heads connect naturally to necks with no gap, with sufficient space between neighboring sprites. Full caps, hands and shoes visible with generous outer margins.
+
+Background: genuinely transparent alpha and empty between characters. No scenery, no floor, no cast shadows, no halo, no aura, no backdrop or glow. If genuine transparency is impossible, plain solid white only. No checkerboard pixels. No words, labels, titles, numbers, logos, watermark, border or separators.
+No existing game or comic character imitation. A visual design comparison, not a claim of verified part alignment or finished animation.

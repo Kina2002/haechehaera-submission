@@ -1,0 +1,33 @@
+Built-in GPT image generation.
+Static storyboard only, no animation created.
+References: 경기장용-단순도트-보통형-v01.png and the prior six-personality idle-pose sheet.
+Rows top to bottom: 느긋 / 엉뚱 / 투덜이.
+Columns: 타격 준비 / 공 맞히기 / 스윙 마무리 / 출발 / 질주 / 1루 통과.
+Native pixel grid, modular assembly, precise baseball mechanics and 40-pixel animation readability are not verified.
+Exact prompt:
+
+Use case: stylized-concept.
+Asset type: STATIC SIX-STAGE BASEBALL ACTION STORYBOARD, not an animation.
+Reference image 1: the current simple on-field pixel player, use its exact style, identity and uniform.
+Reference image 2: personality gesture examples for this same player. Use only as body-language guidance, NOT its layout or idle actions.
+
+Draw EXACTLY EIGHTEEN full-body sprites in EXACTLY THREE ROWS and SIX COLUMNS. Each row is one personality's complete sequence from batting to running through FIRST BASE. Same original player, face, brown hair, green cap, green jersey with white sleeve cuffs, white trousers, green socks and dark shoes in every cell. SAME physical head/body scale, same limited palette and square-pixel grid. Keep the coarse simple small-sprite style of the first reference, as if authored around 40 logical pixels tall then enlarged sharply. Simple rectangular eyes and neutral facial marks, no new detailed expressions or realistic anatomy. No smooth vector cartoon, blur, glossy rendering, airbrush gradients or added texture.
+
+EVERY ROW uses these EXACT SIX STAGES, left to right:
+1. BATTING READY: player faces RIGHT in a stable right-handed batting stance, both hands gripping a plain brown wooden bat raised behind the shoulder.
+2. CONTACT: rotate hips and extend the two-handed grip through a believable swing, bat makes contact with one tiny white baseball just ahead to the RIGHT. Show a successful hit, not a miss.
+3. FOLLOW-THROUGH: finish the swing with the bat up/back across the shoulder, weight on the forward leg, still looking RIGHT.
+4. RUN START: first running step toward RIGHT, both hands now free; the released bat lies BEHIND the player on the left side of this cell.
+5. SPRINT: a clear mid-stride run toward RIGHT, alternate arms and legs naturally, BOTH HANDS EMPTY and no bat nearby. Do not carry the bat.
+6. FIRST-BASE PASS: run through first base toward RIGHT, front shoe stepping on a clearly visible small white base bag underfoot, trailing leg still running. Do not stop for a victory pose or slide.
+
+All six stages are separate fixed-size storyboard cells, not repeated people in one continuous scene. Keep all caps, bats, balls, arms and feet fully visible within their own cells, generous empty gaps between neighboring sprites and rows. Facing RIGHT throughout, right-handed batter throughout. Each row shares one invisible ground level, one character scale and one reference foot location for each corresponding stage. No shrinking a bat pose to fit.
+Personality affects POSTURE AND BODY LANGUAGE ONLY. All three rows perform the same baseball action, start running at stage 4, reach base at stage 6, with no extra delay, mistake, changed success or alternate route. Use the same simple face; distinguish personalities with shoulder position, head tilt, torso lean, elbow spread and running-arm rhythm. No magical effects, emotions icons, sweat drops, arrows, speed lines, captions or stage numbers.
+
+Background genuine transparent alpha, no gray backdrop, checkerboard, glow, haze, shadow, field, crowd or scenery. The ONLY props are the bat, tiny contact ball at stage 2 and small first-base bag at stage 6. No letters, numbers, labels, logo, watermark, separators or frame borders.
+Original fictional player, no existing game/comic character imitation. These are motion planning drawings, not verified production animation frames.
+
+ROW PERSONALITIES, top to bottom:
+ROW 1 LAID-BACK: loose relaxed shoulders and a comfortable balanced bat stance; smooth unforced-looking swing and follow-through; immediate run start and an easy flowing full running stride with relaxed hands and low shoulders. Do not depict walking, yawning, stretching or being late to first base.
+ROW 2 QUIRKY: subtly tilted whole head in the ready stance, an unusually high but valid follow-through; immediate run start and a slightly eccentric running silhouette with one elbow flared out and an expressive high knee. Keep moving straight toward first base. No dancing, pointing away, random extra steps or changed baseball outcome.
+ROW 3 GRUMPY: shoulders slightly hunched forward, firm compact batting setup and a low brisk follow-through; immediate run start with a stubborn forward lean, tight forceful arm pumping and emphatic planted steps. Keep the SAME neutral face. Do not cross arms while batting/running and do not stop to complain.

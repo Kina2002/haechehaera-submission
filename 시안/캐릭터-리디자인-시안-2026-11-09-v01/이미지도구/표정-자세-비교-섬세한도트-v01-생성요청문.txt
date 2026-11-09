@@ -1,0 +1,33 @@
+Built-in GPT image editing.
+Reference: 체형별-기본얼굴-6종-v01.png, player 1 only.
+Left to right: 허세 / 소심 / 열혈.
+Static visual concept study, not a verified shared-part assembly, native-resolution sprite or animation.
+First edit prompt:
+
+Use case: style-transfer and expression/pose readability concept.
+Input reference: the supplied six-body pixel baseball player sheet. Reference ONLY the first normal-build player as the shared character identity and green/white uniform. Do not include the other five body types. This is a refinement test for ONE generic player, not players B or C and not production animation assets.
+
+Primary request: a character expression and pose study showing how a more refined, charming PIXEL ART treatment allows distinct personality acting. Exactly SIX drawings arranged as a clean 3-column by 2-row sheet. Top row: three enlarged head-and-shoulder closeups. Bottom row: the same three states as full-body standing poses. Each column's upper face and lower player MUST be the same character, same expression, same cap and hair. No titles or labels in the image.
+
+Critical style correction: the reference is too coarse, blocky and heavy. Redraw with a FINER genuine pixel-art grid, as if the FULL BODY were hand-pixeled at about 80–96 native pixels tall, with a head roughly 32–38 native pixels tall, then enlarged with crisp nearest-neighbor scaling. Pixels should be much smaller relative to the character than in the reference. Clean delicate 1-native-pixel dark outlines, controlled stair-step contours, carefully placed small eye/eyebrow/mouth pixels, compact thoughtful color clusters. Thin outlines and rounded-looking pixel silhouettes, not massive black blocks or square mitten fists. Keep short chubby fingers very simple and readable. Retain visible real pixels, without vector outlines, smooth antialiasing, blurring, soft painting, fake pixel texture or gradients. Flat colors, at most one flat shadow per material. Preserve a cute quirky original 2.3–2.5-head-tall chibi identity and large expressive face; avoid realistic proportions and aggressive mascot styling.
+
+Shared character: normal compact baseball build from reference player 1, same head shape, short dark hair, warm medium skin, green #08654E cap/shirt/socks, white trousers, dark shoes, thin white cap band and sleeve-end stripes. No writing or logos. Same physical head size and body proportions in all three lower players. No bandages, wristbands, equipment, personal accessories, new character identities or scenery.
+
+COLUMNS left to right:
+1. SHOW-OFF: one eyebrow lifted, the other relaxed, eyes glance toward viewer with a small asymmetrical closed-mouth smirk. Not angry, no giant toothy grin. Lower pose: chin tipped up a little, chest proudly out, hands resting on hips, weight confidently on one leg. Playfully self-satisfied and likeable.
+2. TIMID: clearly worried raised-inner eyebrows, wide attentive eyes, tiny uncertain mouth, one large simple sweat drop near the temple. Lower pose: chin tucked slightly, shoulders raised/inward, elbows close to the body, hands nervously held together in front of the chest. Shy but appealing, not frightened horror.
+3. HOT-BLOODED: eyebrows strongly angled with energetic eyes, a large clear open shouting mouth. Lower pose: torso leaning forward, feet planted apart, one fist thrust upward and the other near the waist, a compact energetic cheer. Passionate and endearing rather than hostile.
+
+Composition: all six drawings separated by generous transparent gaps, upper heads directly above their corresponding lower bodies. Lower three players share a common shoe baseline and identical character scale. The top closeups are enlarged versions of their lower faces, not differently redesigned portraits. All caps, hands and feet completely inside the canvas. Do not draw frames, dividers, pose arrows or motion trails.
+Background genuinely transparent alpha, no checkerboard pattern. If transparency cannot be produced, plain solid white only. No text, no labels, no numbers, no logos, no watermarks.
+Original design with no resemblance to specific existing game/comic characters or franchise references.
+Goal: compare finer pixel artwork and three unmistakable expressions/body silhouettes using one shared character. A static concept study, not evidence that a 40-pixel game sprite or animated sequence already works.
+
+Second edit prompt:
+
+Use case: background-extraction.
+Edit the supplied six-drawing pixel-art expression study. REMOVE ONLY the unwanted background and glow. Keep all six character drawings, facial expressions, poses, palette, positions, scale, pixel outlines and internal details exactly unchanged.
+
+The sheet must contain ONLY three upper head-and-shoulder busts and three lower full-body characters. Erase every soft gray, green, brown or white haze, halo, aura, blur, vignette, light pool, backdrop and ground shadow outside the actual six character silhouettes. The gaps between the six characters and all space around them must be genuinely 100% transparent, alpha zero. Preserve the actual green shirt and white trousers; retain clean opaque character interiors and crisp square-pixel cutout edges. Do not add checkerboard pixels. No gray backdrop. No glow behind or underneath the characters. No cast shadows.
+Do not redraw the faces or bodies or modify their proportions. Preserve exactly the original expressions left to right: smug/show-off, worried/timid, enthusiastic/hot-blooded, with matching full-body personality poses below. No text, no logo, no watermark.
+Output a clean genuinely transparent PNG cutout sheet. If full transparency is impossible, use a uniformly pure solid white background, never gradients or soft haze.
