@@ -54,6 +54,8 @@ MLB 14개 단위 검사에서 조건 경계·성공/실패·금액·중복 방�
 
 ## 개발 참고
 
+- 시험 기록: [P11 자금 균형 시험](P11-자금-균형-시험.md)에서 75까지의 훈련비가 이적료보다 크다는 점을 확인했습니다. MLB 규칙은 바꾸지 않았습니다.
+- 향후 구상: [P13 FA와 유저 간 트레이드](P13-FA와-유저-간-트레이드.md)에서 트레이드로 온 선수의 MLB 도전 제한을 검토합니다.
 - [mlb.js 25행](../../src/mlb.js) · `mlbQuote`
 - [mlb.js 45행](../../src/mlb.js) · `completeMlbAttempt`
 - [mlb.js 73행](../../src/mlb.js) · `validateMlbState`
