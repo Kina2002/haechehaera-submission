@@ -51,14 +51,32 @@ function gainExp(p,pos,s,growth){
   return ups;
 }
 
-function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null}){
+// 긴급 대출 (P14 제안 · 시험값): 이자 10%, 급여·유지비 뒤 남은 돈에서 경기 수입의 30%까지 상환.
+const LOAN={interest:.1,repayShare:.3};
+// 해체 여론 설정 (P09 제안 · 시험값). rank는 시즌 끝 1~6위 보정값.
+const DISBAND={
+  base:{name:'기본',start:30,win:-5,loss:5,unpaid:5,loan:15,loanAtSeasonEnd:10,rank:[-30,-15,0,0,10,20],restart:20},
+  strict:{name:'엄격',start:30,win:-4,loss:6,unpaid:6,loan:15,loanAtSeasonEnd:10,rank:[-25,-10,0,5,15,25],restart:20},
+  lenient:{name:'관대',start:30,win:-6,loss:4,unpaid:4,loan:15,loanAtSeasonEnd:10,rank:[-35,-20,-5,0,5,15],restart:20},
+};
+function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null}){
   const rnd=seeded(seed),ri=(a,b)=>a+Math.floor(rnd()*(b-a+1));
   const t=world.initialTeam();
   const enrich=p=>{p.fans=ri(15,85);p.loyalty=ri(45,70);p.salary=Math.max(3,Math.round(price(p)*B.salaryFactor));
     p.ask=Math.max(3,Math.round(price(p)*B.salaryFactor*(1+(50-p.loyalty)/200)));p.contract=contractGames;p.played=0;p.since=0;return p;};
   t.players.forEach(enrich);
   const club={funds:B.startFunds,debt:0,fac:[],stadium:1,ticket:10,w:0,l:0,d:0,games:0,departures:0,stuck:false,
-    flow:{base:0,runs:0,win:0,gate:0,stores:0,salary:0,maintenance:0,training:0,facilities:0,stadium:0,recruit:0,homeNet:0,awayNet:0,homeGames:0,awayGames:0},trainPoints:0,perfPoints:0};
+    flow:{base:0,runs:0,win:0,gate:0,stores:0,salary:0,maintenance:0,training:0,facilities:0,stadium:0,recruit:0,homeNet:0,awayNet:0,homeGames:0,awayGames:0,loanIn:0,loanRepay:0},trainPoints:0,perfPoints:0,
+    // 해체 여론·긴급 대출(P09·P14 제안). disband 옵션이 없으면 사용하지 않습니다.
+    pressure:disband?disband.start:0,loan:0,loans:0,loanSeason:-1,season:0,forfeits:0,disbands:0};
+  const addPressure=v=>{if(disband)club.pressure=clamp(club.pressure+v,0,100);};
+  // 긴급 대출: 미지급금 + 모자란 인원 × 가장 싼 영입비(여유 20%). 시즌당 1번, 남은 대출이 있으면 불가.
+  function takeLoan(cheapest){
+    if(!disband||club.loan>0||club.loanSeason===club.season)return false;
+    const amount=Math.round(club.debt+(10-t.players.length)*cheapest*1.2);
+    club.funds+=amount;club.flow.loanIn+=amount;club.loan=Math.round(amount*(1+LOAN.interest));club.loans++;club.loanSeason=club.season;
+    const pay=Math.min(club.funds,club.debt);club.funds-=pay;club.debt-=pay;addPressure(disband.loan);return true;
+  }
   const log=[];
   const fixed=()=>t.players.reduce((s,p)=>s+p.salary,0)+club.fac.length*B.maintenance;
   const reserve=()=>policy.reserveGames*fixed();
@@ -91,7 +109,16 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     p.salary=p.ask;p.contract=contractGames;p.played=0;p.since=club.games;}}
   function replaceDeparted(){
     while(t.players.length<10){const cands=[0,1,2].map(()=>{const p=world.recruit();return enrich(p);}).sort((a,b)=>price(a)-price(b));
-      const p=cands[0],cost=Math.round(price(p)*B.hireFactor);if(club.funds<cost){club.stuck=true;return;}spend(cost,'recruit');t.players.push(p);}
+      const p=cands[0],cost=Math.round(price(p)*B.hireFactor);if(club.funds<cost)takeLoan(cost);if(club.funds<cost){club.stuck=true;return;}spend(cost,'recruit');t.players.push(p);}
+  }
+  // 재창단 (P09 제안): 애정도 70 이상 중 최대 3명만 남기고, 새 시작 선수로 12명. 자금·시설·경기장·빚 초기화.
+  function rebuild(){
+    const keep=t.players.filter(p=>p.loyalty>=70).sort((a,b)=>b.loyalty-a.loyalty).slice(0,3);
+    keep.forEach(p=>{p.contract=contractGames;});
+    const newcomers=world.initialTeam().players.slice(0,12-keep.length).map(enrich);
+    t.players=[...keep,...newcomers];t.lineup=world.autoLineup(t.players);
+    Object.assign(club,{funds:B.startFunds,debt:0,loan:0,fac:[],stadium:1,ticket:10,stuck:false,pressure:disband.restart});
+    policy.start.forEach(build);
   }
   function playOne(opp,home){
     // 이적 뒤에도 빈 자리가 없게, 훈련 전과 훈련 뒤 모두 자동 편성을 다시 합니다.
@@ -107,6 +134,8 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     const salary=t.players.reduce((s,p)=>s+p.salary,0),maint=club.fac.length*B.maintenance,due=salary+maint+club.debt,paid=Math.min(club.funds,due);
     const net=Object.values(inc).reduce((a,v)=>a+v,0)-salary-maint;club.flow[home===0?'homeNet':'awayNet']+=net;club.flow[home===0?'homeGames':'awayGames']++;
     club.funds-=paid;club.flow.salary+=Math.min(paid,salary);club.flow.maintenance+=Math.max(0,Math.min(paid-salary,maint));club.debt=due-paid;
+    // 대출 상환: 급여·유지비를 낸 뒤 남은 돈에서 이번 경기 수입의 30%까지.
+    if(club.loan>0&&club.funds>0){const pay=Math.min(club.loan,club.funds,Math.round(Object.values(inc).reduce((a,v)=>a+v,0)*LOAN.repayShare));club.funds-=pay;club.loan-=pay;club.flow.loanRepay+=pay;}
     if(win)club.w++;else if(g.result==='L')club.l++;else club.d++;club.games++;
     const welfare=club.fac.filter(id=>WELFARE.includes(id)).length,inLineup=new Set(t.lineup.map(x=>x.id));
     for(const p of t.players){p.loyalty=clamp(p.loyalty+welfare-(club.debt?8:0),0,100);p.contract=Math.max(0,p.contract-1);if(inLineup.has(p.id))p.played++;
@@ -125,17 +154,29 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
   }else{
     // 제안 리그: 6팀, 상대 5팀과 홈·원정 1번씩(우리 10경기), 가상 팀끼리도 2번씩. 1위 승격, 6위 강등.
     const MIDS=[39,51,63,75],OFFS=[6,3,0,-3,-6];let lv=0;
-    for(let s=0;s<seasons&&!club.stuck;s++){
+    for(let s=0;s<seasons&&(disband||!club.stuck);s++){
+      club.season=s;
+      // 해체 규칙을 쓰면 시즌 시작 때 다시 인원을 채워 봅니다(새 시즌에는 대출을 다시 받을 수 있음).
+      if(disband&&t.players.length<10){club.stuck=false;replaceDeparted();}
       const ais=OFFS.map((off,i)=>{const o=world.botTeam((MIDS[lv]+off-43.5)/4,'dh','AI'+i);for(const p of o.players)for(const k of NINE)p.a[k]=Math.round(p.a[k]);return {o,pts:0};});
-      let ours=0;
+      let ours=0,forfeits=0;
       // 홈·원정이 번갈아 오도록 상대마다 첫 경기 장소를 엇갈리게 배정합니다.
-      for(let r=0;r<2;r++)for(const [i,ai] of ais.entries()){if(club.stuck)break;const g=playOne(ai.o,(i+r)%2);const pts=g.result==='W'?1:g.result==='D'?.5:0;ours+=pts;ai.pts+=1-pts;}
+      for(let r=0;r<2;r++)for(const [i,ai] of ais.entries()){
+        if(club.stuck){if(!disband)break;ai.pts+=1;club.l++;forfeits++;club.forfeits++;addPressure(disband.loss);continue;}// 부전패
+        const g=playOne(ai.o,(i+r)%2);const pts=g.result==='W'?1:g.result==='D'?.5:0;ours+=pts;ai.pts+=1-pts;
+        if(disband){addPressure(g.result==='W'?disband.win:g.result==='L'?disband.loss:0);if(club.debt>0)addPressure(disband.unpaid);}
+      }
       for(let i=0;i<5;i++)for(let j=i+1;j<5;j++)for(let r=0;r<2;r++){const g=world.playGame(ais[i].o,ais[j].o,r,ri(1,2**31-1),{boneheads:false});
         const pts=g.result==='W'?1:g.result==='D'?.5:0;ais[i].pts+=pts;ais[j].pts+=1-pts;}
       const table=[{pts:ours+rnd()*1e-3,us:true},...ais.map(a=>({pts:a.pts+rnd()*1e-3}))].sort((a,b)=>b.pts-a.pts);
       const rank=table.findIndex(x=>x.us)+1;const tierBefore=lv;
       if(rank===1&&lv<3)lv++;else if(rank===6&&lv>0)lv--;
-      log.push(snapshot({season:s+1,tier:tierBefore,rank,points:ours,nextTier:lv}));
+      let disbanded=false,pressureEnd=null;
+      if(disband){
+        addPressure(disband.rank[rank-1]);if(club.loan>0)addPressure(disband.loanAtSeasonEnd);pressureEnd=club.pressure;
+        if(club.pressure>=100){disbanded=true;club.disbands++;rebuild();lv=0;}
+      }
+      log.push(snapshot({season:s+1,tier:tierBefore,rank,points:ours,nextTier:lv,forfeits,pressureEnd,disbanded,loanLeft:club.loan,loans:club.loans,disbands:club.disbands}));
     }
   }
   return {log,flow:club.flow};
@@ -167,8 +208,31 @@ function mainGrowth(n,out){
   report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
+// 해체 여론·긴급 대출·재창단 비교: 제안 리그 10시즌, 경기 성장 K=10(결정값), 돈 규칙 그대로.
+// node tests/run-economy-sim.cjs 20 결과.json disband
+function mainDisband(n,out){
+  const started=Date.now(),world=createWorld(20261110),seasons=10,growth={K:10,cap:80};
+  const report={version:'2026-11-10-disband-v01',clubsPerCell:n,seasons,growth,loan:LOAN,settings:DISBAND,results:{}};
+  for(const [dk,set] of Object.entries(DISBAND))for(const [pk,pol] of Object.entries(POLICIES)){
+    const runs=[];for(let i=0;i<n;i++)runs.push(career(world,pol,{league:true,contractGames:10,seasons,seed:9100+i*17,growth,disband:set}));
+    report.results[dk+':'+pk]=runs.map(r=>r.log);
+    const last=runs.map(r=>r.log.at(-1)),firsts=runs.map(r=>r.log.find(l=>l.disbanded)?.season).filter(Boolean);
+    const pAt=s=>median(runs.map(r=>r.log[s]?.pressureEnd).filter(x=>x!=null));
+    console.log('\n[여론 '+set.name+'] '+pol.name);
+    console.log(' 해체 1번 이상:',Math.round(100*firsts.length/n)+'% 구단',firsts.length?'· 첫 해체 중앙값 '+median(firsts)+'시즌':'',
+      '· 구단당 해체',(last.reduce((a,l)=>a+l.disbands,0)/n).toFixed(2)+'번');
+    console.log(' 긴급 대출: 받은 구단',Math.round(100*last.filter(l=>l.loans>0).length/n)+'%','· 구단당',(last.reduce((a,l)=>a+l.loans,0)/n).toFixed(2)+'번',
+      '· 부전패 경기 구단당',(runs.reduce((a,r)=>a+r.log.reduce((b,l)=>b+l.forfeits,0),0)/n).toFixed(1));
+    console.log(' 시즌 끝 여론(중앙값) 3·6·10시즌:',pAt(2),'/',pAt(5),'/',pAt(9),
+      '· 10시즌 뒤 리그 동네/지역/2부/1부:',[0,1,2,3].map(x=>Math.round(100*last.filter(l=>l.nextTier===x).length/n)+'%').join('/'),
+      '· 자금 중앙값',Math.round(median(last.map(l=>l.funds))));
+  }
+  report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
+  if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
+}
 function main(){
   if(process.argv[4]==='growth')return mainGrowth(Number(process.argv[2])||20,process.argv[3]);
+  if(process.argv[4]==='disband')return mainDisband(Number(process.argv[2])||20,process.argv[3]);
   const n=Number(process.argv[2])||30,out=process.argv[3],started=Date.now();
   const world=createWorld(20261110);
   const report={version:'2026-11-09-v01',clubsPerPolicy:n,rules:B,policies:POLICIES,notes:[
@@ -208,4 +272,4 @@ function main(){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 if(require.main===module)main();
-module.exports={career,POLICIES};
+module.exports={career,POLICIES,DISBAND};
