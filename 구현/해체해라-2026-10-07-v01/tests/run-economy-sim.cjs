@@ -120,10 +120,14 @@ function ageP21(p,rnd,rule=P21_AGING){
 // 서로 다른 능력 3개에 각각 +(나이−19). 유소년 아카데미 유망주는 19세 그대로. ages.entry를 켜면 씁니다.
 // 나이는 고르게 뽑고, 대상은 노화와 같은 10개 능력이며 100을 넘지 않습니다(Claude 초안).
 const P21_ENTRY=Object.freeze({min:19,max:26,count:3});
+// 이슈 #46-14 후보 (Claude 초안 · 시험값, 2026-11-11): 젊은 선수 보너스를 나이 대신 "이 구단에서 몇 번째 시즌인가"로 줍니다.
+// [이 시즌까지, 배수]. 19세 입단 선수에게는 지금 나이 표(21세까지 ×1.5, 25세까지 ×1.3)와 같고, 늦게 입단한 선수도 같은 기간을 받습니다.
+const TENURE_BONUS=Object.freeze([[3,1.5],[7,1.3],[99,1]]);
 function entryP21(p,rnd,rule=P21_ENTRY){
   p.age=rule.min+Math.floor(rnd()*(rule.max-rule.min+1));
-  const bonus=p.age-P21_AGING.entryAge,keys=[...TEN];
-  if(bonus>0)for(let i=0;i<rule.count;i++){const j=i+Math.floor(rnd()*(keys.length-i));[keys[i],keys[j]]=[keys[j],keys[i]];p.a[keys[i]]=Math.min(100,p.a[keys[i]]+bonus);}
+  // rule.count: 보정할 능력 수. 숫자이거나, 입단 나이를 받아 개수를 돌려주는 함수(이슈 #46-14 추가 후보)입니다.
+  const bonus=p.age-P21_AGING.entryAge,keys=[...TEN],count=typeof rule.count==='function'?Math.min(TEN.length,rule.count(p.age)):rule.count;
+  if(bonus>0)for(let i=0;i<count;i++){const j=i+Math.floor(rnd()*(keys.length-i));[keys[i],keys[j]]=[keys[j],keys[i]];p.a[keys[i]]=Math.min(100,p.a[keys[i]]+bonus);}
   return bonus;
 }
 // reform: 시설·경기장 개편안(P17)을 씁니다. 이때 원정 응원 비율은 awayShare 대신 응원단 버스 단계로 정합니다(P16).
@@ -141,7 +145,10 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
   const rnd=seeded(seed),ri=(a,b)=>a+Math.floor(rnd()*(b-a+1));
   const ageRnd=seeded(seed^0x5a17e901);// P21 노화 추첨 전용. 다른 판단의 난수 흐름을 건드리지 않습니다.
   const t=world.initialTeam();
-  const enrich=p=>{if(ages&&p.age==null){if(ages.p21&&ages.entry)entryP21(p,ageRnd);else p.age=ages.p21?P21_AGING.entryAge:ri(AGES.startAge[0],AGES.startAge[1]);}p.fans=ri(15,85);p.loyalty=ri(45,70);p.salary=Math.max(3,Math.round(price(p)*B.salaryFactor));
+  // ages.entryCount: 숫자(보정 능력 수), 'all25'(25세 이상 입단은 10개 모두, 아래는 3개), 'graded'(나이−19개). 없으면 P21_ENTRY의 3개.
+  const ENTRY_COUNT={all25:age=>age>=25?TEN.length:P21_ENTRY.count,graded:age=>age-P21_AGING.entryAge};
+  const entryRule=!ages?.entryCount?P21_ENTRY:{...P21_ENTRY,count:ENTRY_COUNT[ages.entryCount]||ages.entryCount};
+  const enrich=p=>{if(ages&&p.age==null){if(ages.p21&&ages.entry)entryP21(p,ageRnd,entryRule);else p.age=ages.p21?P21_AGING.entryAge:ri(AGES.startAge[0],AGES.startAge[1]);}p.fans=ri(15,85);p.loyalty=ri(45,70);p.salary=Math.max(3,Math.round(price(p)*B.salaryFactor));
     p.ask=Math.max(3,Math.round(price(p)*B.salaryFactor*(1+(50-p.loyalty)/200)));p.contract=contractGames;p.played=0;p.since=0;p.apps=0;return p;};
   t.players.forEach(enrich);
   const club={funds:B.startFunds,debt:0,fac:[],stadium:1,ticket:10,w:0,l:0,d:0,games:0,departures:0,stuck:false,
@@ -168,7 +175,9 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
   const goal=()=>reform&&NEED[Math.min(3,club.lv+1)]>club.stadium?REFORM.stadiumCost[club.stadium]:0;
   const trainLv=k=>{if(!reform)return null;const id=Object.keys(REFORM.fac).find(id=>REFORM.fac[id].train?.includes(k));return has(id)?REFORM.trainLevels[club.lvl[id]||1]:null;};
   // 나이 보너스를 쓰면 유소년 아카데미의 +30%는 빼고 나이 배수(18~19세 ×1.5)로 대신합니다.
-  const ageMult=p=>!ages?.bonus||p.age==null?1:(ages.bonusTable||AGES.bonus).find(([max])=>p.age<=max)[1];
+  // ages.bonusBy==='tenure'(이슈 #46-14 후보): 나이 대신 이 구단에서 몇 번째 시즌인지(p.seasons+1)로 보너스를 고릅니다.
+  const ageMult=p=>!ages?.bonus||p.age==null?1:ages.bonusBy==='tenure'?(ages.tenureTable||TENURE_BONUS).find(([max])=>(p.seasons||0)+1<=max)[1]
+    :(ages.bonusTable||AGES.bonus).find(([max])=>p.age<=max)[1];
   // 나이를 보는 감독(2026-11-10): 훈련은 29세 이하 그대로·30~32세 절반·33세 이상 안 함, 영입은 후보 3명 중 (평균 능력 + 28 − 나이)가 큰 선수
   const trainAgeW=p=>!ages?.aware||p.age==null?1:p.age<=29?1:p.age<=32?.5:0;
   const newRecruit=()=>{const p=world.recruit();const o=market?market.offset[club.lv]||0:0;if(o)for(const k of NINE)p.a[k]=Math.min(100,p.a[k]+o);return p;};
@@ -364,6 +373,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
       if(ages&&s>0){
         // 나이: 시즌마다 +1세 후 능력 하락. ages.p21이면 P21 확정 규칙, 아니면 임시 가정(33세부터 하락·37세 은퇴 등).
         // 은퇴한 자리는 예비금 안에서 12명까지 다시 영입합니다.
+        if(ages.bonusBy==='tenure')for(const p of t.players)p.seasons=(p.seasons||0)+1;
         if(ages.p21)for(const p of t.players)club.ageLoss+=ageP21(p,ageRnd);
         else for(const p of t.players){p.age++;const d=((ages.decline||AGES.decline).filter(([from])=>p.age>=from).at(-1)||[0,0])[1];if(d)for(const k of [...NINE,'stamina'])p.a[k]=Math.max(20,p.a[k]-d);}
         // 은퇴: retireAt이 있으면 그 나이에 은퇴(이전 시험). null이면 정해진 나이 없이 ① 선수가 원할 때(retireWish: [이 나이부터, 시즌 끝 확률])
@@ -735,9 +745,24 @@ function mainTop(n,out,seasons=20,set='top',worldSeed=20261115,seedBase=16000){
     marketF:{name:'F21e. E21e + 감속 없는 젊은 선수 보너스 + 한도 85',opts:{leagueMoney:LEAGUE_MONEY,ages:FL,market:MARKET}},
     marketG:{name:'G21e. F21e + 젊은 선수 2명 출전 감독',opts:{leagueMoney:LEAGUE_MONEY,ages:FL,market:MARKET,playYoung:2}},
   };})(),
+  // 이슈 #46-14 후보 비교 (2026-11-11): 입단 나이 보정 뒤 줄어든 1부 도달을 되돌릴 수 있는지, F21e(영입 시장 + 젊은 선수 보너스 + 한도 85)에 하나씩 더합니다.
+  // p21e와 같은 시드로 돌리면 F21e와 짝지어 비교합니다. node tests/run-economy-sim.cjs 20 결과.json p21f 25 [world 시드] [구단 시드 시작]
+  p21f:(()=>{const FL={bonus:true,bonusTable:[[21,1.5],[25,1.3],[99,1]],capUp:true,aware:true,p21:true,entry:true,retireAt:null,
+      retireWish:[[35,.1],[36,.2],[37,.35],[38,.5],[39,.65],[40,.8]],managerRetire:true};return {
+    count5:{name:'F21e + 입단 보정 능력 5개(각 +(나이−19))',opts:{leagueMoney:LEAGUE_MONEY,ages:{...FL,entryCount:5},market:MARKET}},
+    tenure:{name:'F21e + 젊은 선수 보너스를 입단 뒤 시즌 수로(1~3시즌 ×1.5, 4~7시즌 ×1.3)',opts:{leagueMoney:LEAGUE_MONEY,ages:{...FL,bonusBy:'tenure'},market:MARKET}},
+    both:{name:'F21e + 능력 5개 + 시즌 수 보너스',opts:{leagueMoney:LEAGUE_MONEY,ages:{...FL,entryCount:5,bonusBy:'tenure'},market:MARKET}},
+  };})(),
+  // 이슈 #46-14 추가 후보 (참가자 질문 2026-11-11): 25·26세 입단은 모든 능력 보정, 그리고 계단을 없앤 완만한 안(나이−19개 능력).
+  // node tests/run-economy-sim.cjs 20 결과.json p21g 25 [world 시드] [구단 시드 시작]
+  p21g:(()=>{const FL={bonus:true,bonusTable:[[21,1.5],[25,1.3],[99,1]],capUp:true,aware:true,p21:true,entry:true,retireAt:null,
+      retireWish:[[35,.1],[36,.2],[37,.35],[38,.5],[39,.65],[40,.8]],managerRetire:true};return {
+    all25:{name:'F21e + 25·26세 입단은 10개 능력 모두 +(나이−19), 19~24세는 3개',opts:{leagueMoney:LEAGUE_MONEY,ages:{...FL,entryCount:'all25'},market:MARKET}},
+    graded:{name:'F21e + 나이−19개 능력에 각 +(나이−19) (20세 1개 … 26세 7개)',opts:{leagueMoney:LEAGUE_MONEY,ages:{...FL,entryCount:'graded'},market:MARKET}},
+  };})(),
   };
-  const VARIANTS=SETS[set],p21set=set==='p21'||set==='p21e',aged=set.startsWith('youth')||p21set;
-  const report={version:'2026-11-10-'+set+'-v01',ages:p21set?{p21:P21_AGING,...(set==='p21e'?{entry:P21_ENTRY}:{}),tempAges:AGES}:set.startsWith('youth')?AGES:undefined,market:set==='youth3'||p21set?MARKET:undefined,variantOpts:Object.fromEntries(Object.entries(SETS[set]).map(([k,v])=>[k,v.opts])),clubsPerCell:n,...(p21set?{worldSeed,seedBase}:{}),seasons,unit:'만원',policy:'normal',settings:{...base,disband:'base'},reform:REFORM,leagueMoney:LEAGUE_MONEY,variants:{},results:{},summary:{}};
+  const VARIANTS=SETS[set],p21set=['p21','p21e','p21f','p21g'].includes(set),aged=set.startsWith('youth')||p21set;
+  const report={version:(set==='p21f'||set==='p21g'?'2026-11-11-':'2026-11-10-')+set+'-v01',ages:p21set?{p21:P21_AGING,...(set!=='p21'?{entry:P21_ENTRY}:{}),...(set==='p21f'?{tenureBonus:TENURE_BONUS}:{}),tempAges:AGES}:set.startsWith('youth')?AGES:undefined,market:set==='youth3'||p21set?MARKET:undefined,variantOpts:Object.fromEntries(Object.entries(SETS[set]).map(([k,v])=>[k,v.opts])),clubsPerCell:n,...(p21set?{worldSeed,seedBase}:{}),seasons,unit:'만원',policy:'normal',settings:{...base,disband:'base'},reform:REFORM,leagueMoney:LEAGUE_MONEY,variants:{},results:{},summary:{}};
   const pct=(a,b)=>Math.round(100*a/b)+'%',med=a=>median(a);
   for(const [vk,v] of Object.entries(VARIANTS)){
     const world=createWorld(worldSeed),runs=[];
@@ -773,7 +798,7 @@ function main(){
   if(process.argv[4]==='loyalty')return mainLoyalty(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||12,process.argv[6]||null);
   if(process.argv[4]==='rebuild')return mainRebuild(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||15,process.argv[6]||null);
   // p21 추가 표본: node tests/run-economy-sim.cjs 20 결과.json p21 25 [world 시드=20261115] [구단 시드 시작=16000]
-  if(process.argv[4]==='p21'||process.argv[4]==='p21e')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,process.argv[4],Number(process.argv[6])||20261115,Number(process.argv[7])||16000);
+  if(['p21','p21e','p21f','p21g'].includes(process.argv[4]))return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,process.argv[4],Number(process.argv[6])||20261115,Number(process.argv[7])||16000);
   if(process.argv[4]==='youth3')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth3');
   if(process.argv[4]==='youth2')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth2');
   if(process.argv[4]==='youth')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth');
@@ -823,4 +848,4 @@ function main(){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 if(require.main===module)main();
-module.exports={career,POLICIES,DISBAND,REFORM,REFORM_POLICIES,LEAGUE_MONEY,AGES,MARKET,TEN,P21_AGING,ageP21,P21_ENTRY,entryP21};
+module.exports={career,POLICIES,DISBAND,REFORM,REFORM_POLICIES,LEAGUE_MONEY,AGES,MARKET,TEN,P21_AGING,ageP21,P21_ENTRY,entryP21,TENURE_BONUS};

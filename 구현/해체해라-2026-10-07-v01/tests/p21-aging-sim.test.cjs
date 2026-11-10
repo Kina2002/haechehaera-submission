@@ -51,6 +51,21 @@ test('entry rule: age 19~26 and three distinct abilities each +(age−19), cappe
   assert.equal(top.age,26);assert.equal(TEN.filter(k=>top.a[k]===100).length,3);
 });
 
+test('entry rule with count 5 (issue #46-14 candidate) raises five distinct abilities',()=>{
+  const p=makePlayer(null,50);delete p.age;const bonus=entryP21(p,()=>.99,{...P21_ENTRY,count:5});
+  assert.equal(p.age,26);assert.equal(bonus,7);
+  assert.equal(TEN.filter(k=>p.a[k]===57).length,5);
+});
+
+test('entry rule with an age-dependent count (all ten from 25, or age−19)',()=>{
+  const all25=age=>age>=25?10:3,graded=age=>age-19;
+  for(const [r,age,n] of [[.99,26,10],[.75,25,10],[.7,24,3]]){const p=makePlayer(null,50);delete p.age;
+    const seq=[r,...Array(20).fill(0)];let i=0;entryP21(p,()=>seq[i++],{...P21_ENTRY,count:all25});
+    assert.equal(p.age,age);assert.equal(TEN.filter(k=>p.a[k]===50+(age-19)).length,n);}
+  const g=makePlayer(null,50);delete g.age;const seq=[.5,...Array(20).fill(0)];let j=0;entryP21(g,()=>seq[j++],{...P21_ENTRY,count:graded});
+  assert.equal(g.age,23);assert.equal(TEN.filter(k=>g.a[k]===54).length,4);
+});
+
 test('career with ages.p21 + entry: starting roster ages spread over 19~26',()=>{
   const ages={bonus:false,capUp:false,aware:true,p21:true,entry:true,retireAt:null,retireWish:[[35,.1]],managerRetire:true};
   const r=career(createWorld(20261115),REFORM_POLICIES.normal,{league:true,contractGames:10,seasons:1,growth:{K:10,cap:80},
