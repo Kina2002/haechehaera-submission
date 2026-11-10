@@ -569,6 +569,22 @@ function mainLoyalty(n,out,seasons=12,only=null){
   report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
+// 세 유저 유형 플레이 분석 (참가자 요청 2026-11-11): 지금까지 정한 규칙을 모두 넣고, 같은 구단을 아끼는·보통·무리한 투자 유저가 각각 운영합니다.
+// 규칙: 시설 개편 v03·리그별 수입·영입 시장·P21 나이와 입단 보정·젊은 선수 보너스·해체 여론·긴급 대출·재창단 초안·MLB 후원과 회생권·구단 사건 애정도.
+// 구단마다 따로 만든 world를 쓰므로 세 유저가 같은 구단(같은 운)으로 시작합니다.
+// node tests/run-economy-sim.cjs 20 결과.json personas [시즌 수=25] [thrifty|normal|aggressive] [world 시드 시작=20261130] [구단 시드 시작=21000]
+function mainPersona(n,out,seasons=25,pk='normal',worldSeed=20261130,seedBase=21000){
+  const started=Date.now();
+  const ages={bonus:true,bonusTable:[[21,1.5],[25,1.3],[99,1]],capUp:true,aware:true,p21:true,entry:true,retireAt:null,
+    retireWish:[[35,.1],[36,.2],[37,.35],[38,.5],[39,.65],[40,.8]],managerRetire:true};
+  const base={league:true,contractGames:10,seasons,growth:{K:10,cap:80},disband:DISBAND.base,mlb:{request:true,regular:true,ticket:true,ticketAt:[1]},
+    reform:true,invest:true,leagueMoney:LEAGUE_MONEY,market:MARKET,ages,rebuildRule:{},loyalty:{events:true}};
+  const runs=[];for(let i=0;i<n;i++)runs.push(career(createWorld(worldSeed+i),REFORM_POLICIES[pk],{...base,seed:seedBase+i*31}));
+  const report={version:'2026-11-11-personas-v01',persona:pk,personaName:REFORM_POLICIES[pk].name,policy:REFORM_POLICIES[pk],clubs:n,seasons,worldSeed,seedBase,
+    settings:{...base,disband:'base'},reform:REFORM,results:runs.map(r=>r.log)};
+  report.seconds=Math.round((Date.now()-started)/1000);console.log(REFORM_POLICIES[pk].name,'구단',n,'· 소요 시간',report.seconds,'초');
+  if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
+}
 // MLB 진출·후원·회생권 비교: 해체 여론 기본 설정, 경기 성장 K=10, 제안 리그 10시즌.
 // node tests/run-economy-sim.cjs 20 결과.json mlb
 function mainMlb(n,out){
@@ -795,6 +811,7 @@ function mainTop(n,out,seasons=20,set='top',worldSeed=20261115,seedBase=16000){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 function main(){
+  if(process.argv[4]==='personas')return mainPersona(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,process.argv[6]||'normal',Number(process.argv[7])||20261130,Number(process.argv[8])||21000);
   if(process.argv[4]==='loyalty')return mainLoyalty(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||12,process.argv[6]||null);
   if(process.argv[4]==='rebuild')return mainRebuild(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||15,process.argv[6]||null);
   // p21 추가 표본: node tests/run-economy-sim.cjs 20 결과.json p21 25 [world 시드=20261115] [구단 시드 시작=16000]
