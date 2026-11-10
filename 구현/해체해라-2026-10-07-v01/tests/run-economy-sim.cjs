@@ -59,16 +59,23 @@ const DISBAND={
   strict:{name:'엄격',start:30,win:-4,loss:6,unpaid:6,loan:15,loanAtSeasonEnd:10,rank:[-25,-10,0,5,15,25],restart:20},
   lenient:{name:'관대',start:30,win:-6,loss:4,unpaid:4,loan:15,loanAtSeasonEnd:10,rank:[-35,-20,-5,0,5,15],restart:20},
 };
-function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null}){
+// MLB 진출 (현재 게임 src/mlb.js 기본값과 같음): 주요 3능력 평균 75 이상·출전 5경기 이상, 성공 35%+2%p/점(최대 85%),
+// 이적료 5,000만+400만/점, 실패 시 애정도 −20, 3경기 뒤 재도전, 도전하려면 11명 이상.
+const MLB={minAbility:75,minGames:5,baseChance:.35,perPoint:.02,maxChance:.85,baseFee:5000,feePerPoint:400,failLoyalty:20,retryGames:3};
+const mlbScore=p=>Math.max((p.a.contact+p.a.power+p.a.eye)/3,(p.a.velocity+p.a.control+p.a.stamina)/3);
+function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null,mlb=null}){
   const rnd=seeded(seed),ri=(a,b)=>a+Math.floor(rnd()*(b-a+1));
   const t=world.initialTeam();
   const enrich=p=>{p.fans=ri(15,85);p.loyalty=ri(45,70);p.salary=Math.max(3,Math.round(price(p)*B.salaryFactor));
-    p.ask=Math.max(3,Math.round(price(p)*B.salaryFactor*(1+(50-p.loyalty)/200)));p.contract=contractGames;p.played=0;p.since=0;return p;};
+    p.ask=Math.max(3,Math.round(price(p)*B.salaryFactor*(1+(50-p.loyalty)/200)));p.contract=contractGames;p.played=0;p.since=0;p.apps=0;return p;};
   t.players.forEach(enrich);
   const club={funds:B.startFunds,debt:0,fac:[],stadium:1,ticket:10,w:0,l:0,d:0,games:0,departures:0,stuck:false,
     flow:{base:0,runs:0,win:0,gate:0,stores:0,salary:0,maintenance:0,training:0,facilities:0,stadium:0,recruit:0,homeNet:0,awayNet:0,homeGames:0,awayGames:0,loanIn:0,loanRepay:0},trainPoints:0,perfPoints:0,
     // 해체 여론·긴급 대출(P09·P14 제안). disband 옵션이 없으면 사용하지 않습니다.
-    pressure:disband?disband.start:0,loan:0,loans:0,loanSeason:-1,season:0,forfeits:0,disbands:0};
+    pressure:disband?disband.start:0,loan:0,loans:0,loanSeason:-1,season:0,forfeits:0,disbands:0,
+    // MLB 진출·후원·회생권(P15 제안). mlb 옵션이 없으면 사용하지 않습니다.
+    alumni:[],mlbCount:0,mlbFails:0,mlbFee:0,donations:0,donationSum:0,tickets:0,ticketsUsed:0,
+    requests:0,refusals:0,requestSum:0,regularSum:0,regularGames:0};
   const addPressure=v=>{if(disband)club.pressure=clamp(club.pressure+v,0,100);};
   // 긴급 대출: 미지급금 + 모자란 인원 × 가장 싼 영입비(여유 20%). 시즌당 1번, 남은 대출이 있으면 불가.
   function takeLoan(cheapest){
@@ -86,7 +93,45 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
   const attendance=ticket=>{const pop=t.players.reduce((s,p)=>s+p.fans,0)*.3+80;return Math.round(clamp(pop*(B.ticketBase/ticket)**1.8,0,club.stadium*200));};
   function build(id){if(club.fac.includes(id)||club.fac.length>=limit()||club.funds<B.facilityPrice)return false;spend(B.facilityPrice,'facilities');club.fac.push(id);return true;}
   policy.start.forEach(build);
+  // MLB 도전: 조건을 갖춘 선수 중 평가가 가장 높은 1명이 경기 전 한 번 도전합니다. 성공하면 12명까지 다시 영입합니다.
+  function tryMlb(){
+    if(!mlb||t.players.length<11)return;
+    const c=t.players.filter(p=>p.apps>=MLB.minGames&&p.loyalty>=1&&p.contract>0&&(p.mlbRetryAt||0)<=club.games&&mlbScore(p)>=MLB.minAbility)
+      .sort((a,b)=>mlbScore(b)-mlbScore(a))[0];
+    if(!c)return;
+    const over=mlbScore(c)-MLB.minAbility,chance=Math.min(MLB.maxChance,MLB.baseChance+MLB.perPoint*over);
+    if(rnd()<chance){
+      const fee=Math.round(MLB.baseFee+MLB.feePerPoint*over);club.funds+=fee;club.mlbFee+=fee;club.mlbCount++;
+      club.alumni.push({loyalty:c.loyalty,memory:c.loyalty,fee,donatedSeason:-1,requestedSeason:-1});t.players=t.players.filter(p=>p!==c);
+      if(mlb.ticket&&(mlb.ticketAt||[3,10]).includes(club.mlbCount))club.tickets=Math.min(2,club.tickets+1);
+      while(t.players.length<12){const p=enrich(world.recruit()),cost=Math.round(price(p)*B.hireFactor);if(club.funds-cost<reserve())break;spend(cost,'recruit');t.players.push(p);}
+    }else{c.loyalty=Math.max(0,c.loyalty-MLB.failLoyalty);c.mlbRetryAt=club.games+MLB.retryGames;club.mlbFails++;}
+  }
+  // MLB 출신 후원: 위기(미지급금·대출 상환 중·여론 60% 이상)일 때 경기 뒤 일정 확률. 진출 당시 애정도가 높을수록 잘 돕습니다.
+  function maybeDonate(){
+    if(!mlb?.donate||!(club.debt>0||club.loan>0||club.pressure>=60))return;
+    const c=club.alumni.filter(a=>a.donatedSeason!==club.season);if(!c.length||rnd()>=mlb.chance)return;
+    const total=c.reduce((s,a)=>s+Math.max(5,a.loyalty),0);let x=rnd()*total,a=c[0];for(const y of c){x-=Math.max(5,y.loyalty);if(x<=0){a=y;break;}}
+    if(rnd()>=clamp(a.loyalty/70,.3,1))return;// 애정도가 낮았던 선수는 거절할 수 있음
+    const amount=Math.round(a.fee*(.2+.2*a.loyalty/100));club.funds+=amount;club.donations++;club.donationSum+=amount;a.donatedSeason=club.season;
+    addPressure(-10);for(const p of t.players)p.fans+=5;
+  }
+  // 참가자 방식(2026-11-10): ① 후원 요청 — 위기 때 감독이 MLB 출신마다 시즌당 1번 요청. 금액은 떠날 때 애정도 구간으로 정하고,
+  // 요청할 때마다 그 선수의 기억 애정도 −10. ② 정기 후원 — 아주 힘들 때(여론 90% 이상 또는 대출 중) 애정도 90 이상으로 떠난 선수가 경기마다 이적료의 5%.
+  const REQUEST_TIERS=[[90,.4],[70,.3],[50,.2],[30,.1]];
+  function requestSupport(){
+    if(!mlb?.request||!(club.debt>0||club.loan>0||club.pressure>=60))return;
+    for(const a of club.alumni){if(a.requestedSeason===club.season)continue;a.requestedSeason=club.season;
+      const share=(REQUEST_TIERS.find(([min])=>a.memory>=min)||[0,0])[1];club.requests++;a.memory=Math.max(0,a.memory-10);
+      if(!share){club.refusals++;continue;}
+      const amount=Math.round(a.fee*share);club.funds+=amount;club.requestSum+=amount;club.donations++;addPressure(-5);}
+  }
+  function regularSupport(){
+    if(!mlb?.regular||!(club.pressure>=90||club.loan>0))return;
+    for(const a of club.alumni)if(a.loyalty>=90){const amount=Math.round(a.fee*.05);club.funds+=amount;club.regularSum+=amount;club.regularGames++;}
+  }
   function manage(){
+    tryMlb();
     for(const id of policy.later)if(!club.fac.includes(id)&&club.funds-B.facilityPrice>=reserve()+fixed())build(id);
     if(club.stadium<policy.stadiumMax&&club.funds-club.stadium*2500>=reserve()+fixed()){spend(club.stadium*2500,'stadium');club.stadium++;}
     // 훈련: 출전 선수의 (능력 가중치 ÷ 훈련비)가 가장 큰 능력부터 +1. 예비금 아래로는 쓰지 않습니다.
@@ -138,7 +183,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     if(club.loan>0&&club.funds>0){const pay=Math.min(club.loan,club.funds,Math.round(Object.values(inc).reduce((a,v)=>a+v,0)*LOAN.repayShare));club.funds-=pay;club.loan-=pay;club.flow.loanRepay+=pay;}
     if(win)club.w++;else if(g.result==='L')club.l++;else club.d++;club.games++;
     const welfare=club.fac.filter(id=>WELFARE.includes(id)).length,inLineup=new Set(t.lineup.map(x=>x.id));
-    for(const p of t.players){p.loyalty=clamp(p.loyalty+welfare-(club.debt?8:0),0,100);p.contract=Math.max(0,p.contract-1);if(inLineup.has(p.id))p.played++;
+    for(const p of t.players){p.loyalty=clamp(p.loyalty+welfare-(club.debt?8:0),0,100);p.contract=Math.max(0,p.contract-1);if(inLineup.has(p.id)){p.played++;p.apps=(p.apps||0)+1;}
       p.fans=Math.max(0,p.fans+(win?3:0)+(club.fac.includes('fans')?2:0));}
     if(rnd()<B.fanEventChance){const p=t.players[ri(0,t.players.length-1)];p.fans=Math.max(0,p.fans+EVENT_FANS[ri(0,9)]);}
     const gone=t.players.filter(p=>p.loyalty<=0);if(gone.length){club.departures+=gone.length;t.players=t.players.filter(p=>p.loyalty>0);replaceDeparted();}
@@ -165,6 +210,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
         if(club.stuck){if(!disband)break;ai.pts+=1;club.l++;forfeits++;club.forfeits++;addPressure(disband.loss);continue;}// 부전패
         const g=playOne(ai.o,(i+r)%2);const pts=g.result==='W'?1:g.result==='D'?.5:0;ours+=pts;ai.pts+=1-pts;
         if(disband){addPressure(g.result==='W'?disband.win:g.result==='L'?disband.loss:0);if(club.debt>0)addPressure(disband.unpaid);}
+        maybeDonate();requestSupport();regularSupport();
       }
       for(let i=0;i<5;i++)for(let j=i+1;j<5;j++)for(let r=0;r<2;r++){const g=world.playGame(ais[i].o,ais[j].o,r,ri(1,2**31-1),{boneheads:false});
         const pts=g.result==='W'?1:g.result==='D'?.5:0;ais[i].pts+=pts;ais[j].pts+=1-pts;}
@@ -174,9 +220,14 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
       let disbanded=false,pressureEnd=null;
       if(disband){
         addPressure(disband.rank[rank-1]);if(club.loan>0)addPressure(disband.loanAtSeasonEnd);pressureEnd=club.pressure;
-        if(club.pressure>=100){disbanded=true;club.disbands++;rebuild();lv=0;}
+        // 구단 회생권(P15): 해체 판정 때 1장을 써서 막고 여론을 70%로 내립니다.
+        if(club.pressure>=100&&mlb?.ticket&&club.tickets>0){club.tickets--;club.ticketsUsed++;club.pressure=70;}
+        else if(club.pressure>=100){disbanded=true;club.disbands++;rebuild();lv=0;}
       }
-      log.push(snapshot({season:s+1,tier:tierBefore,rank,points:ours,nextTier:lv,forfeits,pressureEnd,disbanded,loanLeft:club.loan,loans:club.loans,disbands:club.disbands}));
+      log.push(snapshot({season:s+1,tier:tierBefore,rank,points:ours,nextTier:lv,forfeits,pressureEnd,disbanded,loanLeft:club.loan,loans:club.loans,disbands:club.disbands,
+        mlbCount:club.mlbCount,mlbFails:club.mlbFails,mlbFee:club.mlbFee,donations:club.donations,donationSum:club.donationSum,tickets:club.tickets,ticketsUsed:club.ticketsUsed,
+        requests:club.requests,refusals:club.refusals,requestSum:club.requestSum,regularSum:club.regularSum,regularGames:club.regularGames,
+        alumni:club.alumni.length,alumni90:club.alumni.filter(a=>a.loyalty>=90).length,alumniLoyalty:club.alumni.map(a=>a.loyalty)}));
     }
   }
   return {log,flow:club.flow};
@@ -230,8 +281,59 @@ function mainDisband(n,out){
   report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
+// MLB 진출·후원·회생권 비교: 해체 여론 기본 설정, 경기 성장 K=10, 제안 리그 10시즌.
+// node tests/run-economy-sim.cjs 20 결과.json mlb
+function mainMlb(n,out){
+  const started=Date.now(),world=createWorld(20261112),seasons=10,growth={K:10,cap:80};
+  const variants=[{key:'none',name:'MLB 도전 안 함',mlb:null},{key:'mlb',name:'MLB 도전만 (후원·회생권 없음)',mlb:{donate:false,ticket:false}},
+    {key:'full',name:'후원 15% + 회생권(3명·10명)',mlb:{donate:true,chance:.15,ticket:true,ticketAt:[3,10]}},
+    {key:'full1',name:'후원 15% + 회생권(1명·3명)',mlb:{donate:true,chance:.15,ticket:true,ticketAt:[1,3]}}];
+  const report={version:'2026-11-10-mlb-v01',clubsPerCell:n,seasons,growth,disband:DISBAND.base,mlbRules:MLB,variants:variants.map(v=>({key:v.key,name:v.name,mlb:v.mlb})),results:{}};
+  for(const v of variants)for(const [pk,pol] of Object.entries(POLICIES)){
+    const runs=[];for(let i=0;i<n;i++)runs.push(career(world,pol,{league:true,contractGames:10,seasons,seed:12000+i*19,growth,disband:DISBAND.base,mlb:v.mlb}));
+    report.results[v.key+':'+pk]=runs.map(r=>r.log);
+    const last=runs.map(r=>r.log.at(-1)),avg=f=>(last.reduce((a,l)=>a+(l[f]||0),0)/n);
+    const firsts=runs.map(r=>r.log.find(l=>l.disbanded)?.season).filter(Boolean);
+    console.log('\n['+v.name+'] '+pol.name);
+    console.log(' MLB 성공 구단당',avg('mlbCount').toFixed(2)+'명','· 1명 이상',Math.round(100*last.filter(l=>l.mlbCount>=1).length/n)+'%','· 3명 이상',Math.round(100*last.filter(l=>l.mlbCount>=3).length/n)+'%',
+      '· 실패',avg('mlbFails').toFixed(2)+'번','· 이적료 구단당',Math.round(avg('mlbFee'))+'만');
+    console.log(' 후원 구단당',avg('donations').toFixed(2)+'번',Math.round(avg('donationSum'))+'만','· 회생권 사용 구단당',avg('ticketsUsed').toFixed(2)+'장','· 남은 회생권',avg('tickets').toFixed(2)+'장');
+    console.log(' 해체 1번 이상',Math.round(100*firsts.length/n)+'%','· 구단당 해체',avg('disbands').toFixed(2)+'번','· 10시즌 뒤 동네/지역/2부/1부',[0,1,2,3].map(x=>Math.round(100*last.filter(l=>l.nextTier===x).length/n)+'%').join('/'),
+      '· 자금 중앙값',Math.round(median(last.map(l=>l.funds))));
+  }
+  report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
+  if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
+}
+// 참가자 방식 비교: 첫 MLB 회생권 1장 + 후원 요청 + 정기 후원(애정도 90 이상) vs MLB 도전만.
+// node tests/run-economy-sim.cjs 20 결과.json mlb2
+function mainMlb2(n,out){
+  const started=Date.now(),world=createWorld(20261113),seasons=10,growth={K:10,cap:80};
+  const variants=[{key:'mlb',name:'MLB 도전만',mlb:{donate:false,ticket:false}},
+    {key:'request',name:'첫 MLB 회생권 + 후원 요청 + 정기 후원',mlb:{donate:false,request:true,regular:true,ticket:true,ticketAt:[1]}}];
+  const report={version:'2026-11-10-mlb-v02',clubsPerCell:n,seasons,growth,disband:DISBAND.base,mlbRules:MLB,
+    requestTiers:'떠날 때 애정도 90+ 40% / 70~89 30% / 50~69 20% / 30~49 10% / 30 미만 거절, 요청마다 기억 애정도 −10, 시즌당 선수별 1번, 위기(미지급·대출·여론 60%+) 때만, 후원 1번마다 여론 −5',
+    regular:'여론 90% 이상 또는 대출 중일 때, 애정도 90 이상으로 떠난 선수가 경기마다 이적료의 5%',ticket:'첫 MLB 진출 때 1장, 시즌 끝 해체 판정에서 여론 70%로',
+    variants:variants.map(v=>({key:v.key,name:v.name,mlb:v.mlb})),results:{}};
+  for(const v of variants)for(const [pk,pol] of Object.entries(POLICIES)){
+    const runs=[];for(let i=0;i<n;i++)runs.push(career(world,pol,{league:true,contractGames:10,seasons,seed:13000+i*23,growth,disband:DISBAND.base,mlb:v.mlb}));
+    report.results[v.key+':'+pk]=runs.map(r=>r.log);
+    const last=runs.map(r=>r.log.at(-1)),avg=f=>(last.reduce((a,l)=>a+(l[f]||0),0)/n);
+    const firsts=runs.map(r=>r.log.find(l=>l.disbanded)?.season).filter(Boolean),al=last.reduce((a,l)=>a+l.alumni,0),al90=last.reduce((a,l)=>a+l.alumni90,0);
+    console.log('\n['+v.name+'] '+pol.name);
+    console.log(' MLB 성공 구단당',avg('mlbCount').toFixed(2)+'명','· 1명 이상',Math.round(100*last.filter(l=>l.mlbCount>=1).length/n)+'%',
+      '· 애정도 90 이상으로 떠난 선수',al?Math.round(100*al90/al)+'%':'-','· 이적료 구단당',Math.round(avg('mlbFee'))+'만');
+    console.log(' 후원 요청',avg('requests').toFixed(2)+'번 (거절',avg('refusals').toFixed(2)+') · 요청 후원금',Math.round(avg('requestSum'))+'만',
+      '· 정기 후원',Math.round(avg('regularSum'))+'만 ('+avg('regularGames').toFixed(1)+'경기)','· 회생권 사용',avg('ticketsUsed').toFixed(2)+'장 · 남음',avg('tickets').toFixed(2)+'장');
+    console.log(' 해체 1번 이상',Math.round(100*firsts.length/n)+'%','· 구단당 해체',avg('disbands').toFixed(2)+'번','· 대출 구단당',avg('loans').toFixed(2)+'번',
+      '· 10시즌 뒤 동네/지역/2부/1부',[0,1,2,3].map(x=>Math.round(100*last.filter(l=>l.nextTier===x).length/n)+'%').join('/'),'· 자금 중앙값',Math.round(median(last.map(l=>l.funds))));
+  }
+  report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
+  if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
+}
 function main(){
+  if(process.argv[4]==='mlb2')return mainMlb2(Number(process.argv[2])||20,process.argv[3]);
   if(process.argv[4]==='growth')return mainGrowth(Number(process.argv[2])||20,process.argv[3]);
+  if(process.argv[4]==='mlb')return mainMlb(Number(process.argv[2])||20,process.argv[3]);
   if(process.argv[4]==='disband')return mainDisband(Number(process.argv[2])||20,process.argv[3]);
   const n=Number(process.argv[2])||30,out=process.argv[3],started=Date.now();
   const world=createWorld(20261110);
