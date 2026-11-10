@@ -1,0 +1,20 @@
+Built-in GPT image generation.
+Style reference: user-supplied simple full-body pixel sprites.
+Direction: separate detailed management-window art from simple on-field sprites.
+Enlarged style preview. Native 40-pixel grid, actual-size legibility, animation and modular assembly have not been verified.
+Exact prompt:
+
+Use case: stylized-concept.
+Use the attached image ONLY as a visual style reference for the SMALL, SIMPLE full-body pixel sprites. Create ONE NEW ORIGINAL BASEBALL PLAYER in that same compact sprite language. Do not copy any of the six people, their faces, hairstyles, clothing or identities. Do not include their gray background.
+
+This is the ON-FIELD game sprite. A separate detailed portrait will be used in the player management screen. Keep this on-field drawing as simple as the reference.
+
+Match the reference's coarse but carefully arranged square pixels, limited flat palette, small elongated pixel eyes, simple facial marks, clean front-facing standing silhouette, big hair/head and short compact body. Approximately 2.5 to 3 heads tall, similar to the reference. Imagine an original sprite about 18–20 pixels wide and 40 pixels tall, then enlarged sharply with nearest-neighbor scaling. Head including hair and cap about 15–16 logical pixels high; compact torso and legs below it. Maintain ONE uniform logical pixel size, crisp horizontal/vertical pixel blocks and deliberate stair steps. One-pixel dark colored outline where needed. At most 2–3 shades per material, about 16–20 colors overall. No tiny high-resolution detail, skin texture, realistic face, shaded lips, nose anatomy, airbrush, gradients, vector curves, antialiasing, glossy cartoon rendering or large smooth eyes. The simplicity level of the reference is the key requirement.
+
+Character: a fictional young adult baseball player, normal balanced athletic build, dark brown short slightly wavy hair visible below a plain green baseball cap, warm light-medium skin. Face uses a few white/dark-brown rectangular eye pixels, a tiny neutral mouth if needed and no detailed nose. Friendly calm expression. No realistic adult portrait face transplanted onto a small body, no makeup, cheekbone shading or rendered lips. The head and body must be purpose-designed together as one coherent small game sprite.
+
+Uniform: green #08654E baseball cap and short-sleeved jersey, tiny white sleeve cuffs, white trousers, green socks, simple very dark shoes. Simplify clothing to broad color blocks with one shadow shade. Small pixel hands resting at sides, both feet planted slightly apart. Full FRONT view. No bat, glove, ball, wristbands, jewelry, letters, numbers or logos.
+
+Exactly ONE isolated full-body character centered with a comfortable empty margin. No portraits, inset, comparison sheet, labels, words, numbers, watermark, border, other people, ground line, cast shadow, halo or glow.
+Genuinely transparent alpha background, not a painted checkerboard. If transparency is impossible, plain solid white only.
+Output is an enlarged clean pixel-sprite STYLE PREVIEW, not a detailed character illustration.

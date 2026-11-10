@@ -1,0 +1,53 @@
+/* 중계 화면 시안 · 2026-11-09 v01 — 게임 기본 색(남색 판넬·하늘색 테두리·노란 강조)을 따릅니다. */
+/* New layout: the field fills the window; menus, title row, lineups and history step aside. */
+body.bc-on.in-game #header,body.bc-on.in-game footer,body.bc-on.in-game .match-top{display:none!important}
+body.bc-on.in-game main{padding:0!important;max-width:none!important}
+body.bc-on.in-game .match-layout{display:block!important;margin:0!important}
+body.bc-on.in-game .match-layout>.dugout,body.bc-on.in-game .play-history21{display:none!important}
+body.bc-on.in-game .match-layout>section{width:auto!important;max-width:none!important;padding:0!important;border:0!important;background:none!important}
+body.bc-on.in-game .field-wrap{position:relative!important;width:var(--bc-w)!important;max-width:none!important;margin:8px auto 0!important}
+body.bc-on.in-game #field{width:100%!important;height:auto!important;max-height:none!important;aspect-ratio:var(--bc-aspect)!important}
+
+/* Overlay boxes on the field */
+.bc-box{position:absolute;z-index:20;pointer-events:none}
+.bc-box>*{pointer-events:auto}
+.bc-tl{left:10px;top:10px;width:380px;display:flex;flex-direction:column;border:2px solid #35749d;border-radius:8px;overflow:hidden;background:#061a2fe6}
+.bc-tl .scoreboard{border:0!important;border-radius:0!important;padding:4px 10px!important;margin:0!important}
+.bc-tl .scoreboard *{font-size:13px;white-space:nowrap}
+.bc-tl .scoreboard .score,.bc-tl .scoreboard [class*=score] b{font-size:20px}
+.bc-tl .countboard{border:0!important;margin:0!important;padding:3px 10px!important;font-size:12px;background:#04172b}
+.bc-tr{right:10px;top:10px;display:flex;gap:6px}
+.bc-tr button{background:#061a2fe6;border:2px solid #35749d;color:#d9eef3}
+.bc-tr button.on{background:#ffe05c;color:#14222a;border-color:#ffe05c}
+.bc-tc{left:50%;top:42px;transform:translateX(-50%);width:max-content}
+.bc-bl{left:10px;bottom:10px;width:300px;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.bc-bl .current-card{width:210px}
+.bc-br{right:10px;bottom:10px;width:210px}
+.bc-bl .current-card,.bc-br .current-card{margin:0!important;padding:8px 10px!important;background:#061a2fe6!important;border:2px solid #35749d!important;border-radius:8px!important;font-size:12px}
+.bc-bl .current-card h4,.bc-br .current-card h4{font-size:12px;margin:0 0 4px}
+.bc-bl .current-card canvas,.bc-br .current-card canvas{width:46px!important;height:56px!important}
+.bc-bl .controls{width:300px;margin:0!important;padding:6px 8px!important;background:#061a2fe6;border:2px solid #35749d;border-radius:8px;min-height:0!important;zoom:.82}
+.bc-bl .controls .hint{margin:0 0 4px;font-size:12px}
+.bc-toolbar{display:flex;flex-wrap:nowrap;align-items:center;justify-content:center;gap:5px;padding:4px 8px;background:#061a2fe6;border:2px solid #35749d;border-radius:999px}
+.bc-toolbar button,.bc-toolbar .pill,.bc-toolbar label{font-size:12px!important;padding:3px 9px!important;white-space:nowrap}
+
+/* Drawers opened from the top-right buttons */
+body.bc-on.bc-lineup .match-layout>.dugout{display:block!important;position:fixed;top:58px;z-index:40;width:190px;max-height:calc(100vh - 80px);overflow:auto;background:#061a2ff2}
+body.bc-on.bc-lineup .match-layout>.dugout:first-child{right:214px}
+body.bc-on.bc-lineup .match-layout>.dugout:last-child{right:16px}
+body.bc-on.bc-log .play-history21{display:block!important;position:fixed;top:58px;right:16px;z-index:40;width:360px;max-height:calc(100vh - 160px);overflow:auto;background:#061a2ff2;border:2px solid #35749d;border-radius:8px;padding:8px}
+
+/* Attack / defence: a badge on the score bug and our card highlighted, the other card quieter */
+.bc-side{padding:3px 10px;font-size:13px;font-weight:700;letter-spacing:.5px;color:#fff;background:#2b5f9e}
+.bc-side.attack{background:var(--our,#08654e)}
+.bc-side::before{content:'▲ ';font-size:10px}
+.bc-side:not(.attack)::before{content:'■ '}
+body.bc-on .bc-bl .current-card{border-color:#ffe05c!important;box-shadow:0 0 0 2px #ffe05c55}
+body.bc-on .bc-br .current-card{opacity:.88;transform:scale(.9);transform-origin:bottom right}
+/* A paused still for screenshots: hide the pause card so the whole field shows */
+body.bc-still #fieldStatus,body.bc-still .pausedveil{display:none!important}
+/* Preview switch */
+.bc-dock{position:fixed;left:50%;top:6px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;padding:4px 8px;background:#061a2fef;border:1px solid #35749d;border-radius:999px;color:#fff;font-size:12px}
+.bc-dock b{color:#ffe05c;margin-right:2px}
+.bc-dock button{padding:3px 10px;font-size:12px;border:1px solid #35749d;border-radius:999px;background:#092d4d;color:#b6dee2;cursor:pointer;font-family:inherit}
+.bc-dock button.active{background:#ffe05c;color:#14222a;border-color:#ffe05c}

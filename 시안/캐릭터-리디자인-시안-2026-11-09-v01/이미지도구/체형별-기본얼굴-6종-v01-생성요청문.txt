@@ -1,0 +1,22 @@
+Built-in GPT image editing.
+Reference: 체형별-몸-6종-v01.png.
+Transparent background requested.
+Visual head/body proportion preview, not a verified pixel-exact part composite.
+Exact generation prompt:
+
+Use case: precise-object-edit.
+Edit target: the supplied transparent pixel-art sheet of SIX headless baseball bodies.
+Primary request: attach ONE IDENTICAL SHARED FRONT-FACING HEAD design to each of these existing six bodies, producing six complete cute pixel baseball players for a proportion comparison.
+
+Preserve the six existing body silhouettes, heights, widths, poses, colors, clothes, hand positions, leg proportions, shoes, left-to-right order, spacing and baseline. Do NOT redesign or resize the bodies. Preserve all existing body pixels as closely as possible. The body types left to right remain normal, big round, slim athletic, broad shoulders, tall elongated, small neat. All six keep the same front-facing neutral standing pose.
+
+Add only the missing heads including ears, short dark hair, face and green baseball cap. Use EXACTLY THE SAME head shape, head dimensions, skin tone, eyes, eyebrows, nose, mouth, hair and cap for all six, so it looks like the same reusable head asset positioned on each body. Do not scale a head to fit a body: a broad body has a relatively smaller-looking head and the small body has a relatively larger-looking head. Each head attaches centrally and naturally to that body's neck without a gap, doubled neckline or floating head. Retain short necks and clear jaw-to-collar overlap.
+
+Head design: an appealing original cute quirky chibi baseball player, soft rounded-square cheeks built from coarse square pixels, big simple black-and-white eyes, short uncomplicated eyebrows, a tiny simple nose and a small warm closed-mouth smile. Friendly relaxed baseline expression. Avoid angry V-shaped brows, glaring eyes, enormous toothy grin, realistic facial anatomy or lots of facial detail. No cheek bandage, no freckles, no jewelry, no glasses, no distinguishing personality accessories. Plain dark short hair peeks out at the temples under a green #08654E baseball cap with one simple thin white band, and no logo.
+Shared head size: generously large, approximately 280–310 pixels tall including the cap at the supplied sheet's scale, around 40–45 percent of the COMPLETE normal-sized player's height. The same physical head size naturally gives the tall body and small body different chibi proportions. Cute and compact, roughly 2 to 2.6 heads tall depending on body.
+
+Style must remain CHUNKY LOW-RESOLUTION PIXEL ART matching the existing bodies' logical pixel size and dark outline thickness: large crisp square pixel clusters, stepped contours and simple flat palette. Flat colors, at most one flat shadow tone per material. No gradients, no smooth vector edges, no antialiasing, no blur, no glossy rendering or pixel-grid overlay. The heads must look hand-pixeled on the same grid as the bodies.
+
+Canvas: expand the transparent canvas UPWARD as much as needed to accommodate the tallest body's head with a comfortable top margin. Keep the original width and original bodies at their current horizontal positions, shifting all bodies down together ONLY if required by the upward canvas extension. Never shrink the bodies to make space. All six head tops will be at different heights because their neck positions differ. Keep all six lowest shoe soles at EXACTLY the same baseline. Every cap, ear, hand and shoe must be fully inside the canvas.
+Background: genuinely transparent alpha; no drawn checkerboard, scenery, shadows, ground line, panels, labels, text, numbers, logos, watermarks or additional characters.
+This is a visual head/body proportion preview, not a personality or strength variant sheet. Use a completely original character design; no existing game or comic character references.

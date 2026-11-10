@@ -1,0 +1,29 @@
+Built-in GPT image generation.
+Transparent background requested.
+Order: 보통 / 크고 둥근형 / 날렵형 / 어깨 넓은형 / 키 큰형 / 작고 단정한형.
+Body-only concept comparison; attachment fit has not yet been tested.
+Exact generation prompt:
+
+Use case: stylized-concept.
+Asset type: BODY-ONLY modular character base comparison sheet for an original cute quirky pixel-art baseball management game. This is a new art-direction draft, not a finished animation sheet.
+
+Primary request: Draw exactly SIX DIFFERENT CHIBI BODY TYPES, each only once, in ONE horizontal row. Bodies consist of torso, short arms, hands, hips, legs, socks and shoes. NO HEADS, NO FACES, NO HAIR, NO CAPS, NO ACCESSORIES, NO BASEBALL EQUIPMENT. This is a friendly paper-doll game asset sheet: each shirt ends at an ordinary small flat neckline / tiny skin-colored neck connector where a separate large chibi head will later attach. No anatomical detail or injury.
+
+Style: real coarse low-resolution 2D PIXEL ART. Clear visible SQUARE pixels, staircase outlines, compact flat pixel clusters, one logical pixel near-black outlines, simple charming rounded silhouettes made from chunky pixel steps. Body-only sprites roughly 28–36 logical pixels tall before enlargement; all six share the exact same pixel grid and logical pixel size. Enlarge sharply for viewing so the little squares remain visible. LIMITED PALETTE, approximately 10–14 flat colors total. At most a single flat shadow color per material. No gradients, no antialiasing, no blur, no vector-like smooth curves, no glossy or 3D rendering, no texture. Make the bodies cute, appealing and quirky rather than anatomically realistic. The eventual separate head will be very large, around 40–45 percent of the complete character height, so these bodies must be short and compact with substantial shoes and simple rounded hands. Do not make adult-proportioned long torsos.
+
+Uniform shared by all six: green #08654E short-sleeved baseball shirt, white baseball trousers, green socks and very dark shoes. A single simple white stripe at each sleeve end only. Same warm medium skin color on all hands and tiny neck connectors to isolate body-shape differences. No wristbands, no jewelry, no tape, no gloves, no bats, no number, no text, no buttons or decorative seams. A minimal plain dark waist separator is okay.
+
+Pose shared by all six: completely FRONT-FACING neutral standing, arms angled slightly away from the torso so arm/body boundaries are readable; simple empty hands at the sides; feet slightly apart. Both shoes on the same invisible horizontal baseline. Symmetric relaxed pose. No action poses, no personality acting, no battle stance.
+
+LEFT TO RIGHT, exactly this order and distinct silhouettes:
+1. NORMAL: balanced medium build, compact torso and ordinary short chunky legs.
+2. BIG ROUND: much wider plump circular torso, substantial belly and hips, thick arms, short thick legs; friendly soft round bulk.
+3. SLIM ATHLETIC: noticeably narrow waist and torso, lean limbs and legs proportionally longer than the torso; still cute chibi and visibly different from type 5.
+4. BROAD SHOULDERS: clearly wide shoulders and upper chest tapering to a small waist, sturdy arms, inverted-triangle torso; do not give this one the round belly of type 2.
+5. TALL ELONGATED: the tallest BODY, narrow elongated torso plus longer legs, relatively straight upright silhouette, less athletic/tapered than type 3.
+6. SMALL NEAT: clearly the shortest and smallest BODY, small compact tidy torso, short stubby limbs, narrower and lighter than type 2.
+
+Composition and construction: six isolated sprites with generous transparent gaps, same view and art style, all full bodies entirely visible. Keep their NATURAL DIFFERENT HEIGHTS and WIDTHS, do not enlarge the small one or shrink the tall one to equal heights. All lowest shoe soles align on exactly one invisible horizontal line. All six tiny neck connectors have the SAME WIDTH and fit the same future shared head size; their vertical positions naturally differ with body height. Maintain a consistent line thickness, palette and scale. The shapes must remain distinct when the eventual full player is displayed at 40 pixels tall.
+
+Background: genuinely transparent alpha, no drawn checkerboard. If actual transparency is impossible, solid white only. No ground, no ground line, no cast shadows, no scenery, no labels, no letters, no numbers, no logos, no watermark, no extra people or sprites.
+Original new design with no existing game or comic characters or franchise references.

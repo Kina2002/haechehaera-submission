@@ -1,0 +1,27 @@
+Built-in GPT image editing.
+Reference: 체형별-기본얼굴-섬세한도트-6종-v01.png.
+Revision target: second body only, from a protruding rounded belly to a solid athletic heavyweight build.
+Visual concept study, not verified production parts.
+Exact generation prompt:
+
+Use case: precise-object-edit.
+Edit target: the supplied transparent six-body-type refined pixel-art baseball player lineup.
+Primary request: change ONLY the BODY of the SECOND character from the LEFT into a solid athletic heavyweight baseball player, while preserving the other five characters exactly.
+
+The user finds the second body's very protruding belly and balloon-like hips unappealing for the intended athlete. Replace that pear/bell-shaped torso with a strong compact athletic build:
+- broad, deep chest and thick upper back, rounded powerful shoulders;
+- sturdy muscular upper arms and forearms with simple clean chibi shapes;
+- a substantial firm core, with a gentle taper from chest to waist; the waist is thick and strong, not tiny, and the stomach does NOT bulge wider than the chest;
+- reduce the balloon-like width of the hips and trousers; give the white trousers clear strong THIGHS rather than one inflated round mass;
+- slightly longer, sturdy thighs and thick calves with balanced leg support so this reads as a powerful baseball player planted on the ground;
+- retain a friendly rounded overall impression with substantial total body mass, not a slim athlete and not a bodybuilder anatomy study. Do not add defined abs, muscle striations or harsh shading.
+
+Important body-type distinction: character 2 remains a thick, compact, all-around powerful build with a broad chest, substantial waist and thick lower body. Character 4, which must remain UNCHANGED, is the sharper broad-shouldered inverted-triangle type with a noticeably narrower waist. Do not make character 2 a duplicate of character 4.
+Keep character 2 approximately the same full height, same neck/head attachment, same full head and cap, same basic smiling facial expression, skin tone, uniform and simple neutral front-facing pose. Keep feet on the existing common baseline. Empty hands relaxed at the sides. No new accessories, equipment or text.
+
+INVARIANTS:
+Preserve the FIRST, THIRD, FOURTH, FIFTH and SIXTH characters exactly: same faces, heads, body shapes, positions, sizes, palettes, outlines and poses. Preserve the second character's head, hair, cap, face and head position unchanged. Do not change the row layout, number of figures, canvas dimensions, common shoe baseline or transparent gaps.
+Keep the original refined genuine pixel-art style: fine crisp square pixel grid, controlled staircase contours, thin dark outlines, appealing large chibi faces and simple compact forms. Same pixel density and color palette throughout. Do not make the edited body smoother, coarser, more realistic or more detailed than the rest.
+Uniform unchanged: green #08654E shirt and socks, white trousers, dark shoes, thin white sleeve-end stripes. No logo, lettering, jersey number, wristbands or props.
+Background genuinely transparent alpha. No background, shadows, glow, halo, scenery, checkerboard, labels, watermark, frame or extra characters.
+Original fictional character design. This is a visual body-shape revision, not finished production parts.

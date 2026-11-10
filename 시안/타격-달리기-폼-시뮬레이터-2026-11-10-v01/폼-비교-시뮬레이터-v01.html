@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>해체해라 · 타격폼과 달리기폼 비교</title>
+  <style>[hidden]{display:none!important}:root{color-scheme:dark;--bg:#061521;--panel:#0c2535;--panel2:#102e40;--ink:#e7f1ef;--muted:#a3bac3;--line:#2e5161;--accent:#a5e1ba;--selected:#f1d785}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 25% 0,#153843,transparent 65%),var(--bg);color:var(--ink);font:14px/1.6 'Malgun Gothic','Segoe UI',sans-serif}button,select,input{font:inherit}button,select{background:#123443;border:1px solid #426271;color:var(--ink);border-radius:7px;padding:7px 12px}button{cursor:pointer}button:hover{border-color:var(--accent);background:#194655}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--selected);outline-offset:3px}button.active,button[aria-pressed=true].candidate{background:var(--selected);color:#1c2b2e;border-color:var(--selected)}label{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px}h1,h2,h3,p{margin:0}h1{font-size:29px;letter-spacing:-1px;line-height:1.4}h2{font-size:19px}h3{font-size:13px;color:#c8e1da;margin-bottom:7px}.eyebrow{color:var(--accent);font-size:11px;letter-spacing:1px;margin-bottom:5px}.intro{color:var(--muted);margin-top:7px}.draft{border:1px solid #6b6046;color:var(--selected);padding:5px 11px;border-radius:20px;font-size:11px;white-space:nowrap}
+main{max-width:1320px;padding:30px 24px 24px;margin:auto}.page-head{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px}.toolbar{display:flex;gap:18px;align-items:center;flex-wrap:wrap;padding:14px;background:#0d2937;border:1px solid var(--line);border-radius:10px}.tabs{display:flex;gap:4px}.tabs button{font-size:13px;padding:8px 15px}.check{white-space:nowrap}.check input{accent-color:var(--selected);width:15px;height:15px}.section-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:24px 0 12px}.section-heading p{font-size:12px;color:var(--muted);margin-top:3px}.playback{display:flex;gap:12px;align-items:center}.playback button{min-width:105px;font-size:12px}.playback select{padding:4px 7px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.form-card{position:relative;display:block;text-align:left;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);width:100%}.form-card:hover{background:var(--panel2)}.form-card.selected{border:2px solid var(--selected)}.form-card.selected .card-head{padding:9px 11px 5px}.card-head{display:flex;gap:9px;align-items:center;padding:10px 12px 6px}.card-id{font-size:10px;color:#94b5bd;letter-spacing:1px}.card-head strong{font-size:14px;font-weight:600}.card-hint{margin-left:auto;display:none;color:var(--selected);font-size:10px}.form-card.recommended .card-hint{display:inline}.form-card canvas{width:100%;height:auto;display:block;aspect-ratio:340/205;image-rendering:pixelated}.card-caption{padding:5px 12px 10px;color:var(--muted);font-size:11px;border-top:1px solid #28495870;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.form-card.selected .card-caption{padding:5px 11px 9px}.form-card .selected-mark{position:absolute;right:10px;bottom:39px;color:var(--selected);font-size:10px;background:#102a32d9;border-radius:4px;padding:1px 5px}
+.detail{margin-top:24px;background:#0b2534;border:1px solid var(--line);border-radius:11px;padding:20px}.detail-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}.detail-heading>div>p:last-child{color:var(--muted);font-size:12px;margin-top:4px}.detail-heading>button{font-size:12px;flex:none}.detail-top{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(240px,1fr);gap:24px}.hero{position:relative;background:#08202b;border:1px solid #2a4a55;border-radius:9px;overflow:hidden}.hero canvas{width:100%;height:auto;display:block;image-rendering:pixelated}.phase{position:absolute;bottom:12px;left:12px;background:#08222ed9;color:#dbeddf;padding:3px 10px;border:1px solid #4b6d70;border-radius:4px;font-size:11px}.notes{padding:5px 0}.notes ul{margin:0 0 19px;padding-left:19px;font-size:13px;color:#d9e8e5}.notes li{margin:5px 0}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.tags span{border:1px solid #3d655f;background:#123a39;border-radius:15px;padding:2px 10px;font-size:11px;color:#b9dfca}.small{font-size:11px;color:var(--muted)}.size-test{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);margin-top:16px;padding-top:10px;color:var(--muted);font-size:11px}.size-test canvas{width:180px;height:90px;image-rendering:pixelated;max-width:55%}.scrub-label{display:flex;flex-wrap:wrap;justify-content:space-between;margin:18px 0 12px;gap:5px;color:#bad3d3}.scrub-label input{width:100%;accent-color:var(--selected)}#frame-label{font-variant-numeric:tabular-nums}.strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.strip button{padding:0;background:#0d2937;border-color:#31505f;overflow:hidden}.strip button.active{background:#173b42;border-color:var(--selected);color:var(--ink)}.strip canvas{display:block;width:100%;height:auto;image-rendering:pixelated}.strip span{display:block;padding:4px 2px;font-size:11px;border-top:1px solid #294857;white-space:nowrap}footer{color:#94afb7;font-size:11px;margin-top:18px;line-height:1.8}
+@media(min-width:1500px){.form-card canvas{aspect-ratio:340/190}.detail-top{grid-template-columns:minmax(0,1.2fr) 1fr}}@media(max-width:850px){main{padding:20px 14px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{gap:12px}.detail-top{grid-template-columns:1fr}.notes{display:none}.strip{grid-template-columns:repeat(3,minmax(0,1fr))}.page-head{align-items:flex-start}h1{font-size:25px}.draft{display:none}}@media(max-width:480px){main{padding:16px 10px}.cards{gap:9px}.card-head{padding:8px 8px 4px;gap:5px}.card-head strong{font-size:12px}.card-id{font-size:9px}.card-caption{font-size:10px;padding:4px 8px 8px}.card-hint{display:none!important}.section-heading{align-items:flex-start}.section-heading p{max-width:190px}.playback{gap:5px;flex-direction:column;align-items:flex-end}.playback button{padding:5px;font-size:11px;min-width:90px}.detail{padding:12px}.detail-heading{align-items:flex-start}.detail-heading>button{max-width:110px;padding:6px;font-size:11px}.toolbar label{font-size:11px}.toolbar select{padding:5px 6px}.tabs button{padding:6px 10px}.card-head strong{white-space:nowrap}}
+</style>
+</head>
+<body>
+<main id="form-study">
+  <header class="page-head">
+    <div><p class="eyebrow">해체해라 · 동작 비교 시안 v01</p><h1>같은 선수, 서로 다른 폼</h1><p class="intro">타격 6종 · 달리기 6종. 성격은 폼을 고정하지 않고, 선호 후보와 표현에 묻어납니다.</p></div>
+    <span class="draft">폼 검토용 초안</span>
+  </header>
+  <section class="toolbar" aria-label="비교 설정">
+    <div class="tabs" role="group" aria-label="동작 종류"><button type="button" data-kind="bat" class="active" aria-pressed="true">타격폼 6종</button><button type="button" data-kind="run" aria-pressed="false">달리기폼 6종</button></div>
+    <label>성격별 어울림 후보<select id="personality"><option value="all">전체 보기</option><option value="열혈">열혈</option><option value="소심">소심</option><option value="허세">허세</option><option value="느긋">느긋</option><option value="엉뚱">엉뚱</option><option value="투덜이">투덜이</option></select></label>
+    <label class="check"><input type="checkbox" id="silhouette"> 실루엣만 보기</label>
+    <label id="hand-label">타석 방향<select id="hand"><option value="right">우타</option><option value="left">좌타</option></select></label>
+  </section>
+  <div class="section-heading"><div><h2 id="grid-title">타격폼 후보</h2><p id="grid-note">카드를 선택하면 아래에서 분할동작을 크게 볼 수 있습니다.</p></div><div class="playback"><button type="button" id="play" aria-pressed="true">Ⅱ 일시정지</button><label>재생<select id="speed"><option value="0.5">0.5배</option><option value="1" selected>1배</option><option value="1.5">1.5배</option></select></label></div></div>
+  <section id="cards" class="cards" aria-label="폼 후보 비교"></section>
+  <section class="detail" aria-labelledby="detail-title">
+    <div class="detail-heading"><div><p class="eyebrow" id="detail-id">B01</p><h2 id="detail-title">기본 균형</h2><p id="detail-description"></p></div><button type="button" id="sheet-export">6종 분할 PNG 저장</button></div>
+    <div class="detail-top">
+      <div class="hero"><canvas id="hero" width="540" height="370" aria-label="선택한 폼의 큰 동작"></canvas><span class="phase" id="phase-label">준비</span></div>
+      <div class="notes"><h3>눈여겨볼 부분</h3><ul id="features"></ul><h3>같이 검토할 성격 후보</h3><div id="tags" class="tags"></div><p class="small">다른 성격에도 사용할 수 있습니다. 아래 후보는 제안이며 확정 조합이 아닙니다.</p><div class="size-test"><canvas id="small-preview" width="180" height="90" aria-label="40픽셀 높이 근처의 작은 표시 비교"></canvas><span>작은 주자 크기 비교</span></div></div>
+    </div>
+    <label class="scrub-label">분할동작 위치 <span id="frame-label">1 / 6</span><input id="scrub" type="range" min="0" max="1000" value="0" aria-label="동작 위치"></label>
+    <div id="strip" class="strip" aria-label="여섯 장의 분할동작"></div>
+  </section>
+  <footer>같은 외형의 기준 선수로 자세를 비교합니다. 실제 게임·능력치·구단 저장과 연결하지 않은 시안입니다. 최종 캐릭터 그림체와 얼굴 파츠는 별도 검토합니다.</footer>
+</main>
+<script>/* Common form candidates. Personality labels are non-exclusive suggestions. */
+window.FormCandidates={
+ bat:[
+  {id:'B01',name:'기본 균형',description:'배트를 몸 가까이 두고 작은 준비에서 일정하게 회전합니다.',features:['발 간격과 머리 높이가 안정적','짧은 준비, 단단한 중심','다른 폼을 비교하는 기준'],tags:['소심','느긋','투덜이'],p:{stance:15,crouch:0,kick:3,hands:0,bat:-1.15,sway:0,lean:2,finish:0,finishX:-14,finishY:-3,finishAngle:-2.4}},
+  {id:'B02',name:'다리 높이 들기',description:'앞다리를 높이 들어 힘을 모으고 크게 내딛습니다.',features:['준비에서 무릎이 확실히 올라감','접촉 전 다리를 내려 중심 이동','크고 적극적인 준비 동작'],tags:['열혈','허세','엉뚱'],p:{stance:15,crouch:0,kick:24,hands:1,bat:-1.25,sway:1,lean:3,finish:2,finishX:-20,finishY:-15,finishAngle:-2.8}},
+  {id:'B03',name:'낮게 모으기',description:'낮은 자세로 몸을 모았다가 타격 순간에 펴냅니다.',features:['낮은 머리와 깊은 무릎 굽힘','준비와 접촉의 높이 차이','작은 자세에서 크게 펴지는 실루엣'],tags:['열혈','소심','투덜이'],p:{stance:19,crouch:6,kick:0,hands:-2,bat:-.95,sway:1,lean:6,finish:-1,finishX:-19,finishY:-13,finishAngle:-2.3}},
+  {id:'B04',name:'넓게 서기',description:'발을 넓게 놓고 다리를 크게 들지 않으며 몸통을 돌립니다.',features:['넓은 발 간격','발이 지면을 지키는 준비','회전과 마무리의 옆 폭이 큼'],tags:['열혈','허세','느긋'],p:{stance:23,crouch:3,kick:1,hands:0,bat:-1.15,sway:0,lean:4,finish:4,finishX:-25,finishY:-2,finishAngle:-3.15}},
+  {id:'B05',name:'배트 높게 들기',description:'상체를 세우고 손과 배트를 높이 든 채 준비합니다.',features:['높은 손 위치와 세운 상체','준비 실루엣이 위로 길어짐','타격 때 손을 내려 앞으로 연결'],tags:['소심','허세','엉뚱'],p:{stance:13,crouch:-2,kick:8,hands:9,bat:-1.15,sway:0,lean:0,finish:3,finishX:-14,finishY:-20,finishAngle:-2.05}},
+  {id:'B06',name:'배트 낮게 흔들기',description:'낮은 배트를 가볍게 흔들며 리듬을 잡고 준비합니다.',features:['배트가 뒤쪽으로 낮게 뻗음','작은 흔들림이 있는 대기','준비의 여유와 짧게 끊는 마무리'],tags:['느긋','엉뚱','투덜이'],p:{stance:17,crouch:1,kick:4,hands:-8,bat:-3.05,sway:4,lean:1,finish:-3,finishX:-14,finishY:3,finishAngle:-3.0}}
+ ],
+ run:[
+  {id:'R01',name:'앞으로 기울이기',description:'상체를 앞으로 기울이고 팔을 앞뒤로 선명하게 움직입니다.',features:['앞으로 향한 어깨와 머리','몸 가까이에서 빠르게 왕복하는 팔','돌진하는 인상, 실제 속도는 공통'],tags:['열혈','소심','투덜이'],p:{lean:10,cadence:2.15,lift:9,bob:1.8,arm:.93,armWide:0,head:0}},
+  {id:'R02',name:'상체 세우기',description:'머리와 어깨의 높이를 안정적으로 유지하며 달립니다.',features:['곧게 세운 몸통','과하지 않은 보폭과 팔치기','침착하고 흔들림이 적은 실루엣'],tags:['소심','느긋','투덜이'],p:{lean:1,cadence:1.9,lift:8,bob:.7,arm:.68,armWide:0,head:0}},
+  {id:'R03',name:'무릎 높이 들기',description:'무릎을 높이 들고 위아래 탄력이 보이는 자세입니다.',features:['높이 접히는 앞다리','상하 움직임이 뚜렷함','작은 크기에서도 리듬 차이가 보임'],tags:['열혈','허세','엉뚱'],p:{lean:4,cadence:2.2,lift:20,bob:4.6,arm:.87,armWide:1,head:-1}},
+  {id:'R04',name:'큰 보폭',description:'발이 앞뒤로 길게 벌어지고 한 걸음을 길게 이어갑니다.',features:['길게 벌어지는 다리','천천히 바뀌는 큰 걸음','걸음 수가 적어도 이동 속도는 공통'],tags:['허세','느긋'],p:{lean:3,cadence:1.4,lift:10,bob:1.6,arm:.94,armWide:0,head:0}},
+  {id:'R05',name:'짧은 보폭',description:'작은 걸음을 자주 바꾸고 팔도 몸 가까이에서 움직입니다.',features:['짧고 잦은 발 교대','좁은 팔치기','작은 걸음이어도 이동 속도는 공통'],tags:['소심','느긋','엉뚱','투덜이'],p:{lean:5,cadence:2.9,lift:7,bob:1.3,arm:.54,armWide:-1,head:0}},
+  {id:'R06',name:'팔 크게 치기',description:'팔꿈치의 앞뒤 움직임을 크게 보여주는 자세입니다.',features:['몸 바깥까지 커지는 팔의 폭','가슴과 어깨의 움직임 강조','큰 팔 동작이 성능을 정하지 않음'],tags:['열혈','허세','엉뚱'],p:{lean:5,cadence:1.95,lift:10,bob:2,arm:1.38,armWide:5,head:1}}
+ ],
+ phases:{bat:['준비','힘 모으기','딛기','맞히기','마무리','복귀'],run:['오른발 지지','밀어내기','발 교대','왼발 지지','밀어내기','발 교대']},
+ sampleTimes:{bat:[0,.25,.43,.56,.73,.92],run:[0,1/6,2/6,.5,2/3,5/6]},
+ personalities:{'열혈':{bat:['B02','B03','B04'],run:['R01','R03','R06']},'소심':{bat:['B01','B03','B05'],run:['R01','R02','R05']},'허세':{bat:['B02','B04','B05'],run:['R03','R04','R06']},'느긋':{bat:['B01','B04','B06'],run:['R02','R04','R05']},'엉뚱':{bat:['B02','B05','B06'],run:['R03','R05','R06']},'투덜이':{bat:['B01','B03','B06'],run:['R01','R02','R05']}}
+};
+</script>
+<script>/* Original procedural motion study. No game characters/assets are imported.
+ * All runners cover the same ground distance per second; cadence changes step size.
+ * These are design comparisons, not production sprites or a baseball physics model. */
+(function(){
+'use strict';
+const W=168,H=144,OX=78,GY=128,SPEED=90;
+const C={outline:'#1a2935',skin:'#e6b68c',skinLight:'#f6d3a3',skinDark:'#bd8466',jersey:'#167560',jerseyLight:'#299779',jerseyDark:'#105443',pants:'#e8ece0',pantsDark:'#bccfca',shoe:'#233747',shoeLight:'#49616b',hair:'#30313c',helmet:'#155348',helmetLight:'#2d8c72',bat:'#d6a668',batDark:'#996b43'};
+const canvas=()=>{const v=document.createElement('canvas');v.width=W;v.height=H;return v;};
+const cache=new Map();let work=canvas(),c=work.getContext('2d',{willReadFrequently:true});
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t,smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
+const P=(x,y)=>[x,y],add=(a,b)=>[a[0]+b[0],a[1]+b[1]];
+function blend(keys,t){for(let i=1;i<keys.length;i++){if(t<=keys[i][0])return mix(keys[i-1][1],keys[i][1],smooth((t-keys[i-1][0])/(keys[i][0]-keys[i-1][0])));}return keys.at(-1)[1];}
+function line(a,b,color,width){c.strokeStyle=color;c.lineWidth=width;c.lineCap='round';c.lineJoin='round';c.beginPath();c.moveTo(...a);c.lineTo(...b);c.stroke();}
+function polygon(points,fill,stroke=C.outline,width=1.7){c.beginPath();points.forEach((a,i)=>i?c.lineTo(...a):c.moveTo(...a));c.closePath();c.fillStyle=fill;c.fill();if(stroke){c.strokeStyle=stroke;c.lineWidth=width;c.lineJoin='round';c.stroke();}}
+function ellipse(x,y,rx,ry,color){c.fillStyle=color;c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fill();}
+function limb(a,b,d,r,color,far=false){line(a,b,C.outline,r+2.6);line(b,d,C.outline,r+2.6);line(a,b,color,r);line(b,d,color,r);ellipse(...b,r*.47,r*.47,color);}
+function ik(a,b,L1,L2,sign=-1){const dx=b[0]-a[0],dy=b[1]-a[1],dist=Math.max(.01,Math.hypot(dx,dy)),d=Math.min(dist,L1+L2-.01),ux=dx/dist,uy=dy/dist;const q=(L1*L1-L2*L2+d*d)/(2*d),h=Math.sqrt(Math.max(0,L1*L1-q*q));return[a[0]+ux*q-uy*h*sign,a[1]+uy*q+ux*h*sign];}
+function leg(hip,foot,far){const knee=ik(hip,foot,17.5,18,-1);limb(hip,knee,foot,6.4,far?C.pantsDark:C.pants,far);line([knee[0]*.25+foot[0]*.75,knee[1]*.25+foot[1]*.75],foot,far?C.jerseyDark:C.jersey,5.8);polygon([[foot[0]-3.8,foot[1]-2.8],[foot[0]+4.2,foot[1]-2.4],[foot[0]+8,foot[1]-.4],[foot[0]+7,foot[1]+2.6],[foot[0]-4,foot[1]+2.6]],far?C.shoe:C.shoeLight,C.outline,1.5);line([foot[0]-2,foot[1]+1.7],[foot[0]+6,foot[1]+1.7],'#182d36',1.3);return knee;}
+function arm(shoulder,hand,far,bend=1){const elbow=ik(shoulder,hand,14,14,bend);limb(shoulder,elbow,hand,4.2,far?C.skinDark:C.skin);line(shoulder,[mix(shoulder[0],elbow[0],.5),mix(shoulder[1],elbow[1],.5)],far?C.jerseyDark:C.jersey,6.8);line([mix(shoulder[0],elbow[0],.43),mix(shoulder[1],elbow[1],.43)],[mix(shoulder[0],elbow[0],.53),mix(shoulder[1],elbow[1],.53)],far?C.pantsDark:C.pants,1.3);ellipse(...hand,2.8,2.6,C.outline);ellipse(...hand,1.8,1.7,far?C.skinDark:C.skinLight);return elbow;}
+function torso(hip,shoulder,twist=0){const sw=10.8+twist,hw=7.5;polygon([[shoulder[0]-sw,shoulder[1]-1],[shoulder[0]+sw,shoulder[1]-1],[hip[0]+hw,hip[1]+1],[hip[0]-hw,hip[1]+1]],C.jersey);polygon([[shoulder[0]-sw+1,shoulder[1]],[shoulder[0]-4,shoulder[1]+2],[hip[0]-3,hip[1]],[hip[0]-hw+1,hip[1]]],C.jerseyDark,null);line([shoulder[0]+3,shoulder[1]+5],[hip[0]+2,hip[1]-3],C.jerseyLight,1.1);line([hip[0]-7,hip[1]-1],[hip[0]+7,hip[1]-1],C.outline,2.2);c.fillStyle='#cfb77c';c.fillRect(hip[0]+1,hip[1]-2,2,2);}
+function head(neck,tilt=0){const x=neck[0]+2+tilt,y=neck[1]-13;line([neck[0],neck[1]+4],[neck[0]+1,neck[1]-1],C.outline,7);line([neck[0],neck[1]+3],[neck[0]+1,neck[1]-1],C.skin,4);polygon([[x-11,y-8],[x-12,y+3],[x-7,y+11],[x+4,y+13],[x+12,y+7],[x+13,y-6],[x+8,y-12],[x-4,y-14]],C.skin);polygon([[x-11,y-6],[x-10,y+4],[x-6,y+10],[x-3,y+10],[x-7,y+1],[x-6,y-8]],C.skinDark,null);ellipse(x-10.5,y+2,3.2,4.1,C.outline);ellipse(x-10,y+2,2.1,2.8,C.skin);c.fillStyle=C.hair;c.fillRect(x-10,y-7,3,8);c.fillStyle=C.outline;c.fillRect(x-2,y-1,2,3);c.fillRect(x+7,y-1,2,3);c.fillRect(x-3,y-4,5,1);c.fillRect(x+6,y-4,4,1);c.fillStyle=C.skinDark;c.fillRect(x+5,y+3,3,2);c.fillStyle='#69443a';c.fillRect(x+2,y+8,5,1);c.fillStyle=C.skinLight;c.fillRect(x+8,y+4,2,2);polygon([[x-14,y-7],[x-13,y-14],[x-8,y-19],[x+3,y-20],[x+12,y-15],[x+14,y-7]],C.helmet);polygon([[x-11,y-13],[x-7,y-17],[x+2,y-18],[x+10,y-14],[x+11,y-11],[x-10,y-11]],C.helmetLight,null);polygon([[x-14,y-8],[x+12,y-9],[x+22,y-5],[x+22,y-2],[x+12,y-3],[x-11,y-5]],C.helmet,C.outline,1.5);line([x+11,y-7],[x+20,y-4],C.helmetLight,1.2);return[x,y];}
+function bat(grip,angle){const tip=[grip[0]+Math.cos(angle)*39,grip[1]+Math.sin(angle)*39],mid=[mix(grip[0],tip[0],.42),mix(grip[1],tip[1],.42)];line(grip,tip,C.outline,6);line(grip,mid,C.batDark,2.8);line(mid,tip,C.bat,4);line([tip[0]-.6,tip[1]-.4],[mid[0]-.6,mid[1]-.4],'#edc995',1.1);return tip;}
+function batPose(form,t){
+ const p=form.p,load=blend([[0,0],[.25,1],[.42,.3],[.56,0],[1,0]],t),swing=blend([[0,0],[.4,0],[.56,1],[.73,1],[.92,0],[1,0]],t),follow=blend([[0,0],[.56,0],[.73,1],[.92,0],[1,0]],t);
+ const sway=p.sway*Math.sin(t*Math.PI*2),hy=-31+p.crouch*(1-.75*swing)+load*(p.crouch>4?1.5:-2);
+ const hip=P(sway+3*swing,hy),shoulder=P(hip[0]+p.lean+4*swing,hy-21),neck=P(shoulder[0],shoulder[1]-4);
+ const farHip=add(hip,[-5,0]),nearHip=add(hip,[5,0]),rear=P(-p.stance,0),front=P(p.stance+4*swing,-p.kick*load);
+ const grip=P(blend([[0,shoulder[0]+18],[.25,shoulder[0]+17],[.43,shoulder[0]+20],[.56,shoulder[0]+19],[.73,shoulder[0]+p.finishX],[.84,shoulder[0]+12],[.98,shoulder[0]+18],[1,shoulder[0]+18]],t),blend([[0,shoulder[1]-5-p.hands],[.25,shoulder[1]-7-p.hands],[.43,shoulder[1]-3-p.hands*.5],[.56,hy-13],[.73,shoulder[1]+p.finishY],[.84,shoulder[1]+4],[.98,shoulder[1]-5-p.hands],[1,shoulder[1]-5-p.hands]],t));
+ const angle=blend([[0,p.bat],[.25,p.bat-.25],[.43,-1.5],[.56,.05],[.73,p.finishAngle],[.84,-1.1],[.98,p.bat],[1,p.bat]],t);
+ return{hip,shoulder,neck,farHip,nearHip,rear,front,grip,angle,farShoulder:add(shoulder,[-3,-1]),nearShoulder:add(shoulder,[mix(9,-6,follow),1]),twist:-Math.sin(swing*Math.PI)*1.5,tilt:swing*.8,follow};
+}
+function drawBat(form,t){const q=batPose(form,t),kn1=leg(q.farHip,q.rear,true),kn2=leg(q.nearHip,q.front,false);if(t<.46)bat(q.grip,q.angle);arm(q.farShoulder,add(q.grip,[-2,2]),true,-1);torso(q.hip,q.shoulder,q.twist);const h=head(q.neck,q.tilt);if(t>=.46)bat(q.grip,q.angle);arm(q.nearShoulder,add(q.grip,[1,-1]),false,q.grip[0]>=q.nearShoulder[0]?1:-1);return{...q,knees:[kn1,kn2],head:h};}
+function runPose(form,t){const p=form.p,a=t*Math.PI*2,hip=P(0,-31-p.bob*(.5+.5*Math.cos(a*2))),shoulder=P(p.lean,hip[1]-21),neck=P(shoulder[0],shoulder[1]-4);const stride=SPEED*.48/p.cadence;
+ const foot=ph=>{let q=(ph+1)%1;if(q<.48)return P(stride*.5-stride*q/.48,0);const u=(q-.48)/.52;return P(-stride*.5+stride*smooth(u),-p.lift*Math.sin(u*Math.PI));};
+ const rear=foot(t+.5),front=foot(t),farShoulder=add(shoulder,[-7-p.armWide*.35,-1]),nearShoulder=add(shoulder,[8+p.armWide*.35,1]);
+ const hand=(sh,phase)=>{const upper=Math.PI/2+Math.sin(phase)*p.arm,el=add(sh,[13*Math.cos(upper),13*Math.sin(upper)]),lower=upper-Math.PI*.55;return{el,ha:add(el,[12*Math.cos(lower),12*Math.sin(lower)])};};
+ return{hip,shoulder,neck,rear,front,farHip:add(hip,[-5,0]),nearHip:add(hip,[5,0]),farShoulder,nearShoulder,farHand:hand(farShoulder,a),nearHand:hand(nearShoulder,a+Math.PI),twist:Math.sin(a)*1.2,tilt:p.head+Math.sin(a)*.3};
+}
+function drawRun(form,t){const q=runPose(form,t),k1=leg(q.farHip,q.rear,true);arm(q.farShoulder,q.farHand.ha,true,-1);const k2=leg(q.nearHip,q.front,false);torso(q.hip,q.shoulder,q.twist);const h=head(q.neck,q.tilt);arm(q.nearShoulder,q.nearHand.ha,false,1);return{...q,knees:[k1,k2],head:h};}
+function raster(form,t,kind){c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,W,H);c.translate(OX,GY);const joints=kind==='bat'?drawBat(form,t):drawRun(form,t);const img=c.getImageData(0,0,W,H);for(let i=3;i<img.data.length;i+=4)img.data[i]=img.data[i]>=140?255:0;c.setTransform(1,0,0,1,0,0);c.putImageData(img,0,0);const result=canvas();result.getContext('2d').drawImage(work,0,0);return{canvas:result,joints};}
+function sprite(form,t,kind){const i=Math.min(47,Math.floor(((t%1+1)%1)*48+1e-8)),key=form.id+':'+i;let entry=cache.get(key);if(!entry){entry=raster(form,i/48,kind);cache.set(key,entry);}return entry;}
+function colors(){return{ground:'#284c4e',grid:'#284851',bg:'#0b2534',dim:'#7caaad',ink:'#c9e7df'};}
+function scene(ctx,w,h,kind,time){const p=colors();ctx.fillStyle=p.bg;ctx.fillRect(0,0,w,h);const ground=h*.86;ctx.fillStyle=kind==='bat'?'#15383e':'#12353c';ctx.fillRect(0,ground,w,h-ground);ctx.strokeStyle=p.ground;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,ground+.5);ctx.lineTo(w,ground+.5);ctx.stroke();if(kind==='bat'){ctx.strokeStyle='#3c5d60';ctx.beginPath();ctx.moveTo(w*.23,ground);ctx.lineTo(w*.43,ground-9);ctx.lineTo(w*.77,ground-4);ctx.stroke();}else{const step=40,shift=time*SPEED%step;ctx.strokeStyle='#31515b';for(let x=-shift;x<w;x+=step){ctx.beginPath();ctx.moveTo(x,ground+8);ctx.lineTo(x+12,ground+8);ctx.stroke();}}return ground;}
+function render(ctx,w,h,form,kind,t,options={}){const ground=scene(ctx,w,h,kind,options.clock||0),entry=sprite(form,t,kind);const maxScale=Math.min((ground-8)/(kind==='bat'?118:102),w/165);let scale=Math.min(options.scale||maxScale,maxScale);if(options.small)scale=.44;const x=w*.48;ctx.imageSmoothingEnabled=false;
+ let picture=entry.canvas;
+ if(options.silhouette){if(!entry.mask){entry.mask=canvas();const m=entry.mask.getContext('2d');m.drawImage(entry.canvas,0,0);m.globalCompositeOperation='source-in';m.fillStyle='#d7e2d9';m.fillRect(0,0,W,H);}picture=entry.mask;}
+ ctx.save();ctx.translate(x,ground-2.6*scale);if(options.left)ctx.scale(-1,1);ctx.drawImage(picture,-OX*scale,-GY*scale,W*scale,H*scale);ctx.restore();
+ return entry.joints;
+}
+function phase(kind,t){if(kind==='run')return Math.min(5,Math.floor(t*6));const times=FormCandidates.sampleTimes.bat;let n=0;for(let i=1;i<times.length;i++)if(t>=times[i]-.035)n=i;return n;}
+window.FormMotion={render,sprite,raster,batPose,runPose,phase,cache,constants:{W,H,OX,GY,SPEED},palette:C};
+})();
+</script>
+<script>(function(){
+'use strict';
+const $=s=>document.querySelector(s),D=FormCandidates,M=FormMotion;
+const S={kind:'bat',selected:'B01',playing:true,speed:1,hand:'right',silhouette:false,personality:'all',clock:0,scrub:0};
+let last=performance.now(),cardCanvases=[],stripCanvases=[];
+function selected(){return D[S.kind].find(f=>f.id===S.selected)||D[S.kind][0];}
+function poseTime(form){return S.kind==='bat'?(S.clock/2.6)%1:(S.clock*form.p.cadence)%1;}
+function options(extra={}){return{left:S.kind==='bat'&&S.hand==='left',silhouette:S.silhouette,clock:S.clock,...extra};}
+function paint(c,form,t,extra={}){M.render(c.getContext('2d'),c.width,c.height,form,S.kind,t,options(extra));}
+function drawCards(){
+ const recommended=S.personality==='all'?[]:D.personalities[S.personality][S.kind];
+ $('#cards').innerHTML=D[S.kind].map(f=>'<button type="button" class="form-card '+(f.id===S.selected?'selected ':'')+(recommended.includes(f.id)?'recommended':'')+'" data-id="'+f.id+'" aria-pressed="'+(f.id===S.selected)+'"><div class="card-head"><span class="card-id">'+f.id+'</span><strong>'+f.name+'</strong><span class="card-hint">어울림 후보</span></div><canvas width="340" height="205" aria-label="'+f.name+' 동작"></canvas><div class="card-caption">'+f.features[0]+'</div>'+(f.id===S.selected?'<span class="selected-mark">선택한 폼</span>':'')+'</button>').join('');
+ cardCanvases=D[S.kind].map(f=>({form:f,canvas:$('#cards [data-id="'+f.id+'"] canvas')}));
+ $('#grid-title').textContent=S.kind==='bat'?'타격폼 후보':'달리기폼 후보';
+ $('#grid-note').textContent=S.kind==='bat'?'같은 선수와 타격 시점으로 자세를 비교합니다.':'모든 폼의 이동 속도는 같습니다. 보폭과 발 교대 리듬을 비교합니다.';
+ $('#hand-label').hidden=S.kind!=='bat';
+}
+function drawDetail(){
+ const f=selected();$('#detail-id').textContent=f.id;$('#detail-title').textContent=f.name;$('#detail-description').textContent=f.description;
+ $('#features').innerHTML=f.features.map(x=>'<li>'+x+'</li>').join('');$('#tags').innerHTML=f.tags.map(x=>'<span>'+x+'</span>').join('');
+ $('#strip').innerHTML=D.phases[S.kind].map((x,i)=>'<button type="button" data-frame="'+i+'" aria-label="'+(i+1)+'번 '+x+'"><canvas width="180" height="160"></canvas><span>'+(i+1)+'. '+x+'</span></button>').join('');
+ stripCanvases=[...$('#strip').querySelectorAll('canvas')];drawStrip();
+}
+function drawStrip(){const f=selected();stripCanvases.forEach((c,i)=>paint(c,f,D.sampleTimes[S.kind][i],{scale:1.32,clock:0}));}
+function render(){
+ const f=selected(),t=S.playing?poseTime(f):S.scrub;
+ for(const item of cardCanvases)paint(item.canvas,item.form,S.playing?poseTime(item.form):S.scrub);
+ paint($('#hero'),f,t,{scale:2.78});paint($('#small-preview'),f,t,{small:true});
+ const phase=M.phase(S.kind,t);$('#phase-label').textContent=D.phases[S.kind][phase];$('#frame-label').textContent=(phase+1)+' / 6';
+ $('#strip').querySelectorAll('button').forEach((b,i)=>b.classList.toggle('active',i===phase));
+ if(S.playing)$('#scrub').value=Math.round(t*1000);
+}
+function setPlay(on){
+ if(!on&&S.playing)S.scrub=poseTime(selected());
+ if(on&&!S.playing){const f=selected();S.clock=S.kind==='bat'?S.scrub*2.6:S.scrub/f.p.cadence;}
+ S.playing=on;$('#play').textContent=on?'Ⅱ 일시정지':'▶ 재생';$('#play').setAttribute('aria-pressed',String(on));render();
+}
+function changeKind(kind){if(!['bat','run'].includes(kind))return;S.kind=kind;S.selected=D[kind][0].id;S.clock=0;S.scrub=0;document.querySelectorAll('[data-kind]').forEach(b=>{b.classList.toggle('active',b.dataset.kind===kind);b.setAttribute('aria-pressed',String(b.dataset.kind===kind));});drawCards();drawDetail();render();}
+function select(id){if(!D[S.kind].some(f=>f.id===id))return;S.selected=id;drawCards();drawDetail();render();}
+document.querySelectorAll('[data-kind]').forEach(b=>b.addEventListener('click',()=>changeKind(b.dataset.kind)));
+$('#cards').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)select(b.dataset.id);});
+$('#personality').addEventListener('change',e=>{S.personality=e.target.value;drawCards();render();});
+$('#silhouette').addEventListener('change',e=>{S.silhouette=e.target.checked;drawStrip();render();});
+$('#hand').addEventListener('change',e=>{S.hand=e.target.value;drawStrip();render();});
+$('#speed').addEventListener('change',e=>{S.speed=Number(e.target.value);});$('#play').addEventListener('click',()=>setPlay(!S.playing));
+$('#scrub').addEventListener('input',e=>{setPlay(false);S.scrub=Number(e.target.value)/1000;render();});
+$('#strip').addEventListener('click',e=>{const b=e.target.closest('[data-frame]');if(!b)return;setPlay(false);S.scrub=D.sampleTimes[S.kind][Number(b.dataset.frame)];$('#scrub').value=Math.round(S.scrub*1000);render();});
+function contactSheet(kind){
+ const v=document.createElement('canvas'),g=v.getContext('2d');v.width=1536;v.height=1130;g.fillStyle='#061b28';g.fillRect(0,0,v.width,v.height);g.fillStyle='#e8f1e9';g.font='bold 27px "Malgun Gothic",sans-serif';g.fillText(kind==='bat'?'타격폼 6종 · 분할동작 제안':'달리기폼 6종 · 분할동작 제안',28,41);g.fillStyle='#abc5c9';g.font='15px "Malgun Gothic",sans-serif';g.fillText('같은 기준 선수로 자세를 비교하는 초안 · 성격과 실력은 별도 · 최종 캐릭터 자산 아님',28,70);
+ const x0=224,cw=212,rowH=166,y0=115;
+ D.phases[kind].forEach((label,i)=>{g.fillStyle='#c9e3dc';g.font='15px "Malgun Gothic",sans-serif';g.fillText((i+1)+'. '+label,x0+i*cw+15,101);});
+ D[kind].forEach((f,row)=>{const y=y0+row*rowH;g.fillStyle=row%2?'#0b2937':'#0c2533';g.fillRect(16,y,v.width-32,rowH-8);g.fillStyle='#a6c6c9';g.font='13px "Malgun Gothic",sans-serif';g.fillText(f.id,30,y+49);g.fillStyle='#eef2e9';g.font='bold 20px "Malgun Gothic",sans-serif';g.fillText(f.name,30,y+79);for(let i=0;i<6;i++){const cell=document.createElement('canvas');cell.width=cw-6;cell.height=rowH-12;M.render(cell.getContext('2d'),cell.width,cell.height,f,kind,D.sampleTimes[kind][i],{scale:1.3,clock:0});g.drawImage(cell,x0+i*cw,y);}});
+ return v;
+}
+$('#sheet-export').addEventListener('click',()=>{const a=document.createElement('a');a.download=(S.kind==='bat'?'타격폼':'달리기폼')+'-6종-분할동작-v01.png';a.href=contactSheet(S.kind).toDataURL('image/png');a.click();});
+window.FormStudy={state:S,changeKind,select,setPlay,render,contactSheet,ready:false};
+drawCards();drawDetail();render();window.FormStudy.ready=true;
+function tick(now){const dt=Math.min(.08,(now-last)/1000);last=now;if(S.playing)S.clock+=dt*S.speed;render();requestAnimationFrame(tick);}requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

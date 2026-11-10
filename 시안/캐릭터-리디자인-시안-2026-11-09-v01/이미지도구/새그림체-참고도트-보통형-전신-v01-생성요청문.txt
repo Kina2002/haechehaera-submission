@@ -1,0 +1,47 @@
+Built-in GPT image generation/editing.
+Style reference: user-supplied fine-pixel portrait image, preserved alongside this file.
+Final output: original normal-build baseball player, full body, large-headed 2.5-head proportion direction.
+This is an art-direction concept; native sprite grid, 40-pixel display, animation and modular assembly are not verified.
+
+First generation prompt:
+
+Use case: stylized-concept.
+Asset type: ONE original full-body baseball player art-direction study, extending the visual language of the user's supplied fine-pixel character portraits to a complete clothed body.
+
+Input image 1: STYLE reference ONLY. It shows eight finely shaded pixel portraits with nuanced eyes, noses, lips, jawlines and richly shaded hair. Learn the PIXEL ART treatment and appealing portrait-level facial detail from this reference. Do not copy any depicted person's face, hairstyle, clothing, colors, pose or identity. Do not copy the grid, crop, watermark or background. Create one new original character, not eight portraits and not any existing game/comic character.
+
+Primary request: a young adult male fictional baseball player, normal balanced athletic build, full body from cap to cleats, standing facing the viewer in a relaxed neutral pose, arms resting slightly away from the torso, empty hands, feet apart. Keep the established large-headed proportions at about 2.5 heads tall, head including cap about 40% of total standing height, but give the face an attractive young-adult portrait anatomy like the reference: almond-shaped dark brown eyes, nuanced eyebrows, a readable modeled nose, subtle lips with a small relaxed smile, a softly defined jaw and cheeks. Warm light-medium skin, short dark brown hair with carefully placed strand highlights visible at the temples and below the cap. Do not reuse any of the eight reference faces.
+
+MOST IMPORTANT: TRUE DETAILED PIXEL ART, not a smooth cartoon made jagged around its edges. The supplied reference's delicate high-density hand-pixeled appearance is essential. Imagine a complete character authored at around 180–200 native pixels tall, with an approximately 70–80-pixel-high head, then enlarged sharply with nearest-neighbor scaling. Fine but visibly discrete square pixels throughout the face, hair, clothing and outline. Use controlled pixel clusters, carefully stepped contours, selective colored outlines one native pixel thick, and a coherent palette of multiple discrete shadow/midtone/highlight shades. Hair should have several deliberate dark-to-light pixel bands, skin a few well-chosen warm shades defining nose, cheeks and chin. Preserve the same pixel density and craftsmanship on the BODY: shaded folds of fabric, sleeve edges, trouser creases, hands and cleats carefully made of small pixel clusters. No airbrushed shading or continuous gradients. No giant square pixels, massive solid black outline, round baby face, enormous circular toy eyes, simplistic U-shaped mouth, flat sticker-cartoon look, vector drawing, 3D rendering, photorealism, blur, oil paint or simulated pixel-noise texture.
+
+Uniform: plain green #08654E baseball cap and short-sleeved baseball jersey, green socks, white baseball trousers, dark cleats. Small white sleeve-end trim and a simple white cap band. Subtle fabric folds and seam details rendered in pixels. Normal athletic shoulders, chest and legs; no protruding belly, exaggerated muscular anatomy or bodybuilder abs. No text, jersey numbers, lettering, logos, badges, advertising, personal accessories, bat, glove, ball or extra props.
+
+Composition: a single complete full-body player centered on a tall canvas with comfortable transparent margins. Cap, ears, hands and both shoes fully visible. No portrait inset, no duplicate poses, no multiple people, no comparison panels. The character should fill most of the available height while leaving a margin.
+Background: genuine transparent alpha, no checkerboard pixels, no backdrop, no scenery, no glow, no ground or cast shadow. If actual transparency is impossible, use pure solid white only.
+This is a new visual style study for review, not a claim that a 40-pixel gameplay sprite or modular parts are finished.
+
+Proportion correction prompt:
+
+Use case: precise-object-edit.
+Edit target: the supplied detailed fine-pixel baseball player's full-body image.
+
+Correct ONLY the head-to-body proportions to the established TWO-AND-A-HALF-HEADS-TALL game character proportions. The supplied image incorrectly has a long realistic 6–7-head-tall body. This must be a dramatic silhouette correction, not a subtle adjustment.
+
+MANDATORY GEOMETRY:
+- Whole player from cap top to shoe bottoms = 100% standing height.
+- Head INCLUDING cap, hair, face and chin = approximately 40% of that whole height.
+- The entire remaining neck, torso, arms, pelvis, legs and shoes together = approximately 60%.
+- The head should be approximately as wide as the shoulders, and must be much larger relative to the body than in the input.
+- Neck very short, torso compact, arms short but naturally athletic, legs short and sturdy, feet substantial.
+- Keep a normal balanced athletic build. Do not keep the input's long torso, long forearms or long legs. Do not create a protruding round belly.
+This is a large-headed compact 2.5-head-tall game character whose FACE has the nuanced attractive young-adult anatomy of the input. A mature-looking face on deliberately stylized short body proportions. Do not turn the face into a baby, toy mascot or the earlier simplistic round-eye cartoons.
+
+Preserve the character's original face identity and facial qualities: warm medium skin with nuanced pixel shadows, almond-shaped brown eyes, natural nose bridge and nostrils, softly defined lips with relaxed smile, young adult jawline, dark brown highlighted short hair, green baseball cap. Preserve the fine high-density hand-pixeled portrait style. Do NOT replace the face with huge circular cartoon eyes, simple U-mouth or flat emoji expressions.
+
+Preserve uniform and pose: green baseball jersey and cap with simple white trim, white baseball trousers, green socks, dark cleats. Front-facing relaxed standing pose, hands empty and slightly away from sides, both feet visible. No logos, numbers, writing, equipment or accessories.
+
+Detailed PIXEL ART throughout: fine sharp square pixels, deliberate compact multi-shade color clusters, selectively colored thin outlines, visible pixel stair-steps on curves. Hair strand highlights and nuanced facial shading like the input, and equally thoughtful pixel shading on fabric folds, hands, socks and cleats. Reduce the amount of clothing detail as needed to fit the smaller body, preserving coherent scale. No smooth illustration, vector outline, antialiasing, airbrush gradients, 3D or photorealism. Maintain one consistent pixel grid across head and body; do not merely enlarge head pixels to a coarser grid.
+
+Single full-body character on a tall canvas with comfortable margins. No extra portraits, comparisons, duplicate bodies or other characters. Entire cap and shoes inside canvas.
+Background genuinely transparent alpha: erase any backdrop, glow, haze or ground shadow outside the character silhouette. If true transparency is impossible, use pure solid white only. No checkerboard, text or watermark.
+The decisive success criterion is a visibly large head taking approximately TWO FIFTHS of the complete player's height, with a compact athletic body taking THREE FIFTHS.

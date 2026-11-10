@@ -1,0 +1,27 @@
+Mode: built-in imagegen, reference-guided generation, transparent background.
+Reference: 경기장용-머리카락분리-기본형-v01.png
+Order: 보통형 / 단단한 중량형 / 날렵형 / 어깨 넓은형 / 키 큰형 / 작고 단정한형
+Status: visual base-body study, not verified production parts or a rig.
+
+Use case: identity-preserve.
+Asset type: modular base-body comparison sheet for the user's original on-field pixel-art baseball game.
+
+Input image 1 is the exact approved BASE CHARACTER / style and proportion reference, not a real person. Keep its very simple blocky pixel construction, compact body, short limbs, large cute head base, green jersey with white cuffs, white trousers, green socks and dark shoes. The user needs six BODY TYPES in this same design family. Do NOT use a different character art style, portrait style, refined anime style or smooth cartoon.
+
+PRIMARY REQUEST: ONE transparent sprite sheet containing exactly SIX complete front-facing base figures in ONE horizontal row. Each is a hairless and faceless modular base: a clean skin-colored head with two ears and neck, and a clothed baseball body. REMOVE ALL HAIR AND CAPS. NO eyes, eyebrows, nose, mouth, beard, facial detail, hair stubble, glasses, headwear or other accessories. The blank head is a paper-doll base waiting for separate face and hair parts, NOT a skull, mannequin joint diagram or anatomical skeleton. Skin has the SAME temporary warm base tone on all heads, ears, necks, arms and hands. No personality acting and no gender/age/race caricatures.
+
+VERY IMPORTANT SHARED HEAD RULE: all six use the SAME head silhouette, ears, head width, head height and tiny neck width at the SAME absolute pixel scale, to accept shared face/hair/cap pieces later. Do not enlarge the head on the big body or shrink the head on the small body. Heads sit at DIFFERENT heights because bodies have different heights. No caps so the entire clean head base is visible.
+
+Exactly this LEFT TO RIGHT order:
+1. NORMAL: balanced compact ordinary athletic build, reference body proportions.
+2. SOLID HEAVYWEIGHT ATHLETE: substantially wider deep chest, thick strong arms, substantial firm core and strong thighs/calves. Broad compact powerful mass, waist gently narrower than chest, hips balanced, no protruding belly or balloon pants. A sturdy trained baseball player. Keep a thick waist so distinct from type 4. Slightly taller than normal, much wider.
+3. SLIM ATHLETIC: narrow torso/waist, lean arms, relatively longer legs, springy athletic silhouette. Slightly taller than normal but clearly shorter than type 5. Still short cute chibi limbs, not adult anatomy.
+4. BROAD SHOULDERS: widest angular shoulder span, clear inverted-triangle chest tapering to narrower waist than type 2, strong upper arms, ordinary leg length. Height around type 2, shoulder-heavy silhouette distinct from its thick lower body.
+5. TALL: clearly tallest, narrow straight torso and visibly longer legs; slim upright silhouette, less tapered than type 3, not giant or adult realistic proportions.
+6. SMALL NEAT: clearly shortest compact torso and short legs/arms, tidy slim-to-medium build, head same size as the others, no toddler expression or infant anatomy.
+
+Approximate full-height relationships as visual targets, not labels: normal 1.00; heavyweight 1.05; slim 1.08; broad 1.04; tall 1.20; small 0.86. The differences come from torso and limbs, not rescaling whole characters. Keep ONE pixel grid and one uniform pixel size across all six. All soles at EXACT SAME invisible baseline.
+
+STYLE: hard-edged, visibly square stepped PIXEL ART like the input. Small number of large flat pixel clusters, limited palette, one simple shadow per material, no tiny details, no gradients, no soft airbrushing, no antialiasing or thin drawn curves. Each player should look like an enlarged low-resolution sprite with approximately 40 logical pixels of normal full-body height (before enlargement). Do not replace with a smooth high-resolution drawing or tiny indistinguishable specks. Preserve this reference character family while removing the requested modular elements.
+
+POSE: identical neutral full-front standing, arms slightly separated from sides, relaxed empty hands, feet slightly apart. Fully clothed. All six full figures, no cropping, no overlap. Wide clean transparent gaps, generous top/bottom margins. No labels/text, no numbers, no logos, no watermark, no props, no ruler, no baseline drawn, no scenery, no shadow, no checkerboard. Actual transparent alpha. Original fictional design, no existing game/comic/franchise references.

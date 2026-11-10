@@ -1,0 +1,42 @@
+Mode: built-in imagegen, screenshot-reference UI mockup, opaque full-screen scene.
+Reference: 경기장-캐릭터-배치-시안-2026-11-10-v01/공격-새캐릭터-배치-v02.png
+Output is a static concept illustration, not an implemented game screen.
+
+Use case: ui-mockup.
+Asset type: ONE static visual concept for a Korean pixel-art baseball management game, a redesign of the attached gameplay screenshot. This is a mockup illustration ONLY, not an actual changed game screenshot.
+Input image 1: reference for the EXACT game's stadium art, approved low catcher-behind camera, chunky green-uniform on-field base sprites and pixel aesthetic.
+
+PRIMARY CHANGE: let the STADIUM FILL THE WHOLE SCREEN edge-to-edge. Move all information INTO THE STADIUM VIEW. Remove the entire external top scoreboard strip, right sidebar lineup, bottom HUD dock/cards/buttons, preview toolbar and every outer navy margin. Do not reproduce those old UI regions anywhere around the field.
+
+Composition: wide landscape approximately 16:9. Bright daytime pixel stadium, blue sky, stands and city skyline in the background. Preserve the user's low, fairly horizontal camera from behind home plate looking at the pitcher; BOTH first and third bases and their runners/fielders must be visible. The whole stadium spans the canvas with no letterboxing, thick frame or page background. Keep an expansive, uncluttered diamond for player motion. Home plate and the green-uniform batter/catcher are in the foreground, pitcher at center, all other players farther back. The blank-faced, hairless base sprites from the source are intentional temporary modular bases: keep that existing pixel character design rather than designing a new cast or adding realistic people. Do not smooth or lengthen the characters.
+
+1. PHYSICAL OUTFIELD ELECTRONIC SCOREBOARD:
+Build a single broad stadium electronic scoreboard structure across the distant center-field stands, with plausible dark metal housing/supports and pixel LED panels. This is a physical part of the stadium, NOT a floating desktop HUD or top bar. Inside the scoreboard, place the inning score table on its LEFT about 65% width and the CURRENT ATTACKING TEAM'S LINEUP on its RIGHT about 35% width. A compact physical clock/header can say '3회 말 · 1 OUT' and B/S/O lights. Make the lettering readable and aligned while leaving plenty of field visible below. The scoreboard's right lineup belongs inside the same stadium structure, not a screen-edge sidebar.
+Score table header: '팀  1  2  3  4  5  6  7  R  H  E'.
+Rows: '불꽃 나인' with 0 1 0 – – – – and totals R1 H3 E0.
+'해체 드림즈' with 1 1 0 – – – – and totals R2 H4 E0.
+Use navy LED panel, cream/pale blue digits and warm yellow R totals/current inning.
+Right panel title: '공격 라인업'. Show ONLY these nine batters, in order, compact one-column readable list:
+'1 김해체'
+'2 이웃찬'
+'3 박병맛'
+'4 최타돌'
+'5 한타오'
+'6 나가세요'
+'7 고인물'
+'8 외인래'
+'9 해체맨'
+Highlight row 4, '최타돌', in warm yellow as the current batter.
+
+2. SMALL BATTER/PITCHER INFORMATION ON THE GRASS:
+Put two small understated translucent navy information plates on otherwise empty near-side FOUL GRASS, left and right of the home-plate area. They float over grass but do not cover any player, base, chalk line or running path. No large bottom panel strip, no portrait columns, no fixed footer.
+Left grass plate: '현재 타자  최타돌 #3', then '컨택 79  파워 6  선구안 46'.
+Right grass plate: '현재 투수  송직구 #9', then '구속 32  제구 45  센스 26'.
+Use crisp small Korean game UI lettering, clear readable hierarchy, thin restrained borders, no oversized cards.
+
+3. SMALL DECISION BUTTONS BESIDE THE BATTER:
+Place THREE small compact button chips immediately beside the foreground batter, on the left-side foul-grass side, close enough to feel anchored to that player's turn. A compact horizontal group, distinctly smaller than the source's large bottom commands.
+Exact labels: '풀스윙', '컨택', '참기'.
+Use restrained red, blue, teal fills with thin light pixel borders. Keep buttons away from the player's face, body, home plate and catcher. No help paragraphs or extra button rows.
+
+Visual style: match the source's rich square-pixel baseball field and navy/pale-blue/yellow game UI. Crisp visible pixel steps, cohesive palette, 2D game mockup, no photorealism, no 3D render, no vector illustration, no abstract wireframe. Stadium grass and players remain the dominant visual area. Only necessary UI labels and the requested score/lineup/stat/button text. No editorial annotations, numbered callouts, arrows, watermarks, brand names, added menus or invented gameplay controls. One coherent finished proposal, not a collage or side-by-side comparison.

@@ -1,0 +1,33 @@
+Mode: built-in imagegen, reference-guided static UI mockup, opaque background.
+Image 1: ../경기장-일체형-화면-시안-2026-11-10-v01/경기장-전광판-정보배치-시안-v01.png
+Image 2: ../경기장-캐릭터-배치-시안-2026-11-10-v01/수비-새캐릭터-배치-v01.png
+Image 3: 조작부-사용자참고-v01.png
+
+Use case: ui-mockup.
+Asset type: finished STATIC gameplay UI concept illustration for the user's Korean pixel-art baseball management game, not an implemented screen.
+Input image 1 is the approved full-stadium layout/style reference. Preserve its vivid square-pixel stadium, green field, physical center-field electronic scoreboard and modular green-uniform on-field character bases.
+Input image 2 is the corresponding actual game screenshot: use its gameplay information, portrait art and camera as supporting reference, but REMOVE its exterior top/side/bottom panel layout.
+Input image 3 is the user's explicit must-keep status/toolbar reference.
+
+CRITICAL: retain ALL requested UI functions in a stadium-filling composition. Do not achieve minimalism by deleting information or portraits.
+One coherent wide landscape approximately 16:9 mockup. Stadium fills the image edge-to-edge. No external top scoreboard bar, right sidebar lineup, bottom full-width dock, frame, wireframe or page margins. No editor annotations or preview/debug mode buttons. In-scene scoreboard + small compact HUD overlays only. Match the source 2D crisp pixel aesthetic and restrained navy/pale-blue/yellow UI, no photorealism, no 3D, no vector redraw.
+
+MANDATORY SHARED ELEMENTS:
+A. A PHYSICAL electronic scoreboard mounted in the center-field stands, with dark metal structure and pixel LED panels. Left main panel: 7-inning team score table with headers '팀 1 2 3 4 5 6 7 R H E'. Team rows '불꽃 나인': 0 1 0 – – – – | 1 3 0; '해체 드림즈': 1 1 0 – – – – | 2 4 0. Gold R totals, cream/pale-blue numbers. Right part OF THAT SAME stadium scoreboard: the CURRENT ATTACKING team's nine-player lineup, batting order numbers and positions, with current batter highlighted yellow. No screen-edge lineup sidebar.
+B. In the scoreboard's top fascia show the current inning/half, B/S/O dot indicators and a three-base occupancy DIAMOND. Keep visible base occupancy as well as ball/strike/out counts. B=1,S=1,O=1. Do not omit the base diamond.
+C. A small unobtrusive floating TOOLBAR inside the upper-right sky area, well above players, NOT a separate page header strip. Preserve every control shown in image 3: music button '♪' with small ON indicator; '선수 교체'; '자동 배속' with a '1배속 ▾' dropdown; '▶ 경기 재개'; '반자동으로'. All readable small Korean labels, one compact row, no enormous panels. These are actual gameplay controls; do not replace them with preview controls.
+D. Two small translucent navy information plates ON EMPTY NEAR-SIDE FOUL GRASS at lower-left and lower-right. EACH PLATE MUST HAVE A SMALL, FULLY DRAWN HEAD-AND-SHOULDERS PIXEL PORTRAIT on its left, alongside name/number and stats. The user explicitly objected when these faces were removed. Portraits have visible eyes, hair/cap, face features and distinct identities: use the original player-window portrait style in image 2's bottom cards as reference. Do NOT put blank faceless heads in the information plates. Keep portraits around 56–70px square at the displayed scale, restrained borders, a thin stamina bar below stats if space. No full-width footer or large portrait columns.
+E. A SMALL VISIBLE recent-game-history overlay on empty foreground grass below the home-plate action area, bottom-center between the information plates. It should be a very shallow translucent navy block roughly 1/3 screen width and 55–70px high, with a tiny '최근 경기 기록' heading, TWO readable recent entries, and a small '경기 기록 +' button at the right for expanded history. Do not omit it or show only a button without visible recent text. Do not cover the catcher, home plate, basepaths or player's feet. Leave foreground grass for this overlay.
+F. Compact DECISION CONTROLS near the relevant on-field player, with a tiny circular timer showing '—' and a small '그대로 해' option, preserving the source's skip/default action. They must be much smaller than the original bottom dock.
+
+Field and sprites: the green-uniform faceless on-field bodies are intentional temporary modular character bases, separate from the detailed portrait art. Keep these on-field base sprites in the established family, no newly designed realistic cast or character hairstyles. Detailed faces belong in the information cards. All bases, essential players and baselines visible. No overlay over a player, base, chalk path or important play corridor. No watermark or editorial callouts. This is a faithful layout concept, not a new game.
+DEFENSE SCENE:
+Use a distinctly HIGHER, WIDE elevated view from behind the home-plate side, like the playing-field geometry in image 2. Show the ENTIRE diamond and outfield with all nine defenders (P,C,1B,2B,3B,SS,LF,CF,RF), opponent batter, and a runner on first. Home at bottom-center, first at right, third at left, second near back-center, outfield above. No giant foreground characters: all on-field players are smaller so their movement space is broad. This must visibly differ from the low attack view.
+The same physical center-field scoreboard and its right attached lineup remain readable in the stadium background, occupying about the upper quarter; do not turn it into an external screen header.
+Scoreboard status: '우리 수비 · 3회 초'. Only first base occupied.
+The lineup is now the OPPONENT'S ATTACKING LINEUP, not our defenders: 1 강철민 C; 2 정교구 1B; 3 이강타 2B; 4 한방승 3B; 5 윤태완 SS; 6 임수비 LF; 7 박도전 CF; 8 문불꽃 RF; 9 배주력 DH. Highlight 3 이강타.
+Left grass info plate: opponent's small detailed pixel face with orange cap, eyes and hair; '현재 타자 이강타 #2'; '우타 · 파워 37'.
+Right grass info plate: our small detailed face with green cap and visible features; '현재 투수 김막내 #9'; '구속 38 제구 35 센스 23'.
+Defense decision controls must reflect the original game's existing FIELD POSITION commands in image 2, not batting choices or invented pitch types: one SMALL 3x3 grid near our pitcher on free left-side infield grass, labelled '수비 위치'. Rows '후퇴·좌' '후퇴·중앙' '후퇴·우'; '기본·좌' '기본·중앙' '기본·우'; '전진·좌' '전진·중앙' '전진·우'. Highlight '기본·중앙'. A tiny timer '—' and small '그대로 해' below it. Make this compact, not a large central panel; keep it off the mound and running paths.
+Recent entries: '3회초 · 이강타 · 볼' and '3회초 · 이강타 · 스트라이크'. Small '경기 기록 +' control.
+Leave empty foreground foul grass for the two portrait plates and shallow recent log. Preserve the full-screen stadium feel.
