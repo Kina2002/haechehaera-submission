@@ -125,8 +125,9 @@ const P21_ENTRY=Object.freeze({min:19,max:26,count:3});
 const TENURE_BONUS=Object.freeze([[3,1.5],[7,1.3],[99,1]]);
 function entryP21(p,rnd,rule=P21_ENTRY){
   p.age=rule.min+Math.floor(rnd()*(rule.max-rule.min+1));
-  const bonus=p.age-P21_AGING.entryAge,keys=[...TEN];
-  if(bonus>0)for(let i=0;i<rule.count;i++){const j=i+Math.floor(rnd()*(keys.length-i));[keys[i],keys[j]]=[keys[j],keys[i]];p.a[keys[i]]=Math.min(100,p.a[keys[i]]+bonus);}
+  // rule.count: 보정할 능력 수. 숫자이거나, 입단 나이를 받아 개수를 돌려주는 함수(이슈 #46-14 추가 후보)입니다.
+  const bonus=p.age-P21_AGING.entryAge,keys=[...TEN],count=typeof rule.count==='function'?Math.min(TEN.length,rule.count(p.age)):rule.count;
+  if(bonus>0)for(let i=0;i<count;i++){const j=i+Math.floor(rnd()*(keys.length-i));[keys[i],keys[j]]=[keys[j],keys[i]];p.a[keys[i]]=Math.min(100,p.a[keys[i]]+bonus);}
   return bonus;
 }
 // reform: 시설·경기장 개편안(P17)을 씁니다. 이때 원정 응원 비율은 awayShare 대신 응원단 버스 단계로 정합니다(P16).
@@ -144,7 +145,10 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
   const rnd=seeded(seed),ri=(a,b)=>a+Math.floor(rnd()*(b-a+1));
   const ageRnd=seeded(seed^0x5a17e901);// P21 노화 추첨 전용. 다른 판단의 난수 흐름을 건드리지 않습니다.
   const t=world.initialTeam();
-  const enrich=p=>{if(ages&&p.age==null){if(ages.p21&&ages.entry)entryP21(p,ageRnd,ages.entryCount?{...P21_ENTRY,count:ages.entryCount}:P21_ENTRY);else p.age=ages.p21?P21_AGING.entryAge:ri(AGES.startAge[0],AGES.startAge[1]);}p.fans=ri(15,85);p.loyalty=ri(45,70);p.salary=Math.max(3,Math.round(price(p)*B.salaryFactor));
+  // ages.entryCount: 숫자(보정 능력 수), 'all25'(25세 이상 입단은 10개 모두, 아래는 3개), 'graded'(나이−19개). 없으면 P21_ENTRY의 3개.
+  const ENTRY_COUNT={all25:age=>age>=25?TEN.length:P21_ENTRY.count,graded:age=>age-P21_AGING.entryAge};
+  const entryRule=!ages?.entryCount?P21_ENTRY:{...P21_ENTRY,count:ENTRY_COUNT[ages.entryCount]||ages.entryCount};
+  const enrich=p=>{if(ages&&p.age==null){if(ages.p21&&ages.entry)entryP21(p,ageRnd,entryRule);else p.age=ages.p21?P21_AGING.entryAge:ri(AGES.startAge[0],AGES.startAge[1]);}p.fans=ri(15,85);p.loyalty=ri(45,70);p.salary=Math.max(3,Math.round(price(p)*B.salaryFactor));
     p.ask=Math.max(3,Math.round(price(p)*B.salaryFactor*(1+(50-p.loyalty)/200)));p.contract=contractGames;p.played=0;p.since=0;p.apps=0;return p;};
   t.players.forEach(enrich);
   const club={funds:B.startFunds,debt:0,fac:[],stadium:1,ticket:10,w:0,l:0,d:0,games:0,departures:0,stuck:false,
@@ -749,9 +753,16 @@ function mainTop(n,out,seasons=20,set='top',worldSeed=20261115,seedBase=16000){
     tenure:{name:'F21e + 젊은 선수 보너스를 입단 뒤 시즌 수로(1~3시즌 ×1.5, 4~7시즌 ×1.3)',opts:{leagueMoney:LEAGUE_MONEY,ages:{...FL,bonusBy:'tenure'},market:MARKET}},
     both:{name:'F21e + 능력 5개 + 시즌 수 보너스',opts:{leagueMoney:LEAGUE_MONEY,ages:{...FL,entryCount:5,bonusBy:'tenure'},market:MARKET}},
   };})(),
+  // 이슈 #46-14 추가 후보 (참가자 질문 2026-11-11): 25·26세 입단은 모든 능력 보정, 그리고 계단을 없앤 완만한 안(나이−19개 능력).
+  // node tests/run-economy-sim.cjs 20 결과.json p21g 25 [world 시드] [구단 시드 시작]
+  p21g:(()=>{const FL={bonus:true,bonusTable:[[21,1.5],[25,1.3],[99,1]],capUp:true,aware:true,p21:true,entry:true,retireAt:null,
+      retireWish:[[35,.1],[36,.2],[37,.35],[38,.5],[39,.65],[40,.8]],managerRetire:true};return {
+    all25:{name:'F21e + 25·26세 입단은 10개 능력 모두 +(나이−19), 19~24세는 3개',opts:{leagueMoney:LEAGUE_MONEY,ages:{...FL,entryCount:'all25'},market:MARKET}},
+    graded:{name:'F21e + 나이−19개 능력에 각 +(나이−19) (20세 1개 … 26세 7개)',opts:{leagueMoney:LEAGUE_MONEY,ages:{...FL,entryCount:'graded'},market:MARKET}},
+  };})(),
   };
-  const VARIANTS=SETS[set],p21set=set==='p21'||set==='p21e'||set==='p21f',aged=set.startsWith('youth')||p21set;
-  const report={version:(set==='p21f'?'2026-11-11-':'2026-11-10-')+set+'-v01',ages:p21set?{p21:P21_AGING,...(set!=='p21'?{entry:P21_ENTRY}:{}),...(set==='p21f'?{tenureBonus:TENURE_BONUS}:{}),tempAges:AGES}:set.startsWith('youth')?AGES:undefined,market:set==='youth3'||p21set?MARKET:undefined,variantOpts:Object.fromEntries(Object.entries(SETS[set]).map(([k,v])=>[k,v.opts])),clubsPerCell:n,...(p21set?{worldSeed,seedBase}:{}),seasons,unit:'만원',policy:'normal',settings:{...base,disband:'base'},reform:REFORM,leagueMoney:LEAGUE_MONEY,variants:{},results:{},summary:{}};
+  const VARIANTS=SETS[set],p21set=['p21','p21e','p21f','p21g'].includes(set),aged=set.startsWith('youth')||p21set;
+  const report={version:(set==='p21f'||set==='p21g'?'2026-11-11-':'2026-11-10-')+set+'-v01',ages:p21set?{p21:P21_AGING,...(set!=='p21'?{entry:P21_ENTRY}:{}),...(set==='p21f'?{tenureBonus:TENURE_BONUS}:{}),tempAges:AGES}:set.startsWith('youth')?AGES:undefined,market:set==='youth3'||p21set?MARKET:undefined,variantOpts:Object.fromEntries(Object.entries(SETS[set]).map(([k,v])=>[k,v.opts])),clubsPerCell:n,...(p21set?{worldSeed,seedBase}:{}),seasons,unit:'만원',policy:'normal',settings:{...base,disband:'base'},reform:REFORM,leagueMoney:LEAGUE_MONEY,variants:{},results:{},summary:{}};
   const pct=(a,b)=>Math.round(100*a/b)+'%',med=a=>median(a);
   for(const [vk,v] of Object.entries(VARIANTS)){
     const world=createWorld(worldSeed),runs=[];
@@ -787,7 +798,7 @@ function main(){
   if(process.argv[4]==='loyalty')return mainLoyalty(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||12,process.argv[6]||null);
   if(process.argv[4]==='rebuild')return mainRebuild(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||15,process.argv[6]||null);
   // p21 추가 표본: node tests/run-economy-sim.cjs 20 결과.json p21 25 [world 시드=20261115] [구단 시드 시작=16000]
-  if(['p21','p21e','p21f'].includes(process.argv[4]))return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,process.argv[4],Number(process.argv[6])||20261115,Number(process.argv[7])||16000);
+  if(['p21','p21e','p21f','p21g'].includes(process.argv[4]))return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,process.argv[4],Number(process.argv[6])||20261115,Number(process.argv[7])||16000);
   if(process.argv[4]==='youth3')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth3');
   if(process.argv[4]==='youth2')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth2');
   if(process.argv[4]==='youth')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth');
