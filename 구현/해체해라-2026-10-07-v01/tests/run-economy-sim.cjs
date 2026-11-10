@@ -63,7 +63,8 @@ const DISBAND={
 // 이적료 5,000만+400만/점, 실패 시 애정도 −20, 3경기 뒤 재도전, 도전하려면 11명 이상.
 const MLB={minAbility:75,minGames:5,baseChance:.35,perPoint:.02,maxChance:.85,baseFee:5000,feePerPoint:400,failLoyalty:20,retryGames:3};
 const mlbScore=p=>Math.max((p.a.contact+p.a.power+p.a.eye)/3,(p.a.velocity+p.a.control+p.a.stamina)/3);
-function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null,mlb=null}){
+// awayShare: 원정 경기에서 따라온 우리 관객 비율(참가자 아이디어 2026-11-10). 0이면 지금 게임처럼 원정 입장료 없음.
+function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null,mlb=null,awayShare=0}){
   const rnd=seeded(seed),ri=(a,b)=>a+Math.floor(rnd()*(b-a+1));
   const t=world.initialTeam();
   const enrich=p=>{p.fans=ri(15,85);p.loyalty=ri(45,70);p.salary=Math.max(3,Math.round(price(p)*B.salaryFactor));
@@ -174,7 +175,10 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     if(growth)for(const x of t.lineup){const p=t.players.find(p=>p.id===x.id);if(p)club.perfPoints+=gainExp(p,x.pos,p.stats,growth);}
     const win=g.result==='W',crowd=attendance(club.ticket),stores=club.fac.filter(id=>STORES.includes(id)).length;
     const gate=home===0?crowd*club.ticket:0,shop=home===0?crowd*stores:0;
-    const inc={base:B.baseReward,runs:g.score[0]*B.runReward,win:win?B.winReward:0,gate,stores:shop};
+    // 원정 응원 관객 입장료: 홈경기 기준 우리 관객 수 × 원정 비율 × 우리 입장료. 매장 수입은 홈에서만.
+    const awayGate=home===0?0:Math.round(crowd*awayShare)*club.ticket;
+    const inc={base:B.baseReward,runs:g.score[0]*B.runReward,win:win?B.winReward:0,gate,stores:shop,awayGate};
+    club.flow.awayGate??=0;
     for(const [k,v] of Object.entries(inc)){club.funds+=v;club.flow[k]+=v;}
     const salary=t.players.reduce((s,p)=>s+p.salary,0),maint=club.fac.length*B.maintenance,due=salary+maint+club.debt,paid=Math.min(club.funds,due);
     const net=Object.values(inc).reduce((a,v)=>a+v,0)-salary-maint;club.flow[home===0?'homeNet':'awayNet']+=net;club.flow[home===0?'homeGames':'awayGames']++;
@@ -227,7 +231,8 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
       log.push(snapshot({season:s+1,tier:tierBefore,rank,points:ours,nextTier:lv,forfeits,pressureEnd,disbanded,loanLeft:club.loan,loans:club.loans,disbands:club.disbands,
         mlbCount:club.mlbCount,mlbFails:club.mlbFails,mlbFee:club.mlbFee,donations:club.donations,donationSum:club.donationSum,tickets:club.tickets,ticketsUsed:club.ticketsUsed,
         requests:club.requests,refusals:club.refusals,requestSum:club.requestSum,regularSum:club.regularSum,regularGames:club.regularGames,
-        alumni:club.alumni.length,alumni90:club.alumni.filter(a=>a.loyalty>=90).length,alumniLoyalty:club.alumni.map(a=>a.loyalty)}));
+        alumni:club.alumni.length,alumni90:club.alumni.filter(a=>a.loyalty>=90).length,alumniLoyalty:club.alumni.map(a=>a.loyalty),
+        flow:{...club.flow}}));// 수입·지출 항목별 누적 금액
     }
   }
   return {log,flow:club.flow};
@@ -330,7 +335,34 @@ function mainMlb2(n,out){
   report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
+// 원정 응원 관객 입장료 비교: 지금까지 정한 규칙 전체(제안 리그, 계약 10경기, 경기 성장 K=10, 해체 여론 기본, 긴급 대출,
+// MLB 진출·후원 요청·정기 후원·첫 MLB 회생권)에서 원정 비율 0·20·30·50%.
+// node tests/run-economy-sim.cjs 20 결과.json away
+function mainAway(n,out){
+  const started=Date.now(),world=createWorld(20261115),seasons=10;
+  const base={league:true,contractGames:10,seasons,growth:{K:10,cap:80},disband:DISBAND.base,mlb:{request:true,regular:true,ticket:true,ticketAt:[1]}};
+  const shares=[0,.2,.3,.5];
+  const report={version:'2026-11-10-away-v01',clubsPerCell:n,seasons,unit:'만원',settings:{...base,disband:'base'},shares,results:{}};
+  const sum=(f,keys)=>keys.reduce((a,k)=>a+(f[k]||0),0);
+  const INC=['base','runs','win','gate','stores','awayGate'],FIX=['salary','maintenance'];
+  for(const share of shares)for(const [pk,pol] of Object.entries(POLICIES)){
+    const runs=[];for(let i=0;i<n;i++)runs.push(career(world,pol,{...base,awayShare:share,seed:16000+i*31}));
+    report.results[share+':'+pk]=runs.map(r=>r.log);
+    const last=runs.map(r=>r.log.at(-1)),avg=f=>last.reduce((a,l)=>a+(l[f]||0),0)/n;
+    const per=k=>runs.reduce((a,r)=>a+(r.log.at(-1).flow[k]||0)/r.log.length,0)/n;// 시즌당 평균
+    const inc=INC.reduce((a,k)=>a+per(k),0)+avg('mlbFee')/seasons+avg('requestSum')/seasons+avg('regularSum')/seasons,fix=FIX.reduce((a,k)=>a+per(k),0);
+    const firsts=x=>runs.map(r=>r.log.find(l=>l.nextTier>=x)?.season).filter(Boolean),dis=runs.filter(r=>r.log.some(l=>l.disbanded)).length;
+    console.log('\n[원정 비율 '+Math.round(share*100)+'%] '+pol.name);
+    console.log(' 시즌 평균 수입',Math.round(inc),'(원정 입장료',Math.round(per('awayGate'))+', 홈 입장료',Math.round(per('gate'))+') · 급여+유지비',Math.round(fix),'· 여유 돈',Math.round(inc-fix),'· 훈련비',Math.round(per('training')));
+    console.log(' 10시즌 뒤 출전 평균',median(last.map(l=>l.starterMean)).toFixed(1),'· 동네/지역/2부/1부',[0,1,2,3].map(x=>Math.round(100*last.filter(l=>l.nextTier===x).length/n)+'%').join('/'),
+      '· 처음 2부',Math.round(100*firsts(2).length/n)+'%'+(firsts(2).length?'(중앙값 '+median(firsts(2))+'시즌)':''),'· 처음 1부',Math.round(100*firsts(3).length/n)+'%');
+    console.log(' 해체 1번 이상',Math.round(100*dis/n)+'%','· 대출 구단당',avg('loans').toFixed(2),'· MLB 구단당',avg('mlbCount').toFixed(2),'· 10시즌 뒤 자금 중앙값',Math.round(median(last.map(l=>l.funds))));
+  }
+  report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
+  if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
+}
 function main(){
+  if(process.argv[4]==='away')return mainAway(Number(process.argv[2])||20,process.argv[3]);
   if(process.argv[4]==='mlb2')return mainMlb2(Number(process.argv[2])||20,process.argv[3]);
   if(process.argv[4]==='growth')return mainGrowth(Number(process.argv[2])||20,process.argv[3]);
   if(process.argv[4]==='mlb')return mainMlb(Number(process.argv[2])||20,process.argv[3]);
