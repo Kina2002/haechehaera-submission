@@ -30,9 +30,11 @@ const POLICIES={
 };
 
 // ---- 시설·경기장 개편안 (P17 초안 · 시험값, 2026-11-10) ----
+// v03 조정(참가자 승인 2026-11-10): 경기장 2등급 5,000만→8,000만, 버스 3·4단계 +3,000·+4,000만→+5,000·+8,000만,
+// 유니폼 개인 팬 1명당 1,000원→500원, 훈련 시설 3단계 유지비 400만→300만. v02 값은 v02 결과 파일의 reform 항목에 남아 있습니다.
 // 마사지실(체력)·수면실(본헤드)은 경기 판정에 닿는 효과라 이번 시험에서는 빼고, 가상 감독도 짓지 않습니다.
 const REFORM={
-  stadiumCost:[0,5000,10000,15000,20000],// 등급 n → n+1 확장비 = stadiumCost[n]. 오프시즌에만
+  stadiumCost:[0,8000,10000,15000,20000],// 등급 n → n+1 확장비 = stadiumCost[n]. 오프시즌에만
   leagueNeed:[1,1,2,3],// 동네·지역·2부·1부에 필요한 경기장 등급
   fac:{
     bat:{train:['contact','power','eye'],price:1000},field:{train:['sense','catch','throw'],price:1000},
@@ -42,9 +44,9 @@ const REFORM={
     fanplaza:{price:1000,maint:100},bus:{price:1000,maint:100,awayOnly:true},hall:{price:2000,maint:100},academy:{price:2000,maint:150},
   },
   // 훈련 시설 단계: 올리는 비용·경기당 유지비·훈련비 할인·경기 경험치 배수·경기 성장 한도
-  trainLevels:[null,{add:1000,maint:150,disc:0,exp:1,cap:80},{add:2500,maint:250,disc:.2,exp:1.2,cap:80},{add:5000,maint:400,disc:.4,exp:1.4,cap:85}],
-  busLevels:[0,1000,2000,3000,4000],busShare:.05,// 응원단 버스 단계 n으로 올리는 비용, 단계마다 원정 응원 +5%p
-  uniformPerFan:.1,restaurantPerCrowd:1,billboard:[120,200,350,600],// 만원. 유니폼 개인 팬 1명당 1,000원, 음식점 관중 1명당 1,000원
+  trainLevels:[null,{add:1000,maint:150,disc:0,exp:1,cap:80},{add:2500,maint:250,disc:.2,exp:1.2,cap:80},{add:5000,maint:300,disc:.4,exp:1.4,cap:85}],
+  busLevels:[0,1000,2000,5000,8000],busShare:.05,// 응원단 버스 단계 n으로 올리는 비용, 단계마다 원정 응원 +5%p
+  uniformPerFan:.05,restaurantPerCrowd:1,billboard:[120,200,350,600],// 만원. 유니폼 개인 팬 1명당 500원, 음식점 관중 1명당 1,000원
   foodExp:1.1,academyExp:1.3,hallPressure:-5,hallMemory:5,academyMax:14,
 };
 // 개편안 가상 감독: 짓는 순서(later)와 단계 올리기(upgrades)는 시험용 규칙입니다. 승격에 경기장이 필요하면 확장비를 모읍니다.
@@ -459,14 +461,14 @@ function mainAway(n,out){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 // 시설·경기장 개편안 비교(P17): 지금 시설(원정 입장료 없음) vs 개편안(원정 응원은 응원단 버스 단계로).
-// 나머지 규칙은 mainAway와 같습니다. node tests/run-economy-sim.cjs 20 결과.json reform [시즌 수=15]
+// 나머지 규칙은 mainAway와 같습니다. node tests/run-economy-sim.cjs 20 결과.json reform [시즌 수=15] [free: 경기장 조건 없음도 함께]
 function mainReform(n,out,seasons=15){
   const started=Date.now(),world=createWorld(20261115);
   const base={league:true,contractGames:10,seasons,growth:{K:10,cap:80},disband:DISBAND.base,mlb:{request:true,regular:true,ticket:true,ticketAt:[1]}};
   // 두 설정 모두 "투자 먼저" 감독(invest)으로 맞춥니다. 그래서 지금 시설 결과는 원정 응원 시험(away)의 0%와 다릅니다.
   const CONFIGS={now:{name:'지금 시설',policies:POLICIES,opts:{invest:true}},reform:{name:'개편안',policies:REFORM_POLICIES,opts:{reform:true,invest:true}},
-    reformFree:{name:'개편안 · 경기장 승격 조건 없음',policies:REFORM_POLICIES,opts:{reform:true,invest:true,leagueNeed:[1,1,1,1]}}};
-  const report={version:'2026-11-10-reform-v02',clubsPerCell:n,seasons,unit:'만원',settings:{...base,disband:'base'},reform:REFORM,reformPolicies:REFORM_POLICIES,results:{},summary:{}};
+    ...(process.argv[6]==='free'?{reformFree:{name:'개편안 · 경기장 승격 조건 없음',policies:REFORM_POLICIES,opts:{reform:true,invest:true,leagueNeed:[1,1,1,1]}}}:{})};
+  const report={version:'2026-11-10-reform-v03',clubsPerCell:n,seasons,unit:'만원',settings:{...base,disband:'base'},reform:REFORM,reformPolicies:REFORM_POLICIES,results:{},summary:{}};
   const pct=(a,b)=>Math.round(100*a/b)+'%';
   for(const [ck,cfg] of Object.entries(CONFIGS))for(const [pk,pol] of Object.entries(cfg.policies)){
     const runs=[];for(let i=0;i<n;i++)runs.push(career(world,pol,{...base,...cfg.opts,seed:16000+i*31}));
