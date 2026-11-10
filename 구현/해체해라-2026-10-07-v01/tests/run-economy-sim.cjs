@@ -100,15 +100,28 @@ const LEAGUE_MONEY={payout:[0,300,800,1500],prize:[[500,200,100],[2000,1000,500]
 const AGES={startAge:[19,31],prospectAge:[18,19],bonus:[[21,1.5],[25,1.3],[29,1],[33,.7],[99,.4]],capUp:5,decline:[[33,1],[36,2]],retireAt:37};
 // 리그별 영입 시장 (참가자 결정 2026-11-10, 숫자는 Claude 초안): 리그가 오를수록 영입 후보의 9개 능력에 더하는 값. 평균 약 40 → 45 → 50 → 55
 const MARKET={offset:[0,5,10,15]};
+// 선수 나이와 노화 (P21 참가자 확정 2026-11-09). ages.p21을 켜면 위 AGES의 임시 입단 나이·하락 대신 이 규칙을 씁니다.
+// 새로 생성되는 선수는 19세. 시즌을 마칠 때마다 +1세 후 새 나이로 감소: 30~35세 서로 다른 능력 3개 −2, 36~40세 5개 −3, 41세 이상 10개 모두 −5. 하한 1.
+// 추첨 방식은 이전 시뮬레이터(run-economy-legacy-20261109.cjs)의 agePlayer와 같습니다. 은퇴는 P21에 없으므로 ages.retireWish·managerRetire를 그대로 씁니다.
+const TEN=[...NINE,'stamina'];
+const P21_AGING=Object.freeze({entryAge:19,bands:Object.freeze([[30,3,2],[36,5,3],[41,10,5]]),floor:1});// [이 나이부터, 능력 수, 감소량]
+function ageP21(p,rnd,rule=P21_AGING){
+  p.age=(p.age??rule.entryAge)+1;
+  const band=rule.bands.filter(([from])=>p.age>=from).at(-1);if(!band)return 0;
+  const [,count,drop]=band,keys=[...TEN];
+  for(let i=0;i<count;i++){const j=i+Math.floor(rnd()*(keys.length-i));[keys[i],keys[j]]=[keys[j],keys[i]];p.a[keys[i]]=Math.max(rule.floor,p.a[keys[i]]-drop);}
+  return count*drop;// 예정 감소 총량(하한 1에 걸린 몫 포함)
+}
 // reform: 시설·경기장 개편안(P17)을 씁니다. 이때 원정 응원 비율은 awayShare 대신 응원단 버스 단계로 정합니다(P16).
 function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null,mlb=null,awayShare=0,reform=false,invest=false,leagueNeed=null,leagueMoney=null,mlbOff=false,mids=null,ages=null,market=null,playYoung=0}){
   // market: 위 MARKET 같은 리그별 영입 시장. playYoung: 25세 이하 선수를 주전에 이 수만큼 두는 감독(투수 자리 제외).
   // ages: {bonus: 젊은 선수 보너스, capUp: 경기 성장 한도 +5, aware: 나이를 보는 감독, bonusTable·decline·retireAt: AGES 대신 쓸 값}.
-  // 넣으면 나이·하락·은퇴(위 AGES)가 함께 켜집니다.
+  // 넣으면 나이·하락·은퇴(위 AGES)가 함께 켜집니다. ages.p21: 입단 나이와 하락을 P21 확정 규칙(위 P21_AGING)으로 바꿉니다.
   // leagueMoney: 위 LEAGUE_MONEY 같은 리그별 수입. mlbOff: 감독이 MLB에 보내지 않음(게임에서는 이용자 선택). mids: 리그별 상대 평균 능력
   const rnd=seeded(seed),ri=(a,b)=>a+Math.floor(rnd()*(b-a+1));
+  const ageRnd=seeded(seed^0x5a17e901);// P21 노화 추첨 전용. 다른 판단의 난수 흐름을 건드리지 않습니다.
   const t=world.initialTeam();
-  const enrich=p=>{if(ages&&p.age==null)p.age=ri(AGES.startAge[0],AGES.startAge[1]);p.fans=ri(15,85);p.loyalty=ri(45,70);p.salary=Math.max(3,Math.round(price(p)*B.salaryFactor));
+  const enrich=p=>{if(ages&&p.age==null)p.age=ages.p21?P21_AGING.entryAge:ri(AGES.startAge[0],AGES.startAge[1]);p.fans=ri(15,85);p.loyalty=ri(45,70);p.salary=Math.max(3,Math.round(price(p)*B.salaryFactor));
     p.ask=Math.max(3,Math.round(price(p)*B.salaryFactor*(1+(50-p.loyalty)/200)));p.contract=contractGames;p.played=0;p.since=0;p.apps=0;return p;};
   t.players.forEach(enrich);
   const club={funds:B.startFunds,debt:0,fac:[],stadium:1,ticket:10,w:0,l:0,d:0,games:0,departures:0,stuck:false,
@@ -119,7 +132,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     alumni:[],mlbCount:0,mlbFails:0,mlbFee:0,donations:0,donationSum:0,tickets:0,ticketsUsed:0,
     requests:0,refusals:0,requestSum:0,regularSum:0,regularGames:0,
     // 시설 개편안(P17): 시설 단계, 지금 리그 단계, 경기장 때문에 미뤄진 승격 수, 시설별 비용·수입·유지비·보유 경기 수
-    lvl:{},lv:0,delays:0,facStats:{},prospects:0,retired:0,retiredWish:0,retiredByManager:0,youngStarts:0};
+    lvl:{},lv:0,delays:0,facStats:{},prospects:0,retired:0,retiredWish:0,retiredByManager:0,youngStarts:0,ageLoss:0};
   const addPressure=v=>{if(disband)club.pressure=clamp(club.pressure+v,0,100);};
   const has=id=>club.fac.includes(id);
   const stat=id=>club.facStats[id]??={cost:0,inc:0,maint:0,games:0};
@@ -307,7 +320,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
   const snapshot=extra=>{const s=starters().filter(x=>x.p);return {games:club.games,funds:club.funds,debt:club.debt,w:club.w,l:club.l,d:club.d,
     starterMean:s.reduce((a,x)=>a+meanA(x.p),0)/s.length,salary:t.players.reduce((a,p)=>a+p.salary,0),fixed:fixed(),ticket:club.ticket,
     stadium:club.stadium,facilities:club.fac.length,trainPoints:club.trainPoints,perfPoints:club.perfPoints,departures:club.departures,stuck:club.stuck,
-    ...(ages?{ageMean:s.reduce((a,x)=>a+x.p.age,0)/s.length,retired:club.retired,retiredWish:club.retiredWish,retiredByManager:club.retiredByManager,oldest:Math.max(...t.players.map(p=>p.age)),youngStarters:s.filter(x=>x.p.age<=25).length,youngStarts:club.youngStarts}:{}),...extra};};
+    ...(ages?{ageMean:s.reduce((a,x)=>a+x.p.age,0)/s.length,retired:club.retired,retiredWish:club.retiredWish,retiredByManager:club.retiredByManager,oldest:Math.max(...t.players.map(p=>p.age)),youngStarters:s.filter(x=>x.p.age<=25).length,youngStarts:club.youngStarts,...(ages.p21?{ageLoss:club.ageLoss}:{})}:{}),...extra};};
   if(!league){
     let w10=0;
     for(let i=0;i<games&&!club.stuck;i++){const level=Math.floor(club.w/5)+ri(-1,1);const g=playOne(world.botTeam(level,'dh'),i%2);if(g.result==='W')w10++;
@@ -321,8 +334,10 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
       if(disband&&t.players.length<10){club.stuck=false;replaceDeparted();}
       club.lv=lv;
       if(ages&&s>0){
-        // 나이(임시 가정): 시즌마다 +1세, 33세부터 능력 하락, 37세 은퇴. 은퇴한 자리는 예비금 안에서 12명까지 다시 영입합니다.
-        for(const p of t.players){p.age++;const d=((ages.decline||AGES.decline).filter(([from])=>p.age>=from).at(-1)||[0,0])[1];if(d)for(const k of [...NINE,'stamina'])p.a[k]=Math.max(20,p.a[k]-d);}
+        // 나이: 시즌마다 +1세 후 능력 하락. ages.p21이면 P21 확정 규칙, 아니면 임시 가정(33세부터 하락·37세 은퇴 등).
+        // 은퇴한 자리는 예비금 안에서 12명까지 다시 영입합니다.
+        if(ages.p21)for(const p of t.players)club.ageLoss+=ageP21(p,ageRnd);
+        else for(const p of t.players){p.age++;const d=((ages.decline||AGES.decline).filter(([from])=>p.age>=from).at(-1)||[0,0])[1];if(d)for(const k of [...NINE,'stamina'])p.a[k]=Math.max(20,p.a[k]-d);}
         // 은퇴: retireAt이 있으면 그 나이에 은퇴(이전 시험). null이면 정해진 나이 없이 ① 선수가 원할 때(retireWish: [이 나이부터, 시즌 끝 확률])
         // ② 나이를 보는 감독이 시킬 때(managerRetire: 35세 이상 후보 선수, 38세 이상 선수)만 은퇴합니다(참가자 결정 2026-11-10).
         const ra=ages.retireAt===undefined?AGES.retireAt:ages.retireAt,wish=ages.retireWish||null,inLineup=new Set((t.lineup||[]).map(x=>x.id));
@@ -340,7 +355,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
         const need=NEED[Math.min(3,lv+1)],c=REFORM.stadiumCost[club.stadium];
         if(c&&((need>club.stadium&&club.funds-c>=keep())||(club.stadium<policy.stadiumMax&&club.funds-c>=(invest?keep():reserve()+fixed()))))expand();
         // 유소년 아카데미: 시즌마다 무료 유망주 1명(능력 −5, 경기 경험치 +30%)
-        if(has('academy')&&t.players.length<REFORM.academyMax){const p=world.recruit();for(const k of NINE)p.a[k]=Math.max(20,p.a[k]-5);if(ages)p.age=ri(AGES.prospectAge[0],AGES.prospectAge[1]);enrich(p);p.prospect=true;t.players.push(p);club.prospects++;}
+        if(has('academy')&&t.players.length<REFORM.academyMax){const p=world.recruit();for(const k of NINE)p.a[k]=Math.max(20,p.a[k]-5);if(ages)p.age=ages.p21?P21_AGING.entryAge:ri(AGES.prospectAge[0],AGES.prospectAge[1]);enrich(p);p.prospect=true;t.players.push(p);club.prospects++;}
       }
       const ais=OFFS.map((off,i)=>{const o=world.botTeam((MIDS[lv]+off-43.5)/4,'dh','AI'+i);for(const p of o.players)for(const k of NINE)p.a[k]=Math.round(p.a[k]);return {o,pts:0};});
       let ours=0,forfeits=0;
@@ -587,9 +602,19 @@ function mainTop(n,out,seasons=20,set='top'){
     marketF:{name:'F. E + 감속 없는 젊은 선수 보너스 + 한도 85',opts:{leagueMoney:LEAGUE_MONEY,ages:FL,market:MARKET}},
     marketG:{name:'G. F + 젊은 선수 2명 출전 감독',opts:{leagueMoney:LEAGUE_MONEY,ages:FL,market:MARKET,playYoung:2}},
   };})(),
+  // P21 확정 나이 규칙으로 다시 시험 (이슈 #46-5 남은 일, 2026-11-10 준비). 은퇴·감독은 youth3과 같고 하락만 P21 규칙입니다.
+  // 41세 구간까지 보려면 25시즌 이상(P21). node tests/run-economy-sim.cjs 20 결과.json p21 25
+  p21:(()=>{const AG={bonus:false,capUp:false,aware:true,p21:true,retireAt:null,retireWish:[[35,.1],[36,.2],[37,.35],[38,.5],[39,.65],[40,.8]],managerRetire:true},
+    FL={...AG,bonus:true,bonusTable:[[21,1.5],[25,1.3],[99,1]],capUp:true};return {
+    money:{name:'③ 리그별 수입 (나이 없음, 기준)',opts:{leagueMoney:LEAGUE_MONEY}},
+    money21:{name:'③ + P21 나이 (영입 시장·보너스 없음)',opts:{leagueMoney:LEAGUE_MONEY,ages:AG}},
+    marketE:{name:'E21. ③ + P21 나이 + 리그별 영입 시장',opts:{leagueMoney:LEAGUE_MONEY,ages:AG,market:MARKET}},
+    marketF:{name:'F21. E21 + 감속 없는 젊은 선수 보너스 + 한도 85',opts:{leagueMoney:LEAGUE_MONEY,ages:FL,market:MARKET}},
+    marketG:{name:'G21. F21 + 젊은 선수 2명 출전 감독',opts:{leagueMoney:LEAGUE_MONEY,ages:FL,market:MARKET,playYoung:2}},
+  };})(),
   };
-  const VARIANTS=SETS[set];
-  const report={version:'2026-11-10-'+set+'-v01',ages:set.startsWith('youth')?AGES:undefined,market:set==='youth3'?MARKET:undefined,variantOpts:Object.fromEntries(Object.entries(SETS[set]).map(([k,v])=>[k,v.opts])),clubsPerCell:n,seasons,unit:'만원',policy:'normal',settings:{...base,disband:'base'},reform:REFORM,leagueMoney:LEAGUE_MONEY,variants:{},results:{},summary:{}};
+  const VARIANTS=SETS[set],aged=set.startsWith('youth')||set==='p21';
+  const report={version:'2026-11-10-'+set+'-v01',ages:set==='p21'?{p21:P21_AGING,tempAges:AGES}:set.startsWith('youth')?AGES:undefined,market:set==='youth3'||set==='p21'?MARKET:undefined,variantOpts:Object.fromEntries(Object.entries(SETS[set]).map(([k,v])=>[k,v.opts])),clubsPerCell:n,seasons,unit:'만원',policy:'normal',settings:{...base,disband:'base'},reform:REFORM,leagueMoney:LEAGUE_MONEY,variants:{},results:{},summary:{}};
   const pct=(a,b)=>Math.round(100*a/b)+'%',med=a=>median(a);
   for(const [vk,v] of Object.entries(VARIANTS)){
     const world=createWorld(20261115),runs=[];
@@ -614,7 +639,7 @@ function mainTop(n,out,seasons=20,set='top'){
     console.log(' 시즌 평균 수입',sum.inc,'(리그 배당금',sum.league+', 상금',sum.prize+') · 급여+유지비',sum.fix,'· 여유 돈',sum.spare,'· 훈련비',sum.training);
     console.log(' 처음 2부',pct(sum.first2,1),'(중앙값',sum.first2Median,'시즌) · 처음 1부',pct(sum.first3,1),'(중앙값',sum.first3Median,'시즌) · 리그(동네/지역/2부/1부) 10시즌',sum.dist10,'/ 15시즌',sum.dist15,'/',seasons+'시즌',sum.distEnd);
     console.log(' 출전 평균 10시즌',sum.starter10.toFixed(1),'/',seasons+'시즌',sum.starterEnd.toFixed(1),'· 경기당 급여',seasons+'시즌',sum.salaryEnd,'· 경기장',sum.stadiumEnd,'· 해체 1번 이상',pct(sum.disband,1),'· 대출',sum.loans.toFixed(2),'· MLB',sum.mlb.toFixed(2));
-    if(set.startsWith('youth')){sum.ageEnd=med(at(seasons).map(l=>l.ageMean??NaN));sum.retired=runs.reduce((a,r)=>a+(r.log.at(-1).retired||0),0)/n;sum.retiredWish=runs.reduce((a,r)=>a+(r.log.at(-1).retiredWish||0),0)/n;sum.retiredByManager=runs.reduce((a,r)=>a+(r.log.at(-1).retiredByManager||0),0)/n;sum.oldest=med(at(seasons).map(l=>l.oldest??NaN));sum.youngStarters=med(at(seasons).map(l=>l.youngStarters??NaN));
+    if(aged){sum.ageEnd=med(at(seasons).map(l=>l.ageMean??NaN));sum.retired=runs.reduce((a,r)=>a+(r.log.at(-1).retired||0),0)/n;sum.retiredWish=runs.reduce((a,r)=>a+(r.log.at(-1).retiredWish||0),0)/n;sum.retiredByManager=runs.reduce((a,r)=>a+(r.log.at(-1).retiredByManager||0),0)/n;sum.oldest=med(at(seasons).map(l=>l.oldest??NaN));sum.youngStarters=med(at(seasons).map(l=>l.youngStarters??NaN));
       console.log(' 출전 선수 평균 나이',seasons+'시즌',isNaN(sum.ageEnd)?'-':sum.ageEnd.toFixed(1),'· 은퇴 구단당',sum.retired.toFixed(1),'(선수 희망',sum.retiredWish.toFixed(1)+', 감독 결정',sum.retiredByManager.toFixed(1)+') · 최고령 중앙값',sum.oldest,'· 25세 이하 주전(마지막 시즌)',sum.youngStarters);}
     console.log(' 2부에서 보낸 시즌',sum.seasons2,'순위(1~6위)',sum.ranks2,'· 1부에서 보낸 시즌',sum.seasons1,'순위',sum.ranks1);
   }
@@ -622,6 +647,7 @@ function mainTop(n,out,seasons=20,set='top'){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 function main(){
+  if(process.argv[4]==='p21')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,'p21');
   if(process.argv[4]==='youth3')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth3');
   if(process.argv[4]==='youth2')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth2');
   if(process.argv[4]==='youth')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth');
@@ -671,4 +697,4 @@ function main(){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 if(require.main===module)main();
-module.exports={career,POLICIES,DISBAND,REFORM,REFORM_POLICIES,LEAGUE_MONEY,AGES,MARKET};
+module.exports={career,POLICIES,DISBAND,REFORM,REFORM_POLICIES,LEAGUE_MONEY,AGES,MARKET,TEN,P21_AGING,ageP21};
