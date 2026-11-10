@@ -51,6 +51,12 @@ test('entry rule: age 19~26 and three distinct abilities each +(age−19), cappe
   assert.equal(top.age,26);assert.equal(TEN.filter(k=>top.a[k]===100).length,3);
 });
 
+test('entry rule with count 5 (issue #46-14 candidate) raises five distinct abilities',()=>{
+  const p=makePlayer(null,50);delete p.age;const bonus=entryP21(p,()=>.99,{...P21_ENTRY,count:5});
+  assert.equal(p.age,26);assert.equal(bonus,7);
+  assert.equal(TEN.filter(k=>p.a[k]===57).length,5);
+});
+
 test('career with ages.p21 + entry: starting roster ages spread over 19~26',()=>{
   const ages={bonus:false,capUp:false,aware:true,p21:true,entry:true,retireAt:null,retireWish:[[35,.1]],managerRetire:true};
   const r=career(createWorld(20261115),REFORM_POLICIES.normal,{league:true,contractGames:10,seasons:1,growth:{K:10,cap:80},
