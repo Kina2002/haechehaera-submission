@@ -1,0 +1,8 @@
+Mode: built-in imagegen, precise-object edit.
+Edit target: 공격-전진좌-심판포함-v01.png
+
+Use case: precise-object-edit.
+Edit target: this exact 전진·좌 low attack-view pixel-art baseball UI mockup.
+Change ONLY the PLATE UMPIRE's position and size. The current plate umpire is too far screen-left and obscures the batter's legs. ERASE that old plate umpire and its old '주심' tag completely, restoring the exposed dirt/batter shape. Place the SAME SINGLE masked black-shirt gray-trouser plate umpire in a compact crouch BEHIND THE CATCHER on the camera-near side, offset to the catcher's SCREEN-RIGHT so no part of him overlaps the batter. For this 1672x941 composition, aim for the umpire's feet near (990,850), body around 120px wide and 140px tall, leaving a small clear gap to the catcher's right silhouette. A small quiet '주심' tag sits beside his right, NOT over the bottom recent-history panel. He must be completely inside the field and above the UI, no portrait/stat panel overlap. This is a deliberate screen-layout offset to keep the plate area readable.
+Keep EXACTLY FOUR umpires total: this repositioned 주심, plus the existing 1루심, 2루심, 3루심 in their current positions. Do NOT add a fifth official, keep the three base umpires and tags unchanged.
+INVARIANTS: every green player, the selected 전진·좌 formation, pitcher/catcher/batter/runners, bases, field/camera/stadium, physical scoreboard, lineup, BSO/runner diamond, ALL toolbar controls, BOTH detailed portrait/stat plates, batting buttons/timer/default action, and recent game log/expand button remain unchanged. Do not crop, remove text, recolor teams, change camera or redraw the whole design. Same pixel-art style, no extra annotations or watermark.
