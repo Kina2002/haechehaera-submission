@@ -17,7 +17,7 @@
 
 - **선택 완료, 게임 적용 전.** 사용자가 “홈런 직후, 관중의 환호 좋다”라고 확인한 4초 편집본을 선택했습니다.
 - 로컬 보관본: [MP3](local-audio/homerun-crowd-first4.mp3) · [WAV](local-audio/homerun-crowd-first4.wav).
-- 원본 `u_xg7ssi08yr-crowd-cheering-379666.mp3`의 0.75~4.75초를 사용하며, 마지막 0.65초를 부드럽게 줄인 기존 시안 그대로입니다. 승인 후 다시 편집하지 않았습니다.
+- 원본 `u_xg7ssi08yr-crowd-cheering-379666.mp3`의 0.75\~4.75초를 사용하며, 마지막 0.65초를 부드럽게 줄인 기존 시안 그대로입니다. 승인 후 다시 편집하지 않았습니다.
 - 선택 파일의 해시와 원본 구간은 [homerun-selection.json](homerun-selection.json)에 기록했습니다.
 - 제공 음원은 로컬에 보관하고 공개 저장소에는 선택 내역만 기록합니다. 게임 연결·배포는 진행하지 않았습니다.
 

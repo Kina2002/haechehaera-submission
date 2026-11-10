@@ -33,7 +33,7 @@
 - 제목: **Fireworks Piece** / 제작자: **stephan**.
 - 원본: [Wikimedia Commons 파일 설명](https://commons.wikimedia.org/wiki/File:Fireworks_piece.ogg) · [확인한 판본](https://commons.wikimedia.org/w/index.php?title=File:Fireworks_piece.ogg&oldid=1053774391).
 - 파일 설명에 제작자가 퍼블릭 도메인으로 공개한 녹음으로 명시되어 있습니다. 2007년 6월 2일 독일 뒤셀도르프 불꽃놀이 녹음입니다.
-- [원본 OGG](sources/fireworks-piece-stephan.ogg)를 보존했습니다. 43.35~50.85초 구간을 발췌해 저음·존재감·다이내믹·앞뒤 여백·마무리 페이드를 편집했습니다.
+- [원본 OGG](sources/fireworks-piece-stephan.ogg)를 보존했습니다. 43.35\~50.85초 구간을 발췌해 저음·존재감·다이내믹·앞뒤 여백·마무리 페이드를 편집했습니다.
 - 녹음의 원래 스테레오 공간감을 사용했습니다. 녹음에 담긴 불꽃의 소리이지, 게임에서 폭죽을 실행하는 기능은 아닙니다.
 
 ## 파일과 검사
