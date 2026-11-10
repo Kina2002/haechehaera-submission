@@ -113,7 +113,7 @@ function ageP21(p,rnd,rule=P21_AGING){
   return count*drop;// 예정 감소 총량(하한 1에 걸린 몫 포함)
 }
 // reform: 시설·경기장 개편안(P17)을 씁니다. 이때 원정 응원 비율은 awayShare 대신 응원단 버스 단계로 정합니다(P16).
-function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null,mlb=null,awayShare=0,reform=false,invest=false,leagueNeed=null,leagueMoney=null,mlbOff=false,mids=null,ages=null,market=null,playYoung=0}){
+function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null,mlb=null,awayShare=0,reform=false,invest=false,leagueNeed=null,leagueMoney=null,mlbOff=false,mids=null,ages=null,market=null,playYoung=0,rebuildRule=null}){
   // market: 위 MARKET 같은 리그별 영입 시장. playYoung: 25세 이하 선수를 주전에 이 수만큼 두는 감독(투수 자리 제외).
   // ages: {bonus: 젊은 선수 보너스, capUp: 경기 성장 한도 +5, aware: 나이를 보는 감독, bonusTable·decline·retireAt: AGES 대신 쓸 값}.
   // 넣으면 나이·하락·은퇴(위 AGES)가 함께 켜집니다. ages.p21: 입단 나이와 하락을 P21 확정 규칙(위 P21_AGING)으로 바꿉니다.
@@ -132,7 +132,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     alumni:[],mlbCount:0,mlbFails:0,mlbFee:0,donations:0,donationSum:0,tickets:0,ticketsUsed:0,
     requests:0,refusals:0,requestSum:0,regularSum:0,regularGames:0,
     // 시설 개편안(P17): 시설 단계, 지금 리그 단계, 경기장 때문에 미뤄진 승격 수, 시설별 비용·수입·유지비·보유 경기 수
-    lvl:{},lv:0,delays:0,facStats:{},prospects:0,retired:0,retiredWish:0,retiredByManager:0,youngStarts:0,ageLoss:0};
+    lvl:{},lv:0,delays:0,facStats:{},prospects:0,retired:0,retiredWish:0,retiredByManager:0,youngStarts:0,ageLoss:0,rebuildLog:[]};
   const addPressure=v=>{if(disband)club.pressure=clamp(club.pressure+v,0,100);};
   const has=id=>club.fac.includes(id);
   const stat=id=>club.facStats[id]??={cost:0,inc:0,maint:0,games:0};
@@ -270,12 +270,17 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
       const p=cands[0],cost=Math.round(price(p)*B.hireFactor);if(club.funds<cost)takeLoan(cost);if(club.funds<cost){club.stuck=true;return;}spend(cost,'recruit');t.players.push(p);}
   }
   // 재창단 (P09 제안): 애정도 70 이상 중 최대 3명만 남기고, 새 시작 선수로 12명. 자금·시설·경기장·빚 초기화.
+  // rebuildRule(재창단 세부 비교, 이슈 #46-4): keepMax·keepLoyalty(남는 선수 수·기준), keepStadium(경기장 등급 유지), restart(여론 재시작 값).
+  // 없으면 위 초안 그대로이고, 있으면 재창단마다 남은 인원을 기록합니다.
   function rebuild(){
-    const keep=t.players.filter(p=>p.loyalty>=70).sort((a,b)=>b.loyalty-a.loyalty).slice(0,3);
+    const R={keepMax:3,keepLoyalty:70,keepStadium:false,restart:disband.restart,...(rebuildRule||{})};
+    const keep=t.players.filter(p=>p.loyalty>=R.keepLoyalty).sort((a,b)=>b.loyalty-a.loyalty).slice(0,R.keepMax);
+    if(rebuildRule)club.rebuildLog.push({season:club.season+1,kept:keep.length,loy70:t.players.filter(p=>p.loyalty>=70).length,
+      loy50:t.players.filter(p=>p.loyalty>=50).length,stadium:club.stadium,keptMean:keep.length?keep.reduce((a,p)=>a+meanA(p),0)/keep.length:null});
     keep.forEach(p=>{p.contract=contractGames;});
     const newcomers=world.initialTeam().players.slice(0,12-keep.length).map(enrich);
     t.players=[...keep,...newcomers];t.lineup=world.autoLineup(t.players);
-    Object.assign(club,{funds:B.startFunds,debt:0,loan:0,fac:[],stadium:1,ticket:10,stuck:false,pressure:disband.restart,lvl:{},lv:0});
+    Object.assign(club,{funds:B.startFunds,debt:0,loan:0,fac:[],stadium:R.keepStadium?club.stadium:1,ticket:10,stuck:false,pressure:R.restart,lvl:{},lv:0});
     policy.start.forEach(build);
   }
   function playOne(opp,home){
@@ -392,6 +397,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
         requests:club.requests,refusals:club.refusals,requestSum:club.requestSum,regularSum:club.regularSum,regularGames:club.regularGames,
         alumni:club.alumni.length,alumni90:club.alumni.filter(a=>a.loyalty>=90).length,alumniLoyalty:club.alumni.map(a=>a.loyalty),
         flow:{...club.flow},// 수입·지출 항목별 누적 금액
+        ...(rebuildRule&&disbanded?{rebuild:{...club.rebuildLog.at(-1)}}:{}),
         ...(reform?{delayed,delays:club.delays,fac:[...club.fac],lvl:{...club.lvl},prospects:club.prospects,facStats:JSON.parse(JSON.stringify(club.facStats))}:{})}));
     }
   }
@@ -442,6 +448,48 @@ function mainDisband(n,out){
     console.log(' 시즌 끝 여론(중앙값) 3·6·10시즌:',pAt(2),'/',pAt(5),'/',pAt(9),
       '· 10시즌 뒤 리그 동네/지역/2부/1부:',[0,1,2,3].map(x=>Math.round(100*last.filter(l=>l.nextTier===x).length/n)+'%').join('/'),
       '· 자금 중앙값',Math.round(median(last.map(l=>l.funds))));
+  }
+  report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
+  if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
+}
+// 재창단 세부 비교 (이슈 #46-4, 2026-11-10): 지금 결정된 묶음(개편안 v03·리그별 수입 P19·영입 시장 P20·P21 나이, 투자 먼저 감독) 위에서
+// 남는 선수 수·기준, 경기장 등급 유지, 여론 재시작 값만 바꿉니다. 같은 시드라서 첫 해체 전까지는 안마다 똑같이 진행됩니다.
+// node tests/run-economy-sim.cjs 20 결과.json rebuild [시즌 수=15] [aggressive|normal|thrifty, 생략하면 셋 다]
+function mainRebuild(n,out,seasons=15,only=null){
+  const started=Date.now();
+  const AG={bonus:false,capUp:false,aware:true,p21:true,retireAt:null,retireWish:[[35,.1],[36,.2],[37,.35],[38,.5],[39,.65],[40,.8]],managerRetire:true};
+  const base={league:true,contractGames:10,seasons,growth:{K:10,cap:80},disband:DISBAND.base,mlb:{request:true,regular:true,ticket:true,ticketAt:[1]},
+    reform:true,invest:true,leagueMoney:LEAGUE_MONEY,market:MARKET,ages:AG};
+  const VARIANTS={
+    draft:{name:'초안: 애정도 70 이상 최대 3명 · 경기장 1등급 · 여론 20%',rule:{}},
+    keep0:{name:'남는 선수 없음',rule:{keepMax:0}},
+    keep5:{name:'애정도 50 이상 최대 5명',rule:{keepMax:5,keepLoyalty:50}},
+    stadium:{name:'초안 + 경기장 등급 유지',rule:{keepStadium:true}},
+    restart30:{name:'초안 + 여론 30%(새 구단과 같음)에서 다시 시작',rule:{restart:30}},
+  };
+  const pols=only?[only]:Object.keys(REFORM_POLICIES);
+  const report={version:'2026-11-10-rebuild-v01',clubsPerCell:n,seasons,policies:pols,settings:{...base,disband:'base'},variants:{},results:{},summary:{}};
+  const pct=(a,b)=>b?Math.round(100*a/b)+'%':'-';
+  for(const pk of pols)for(const [vk,v] of Object.entries(VARIANTS)){
+    const world=createWorld(20261115),runs=[];
+    for(let i=0;i<n;i++)runs.push(career(world,REFORM_POLICIES[pk],{...base,rebuildRule:v.rule,seed:16000+i*31}));
+    const key=pk+':'+vk;report.variants[key]=REFORM_POLICIES[pk].name+' · '+v.name;report.results[key]=runs.map(r=>r.log);
+    const logs=runs.map(r=>r.log),last=logs.map(l=>l.at(-1)),rb=logs.flatMap(l=>l.filter(e=>e.disbanded).map(e=>e.rebuild));
+    // 첫 재창단 뒤: 다시 지역 리그로 올라가기까지 걸린 시즌, 다시 해체됐는지
+    const after=logs.map(l=>{const i=l.findIndex(e=>e.disbanded);if(i<0)return null;const rest=l.slice(i+1);
+      const up=rest.findIndex(e=>e.nextTier>=1);return {left:rest.length,up:up<0?null:up+1,again:rest.some(e=>e.disbanded)};}).filter(Boolean);
+    const avg=f=>rb.length?rb.reduce((a,x)=>a+f(x),0)/rb.length:null;
+    const sum={disbandedClubs:after.length/n,disbandsPerClub:last.reduce((a,e)=>a+e.disbands,0)/n,rebuilds:rb.length,
+      keptMean:avg(x=>x.kept),keptAny:avg(x=>x.kept>0?1:0),loy70Mean:avg(x=>x.loy70),loy50Mean:avg(x=>x.loy50),
+      upAgain:after.filter(x=>x.up!=null).length,upMedian:median(after.filter(x=>x.up!=null).map(x=>x.up)),again:after.filter(x=>x.again).length,
+      distEnd:[0,1,2,3].map(x=>pct(last.filter(e=>e.nextTier===x).length,n)).join('/'),first3:logs.filter(l=>l.some(e=>e.nextTier>=3)).length/n,
+      fundsEnd:Math.round(median(last.map(e=>e.funds)))};
+    report.summary[key]=sum;
+    console.log('\n['+REFORM_POLICIES[pk].name+'] '+v.name);
+    console.log(' 해체 1번 이상',pct(after.length,n),'· 구단당 해체',sum.disbandsPerClub.toFixed(2)+'번 · 재창단',rb.length+'번',
+      rb.length?'· 남은 선수 평균 '+sum.keptMean.toFixed(1)+'명 (1명 이상 남은 재창단 '+pct(rb.filter(x=>x.kept>0).length,rb.length)+') · 해체 순간 애정도 70 이상 '+sum.loy70Mean.toFixed(1)+'명 / 50 이상 '+sum.loy50Mean.toFixed(1)+'명':'');
+    console.log(' 첫 재창단 뒤: 다시 지역 승격',after.length?sum.upAgain+'/'+after.length+'구단 (중앙값 '+sum.upMedian+'시즌)':'-','· 다시 해체',after.length?sum.again+'/'+after.length+'구단':'-',
+      '·',seasons+'시즌 뒤 리그 동네/지역/2부/1부',sum.distEnd,'· 1부 도달',pct(sum.first3*n,n),'· 자금 중앙값',sum.fundsEnd);
   }
   report.seconds=Math.round((Date.now()-started)/1000);console.log('\n소요 시간',report.seconds,'초');
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
@@ -572,7 +620,8 @@ function mainReform(n,out,seasons=15){
 }
 // 1부까지 키울 돈 후보 비교 (이슈 #46-5): 보통 감독 · 개편안 v03 · 투자 먼저. 후보마다 같은 시작 상태(새 world)에서 돌립니다.
 // node tests/run-economy-sim.cjs 20 결과.json top [시즌 수=20]
-function mainTop(n,out,seasons=20,set='top'){
+// worldSeed·seedBase: 같은 묶음을 다른 표본으로 더 돌릴 때(2026-11-10 추가). 기본값은 이전 시험과 같습니다.
+function mainTop(n,out,seasons=20,set='top',worldSeed=20261115,seedBase=16000){
   const started=Date.now();
   const base={league:true,contractGames:10,seasons,growth:{K:10,cap:80},disband:DISBAND.base,mlb:{request:true,regular:true,ticket:true,ticketAt:[1]},reform:true,invest:true};
   const SETS={top:{
@@ -614,11 +663,11 @@ function mainTop(n,out,seasons=20,set='top'){
   };})(),
   };
   const VARIANTS=SETS[set],aged=set.startsWith('youth')||set==='p21';
-  const report={version:'2026-11-10-'+set+'-v01',ages:set==='p21'?{p21:P21_AGING,tempAges:AGES}:set.startsWith('youth')?AGES:undefined,market:set==='youth3'||set==='p21'?MARKET:undefined,variantOpts:Object.fromEntries(Object.entries(SETS[set]).map(([k,v])=>[k,v.opts])),clubsPerCell:n,seasons,unit:'만원',policy:'normal',settings:{...base,disband:'base'},reform:REFORM,leagueMoney:LEAGUE_MONEY,variants:{},results:{},summary:{}};
+  const report={version:'2026-11-10-'+set+'-v01',ages:set==='p21'?{p21:P21_AGING,tempAges:AGES}:set.startsWith('youth')?AGES:undefined,market:set==='youth3'||set==='p21'?MARKET:undefined,variantOpts:Object.fromEntries(Object.entries(SETS[set]).map(([k,v])=>[k,v.opts])),clubsPerCell:n,...(set==='p21'?{worldSeed,seedBase}:{}),seasons,unit:'만원',policy:'normal',settings:{...base,disband:'base'},reform:REFORM,leagueMoney:LEAGUE_MONEY,variants:{},results:{},summary:{}};
   const pct=(a,b)=>Math.round(100*a/b)+'%',med=a=>median(a);
   for(const [vk,v] of Object.entries(VARIANTS)){
-    const world=createWorld(20261115),runs=[];
-    for(let i=0;i<n;i++)runs.push(career(world,REFORM_POLICIES.normal,{...base,...v.opts,seed:16000+i*31}));
+    const world=createWorld(worldSeed),runs=[];
+    for(let i=0;i<n;i++)runs.push(career(world,REFORM_POLICIES.normal,{...base,...v.opts,seed:seedBase+i*31}));
     report.variants[vk]=v.name;report.results[vk]=runs.map(r=>r.log);
     const at=s=>runs.map(r=>r.log[Math.min(s,r.log.length)-1]);
     const per=k=>runs.reduce((a,r)=>a+(r.log.at(-1).flow[k]||0)/r.log.length,0)/n;
@@ -647,7 +696,9 @@ function mainTop(n,out,seasons=20,set='top'){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 function main(){
-  if(process.argv[4]==='p21')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,'p21');
+  if(process.argv[4]==='rebuild')return mainRebuild(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||15,process.argv[6]||null);
+  // p21 추가 표본: node tests/run-economy-sim.cjs 20 결과.json p21 25 [world 시드=20261115] [구단 시드 시작=16000]
+  if(process.argv[4]==='p21')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,'p21',Number(process.argv[6])||20261115,Number(process.argv[7])||16000);
   if(process.argv[4]==='youth3')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth3');
   if(process.argv[4]==='youth2')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth2');
   if(process.argv[4]==='youth')return mainTop(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||20,'youth');
