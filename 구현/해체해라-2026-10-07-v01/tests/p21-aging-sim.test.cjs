@@ -1,7 +1,7 @@
 // P21 확정 나이 규칙이 현재 자금 시뮬레이터(run-economy-sim.cjs)에 이전 시뮬레이터와 같게 들어갔는지 확인합니다.
 const assert=require('node:assert/strict');
 const test=require('node:test');
-const {ageP21,P21_AGING,TEN,career,REFORM_POLICIES,DISBAND,LEAGUE_MONEY,MARKET}=require('./run-economy-sim.cjs');
+const {ageP21,P21_AGING,TEN,career,REFORM_POLICIES,DISBAND,LEAGUE_MONEY,MARKET,entryP21,P21_ENTRY}=require('./run-economy-sim.cjs');
 const legacy=require('./run-economy-legacy-20261109.cjs');
 const {createWorld}=require('./run-season-sim.cjs');
 
@@ -35,6 +35,28 @@ test('same draws as the legacy simulator that produced the P21 numbers',()=>{
     assert.equal(ageP21(p,r1),legacy.agePlayer(q,r2,true,legacy.CONFIRMED_AGING_RULE));
     assert.deepEqual(p,q);
   }
+});
+
+test('entry rule: age 19~26 and three distinct abilities each +(age−19), capped at 100',()=>{
+  assert.deepEqual({...P21_ENTRY},{min:19,max:26,count:3});
+  const seen=new Set(),rnd=seeded(5);
+  for(let i=0;i<400;i++){
+    const p=makePlayer(null,50);delete p.age;const bonus=entryP21(p,rnd);
+    assert.ok(p.age>=19&&p.age<=26);assert.equal(bonus,p.age-19);seen.add(p.age);
+    const up=TEN.filter(k=>p.a[k]!==50);
+    assert.equal(up.length,bonus?3:0);for(const k of up)assert.equal(p.a[k],50+bonus);
+  }
+  assert.equal(seen.size,8);
+  const top=makePlayer(null,98);entryP21(top,()=>.99);
+  assert.equal(top.age,26);assert.equal(TEN.filter(k=>top.a[k]===100).length,3);
+});
+
+test('career with ages.p21 + entry: starting roster ages spread over 19~26',()=>{
+  const ages={bonus:false,capUp:false,aware:true,p21:true,entry:true,retireAt:null,retireWish:[[35,.1]],managerRetire:true};
+  const r=career(createWorld(20261115),REFORM_POLICIES.normal,{league:true,contractGames:10,seasons:1,growth:{K:10,cap:80},
+    disband:DISBAND.base,reform:true,invest:true,seed:16000,leagueMoney:LEAGUE_MONEY,ages,market:MARKET});
+  const l=r.log[0];
+  assert.ok(l.oldest<=26&&l.oldest>19);assert.ok(l.ageMean>19&&l.ageMean<26);
 });
 
 test('career with ages.p21: every new player starts at 19 and ages one year per season',()=>{
