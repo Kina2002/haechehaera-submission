@@ -12,6 +12,8 @@ const EXP_EVENTS = {
 const EXP_PRESETS = { v01: EXP_EVENTS, v02p: { ...EXP_EVENTS, pitch: { ...EXP_EVENTS.pitch, fieldCatch: .3, fieldThrow: .3, escape: .3, cleanInning: .2 } } };
 // 모든 사건 숫자에 같은 배수를 곱합니다(역할 사이 비율은 그대로). 목표 난이도에 맞출 때 씁니다.
 const scaleExp = (E, s) => Object.fromEntries(Object.entries(E).map(([g, o]) => [g, Object.fromEntries(Object.entries(o).map(([k, v]) => [k, Math.round(v * s * 1000) / 1000]))]));
+// 참가자 결정 (2026-11-11): v02p × 1.2. 80구단 확인 시험에서 보통 유저 25시즌 1부 도달 약 49%(목표 약 50%). P10 표의 숫자입니다.
+EXP_PRESETS.decided = scaleExp(EXP_PRESETS.v02p, 1.2);
 const OF = ['LF', 'CF', 'RF'], RANGE = ['LF', 'CF', 'RF', 'SS'];
 const KEYS = ['contact', 'power', 'eye', 'speed', 'sense', 'catch', 'throw', 'velocity', 'control', 'stamina'];
 
