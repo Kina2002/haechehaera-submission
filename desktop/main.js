@@ -60,6 +60,8 @@ function createWindow() {
 }
 
 // 자가 점검(--self-check=결과.png): 창을 띄우지 않고 게임을 열어 화면을 찍고, 오류·파일 읽기·저장을 확인한 뒤 끝냅니다.
+// --self-check-script=점검.js 를 더하면 그 파일을 게임 화면 안에서 실행하고(게임 전역 함수 사용 가능, Promise면 기다림),
+// 돌려준 값을 결과에 "script"로 넣습니다. 그 뒤에 화면을 찍습니다. 기다리는 시간은 --self-check-wait=밀리초(기본 4000).
 function selfCheck(png) {
   const errors = [];
   win.webContents.on('console-message', event => { if (event.level === 'error') errors.push(String(event.message).slice(0, 300)); });
@@ -68,11 +70,18 @@ function selfCheck(png) {
     const page = await win.webContents.executeJavaScript(`(async()=>({title:document.title,url:location.href,appText:(document.querySelector('#app')?.innerText||'').slice(0,160),
       fetchOk:await fetch('src/game.js').then(r=>r.ok).catch(()=>false),storageKeys:Object.keys(localStorage).length,
       marker:(()=>{const before=localStorage.getItem('haechehaera.desktop-check');localStorage.setItem('haechehaera.desktop-check',String(Date.now()));return before;})()}))()`);
+    let script;
+    const scriptFile = arg('self-check-script');
+    if (scriptFile) {
+      try { script = await win.webContents.executeJavaScript(`(async()=>{${fs.readFileSync(path.resolve(scriptFile), 'utf8')}\n})()`); }
+      catch (e) { script = { error: String(e && e.message || e) }; }
+      await new Promise(r => setTimeout(r, 500));
+    }
     const image = await win.webContents.capturePage();
     fs.writeFileSync(png, image.toPNG());
-    console.log(JSON.stringify({ gameDir, entry, userData: app.getPath('userData'), page, errors }, null, 1));
+    console.log(JSON.stringify({ gameDir, entry, userData: app.getPath('userData'), page, ...(scriptFile ? { script } : {}), errors }, null, 1));
     app.quit();
-  }, 4000));
+  }, Number(arg('self-check-wait')) || 4000));
 }
 
 // 완성본 만들기(--build-exe --out=폴더 [--data-dir=폴더]): 창을 띄우지 않고 build-exe.cjs를 실행한 뒤 결과를 알려 줍니다.
