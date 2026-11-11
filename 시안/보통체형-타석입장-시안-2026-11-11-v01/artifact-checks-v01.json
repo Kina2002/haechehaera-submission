@@ -1,0 +1,13 @@
+{
+  "links": 61,
+  "missing": [],
+  "pngs": 18,
+  "backgroundUnchanged": true,
+  "rebuildMatches": true,
+  "backgroundSHA256": "2d283477b85d75e097ab3da604c577611bf3552dd0fd86bd962852ac46abb544",
+  "atlasSize": [
+    1536,
+    1024
+  ],
+  "fullyTransparentPixels": 1043030
+}

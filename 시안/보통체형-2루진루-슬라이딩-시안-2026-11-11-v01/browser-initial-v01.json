@@ -1,0 +1,78 @@
+{
+  "state": {
+    "time": 6.05,
+    "playing": false,
+    "speed": 1,
+    "scenario": "safe",
+    "style": "feet",
+    "zoom": true,
+    "loop": false,
+    "ready": true,
+    "recording": false,
+    "errors": [],
+    "phase": "베이스 접촉",
+    "runner": {
+      "frame": 10,
+      "progress": 1,
+      "height": 73,
+      "scale": 0.3348623853211009,
+      "anchor": [
+        28,
+        230
+      ],
+      "contact": [
+        838,
+        480
+      ],
+      "hit": [
+        873.8302752293578,
+        465.26605504587155
+      ],
+      "runnerOnBase": true
+    },
+    "race": {
+      "hasBall": true,
+      "tagHappened": true,
+      "out": false,
+      "runnerOnBase": true,
+      "call": "safe",
+      "forcePlay": false
+    },
+    "events": {
+      "catchAt": 4.8,
+      "tagAt": 6,
+      "baseAt": 5.7,
+      "secure": true
+    },
+    "tagger": {
+      "frame": 4,
+      "root": [
+        833.3484570475396,
+        474.55696413678066
+      ],
+      "glove": [
+        873.8302752293578,
+        465.26605504587155
+      ],
+      "scale": 0.1915342830788152,
+      "anchor": [
+        184.79166666666669,
+        415.78125
+      ],
+      "target": [
+        873.8302752293578,
+        465.26605504587155
+      ],
+      "tagDistance": 0
+    },
+    "contactInsideBase": true
+  },
+  "viewport": [
+    1536,
+    706
+  ],
+  "scroll": [
+    1536,
+    706
+  ]
+}

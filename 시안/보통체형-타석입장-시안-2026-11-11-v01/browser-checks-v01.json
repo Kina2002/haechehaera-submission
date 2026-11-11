@@ -1,0 +1,912 @@
+{
+  "snapshots": [
+    {
+      "time": 0,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 8.61446916357595,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "등장",
+      "actor": {
+        "frame": 4,
+        "mirror": true,
+        "position": [
+          1740,
+          716
+        ],
+        "height": 195,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 0.5,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 8.61446916357595,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "등장",
+      "actor": {
+        "frame": 8,
+        "mirror": true,
+        "position": [
+          1630.0418310610744,
+          719.0333287983152
+        ],
+        "height": 201.07167789553895,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 2.657234581787976,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 8.61446916357595,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "타석으로 걷기",
+      "actor": {
+        "frame": 7,
+        "mirror": true,
+        "position": [
+          1157.5471993270905,
+          735.6178809925416
+        ],
+        "height": 227.2677449470075,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 5.314469163575952,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 8.61446916357595,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "몸 돌리기",
+      "actor": {
+        "frame": 10,
+        "mirror": true,
+        "position": [
+          660,
+          797
+        ],
+        "height": 259.535489894015,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 5.564469163575952,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 8.61446916357595,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "몸 돌리기",
+      "actor": {
+        "frame": 15,
+        "mirror": false,
+        "position": [
+          657.0904906714884,
+          795.1815566696803
+        ],
+        "height": 262.5713288417844,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 6.164469163575951,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 8.61446916357595,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "발 위치 잡기",
+      "actor": {
+        "frame": 13,
+        "mirror": false,
+        "position": [
+          640.0476699268513,
+          784.529793704282
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 6.864469163575952,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 8.61446916357595,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "짧은 루틴",
+      "actor": {
+        "frame": 16,
+        "mirror": false,
+        "position": [
+          636,
+          782
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 8.613469163575951,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 8.61446916357595,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "준비 완료",
+      "actor": {
+        "frame": 23,
+        "mirror": false,
+        "position": [
+          636,
+          782
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 8.61446916357595,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 8.61446916357595,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "준비 완료",
+      "actor": null,
+      "tailTime": 1.7
+    },
+    {
+      "time": 0,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 18.514469163575953,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "등장",
+      "actor": {
+        "frame": 4,
+        "mirror": true,
+        "position": [
+          1740,
+          716
+        ],
+        "height": 195,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 0.5,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 18.514469163575953,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "등장",
+      "actor": {
+        "frame": 8,
+        "mirror": true,
+        "position": [
+          1630.0418310610744,
+          719.0333287983152
+        ],
+        "height": 201.07167789553895,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 2.657234581787976,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 18.514469163575953,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "타석으로 걷기",
+      "actor": {
+        "frame": 7,
+        "mirror": true,
+        "position": [
+          1157.5471993270905,
+          735.6178809925416
+        ],
+        "height": 227.2677449470075,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 5.314469163575952,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 18.514469163575953,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "몸 돌리기",
+      "actor": {
+        "frame": 10,
+        "mirror": true,
+        "position": [
+          660,
+          797
+        ],
+        "height": 259.535489894015,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 5.564469163575952,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 18.514469163575953,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "몸 돌리기",
+      "actor": {
+        "frame": 15,
+        "mirror": false,
+        "position": [
+          657.0904906714884,
+          795.1815566696803
+        ],
+        "height": 262.5713288417844,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 6.164469163575951,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 18.514469163575953,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "발 위치 잡기",
+      "actor": {
+        "frame": 13,
+        "mirror": false,
+        "position": [
+          640.0476699268513,
+          784.529793704282
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 6.864469163575952,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 18.514469163575953,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "짧은 루틴",
+      "actor": {
+        "frame": 16,
+        "mirror": false,
+        "position": [
+          636,
+          782
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 8.613469163575951,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 18.514469163575953,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "준비 완료",
+      "actor": {
+        "frame": 23,
+        "mirror": false,
+        "position": [
+          636,
+          782
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 18.514469163575953,
+      "playing": false,
+      "speed": 1,
+      "team": "home",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 18.514469163575953,
+      "entryEnd": 8.61446916357595,
+      "walkEnd": 5.314469163575952,
+      "phase": "1루 베이스 대기",
+      "actor": null,
+      "tailTime": 11.600000000000001
+    },
+    {
+      "time": 0,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 6.645066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "등장",
+      "actor": {
+        "frame": 4,
+        "mirror": false,
+        "position": [
+          -65,
+          716
+        ],
+        "height": 195,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 0.5,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 6.645066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "등장",
+      "actor": {
+        "frame": 8,
+        "mirror": false,
+        "position": [
+          44.92321785993994,
+          720.1092791723343
+        ],
+        "height": 204.22249959842998,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 1.6725332894543232,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 6.645066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "타석으로 걷기",
+      "actor": {
+        "frame": 5,
+        "mirror": false,
+        "position": [
+          302.70048230937914,
+          729.7458124227805
+        ],
+        "height": 225.8498751807065,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 3.3450665789086464,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 6.645066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "몸 돌리기",
+      "actor": {
+        "frame": 10,
+        "mirror": false,
+        "position": [
+          660,
+          797
+        ],
+        "height": 256.699750361413,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 3.5950665789086464,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 6.645066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "몸 돌리기",
+      "actor": {
+        "frame": 15,
+        "mirror": false,
+        "position": [
+          657.0904906714884,
+          795.1815566696803
+        ],
+        "height": 261.311000160628,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 4.195066578908646,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 6.645066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "발 위치 잡기",
+      "actor": {
+        "frame": 13,
+        "mirror": false,
+        "position": [
+          640.0476699268513,
+          784.529793704282
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 4.895066578908646,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 6.645066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "짧은 루틴",
+      "actor": {
+        "frame": 16,
+        "mirror": false,
+        "position": [
+          636,
+          782
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 6.644066578908646,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 6.645066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "준비 완료",
+      "actor": {
+        "frame": 23,
+        "mirror": false,
+        "position": [
+          636,
+          782
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 6.645066578908646,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "entry",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 6.645066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "준비 완료",
+      "actor": null,
+      "tailTime": 1.7
+    },
+    {
+      "time": 0,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 16.545066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "등장",
+      "actor": {
+        "frame": 4,
+        "mirror": false,
+        "position": [
+          -65,
+          716
+        ],
+        "height": 195,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 0.5,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 16.545066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "등장",
+      "actor": {
+        "frame": 8,
+        "mirror": false,
+        "position": [
+          44.92321785993994,
+          720.1092791723343
+        ],
+        "height": 204.22249959842998,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 1.6725332894543232,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 16.545066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "타석으로 걷기",
+      "actor": {
+        "frame": 5,
+        "mirror": false,
+        "position": [
+          302.70048230937914,
+          729.7458124227805
+        ],
+        "height": 225.8498751807065,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 3.3450665789086464,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 16.545066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "몸 돌리기",
+      "actor": {
+        "frame": 10,
+        "mirror": false,
+        "position": [
+          660,
+          797
+        ],
+        "height": 256.699750361413,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 3.5950665789086464,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 16.545066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "몸 돌리기",
+      "actor": {
+        "frame": 15,
+        "mirror": false,
+        "position": [
+          657.0904906714884,
+          795.1815566696803
+        ],
+        "height": 261.311000160628,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 4.195066578908646,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 16.545066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "발 위치 잡기",
+      "actor": {
+        "frame": 13,
+        "mirror": false,
+        "position": [
+          640.0476699268513,
+          784.529793704282
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 4.895066578908646,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 16.545066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "짧은 루틴",
+      "actor": {
+        "frame": 16,
+        "mirror": false,
+        "position": [
+          636,
+          782
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 6.644066578908646,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 16.545066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "준비 완료",
+      "actor": {
+        "frame": 23,
+        "mirror": false,
+        "position": [
+          636,
+          782
+        ],
+        "height": 265,
+        "heldBat": true
+      },
+      "tailTime": null
+    },
+    {
+      "time": 16.545066578908646,
+      "playing": false,
+      "speed": 1,
+      "team": "away",
+      "mode": "full",
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "duration": 16.545066578908646,
+      "entryEnd": 6.645066578908646,
+      "walkEnd": 3.3450665789086464,
+      "phase": "1루 베이스 대기",
+      "actor": null,
+      "tailTime": 11.599999999999998
+    }
+  ],
+  "viewport": [
+    1536,
+    706
+  ],
+  "document": [
+    1536,
+    706
+  ]
+}
