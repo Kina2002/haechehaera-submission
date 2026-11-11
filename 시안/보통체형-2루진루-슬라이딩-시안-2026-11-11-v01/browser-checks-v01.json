@@ -1,0 +1,3018 @@
+{
+  "checks": [
+    {
+      "scenario": "safe",
+      "style": "feet",
+      "tagDistance": 0,
+      "end": {
+        "time": 10,
+        "playing": false,
+        "speed": 1,
+        "scenario": "safe",
+        "style": "feet",
+        "zoom": true,
+        "loop": false,
+        "ready": true,
+        "recording": false,
+        "errors": [],
+        "phase": "대기·종료",
+        "runner": {
+          "frame": 21,
+          "progress": 1,
+          "height": 73,
+          "scale": 0.3348623853211009,
+          "anchor": [
+            94,
+            231
+          ],
+          "contact": [
+            838,
+            480
+          ],
+          "hit": [
+            856,
+            462
+          ],
+          "runnerOnBase": true
+        },
+        "race": {
+          "hasBall": true,
+          "tagHappened": true,
+          "out": false,
+          "runnerOnBase": true,
+          "call": "safe",
+          "forcePlay": false
+        },
+        "events": {
+          "catchAt": 4.8,
+          "tagAt": 6,
+          "baseAt": 5.7,
+          "secure": true
+        },
+        "tagger": {
+          "frame": 7,
+          "root": [
+            807,
+            474
+          ],
+          "glove": [
+            820.2727272727273,
+            439.7121212121212
+          ],
+          "scale": 0.1915342830788152,
+          "anchor": [
+            184.79166666666669,
+            415.78125
+          ],
+          "target": [
+            873.8302752293578,
+            465.26605504587155
+          ],
+          "tagDistance": 59.341507206225124
+        },
+        "contactInsideBase": true
+      }
+    },
+    {
+      "scenario": "out",
+      "style": "feet",
+      "tagDistance": 0,
+      "end": {
+        "time": 10,
+        "playing": false,
+        "speed": 1,
+        "scenario": "out",
+        "style": "feet",
+        "zoom": true,
+        "loop": false,
+        "ready": true,
+        "recording": false,
+        "errors": [],
+        "phase": "대기·종료",
+        "runner": {
+          "frame": 21,
+          "progress": 0.9637,
+          "height": 73.3267,
+          "scale": 0.33636100917431194,
+          "anchor": [
+            94,
+            231
+          ],
+          "contact": [
+            862.1933,
+            485.5937
+          ],
+          "hit": [
+            880.1933,
+            467.5937
+          ],
+          "runnerOnBase": false
+        },
+        "race": {
+          "hasBall": true,
+          "tagHappened": true,
+          "out": true,
+          "runnerOnBase": false,
+          "call": "out",
+          "forcePlay": false
+        },
+        "events": {
+          "catchAt": 4.8,
+          "tagAt": 5.15,
+          "baseAt": 5.7,
+          "secure": true
+        },
+        "tagger": {
+          "frame": 7,
+          "root": [
+            807,
+            474
+          ],
+          "glove": [
+            820.2727272727273,
+            439.7121212121212
+          ],
+          "scale": 0.1915342830788152,
+          "anchor": [
+            184.79166666666669,
+            415.78125
+          ],
+          "target": [
+            899.1930110091744,
+            470.79381559633026
+          ],
+          "tagDistance": 84.82029775257035
+        },
+        "contactInsideBase": false
+      }
+    },
+    {
+      "scenario": "safe",
+      "style": "head",
+      "tagDistance": 0,
+      "end": {
+        "time": 10,
+        "playing": false,
+        "speed": 1,
+        "scenario": "safe",
+        "style": "head",
+        "zoom": true,
+        "loop": false,
+        "ready": true,
+        "recording": false,
+        "errors": [],
+        "phase": "대기·종료",
+        "runner": {
+          "frame": 21,
+          "progress": 1,
+          "height": 73,
+          "scale": 0.3348623853211009,
+          "anchor": [
+            94,
+            231
+          ],
+          "contact": [
+            838,
+            480
+          ],
+          "hit": [
+            856,
+            462
+          ],
+          "runnerOnBase": true
+        },
+        "race": {
+          "hasBall": true,
+          "tagHappened": true,
+          "out": false,
+          "runnerOnBase": true,
+          "call": "safe",
+          "forcePlay": false
+        },
+        "events": {
+          "catchAt": 4.8,
+          "tagAt": 6,
+          "baseAt": 5.7,
+          "secure": true
+        },
+        "tagger": {
+          "frame": 7,
+          "root": [
+            807,
+            474
+          ],
+          "glove": [
+            820.2727272727273,
+            439.7121212121212
+          ],
+          "scale": 0.1915342830788152,
+          "anchor": [
+            184.79166666666669,
+            415.78125
+          ],
+          "target": [
+            876.1743119266055,
+            472.29816513761466
+          ],
+          "tagDistance": 64.70577582819715
+        },
+        "contactInsideBase": true
+      }
+    },
+    {
+      "scenario": "out",
+      "style": "head",
+      "tagDistance": 0,
+      "end": {
+        "time": 10,
+        "playing": false,
+        "speed": 1,
+        "scenario": "out",
+        "style": "head",
+        "zoom": true,
+        "loop": false,
+        "ready": true,
+        "recording": false,
+        "errors": [],
+        "phase": "대기·종료",
+        "runner": {
+          "frame": 21,
+          "progress": 0.9637,
+          "height": 73.3267,
+          "scale": 0.33636100917431194,
+          "anchor": [
+            94,
+            231
+          ],
+          "contact": [
+            862.1933,
+            485.5937
+          ],
+          "hit": [
+            880.1933,
+            467.5937
+          ],
+          "runnerOnBase": false
+        },
+        "race": {
+          "hasBall": true,
+          "tagHappened": true,
+          "out": true,
+          "runnerOnBase": false,
+          "call": "out",
+          "forcePlay": false
+        },
+        "events": {
+          "catchAt": 4.8,
+          "tagAt": 5.15,
+          "baseAt": 5.7,
+          "secure": true
+        },
+        "tagger": {
+          "frame": 7,
+          "root": [
+            807,
+            474
+          ],
+          "glove": [
+            820.2727272727273,
+            439.7121212121212
+          ],
+          "scale": 0.1915342830788152,
+          "anchor": [
+            184.79166666666669,
+            415.78125
+          ],
+          "target": [
+            902.5566211009175,
+            481.22100688073397
+          ],
+          "tagDistance": 92.16087441522487
+        },
+        "contactInsideBase": false
+      }
+    }
+  ],
+  "snapshots": [
+    {
+      "time": 0,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "1루 대기",
+      "runner": {
+        "frame": -1,
+        "progress": 0,
+        "height": 82,
+        "scale": 0.3761467889908257,
+        "anchor": [
+          166,
+          239
+        ],
+        "contact": [
+          1239,
+          581
+        ],
+        "hit": [
+          1257,
+          563
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": false,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 0,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          819.8303030303031,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 59.74111257650272
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 4.9,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 8,
+        "progress": 0.9232,
+        "height": 73.6912,
+        "scale": 0.33803302752293574,
+        "anchor": [
+          43,
+          229
+        ],
+        "contact": [
+          878.0288,
+          489.6032
+        ],
+        "hit": [
+          909.1278385321101,
+          475.0677798165138
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 2,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          840.6242424242424,
+          417.1484848484848
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 58.46316084813441
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.149,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 9,
+        "progress": 0.9635678799999999,
+        "height": 73.32788908,
+        "scale": 0.3363664636697248,
+        "anchor": [
+          25,
+          230
+        ],
+        "contact": [
+          862.24495892,
+          485.60677988
+        ],
+        "hit": [
+          899.2452699236698,
+          470.8066554785321
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 2,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          840.6242424242424,
+          417.1484848484848
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 58.46316084813441
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.15,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 9,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          25,
+          230
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 2,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          840.6242424242424,
+          417.1484848484848
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 58.46316084813441
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.7,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "베이스 접촉",
+      "runner": {
+        "frame": 10,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          28,
+          230
+        ],
+        "contact": [
+          848,
+          482
+        ],
+        "hit": [
+          883.8302752293578,
+          467.26605504587155
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 3,
+        "root": [
+          816.2746568807339,
+          474.1960513761468
+        ],
+        "glove": [
+          856.9776871837643,
+          447.87180895190437
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 24.21919736514763
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 6,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "베이스 접촉",
+      "runner": {
+        "frame": 10,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          28,
+          230
+        ],
+        "contact": [
+          838,
+          480
+        ],
+        "hit": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 4,
+        "root": [
+          833.3484570475396,
+          474.55696413678066
+        ],
+        "glove": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 0
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 6.8,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "일어나기",
+      "runner": {
+        "frame": 18,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          58,
+          225
+        ],
+        "contact": [
+          838,
+          480
+        ],
+        "hit": [
+          856,
+          462
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 6,
+        "root": [
+          825.4300627432452,
+          474.3895819769668
+        ],
+        "glove": [
+          838.7027900159725,
+          440.10170318908797
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 43.21093405364676
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 7.5,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "일어나기",
+      "runner": {
+        "frame": 19,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          62,
+          227
+        ],
+        "contact": [
+          838,
+          480
+        ],
+        "hit": [
+          856,
+          462
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 59.341507206225124
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 8.5,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "대기·종료",
+      "runner": {
+        "frame": 21,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          94,
+          231
+        ],
+        "contact": [
+          838,
+          480
+        ],
+        "hit": [
+          856,
+          462
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 59.341507206225124
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 10,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "대기·종료",
+      "runner": {
+        "frame": 21,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          94,
+          231
+        ],
+        "contact": [
+          838,
+          480
+        ],
+        "hit": [
+          856,
+          462
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          873.8302752293578,
+          465.26605504587155
+        ],
+        "tagDistance": 59.341507206225124
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 0,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "1루 대기",
+      "runner": {
+        "frame": -1,
+        "progress": 0,
+        "height": 82,
+        "scale": 0.3761467889908257,
+        "anchor": [
+          166,
+          239
+        ],
+        "contact": [
+          1239,
+          581
+        ],
+        "hit": [
+          1257,
+          563
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": false,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 0,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          819.8303030303031,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 85.23210160223068
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 4.9,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 8,
+        "progress": 0.9232,
+        "height": 73.6912,
+        "scale": 0.33803302752293574,
+        "anchor": [
+          43,
+          229
+        ],
+        "contact": [
+          878.0288,
+          489.6032
+        ],
+        "hit": [
+          909.1278385321101,
+          475.0677798165138
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 3,
+        "root": [
+          832.8555964136781,
+          477.0423623436197
+        ],
+        "glove": [
+          873.5586267167084,
+          450.7181199193773
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 32.56002479985931
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.149,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 9,
+        "progress": 0.9635678799999999,
+        "height": 73.32788908,
+        "scale": 0.3363664636697248,
+        "anchor": [
+          25,
+          230
+        ],
+        "contact": [
+          862.24495892,
+          485.60677988
+        ],
+        "hit": [
+          899.2452699236698,
+          470.8066554785321
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 4,
+        "root": [
+          858.7105731204214,
+          480.0846517678987
+        ],
+        "glove": [
+          899.1923913022396,
+          470.7937426769896
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 0.0006239823036587617
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.15,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 9,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          25,
+          230
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 4,
+        "root": [
+          858.7111928273562,
+          480.0847246872394
+        ],
+        "glove": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 0
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.7,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "베이스 접촉",
+      "runner": {
+        "frame": 11,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          33,
+          230
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          896.5021229357799,
+          470.79381559633026
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 6,
+        "root": [
+          856.088724370672,
+          479.7761454863463
+        ],
+        "glove": [
+          869.3614516433993,
+          445.4882666984675
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 39.118956264398044
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 6,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "베이스 접촉",
+      "runner": {
+        "frame": 11,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          33,
+          230
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          896.5021229357799,
+          470.79381559633026
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 6,
+        "root": [
+          839.8294199392307,
+          477.86295444080935
+        ],
+        "glove": [
+          853.1021472119579,
+          443.57507565293054
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 53.52782014691036
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 6.8,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "일어나기",
+      "runner": {
+        "frame": 18,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          58,
+          225
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          880.1933,
+          467.5937
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 84.82029775257035
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 7.5,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "일어나기",
+      "runner": {
+        "frame": 19,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          62,
+          227
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          880.1933,
+          467.5937
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 84.82029775257035
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 8.5,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "대기·종료",
+      "runner": {
+        "frame": 21,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          94,
+          231
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          880.1933,
+          467.5937
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 84.82029775257035
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 10,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "feet",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "대기·종료",
+      "runner": {
+        "frame": 21,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          94,
+          231
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          880.1933,
+          467.5937
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          899.1930110091744,
+          470.79381559633026
+        ],
+        "tagDistance": 84.82029775257035
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 0,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "1루 대기",
+      "runner": {
+        "frame": -1,
+        "progress": 0,
+        "height": 82,
+        "scale": 0.3761467889908257,
+        "anchor": [
+          166,
+          239
+        ],
+        "contact": [
+          1239,
+          581
+        ],
+        "hit": [
+          1257,
+          563
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": false,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 0,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          819.8303030303031,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 65.08838296670761
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 4.9,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 14,
+        "progress": 0.9232,
+        "height": 73.6912,
+        "scale": 0.33803302752293574,
+        "anchor": [
+          17,
+          173
+        ],
+        "contact": [
+          878.0288,
+          489.6032
+        ],
+        "hit": [
+          916.9025981651376,
+          493.3215633027523
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 2,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          840.6242424242424,
+          417.1484848484848
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 65.61474436143205
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.149,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 15,
+        "progress": 0.9635678799999999,
+        "height": 73.32788908,
+        "scale": 0.3363664636697248,
+        "anchor": [
+          12,
+          197
+        ],
+        "contact": [
+          862.24495892,
+          485.60677988
+        ],
+        "hit": [
+          902.6089345603671,
+          481.23401585229357
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 2,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          840.6242424242424,
+          417.1484848484848
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 65.61474436143205
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.15,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 15,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          12,
+          197
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 2,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          840.6242424242424,
+          417.1484848484848
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 65.61474436143205
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.7,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "베이스 접촉",
+      "runner": {
+        "frame": 16,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          18,
+          207
+        ],
+        "contact": [
+          848,
+          482
+        ],
+        "hit": [
+          886.1743119266055,
+          474.29816513761466
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 3,
+        "root": [
+          817.0997577981651,
+          476.6713541284404
+        ],
+        "glove": [
+          857.8027881011955,
+          450.34711170419797
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 28.624493611316904
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 6,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "베이스 접촉",
+      "runner": {
+        "frame": 16,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          18,
+          207
+        ],
+        "contact": [
+          838,
+          480
+        ],
+        "hit": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 4,
+        "root": [
+          835.6924937447873,
+          481.58907422852377
+        ],
+        "glove": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 0
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 6.8,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "일어나기",
+      "runner": {
+        "frame": 17,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          27,
+          210
+        ],
+        "contact": [
+          838,
+          480
+        ],
+        "hit": [
+          873.1605504587156,
+          471.29357798165137
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 6,
+        "root": [
+          827.0696556546934,
+          479.30836071131154
+        ],
+        "glove": [
+          840.3423829274207,
+          445.0204819234327
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 45.03331141872519
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 7.5,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "일어나기",
+      "runner": {
+        "frame": 23,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          128,
+          225
+        ],
+        "contact": [
+          848,
+          480
+        ],
+        "hit": [
+          866,
+          462
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 64.70577582819715
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 8.5,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "대기·종료",
+      "runner": {
+        "frame": 21,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          94,
+          231
+        ],
+        "contact": [
+          838,
+          480
+        ],
+        "hit": [
+          856,
+          462
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 64.70577582819715
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 10,
+      "playing": false,
+      "speed": 1,
+      "scenario": "safe",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "대기·종료",
+      "runner": {
+        "frame": 21,
+        "progress": 1,
+        "height": 73,
+        "scale": 0.3348623853211009,
+        "anchor": [
+          94,
+          231
+        ],
+        "contact": [
+          838,
+          480
+        ],
+        "hit": [
+          856,
+          462
+        ],
+        "runnerOnBase": true
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": false,
+        "runnerOnBase": true,
+        "call": "safe",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 6,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          876.1743119266055,
+          472.29816513761466
+        ],
+        "tagDistance": 64.70577582819715
+      },
+      "contactInsideBase": true
+    },
+    {
+      "time": 0,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "1루 대기",
+      "runner": {
+        "frame": -1,
+        "progress": 0,
+        "height": 82,
+        "scale": 0.3761467889908257,
+        "anchor": [
+          166,
+          239
+        ],
+        "contact": [
+          1239,
+          581
+        ],
+        "hit": [
+          1257,
+          563
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": false,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 0,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          819.8303030303031,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 92.55609807554784
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 4.9,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 14,
+        "progress": 0.9232,
+        "height": 73.6912,
+        "scale": 0.33803302752293574,
+        "anchor": [
+          17,
+          173
+        ],
+        "contact": [
+          878.0288,
+          489.6032
+        ],
+        "hit": [
+          916.9025981651376,
+          493.3215633027523
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 3,
+        "root": [
+          834.5374014595496,
+          482.2559579858215
+        ],
+        "glove": [
+          875.24043176258,
+          455.9317155615791
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 37.22529322104777
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.149,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 15,
+        "progress": 0.9635678799999999,
+        "height": 73.32788908,
+        "scale": 0.3363664636697248,
+        "anchor": [
+          12,
+          197
+        ],
+        "contact": [
+          862.24495892,
+          485.60677988
+        ],
+        "hit": [
+          902.6089345603671,
+          481.23401585229357
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": false,
+        "out": false,
+        "runnerOnBase": false,
+        "call": null,
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 4,
+        "root": [
+          862.0741429026612,
+          490.5117180928421
+        ],
+        "glove": [
+          902.5559610844793,
+          481.220809001933
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 0.0006890411587709967
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.15,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "슬라이딩·태그",
+      "runner": {
+        "frame": 15,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          12,
+          197
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 4,
+        "root": [
+          862.0748029190993,
+          490.5119159716431
+        ],
+        "glove": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 0
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 5.7,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "베이스 접촉",
+      "runner": {
+        "frame": 16,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          18,
+          207
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          900.5384550458716,
+          477.85739678899085
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 6,
+        "root": [
+          859.281753184284,
+          489.6745348085432
+        ],
+        "glove": [
+          872.5544804570112,
+          455.3866560206644
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 39.592197811916286
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 6,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "베이스 접촉",
+      "runner": {
+        "frame": 16,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          18,
+          207
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          900.5384550458716,
+          477.85739678899085
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 6,
+        "root": [
+          841.9648448284289,
+          484.48277159732413
+        ],
+        "glove": [
+          855.2375721011562,
+          450.1948928094453
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 56.58367390516834
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 6.8,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "일어나기",
+      "runner": {
+        "frame": 17,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          27,
+          210
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          897.5112059633028,
+          476.8483137614679
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 92.16087441522487
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 7.5,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "일어나기",
+      "runner": {
+        "frame": 23,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          128,
+          225
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          880.1933,
+          467.5937
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 92.16087441522487
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 8.5,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "대기·종료",
+      "runner": {
+        "frame": 21,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          94,
+          231
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          880.1933,
+          467.5937
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 92.16087441522487
+      },
+      "contactInsideBase": false
+    },
+    {
+      "time": 10,
+      "playing": false,
+      "speed": 1,
+      "scenario": "out",
+      "style": "head",
+      "zoom": true,
+      "loop": false,
+      "ready": true,
+      "recording": false,
+      "errors": [],
+      "phase": "대기·종료",
+      "runner": {
+        "frame": 21,
+        "progress": 0.9637,
+        "height": 73.3267,
+        "scale": 0.33636100917431194,
+        "anchor": [
+          94,
+          231
+        ],
+        "contact": [
+          862.1933,
+          485.5937
+        ],
+        "hit": [
+          880.1933,
+          467.5937
+        ],
+        "runnerOnBase": false
+      },
+      "race": {
+        "hasBall": true,
+        "tagHappened": true,
+        "out": true,
+        "runnerOnBase": false,
+        "call": "out",
+        "forcePlay": false
+      },
+      "events": {
+        "catchAt": 4.8,
+        "tagAt": 5.15,
+        "baseAt": 5.7,
+        "secure": true
+      },
+      "tagger": {
+        "frame": 7,
+        "root": [
+          807,
+          474
+        ],
+        "glove": [
+          820.2727272727273,
+          439.7121212121212
+        ],
+        "scale": 0.1915342830788152,
+        "anchor": [
+          184.79166666666669,
+          415.78125
+        ],
+        "target": [
+          902.5566211009175,
+          481.22100688073397
+        ],
+        "tagDistance": 92.16087441522487
+      },
+      "contactInsideBase": false
+    }
+  ]
+}

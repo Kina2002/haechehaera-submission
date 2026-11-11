@@ -1,0 +1,373 @@
+{
+  "date": "2026-11-11",
+  "safe": [
+    {
+      "time": 8.2,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "safe",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "베이스 앞",
+      "frame": 16,
+      "progress": 1,
+      "position": [
+        1239,
+        581
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": "safe",
+        "call": null,
+        "runnerOnBase": true,
+        "ballCaught": false,
+        "receiverFootOnBase": true,
+        "decidedAt": 8.2
+      },
+      "events": {
+        "id": "safe",
+        "name": "주자가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 7.65,
+        "throwAt": 7.95,
+        "ballAt": 8.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    },
+    {
+      "time": 8.35,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "safe",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "베이스 앞",
+      "frame": 16,
+      "progress": 1,
+      "position": [
+        1239,
+        581
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": "safe",
+        "call": "safe",
+        "runnerOnBase": true,
+        "ballCaught": false,
+        "receiverFootOnBase": true,
+        "decidedAt": 8.2
+      },
+      "events": {
+        "id": "safe",
+        "name": "주자가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 7.65,
+        "throwAt": 7.95,
+        "ballAt": 8.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    },
+    {
+      "time": 8.6,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "safe",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "결과·대기",
+      "frame": 23,
+      "progress": 1,
+      "position": [
+        1239,
+        581
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": "safe",
+        "call": "safe",
+        "runnerOnBase": true,
+        "ballCaught": true,
+        "receiverFootOnBase": true,
+        "decidedAt": 8.2
+      },
+      "events": {
+        "id": "safe",
+        "name": "주자가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 7.65,
+        "throwAt": 7.95,
+        "ballAt": 8.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    },
+    {
+      "time": 10.2,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "safe",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "결과·대기",
+      "frame": 23,
+      "progress": 1,
+      "position": [
+        1239,
+        581
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": "safe",
+        "call": "safe",
+        "runnerOnBase": true,
+        "ballCaught": true,
+        "receiverFootOnBase": true,
+        "decidedAt": 8.2
+      },
+      "events": {
+        "id": "safe",
+        "name": "주자가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 7.65,
+        "throwAt": 7.95,
+        "ballAt": 8.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    },
+    {
+      "time": 11.6,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "safe",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "결과·대기",
+      "frame": 23,
+      "progress": 1,
+      "position": [
+        1239,
+        581
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": "safe",
+        "call": "safe",
+        "runnerOnBase": true,
+        "ballCaught": true,
+        "receiverFootOnBase": true,
+        "decidedAt": 8.2
+      },
+      "events": {
+        "id": "safe",
+        "name": "주자가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 7.65,
+        "throwAt": 7.95,
+        "ballAt": 8.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    }
+  ],
+  "out": [
+    {
+      "time": 7.59,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "out",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "진루·송구",
+      "frame": 11,
+      "progress": 0.9119999999999998,
+      "position": [
+        1198.4319999999998,
+        597.808
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": null,
+        "call": null,
+        "runnerOnBase": false,
+        "ballCaught": false,
+        "receiverFootOnBase": true,
+        "decidedAt": null
+      },
+      "events": {
+        "id": "out",
+        "name": "송구가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 6.65,
+        "throwAt": 6.95,
+        "ballAt": 7.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    },
+    {
+      "time": 7.6,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "out",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "진루·송구",
+      "frame": 11,
+      "progress": 0.9145454545454543,
+      "position": [
+        1199.6054545454544,
+        597.3218181818182
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": "out",
+        "call": null,
+        "runnerOnBase": false,
+        "ballCaught": true,
+        "receiverFootOnBase": true,
+        "decidedAt": 7.6
+      },
+      "events": {
+        "id": "out",
+        "name": "송구가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 6.65,
+        "throwAt": 6.95,
+        "ballAt": 7.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    },
+    {
+      "time": 7.75,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "out",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "베이스 앞",
+      "frame": 18,
+      "progress": 0.94,
+      "position": [
+        1211.34,
+        592.46
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": "out",
+        "call": "out",
+        "runnerOnBase": false,
+        "ballCaught": true,
+        "receiverFootOnBase": true,
+        "decidedAt": 7.6
+      },
+      "events": {
+        "id": "out",
+        "name": "송구가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 6.65,
+        "throwAt": 6.95,
+        "ballAt": 7.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    },
+    {
+      "time": 8.2,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "out",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "베이스 앞",
+      "frame": 19,
+      "progress": 0.94,
+      "position": [
+        1211.34,
+        592.46
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": "out",
+        "call": "out",
+        "runnerOnBase": false,
+        "ballCaught": true,
+        "receiverFootOnBase": true,
+        "decidedAt": 7.6
+      },
+      "events": {
+        "id": "out",
+        "name": "송구가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 6.65,
+        "throwAt": 6.95,
+        "ballAt": 7.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    },
+    {
+      "time": 11.6,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "scenario": "out",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "phase": "결과·대기",
+      "frame": 22,
+      "progress": 0.94,
+      "position": [
+        1211.34,
+        592.46
+      ],
+      "cameraWeight": 1,
+      "race": {
+        "result": "out",
+        "call": "out",
+        "runnerOnBase": false,
+        "ballCaught": true,
+        "receiverFootOnBase": true,
+        "decidedAt": 7.6
+      },
+      "events": {
+        "id": "out",
+        "name": "송구가 먼저 도착",
+        "runnerAt": 8.2,
+        "pickupAt": 6.65,
+        "throwAt": 6.95,
+        "ballAt": 7.6,
+        "footOnBase": true,
+        "hasPossession": true
+      }
+    }
+  ],
+  "layout": {
+    "width": 1536,
+    "height": 706,
+    "pageHeight": 706
+  },
+  "errors": []
+}

@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict'),{fixtures,taggedOut,at}=require('./tag-rules.js');
+assert.equal(at(4.9,fixtures.out).call,null,'catch alone does not retire runner');
+assert.equal(at(5.149,fixtures.out).call,null,'no premature tag');
+assert.equal(at(5.15,fixtures.out).call,'out');
+assert.equal(at(10,fixtures.out).call,'out','later touch cannot undo out');
+assert.equal(at(5.7,fixtures.safe).runnerOnBase,true);
+assert.equal(at(6,fixtures.safe).call,'safe','late tag on base stays safe');
+for(let t=5.7;t<=10;t+=.025)assert.equal(at(t,fixtures.safe).runnerOnBase,true);
+assert.equal(taggedOut({hasBall:false,secure:true,touchesRunner:true,onBase:false}),false);
+assert.equal(taggedOut({hasBall:true,secure:false,touchesRunner:true,onBase:false}),false);
+assert.equal(taggedOut({hasBall:true,secure:true,touchesRunner:false,onBase:false}),false);
+assert.equal(taggedOut({hasBall:true,secure:true,touchesRunner:true,onBase:true}),false);
+assert.equal(at(5.2,{...fixtures.out,secure:false}).out,false);
+assert.equal(at(5.2,{...fixtures.out,catchAt:5.3}).out,false);
+console.log('13 tag-rule checks passed, including continuous safe contact.');

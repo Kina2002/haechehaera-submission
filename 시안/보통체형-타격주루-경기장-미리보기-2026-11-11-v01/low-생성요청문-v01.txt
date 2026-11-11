@@ -1,0 +1,6 @@
+Use case: precise-object-edit.
+Input 1 is the EDIT TARGET, the approved Korean pixel-art baseball integrated stadium with peaceful cloth banners.
+Make a CLEAN BACKGROUND PLATE for overlaying an animated batter. Preserve full 1672:941 landscape composition, sharp pixel-art look, scoreboard, inning3회말 우리공격, scores2-1, lineup9, BSO/base markers, both stadium banners with exact slogans, ALL upper controls, BOTH lower portrait/player info cards, stamina, batting decision buttons, 그대로 해, bottom recent2 play log and 경기기록+, field/base geometry and all background fielders and FOUR umpires.
+ONLY REMOVE the SINGLE LARGE BLANK-HEADED BATTER at screen-left of home plate (center approx x630, feet y780). Reconstruct clean dirt/grass/batter-box lines where that body stood. Do not remove the catcher or umpires.
+ONE additional necessary pose correction: the large green blank-headed CATCHER at center foreground (x835, feet y835) must be CROUCHING low behind the plate, instead of standing. Keep his same bald blank modular head and green/white uniform, make the head/torso lower so an animated batter at x630 will remain visible. Keep plate umpire screen-right behind him.
+No replacement batter, no bat, no ball, no runner added in the cleared patch. No changes elsewhere, no crop, no new labels or explanatory panels. This is a background image, not a comic or frame sheet.

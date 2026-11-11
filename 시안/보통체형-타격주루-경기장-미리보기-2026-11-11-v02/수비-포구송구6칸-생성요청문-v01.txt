@@ -1,0 +1,13 @@
+Use case: identity-preserve.
+Asset: transparent animation SPRITE ATLAS, EXACTLY 3 columns and 2 rows, SIX poses, 1536x1024 canvas, each cell512x512.
+Input image is the chosen NORMAL BODY animation reference. Reuse this exact normal body proportions, coarse square pixel style and plain GREEN short-sleeve baseball jersey, white cuffs and pants, green socks, dark shoes, big blank peach bald head and ears. No hair, cap, eyes, nose, mouth, facial features, number or logo. Do not use a different physique or any famous character.
+These are TWO defenders of the same normal physique, with brown baseball GLOVES, in the HIGH diagonal behind-home camera. All six cells full body on empty alpha background, same scale, head top around y55 and feet baseline y460, about436px standing body height. Sharp square pixel edges and simple limited flat colors, no colored matte, glow, haze, shadow, borders, words, baseball field or bases.
+ROW1, fielder throwing toward SCREEN RIGHT to first:
+1 low crouching GROUND-BALL FIELDING pose with left-hand brown glove near ground, both knees bent.
+2 TRANSFER/THROW SET, white baseball held in right hand drawn back, left glove pointing screen-right, rear three-quarter torso.
+3 THROW RELEASE toward screen-right, right arm extended right, empty glove at left side, stable planted feet.
+ROW2, first baseman receiving a throw from SCREEN LEFT:
+4 WIDE STRETCH READY, glove extended LEFT at local x110,y250, head around x320,y90, torso around x320,y245. ONE SHOE planted at local x128,y460 and the other shoe near x385,y460. The shoe at x128 will stay anchored on the base in the game; make the wide athletic leg stretch clear. No bag in this sprite.
+5 SAME STRETCH with glove closed catching incoming ball, keep the base-contact shoe EXACTLY x128,y460, same other foot, head and body positions. Do not draw a separate floating ball.
+6 HOLD BALL IN GLOVE near chest after the catch, still keeping the same shoe at x128,y460 and wide stance, torso slightly upright to look at runner on LEFT.
+The rear/side view jersey is plain green on back with a thin white neck collar, not a front placket. Brown gloves distinguish the defenders from empty-handed runner. Separate each pose with generous blank gutters. Genuinely transparent alpha0 everywhere outside sprite pixels; no tan/gray/brown background.

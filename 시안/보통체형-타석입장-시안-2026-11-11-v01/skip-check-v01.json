@@ -1,0 +1,26 @@
+{
+  "time": 8.514469163575951,
+  "playing": false,
+  "speed": 1,
+  "team": "home",
+  "mode": "entry",
+  "loop": false,
+  "ready": true,
+  "recording": false,
+  "errors": [],
+  "duration": 8.61446916357595,
+  "entryEnd": 8.61446916357595,
+  "walkEnd": 5.314469163575952,
+  "phase": "준비 완료",
+  "actor": {
+    "frame": 23,
+    "mirror": false,
+    "position": [
+      636,
+      782
+    ],
+    "height": 265,
+    "heldBat": true
+  },
+  "tailTime": null
+}

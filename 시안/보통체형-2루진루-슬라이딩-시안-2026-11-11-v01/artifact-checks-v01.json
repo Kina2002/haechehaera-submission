@@ -1,0 +1,34 @@
+{
+  "links": 65,
+  "missing": [],
+  "pngs": 28,
+  "assets": {
+    "보통형-2루동작24칸-v01.png": {
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "27800a3136efbc1a64e1a1ea39dd1b60bf5c6c753aa7f687ae7b22c12a6c0a3c",
+      "fullyTransparentPixels": 867626
+    },
+    "2루수-포구태그8칸-v01.png": {
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "sha256": "eaabd4c77445af34f6b4d1893680195c7891f021b8624dc1cd1287419b68a808",
+      "fullyTransparentPixels": 783742
+    },
+    "경기장-2루주루-배경-v01.png": {
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "sha256": "616d593518ffa27e730094e494d80f5d1eb6e4c5479eafa5717d8518d1fdb345"
+    }
+  },
+  "bundledMatches": true
+}
