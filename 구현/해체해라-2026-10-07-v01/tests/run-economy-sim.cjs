@@ -4,7 +4,7 @@
 // 사용법: node tests/run-economy-sim.cjs [구단 수=30] [결과.json]
 const fs=require('node:fs');
 const {createWorld}=require('./run-season-sim.cjs');
-const {makeTracker,eventExp,EXP_EVENTS}=require('./exp-events.cjs');
+const {makeTracker,eventExp,EXP_EVENTS,EXP_PRESETS}=require('./exp-events.cjs');
 
 // ---- 현재 게임 규칙 (extensions.js 기준값) ----
 const B={startFunds:3000,facilityPrice:1000,maintenance:150,baseReward:350,runReward:80,winReward:600,hireFactor:35,trainingFactor:110,salaryFactor:4,ticketBase:10,staminaCap:100,fanEventChance:.32};
@@ -683,7 +683,8 @@ const SHAPES={t4g10:{name:'4단계 · 10경기',tiers:4,rounds:2},t5g10:{name:'5
   t5bg10:{name:'5단계(63) · 10경기',tiers:5,mids:'b',rounds:2},t5bg20h:{name:'5단계(63) · 20경기 · 돈 절반',tiers:5,mids:'b',rounds:4,money:.5},
   t4g20h:{name:'4단계 · 20경기 · 돈 절반',tiers:4,rounds:4,money:.5},
   // 경기 경험치 사건 방식(P10 2026-11-11, 숫자는 exp-events.cjs의 Claude 초안 v01)
-  t4g10e:{name:'4단계 · 10경기 · 사건 경험치',tiers:4,rounds:2,expEvents:true}};
+  t4g10e:{name:'4단계 · 10경기 · 사건 경험치',tiers:4,rounds:2,expEvents:true},
+  t4g10p:{name:'4단계 · 10경기 · 사건 경험치 v02p',tiers:4,rounds:2,expEvents:'v02p'}};
 function mainShape(n,out,key='t4g10',pk='normal',seasons=25,worldSeed=20261130,seedBase=21000){
   const started=Date.now(),sh=SHAPES[key];if(!sh)throw new Error('리그 모양이 없습니다: '+key);
   const g20=sh.rounds===4,L=sh.tiers===5?(sh.mids==='b'?LEAGUE5B:LEAGUE5):null;
@@ -692,7 +693,7 @@ function mainShape(n,out,key='t4g10',pk='normal',seasons=25,worldSeed=20261130,s
   const disband=g20?{...DISBAND.base,win:-2.5,loss:2.5,unpaid:2.5}:DISBAND.base;
   const base={league:true,contractGames:5*sh.rounds,seasons,growth:{K:g20?20:10,cap:80},disband,mlb:{request:true,regular:true,ticket:true,ticketAt:[1]},
     reform:true,invest:true,leagueMoney:L?L.money:LEAGUE_MONEY,market:L?L.market:MARKET,mids:L?L.mids:null,leagueNeed:L?L.need:null,billboard:L?L.billboard:null,
-    leagueExp:L?L.exp:LEAGUE_EXP4,rounds:sh.rounds,lastStreak:10,shapeLog:true,...(sh.expEvents?{expEvents:EXP_EVENTS}:{}),...(sh.money?{moneyScale:sh.money}:{}),ages,rebuildRule:{},loyalty:{events:true},mlbBonus:MLB_BONUS.choice3};
+    leagueExp:L?L.exp:LEAGUE_EXP4,rounds:sh.rounds,lastStreak:10,shapeLog:true,...(sh.expEvents?{expEvents:typeof sh.expEvents==='string'?EXP_PRESETS[sh.expEvents]:EXP_EVENTS}:{}),...(sh.money?{moneyScale:sh.money}:{}),ages,rebuildRule:{},loyalty:{events:true},mlbBonus:MLB_BONUS.choice3};
   const runs=[];for(let i=0;i<n;i++)runs.push(career(createWorld(worldSeed+i),REFORM_POLICIES[pk],{...base,seed:seedBase+i*31}));
   const report={version:'2026-11-11-league-shape-v01',shape:key,shapeName:sh.name,tiers:sh.tiers,gamesPerSeason:5*sh.rounds,persona:pk,personaName:REFORM_POLICIES[pk].name,clubs:n,seasons,worldSeed,seedBase,
     settings:{...base,disband,mlbBonus:'choice3'},league5:L,results:runs.map(r=>r.log)};

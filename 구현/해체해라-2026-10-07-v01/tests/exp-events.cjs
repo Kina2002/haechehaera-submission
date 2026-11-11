@@ -8,6 +8,8 @@ const EXP_EVENTS = {
   field: { catchOut: .6, error: .8, throwOut: .6, ofAssistThrow: 2.4, ofAssistVelocity: 1.6, caughtStealing: 1.6, rangePos: .5, dpTurn: 1.2, cleanThrow: .3, fullGame: .8, extraInnings: .8 },
   pitch: { k: .8, out: .2, cleanInning: .4, fivePlus: 3, play: .8, escape: .8, fieldCatch: .8, fieldThrow: .8, cover1B: .8, whiffInduced: .1 },
 };
+// v02p (2026-11-11): 야수는 v01 그대로, 투수만 — 투수 앞 타구 처리·송구 0.8 → 0.3, 주자 있을 때 무실점 이닝 0.8 → 0.3, 볼넷 없는 이닝 0.4 → 0.2
+const EXP_PRESETS = { v01: EXP_EVENTS, v02p: { ...EXP_EVENTS, pitch: { ...EXP_EVENTS.pitch, fieldCatch: .3, fieldThrow: .3, escape: .3, cleanInning: .2 } } };
 const OF = ['LF', 'CF', 'RF'], RANGE = ['LF', 'CF', 'RF', 'SS'];
 const KEYS = ['contact', 'power', 'eye', 'speed', 'sense', 'catch', 'throw', 'velocity', 'control', 'stamina'];
 
@@ -93,4 +95,4 @@ function eventExp(pos, s, t, innings, E = EXP_EVENTS) {
   return e;
 }
 
-module.exports = { EXP_EVENTS, makeTracker, eventExp, KEYS };
+module.exports = { EXP_EVENTS, EXP_PRESETS, makeTracker, eventExp, KEYS };
