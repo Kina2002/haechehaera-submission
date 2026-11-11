@@ -4,6 +4,7 @@
 // 사용법: node tests/run-economy-sim.cjs [구단 수=30] [결과.json]
 const fs=require('node:fs');
 const {createWorld}=require('./run-season-sim.cjs');
+const {makeTracker,eventExp,EXP_EVENTS,EXP_PRESETS,scaleExp}=require('./exp-events.cjs');
 
 // ---- 현재 게임 규칙 (extensions.js 기준값) ----
 const B={startFunds:3000,facilityPrice:1000,maintenance:150,baseReward:350,runReward:80,winReward:600,hireFactor:35,trainingFactor:110,salaryFactor:4,ticketBase:10,staminaCap:100,fanEventChance:.32};
@@ -76,6 +77,14 @@ function gainExp(p,pos,s,growth,boost=null){
     add('sense',1+s.bh*2);
     if(pos!=='DH'){const w=POSW[pos];add('catch',(w.catch||0)*4+s.e);add('throw',(w.throw||0)*4);add('sense',(w.sense||0)*2);add('speed',(w.speed||0)*2);}
   }else{add('control',s.pout*.5);add('velocity',s.pk*1.5);add('stamina',s.pout*.3);add('sense',1);}
+  return levelUp(p,e,growth,boost);
+}
+// 사건 방식(P10 참가자 결정 2026-11-11): exp는 exp-events.cjs의 eventExp가 계산한 능력별 경험치(배수 곱하기 전)
+function gainExpEvents(p,exp,growth,boost=null){
+  const e=p.exp??={};for(const [k,v] of Object.entries(exp))if(v>0)e[k]=(e[k]||0)+v*(boost?boost.mult(k):1);
+  return levelUp(p,e,growth,boost);
+}
+function levelUp(p,e,growth,boost){
   let ups=0;
   for(const k of Object.keys(e))for(let guard=0;guard<20;guard++){
     const gcap=boost?boost.cap(k):growth.cap,cap=k==='stamina'?Math.min(gcap,B.staminaCap):gcap;if(p.a[k]>=cap){e[k]=0;break;}
@@ -169,7 +178,7 @@ function entryP21(p,rnd,rule=P21_ENTRY){
 }
 // reform: 시설·경기장 개편안(P17)을 씁니다. 이때 원정 응원 비율은 awayShare 대신 응원단 버스 단계로 정합니다(P16).
 function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null,mlb=null,awayShare=0,reform=false,invest=false,leagueNeed=null,leagueMoney=null,mlbOff=false,mids=null,ages=null,market=null,playYoung=0,rebuildRule=null,loyalty=null,mlbBonus=null,
-  leagueExp=null,billboard=null,rounds=2,lastStreak=0,shapeLog=false,moneyScale=1}){
+  leagueExp=null,billboard=null,rounds=2,lastStreak=0,shapeLog=false,moneyScale=1,expEvents=null}){
   // 리그 모양 비교(2026-11-11): leagueExp 리그별 경기 경험치 배수(P10), billboard 리그별 광고판 수입, rounds 상대마다 만나는 횟수(2면 10경기, 4면 20경기),
   // lastStreak 동네 리그 연속 6위 추가 여론(P09, 2시즌째부터), shapeLog 순위 동률 기록. 모두 없으면 지금과 같습니다.
   // moneyScale: 경기마다 오가는 돈(수입 전부·급여·유지비·정기 후원)의 배수. 0.5면 20경기 한 시즌의 돈이 지금 10경기 한 시즌과 같습니다. 건설비·훈련비·상금·이적료는 그대로.
@@ -379,7 +388,12 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     renew();t.lineup=world.autoLineup(t.players);manage();
     t.lineup=world.autoLineup(t.players);
     if(playYoung&&ages)forceYoung();
-    const g=world.playGame(t,opp,home,ri(1,2**31-1));
+    const tracker=expEvents?makeTracker():null;
+    const g=world.playGame(t,opp,home,ri(1,2**31-1),tracker?{onEvent:tracker.onEvent}:undefined);
+    // expEvents(사건 방식): 출전 선수와 이번 경기에 공을 던진 선수 모두 사건으로 경험치를 받습니다.
+    if(growth&&tracker){const by=tracker.finish(),posOf=new Map(t.lineup.map(x=>[x.id,x.pos]));
+      for(const p of t.players){const pos=posOf.get(p.id)||null,tk=by[p.id];if(!pos&&!tk)continue;club.perfPoints+=gainExpEvents(p,eventExp(pos,p.stats,tk,g.innings,expEvents),growth,boostFor(p));}}
+    else
     // playGame은 경기 시작 때 기록을 새로 만들므로 p.stats는 이번 경기 기록입니다.
     if(growth)for(const x of t.lineup){const p=t.players.find(p=>p.id===x.id);if(p)club.perfPoints+=gainExp(p,x.pos,p.stats,growth,boostFor(p));}
     const win=g.result==='W',crowd=attendance(club.ticket),stores=club.fac.filter(id=>STORES.includes(id)).length;
@@ -667,7 +681,15 @@ const SHAPES={t4g10:{name:'4단계 · 10경기',tiers:4,rounds:2},t5g10:{name:'5
   t4g20:{name:'4단계 · 20경기',tiers:4,rounds:4},t5g20:{name:'5단계 · 20경기',tiers:5,rounds:4},
   // v02 (참가자 2026-11-11): 5단계 39·47·55·63·75, 20경기는 경기당 돈(수입·지출)을 절반으로
   t5bg10:{name:'5단계(63) · 10경기',tiers:5,mids:'b',rounds:2},t5bg20h:{name:'5단계(63) · 20경기 · 돈 절반',tiers:5,mids:'b',rounds:4,money:.5},
-  t4g20h:{name:'4단계 · 20경기 · 돈 절반',tiers:4,rounds:4,money:.5}};
+  t4g20h:{name:'4단계 · 20경기 · 돈 절반',tiers:4,rounds:4,money:.5},
+  // 경기 경험치 사건 방식(P10 2026-11-11, 숫자는 exp-events.cjs의 Claude 초안 v01)
+  t4g10e:{name:'4단계 · 10경기 · 사건 경험치',tiers:4,rounds:2,expEvents:true},
+  t4g10p:{name:'4단계 · 10경기 · 사건 경험치 v02p',tiers:4,rounds:2,expEvents:'v02p'},
+  // 목표 난이도 맞추기(참가자 2026-11-11: 보통 유저 1부 약 50%): v02p 비율 그대로 전체 크기만 키움
+  t4g10p12:{name:'4단계 · 10경기 · 사건 v02p ×1.2',tiers:4,rounds:2,expEvents:'v02p',expScale:1.2},
+  t4g10p135:{name:'4단계 · 10경기 · 사건 v02p ×1.35',tiers:4,rounds:2,expEvents:'v02p',expScale:1.35},
+  // ×1.2(45%)와 ×1.35(65%) 사이에서 보통 유저 50%를 노린 확인 시험(2026-11-11)
+  t4g10p125:{name:'4단계 · 10경기 · 사건 v02p ×1.25',tiers:4,rounds:2,expEvents:'v02p',expScale:1.25}};
 function mainShape(n,out,key='t4g10',pk='normal',seasons=25,worldSeed=20261130,seedBase=21000){
   const started=Date.now(),sh=SHAPES[key];if(!sh)throw new Error('리그 모양이 없습니다: '+key);
   const g20=sh.rounds===4,L=sh.tiers===5?(sh.mids==='b'?LEAGUE5B:LEAGUE5):null;
@@ -676,7 +698,7 @@ function mainShape(n,out,key='t4g10',pk='normal',seasons=25,worldSeed=20261130,s
   const disband=g20?{...DISBAND.base,win:-2.5,loss:2.5,unpaid:2.5}:DISBAND.base;
   const base={league:true,contractGames:5*sh.rounds,seasons,growth:{K:g20?20:10,cap:80},disband,mlb:{request:true,regular:true,ticket:true,ticketAt:[1]},
     reform:true,invest:true,leagueMoney:L?L.money:LEAGUE_MONEY,market:L?L.market:MARKET,mids:L?L.mids:null,leagueNeed:L?L.need:null,billboard:L?L.billboard:null,
-    leagueExp:L?L.exp:LEAGUE_EXP4,rounds:sh.rounds,lastStreak:10,shapeLog:true,...(sh.money?{moneyScale:sh.money}:{}),ages,rebuildRule:{},loyalty:{events:true},mlbBonus:MLB_BONUS.choice3};
+    leagueExp:L?L.exp:LEAGUE_EXP4,rounds:sh.rounds,lastStreak:10,shapeLog:true,...(sh.expEvents?{expEvents:scaleExp(typeof sh.expEvents==='string'?EXP_PRESETS[sh.expEvents]:EXP_EVENTS,sh.expScale||1)}:{}),...(sh.money?{moneyScale:sh.money}:{}),ages,rebuildRule:{},loyalty:{events:true},mlbBonus:MLB_BONUS.choice3};
   const runs=[];for(let i=0;i<n;i++)runs.push(career(createWorld(worldSeed+i),REFORM_POLICIES[pk],{...base,seed:seedBase+i*31}));
   const report={version:'2026-11-11-league-shape-v01',shape:key,shapeName:sh.name,tiers:sh.tiers,gamesPerSeason:5*sh.rounds,persona:pk,personaName:REFORM_POLICIES[pk].name,clubs:n,seasons,worldSeed,seedBase,
     settings:{...base,disband,mlbBonus:'choice3'},league5:L,results:runs.map(r=>r.log)};
@@ -909,7 +931,8 @@ function mainTop(n,out,seasons=20,set='top',worldSeed=20261115,seedBase=16000){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 function main(){
-  if(process.argv[4]==='shape')return mainShape(Number(process.argv[2])||20,process.argv[3],process.argv[5]||'t4g10',process.argv[6]||'normal',Number(process.argv[7])||25);
+  // shape: [world 시드 시작=20261130] [구단 시드 시작=21000]으로 다른 구단 묶음도 돌릴 수 있습니다(예: 20261150 22000).
+  if(process.argv[4]==='shape')return mainShape(Number(process.argv[2])||20,process.argv[3],process.argv[5]||'t4g10',process.argv[6]||'normal',Number(process.argv[7])||25,Number(process.argv[8])||20261130,Number(process.argv[9])||21000);
   if(process.argv[4]==='personas')return mainPersona(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,process.argv[6]||'normal',Number(process.argv[7])||20261130,Number(process.argv[8])||21000,process.argv[9]||null);
   if(process.argv[4]==='loyalty')return mainLoyalty(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||12,process.argv[6]||null);
   if(process.argv[4]==='rebuild')return mainRebuild(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||15,process.argv[6]||null);

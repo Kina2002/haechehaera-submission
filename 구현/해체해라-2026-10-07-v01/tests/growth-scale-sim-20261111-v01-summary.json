@@ -1,0 +1,215 @@
+{
+ "version": "2026-11-11-growth-scale-v01",
+ "cells": {
+  "t4g10p125:aggressive": {
+   "shape": "t4g10p125",
+   "shapeName": "4단계 · 10경기 · 사건 v02p ×1.25",
+   "persona": "aggressive",
+   "groups": "a+b",
+   "all": {
+    "clubs": 80,
+    "topReachPct": 48.8,
+    "topReachMedianSeason": 20,
+    "reach2Pct": 88.8,
+    "reach2MedianSeason": 14,
+    "starter25": 60.4,
+    "disbandAnyPct": 48.8,
+    "mlbPerClub": 13.5,
+    "topSeasonPct": 5.2,
+    "topFirstSeasonRelegationPct": 50
+   },
+   "a": {
+    "clubs": 40,
+    "topReachPct": 47.5,
+    "topReachMedianSeason": 21,
+    "reach2Pct": 92.5,
+    "reach2MedianSeason": 14,
+    "starter25": 61.1,
+    "disbandAnyPct": 52.5,
+    "mlbPerClub": 13.4,
+    "topSeasonPct": 4.9,
+    "topFirstSeasonRelegationPct": 53.3
+   },
+   "b": {
+    "clubs": 40,
+    "topReachPct": 50,
+    "topReachMedianSeason": 19.5,
+    "reach2Pct": 85,
+    "reach2MedianSeason": 13.5,
+    "starter25": 60.1,
+    "disbandAnyPct": 45,
+    "mlbPerClub": 13.5,
+    "topSeasonPct": 5.5,
+    "topFirstSeasonRelegationPct": 47.8
+   }
+  },
+  "t4g10p125:normal": {
+   "shape": "t4g10p125",
+   "shapeName": "4단계 · 10경기 · 사건 v02p ×1.25",
+   "persona": "normal",
+   "groups": "a+b",
+   "all": {
+    "clubs": 80,
+    "topReachPct": 66.3,
+    "topReachMedianSeason": 19,
+    "reach2Pct": 100,
+    "reach2MedianSeason": 11,
+    "starter25": 62.2,
+    "disbandAnyPct": 7.5,
+    "mlbPerClub": 11.4,
+    "topSeasonPct": 7.8,
+    "topFirstSeasonRelegationPct": 48.3
+   },
+   "a": {
+    "clubs": 40,
+    "topReachPct": 65,
+    "topReachMedianSeason": 19,
+    "reach2Pct": 100,
+    "reach2MedianSeason": 11,
+    "starter25": 61.8,
+    "disbandAnyPct": 7.5,
+    "mlbPerClub": 11.1,
+    "topSeasonPct": 7.2,
+    "topFirstSeasonRelegationPct": 69
+   },
+   "b": {
+    "clubs": 40,
+    "topReachPct": 67.5,
+    "topReachMedianSeason": 20,
+    "reach2Pct": 100,
+    "reach2MedianSeason": 10.5,
+    "starter25": 62.3,
+    "disbandAnyPct": 7.5,
+    "mlbPerClub": 11.6,
+    "topSeasonPct": 8.3,
+    "topFirstSeasonRelegationPct": 29
+   }
+  },
+  "t4g10p125:thrifty": {
+   "shape": "t4g10p125",
+   "shapeName": "4단계 · 10경기 · 사건 v02p ×1.25",
+   "persona": "thrifty",
+   "groups": "a+b",
+   "all": {
+    "clubs": 80,
+    "topReachPct": 47.5,
+    "topReachMedianSeason": 21,
+    "reach2Pct": 97.5,
+    "reach2MedianSeason": 11,
+    "starter25": 60.4,
+    "disbandAnyPct": 5,
+    "mlbPerClub": 5.8,
+    "topSeasonPct": 3.9,
+    "topFirstSeasonRelegationPct": 61.1
+   },
+   "a": {
+    "clubs": 40,
+    "topReachPct": 50,
+    "topReachMedianSeason": 19,
+    "reach2Pct": 100,
+    "reach2MedianSeason": 10,
+    "starter25": 61.6,
+    "disbandAnyPct": 7.5,
+    "mlbPerClub": 6.1,
+    "topSeasonPct": 5.2,
+    "topFirstSeasonRelegationPct": 61.9
+   },
+   "b": {
+    "clubs": 40,
+    "topReachPct": 45,
+    "topReachMedianSeason": 21.5,
+    "reach2Pct": 95,
+    "reach2MedianSeason": 11,
+    "starter25": 59.6,
+    "disbandAnyPct": 2.5,
+    "mlbPerClub": 5.4,
+    "topSeasonPct": 2.6,
+    "topFirstSeasonRelegationPct": 60
+   }
+  },
+  "t4g10p12:normal": {
+   "shape": "t4g10p12",
+   "shapeName": "4단계 · 10경기 · 사건 v02p ×1.2",
+   "persona": "normal",
+   "groups": "b",
+   "all": {
+    "clubs": 40,
+    "topReachPct": 52.5,
+    "topReachMedianSeason": 20,
+    "reach2Pct": 100,
+    "reach2MedianSeason": 13,
+    "starter25": 61,
+    "disbandAnyPct": 5,
+    "mlbPerClub": 10.7,
+    "topSeasonPct": 4.7,
+    "topFirstSeasonRelegationPct": 47.6
+   },
+   "a": {
+    "clubs": 0,
+    "topReachPct": 0,
+    "topReachMedianSeason": null,
+    "reach2Pct": 0,
+    "reach2MedianSeason": null,
+    "starter25": null,
+    "disbandAnyPct": 0,
+    "mlbPerClub": null,
+    "topSeasonPct": 0,
+    "topFirstSeasonRelegationPct": 0
+   },
+   "b": {
+    "clubs": 40,
+    "topReachPct": 52.5,
+    "topReachMedianSeason": 20,
+    "reach2Pct": 100,
+    "reach2MedianSeason": 13,
+    "starter25": 61,
+    "disbandAnyPct": 5,
+    "mlbPerClub": 10.7,
+    "topSeasonPct": 4.7,
+    "topFirstSeasonRelegationPct": 47.6
+   }
+  },
+  "t4g10p135:normal": {
+   "shape": "t4g10p135",
+   "shapeName": "4단계 · 10경기 · 사건 v02p ×1.35",
+   "persona": "normal",
+   "groups": "b",
+   "all": {
+    "clubs": 40,
+    "topReachPct": 77.5,
+    "topReachMedianSeason": 21,
+    "reach2Pct": 100,
+    "reach2MedianSeason": 10.5,
+    "starter25": 63.2,
+    "disbandAnyPct": 2.5,
+    "mlbPerClub": 14.9,
+    "topSeasonPct": 8,
+    "topFirstSeasonRelegationPct": 67.6
+   },
+   "a": {
+    "clubs": 0,
+    "topReachPct": 0,
+    "topReachMedianSeason": null,
+    "reach2Pct": 0,
+    "reach2MedianSeason": null,
+    "starter25": null,
+    "disbandAnyPct": 0,
+    "mlbPerClub": null,
+    "topSeasonPct": 0,
+    "topFirstSeasonRelegationPct": 0
+   },
+   "b": {
+    "clubs": 40,
+    "topReachPct": 77.5,
+    "topReachMedianSeason": 21,
+    "reach2Pct": 100,
+    "reach2MedianSeason": 10.5,
+    "starter25": 63.2,
+    "disbandAnyPct": 2.5,
+    "mlbPerClub": 14.9,
+    "topSeasonPct": 8,
+    "topFirstSeasonRelegationPct": 67.6
+   }
+  }
+ }
+}
