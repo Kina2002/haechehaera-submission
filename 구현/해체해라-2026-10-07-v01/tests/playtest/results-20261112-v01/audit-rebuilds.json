@@ -1,0 +1,495 @@
+{
+ "thrifty": {
+  "script": {
+   "disbands": 5,
+   "rebuilds": [
+    {
+     "season": 8,
+     "tier": 1,
+     "rank": 6,
+     "kept": 0,
+     "left": 7,
+     "added": 12
+    },
+    {
+     "season": 11,
+     "tier": 0,
+     "rank": 5,
+     "kept": 2,
+     "left": 10,
+     "added": 10
+    },
+    {
+     "season": 26,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 8,
+     "added": 12
+    },
+    {
+     "season": 28,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 12,
+     "added": 12
+    },
+    {
+     "season": 39,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    }
+   ],
+   "loyaltyNow": [
+    66,
+    50,
+    69,
+    46,
+    60,
+    53,
+    55,
+    69,
+    52,
+    65,
+    56,
+    65
+   ]
+  },
+  "errors": []
+ },
+ "normal": {
+  "script": {
+   "disbands": 6,
+   "rebuilds": [
+    {
+     "season": 7,
+     "tier": 0,
+     "rank": 4,
+     "kept": 0,
+     "left": 5,
+     "added": 12
+    },
+    {
+     "season": 11,
+     "tier": 0,
+     "rank": 5,
+     "kept": 0,
+     "left": 12,
+     "added": 12
+    },
+    {
+     "season": 16,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    },
+    {
+     "season": 25,
+     "tier": 1,
+     "rank": 6,
+     "kept": 0,
+     "left": 3,
+     "added": 12
+    },
+    {
+     "season": 30,
+     "tier": 1,
+     "rank": 6,
+     "kept": 0,
+     "left": 7,
+     "added": 12
+    },
+    {
+     "season": 38,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    }
+   ],
+   "loyaltyNow": [
+    61,
+    52,
+    58,
+    67,
+    54,
+    45,
+    59,
+    65,
+    63,
+    66,
+    58,
+    70
+   ]
+  },
+  "errors": []
+ },
+ "aggressive": {
+  "script": {
+   "disbands": 11,
+   "rebuilds": [
+    {
+     "season": 4,
+     "tier": 0,
+     "rank": 4,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    },
+    {
+     "season": 7,
+     "tier": 0,
+     "rank": 4,
+     "kept": 0,
+     "left": 8,
+     "added": 12
+    },
+    {
+     "season": 13,
+     "tier": 1,
+     "rank": 6,
+     "kept": 0,
+     "left": 4,
+     "added": 12
+    },
+    {
+     "season": 15,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 6,
+     "added": 12
+    },
+    {
+     "season": 19,
+     "tier": 1,
+     "rank": 5,
+     "kept": 0,
+     "left": 4,
+     "added": 12
+    },
+    {
+     "season": 21,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 2,
+     "added": 12
+    },
+    {
+     "season": 24,
+     "tier": 1,
+     "rank": 6,
+     "kept": 0,
+     "left": 4,
+     "added": 12
+    },
+    {
+     "season": 28,
+     "tier": 0,
+     "rank": 3,
+     "kept": 0,
+     "left": 8,
+     "added": 12
+    },
+    {
+     "season": 31,
+     "tier": 0,
+     "rank": 5,
+     "kept": 0,
+     "left": 6,
+     "added": 12
+    },
+    {
+     "season": 35,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 7,
+     "added": 12
+    },
+    {
+     "season": 38,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 5,
+     "added": 12
+    }
+   ],
+   "loyaltyNow": [
+    60,
+    56,
+    47,
+    49,
+    73,
+    46,
+    67,
+    54,
+    51,
+    62,
+    51,
+    46
+   ]
+  },
+  "errors": []
+ },
+ "youth": {
+  "script": {
+   "disbands": 9,
+   "rebuilds": [
+    {
+     "season": 4,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 7,
+     "added": 12
+    },
+    {
+     "season": 9,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 6,
+     "added": 12
+    },
+    {
+     "season": 16,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 6,
+     "added": 12
+    },
+    {
+     "season": 20,
+     "tier": 1,
+     "rank": 6,
+     "kept": 0,
+     "left": 7,
+     "added": 12
+    },
+    {
+     "season": 23,
+     "tier": 0,
+     "rank": 3,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    },
+    {
+     "season": 27,
+     "tier": 0,
+     "rank": 6,
+     "kept": 1,
+     "left": 7,
+     "added": 11
+    },
+    {
+     "season": 30,
+     "tier": 0,
+     "rank": 5,
+     "kept": 0,
+     "left": 10,
+     "added": 12
+    },
+    {
+     "season": 33,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 7,
+     "added": 12
+    },
+    {
+     "season": 38,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 5,
+     "added": 12
+    }
+   ],
+   "loyaltyNow": [
+    68,
+    46,
+    52,
+    67,
+    60,
+    70,
+    48,
+    48,
+    63,
+    62,
+    69,
+    70,
+    66
+   ]
+  },
+  "errors": []
+ },
+ "star": {
+  "script": {
+   "disbands": 11,
+   "rebuilds": [
+    {
+     "season": 3,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    },
+    {
+     "season": 6,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    },
+    {
+     "season": 11,
+     "tier": 1,
+     "rank": 6,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    },
+    {
+     "season": 14,
+     "tier": 0,
+     "rank": 4,
+     "kept": 0,
+     "left": 7,
+     "added": 12
+    },
+    {
+     "season": 17,
+     "tier": 0,
+     "rank": 5,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    },
+    {
+     "season": 21,
+     "tier": 0,
+     "rank": 6,
+     "kept": 1,
+     "left": 8,
+     "added": 11
+    },
+    {
+     "season": 26,
+     "tier": 0,
+     "rank": 4,
+     "kept": 2,
+     "left": 8,
+     "added": 10
+    },
+    {
+     "season": 29,
+     "tier": 0,
+     "rank": 5,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    },
+    {
+     "season": 33,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    },
+    {
+     "season": 36,
+     "tier": 0,
+     "rank": 5,
+     "kept": 0,
+     "left": 12,
+     "added": 12
+    },
+    {
+     "season": 40,
+     "tier": 0,
+     "rank": 6,
+     "kept": 0,
+     "left": 9,
+     "added": 12
+    }
+   ],
+   "loyaltyNow": [
+    64,
+    69,
+    54,
+    68,
+    58,
+    63,
+    57,
+    47,
+    51,
+    68,
+    57,
+    60
+   ]
+  },
+  "errors": []
+ },
+ "normal_ticket": {
+  "script": {
+   "disbands": 3,
+   "rebuilds": [
+    {
+     "season": 10,
+     "tier": 1,
+     "rank": 6,
+     "kept": 1,
+     "left": 11,
+     "added": 11
+    },
+    {
+     "season": 18,
+     "tier": 1,
+     "rank": 6,
+     "kept": 1,
+     "left": 11,
+     "added": 11
+    },
+    {
+     "season": 24,
+     "tier": 0,
+     "rank": 6,
+     "kept": 1,
+     "left": 11,
+     "added": 11
+    }
+   ],
+   "loyaltyNow": [
+    72,
+    52,
+    66,
+    67,
+    67,
+    46,
+    54,
+    54,
+    70,
+    68,
+    63,
+    56
+   ]
+  },
+  "errors": []
+ }
+}

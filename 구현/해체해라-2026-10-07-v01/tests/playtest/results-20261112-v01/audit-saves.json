@@ -1,0 +1,696 @@
+{
+ "thrifty": {
+  "script": {
+   "team": "아끼는 구단",
+   "saveChars": 5940578,
+   "lastGoodChars": 5940578,
+   "checks": {
+    "validateTeam": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    },
+    "move": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "prize": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-rank": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-clamp-once": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "aging": {
+     "ok": 97,
+     "bad": 0,
+     "samples": []
+    },
+    "tickets-from-mlb": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    }
+   },
+   "samples": {
+    "retired": [
+     {
+      "name": "나가세요",
+      "age": 35,
+      "reason": "wish",
+      "season": 21
+     },
+     {
+      "name": "문볼넷",
+      "age": 35,
+      "reason": "wish",
+      "season": 22
+     },
+     {
+      "name": "이웃찬",
+      "age": 37,
+      "reason": "wish",
+      "season": 23
+     },
+     {
+      "name": "진침착",
+      "age": 37,
+      "reason": "wish",
+      "season": 23
+     },
+     {
+      "name": "강철민",
+      "age": 38,
+      "reason": "wish",
+      "season": 23
+     },
+     {
+      "name": "한타오",
+      "age": 35,
+      "reason": "wish",
+      "season": 24
+     },
+     {
+      "name": "김해체",
+      "age": 36,
+      "reason": "wish",
+      "season": 25
+     },
+     {
+      "name": "이강타",
+      "age": 36,
+      "reason": "wish",
+      "season": 25
+     },
+     {
+      "name": "정포구",
+      "age": 40,
+      "reason": "wish",
+      "season": 25
+     }
+    ],
+    "departed": {
+     "loyalty0": 16,
+     "disband": 46,
+     "retired": 9
+    },
+    "academy": [],
+    "mlb": {
+     "tries": 0,
+     "success": 0,
+     "rewards": [],
+     "tickets": 0,
+     "used": [],
+     "fees": []
+    },
+    "duplicateNames": [
+     "고인물",
+     "김막내",
+     "외인래"
+    ],
+    "roster": [
+     "고인물#0(20)",
+     "진침착#1(27)",
+     "고인물#2(25)",
+     "김막내#3(23)",
+     "박병맛#4(23)",
+     "김해체#5(23)",
+     "박도전#6(27)",
+     "김막내#7(20)",
+     "해체맨#8(25)",
+     "외인래#9(21)",
+     "외인래#10(25)",
+     "임수비#11(26)"
+    ],
+    "ticket": {
+     "fans": 597,
+     "ticket": 10,
+     "seats": 2000,
+     "demandAt10": 2591,
+     "gateNow": 2000,
+     "bestTicket": 12000,
+     "gateBest": 2244
+    },
+    "historyChars": 5435783,
+    "historyGames": 20,
+    "newsCount": 50,
+    "ledgerCount": 150,
+    "opinionLogKinds": {
+     "match": 20,
+     "season": 4,
+     "loan": 1,
+     "forfeit": 14,
+     "rebuild": 1
+    }
+   }
+  },
+  "errors": []
+ },
+ "normal": {
+  "script": {
+   "team": "보통 구단",
+   "saveChars": 5850554,
+   "lastGoodChars": 5850554,
+   "checks": {
+    "validateTeam": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    },
+    "move": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "prize": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-rank": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-clamp-once": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "aging": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "tickets-from-mlb": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    }
+   },
+   "samples": {
+    "retired": [],
+    "departed": {
+     "loyalty0": 38,
+     "disband": 45
+    },
+    "academy": [],
+    "mlb": {
+     "tries": 0,
+     "success": 0,
+     "rewards": [],
+     "tickets": 0,
+     "used": [],
+     "fees": []
+    },
+    "duplicateNames": [
+     "박도전",
+     "장래희망",
+     "오빠름"
+    ],
+    "roster": [
+     "송직구#0(24)",
+     "정포구#1(21)",
+     "나가세요#2(28)",
+     "오빠름#3(24)",
+     "한타오#4(22)",
+     "박도전#5(27)",
+     "장래희망#6(28)",
+     "박도전#7(25)",
+     "임수비#8(27)",
+     "장래희망#9(27)",
+     "최타돌#10(25)",
+     "오빠름#11(27)"
+    ],
+    "ticket": {
+     "fans": 837,
+     "ticket": 10,
+     "seats": 2000,
+     "demandAt10": 3311,
+     "gateNow": 2000,
+     "bestTicket": 13000,
+     "gateBest": 2600
+    },
+    "historyChars": 5347098,
+    "historyGames": 20,
+    "newsCount": 50,
+    "ledgerCount": 150,
+    "opinionLogKinds": {
+     "loan": 1,
+     "forfeit": 14,
+     "season": 4,
+     "rebuild": 1,
+     "match": 20
+    }
+   }
+  },
+  "errors": []
+ },
+ "aggressive": {
+  "script": {
+   "team": "무리 구단",
+   "saveChars": 6675873,
+   "lastGoodChars": 6675873,
+   "checks": {
+    "validateTeam": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    },
+    "move": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "prize": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-rank": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-clamp-once": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "tickets-from-mlb": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    }
+   },
+   "samples": {
+    "retired": [],
+    "departed": {
+     "loyalty0": 89,
+     "disband": 63
+    },
+    "academy": [],
+    "mlb": {
+     "tries": 0,
+     "success": 0,
+     "rewards": [],
+     "tickets": 0,
+     "used": [],
+     "fees": []
+    },
+    "duplicateNames": [
+     "배주력",
+     "윤태양",
+     "임수비"
+    ],
+    "roster": [
+     "배주력#0(24)",
+     "윤태양#1(22)",
+     "배주력#2(27)",
+     "윤태양#3(26)",
+     "정포구#4(26)",
+     "문볼넷#5(27)",
+     "최타돌#6(21)",
+     "박병맛#7(25)",
+     "임수비#8(25)",
+     "진침착#9(23)",
+     "외인래#10(23)",
+     "임수비#11(25)"
+    ],
+    "ticket": {
+     "fans": 971,
+     "ticket": 10,
+     "seats": 2000,
+     "demandAt10": 3713,
+     "gateNow": 2000,
+     "bestTicket": 14000,
+     "gateBest": 2800
+    },
+    "historyChars": 5993245,
+    "historyGames": 20,
+    "newsCount": 50,
+    "ledgerCount": 150,
+    "opinionLogKinds": {
+     "match": 30,
+     "season": 4,
+     "loan": 1,
+     "forfeit": 4,
+     "rebuild": 1
+    }
+   }
+  },
+  "errors": []
+ },
+ "youth": {
+  "script": {
+   "team": "육성 구단",
+   "saveChars": 5903236,
+   "lastGoodChars": 5903236,
+   "checks": {
+    "validateTeam": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    },
+    "move": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "prize": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-rank": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-clamp-once": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "tickets-from-mlb": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    }
+   },
+   "samples": {
+    "retired": [
+     {
+      "name": "정포구",
+      "age": 30,
+      "reason": "order",
+      "season": 13
+     },
+     {
+      "name": "이웃찬",
+      "age": 30,
+      "reason": "order",
+      "season": 14
+     }
+    ],
+    "departed": {
+     "loyalty0": 91,
+     "disband": 64,
+     "retired": 2
+    },
+    "academy": [
+     "2:hired",
+     "3:hired",
+     "4:hired",
+     "6:hired",
+     "7:hired",
+     "8:hired",
+     "9:hired",
+     "11:hired",
+     "12:hired",
+     "13:hired",
+     "14:hired",
+     "15:hired",
+     "16:hired",
+     "18:hired",
+     "19:hired",
+     "20:hired",
+     "22:hired",
+     "23:hired",
+     "25:hired",
+     "26:hired",
+     "27:hired",
+     "29:hired",
+     "30:hired",
+     "32:hired",
+     "33:hired",
+     "35:hired",
+     "36:hired",
+     "37:hired",
+     "38:hired",
+     "40:hired"
+    ],
+    "mlb": {
+     "tries": 0,
+     "success": 0,
+     "rewards": [],
+     "tickets": 0,
+     "used": [],
+     "fees": []
+    },
+    "duplicateNames": [
+     "문볼넷",
+     "진침착",
+     "문볼넷"
+    ],
+    "roster": [
+     "윤태양#0(25)",
+     "진침착#1(21)",
+     "한방승#2(25)",
+     "김막내#3(21)",
+     "문볼넷#4(23)",
+     "송직구#5(21)",
+     "문볼넷#6(24)",
+     "진침착#7(27)",
+     "문볼넷#8(28)",
+     "나가세요#9(22)",
+     "배주력#10(27)",
+     "장래희망#11(26)",
+     "해체맨#12(20)"
+    ],
+    "ticket": {
+     "fans": 1114,
+     "ticket": 10,
+     "seats": 2000,
+     "demandAt10": 4142,
+     "gateNow": 2000,
+     "bestTicket": 15000,
+     "gateBest": 3000
+    },
+    "historyChars": 5252968,
+    "historyGames": 20,
+    "newsCount": 50,
+    "ledgerCount": 150,
+    "opinionLogKinds": {
+     "match": 21,
+     "forfeit": 14,
+     "season": 4,
+     "rebuild": 1
+    }
+   }
+  },
+  "errors": []
+ },
+ "star": {
+  "script": {
+   "team": "스타 구단",
+   "saveChars": 6257489,
+   "lastGoodChars": 6257489,
+   "checks": {
+    "validateTeam": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    },
+    "move": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "prize": {
+     "ok": 40,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-rank": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-clamp-once": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "aging": {
+     "ok": 6,
+     "bad": 0,
+     "samples": []
+    },
+    "tickets-from-mlb": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    }
+   },
+   "samples": {
+    "retired": [],
+    "departed": {
+     "loyalty0": 52,
+     "disband": 98
+    },
+    "academy": [],
+    "mlb": {
+     "tries": 0,
+     "success": 0,
+     "rewards": [],
+     "tickets": 0,
+     "used": [],
+     "fees": []
+    },
+    "duplicateNames": [
+     "정포구",
+     "임수비"
+    ],
+    "roster": [
+     "강철민#0(26)",
+     "문볼넷#1(23)",
+     "박도전#2(20)",
+     "정포구#3(21)",
+     "임수비#4(22)",
+     "김막내#5(19)",
+     "정포구#6(22)",
+     "임수비#7(25)",
+     "김해체#8(19)",
+     "송직구#9(24)",
+     "이웃찬#10(25)",
+     "진침착#11(22)"
+    ],
+    "ticket": {
+     "fans": 715,
+     "ticket": 10,
+     "seats": 2000,
+     "demandAt10": 2945,
+     "gateNow": 2000,
+     "bestTicket": 12000,
+     "gateBest": 2400
+    },
+    "historyChars": 5618926,
+    "historyGames": 20,
+    "newsCount": 50,
+    "ledgerCount": 150,
+    "opinionLogKinds": {
+     "match": 24,
+     "season": 4,
+     "loan": 1,
+     "forfeit": 10,
+     "rebuild": 1
+    }
+   }
+  },
+  "errors": []
+ },
+ "normal_ticket": {
+  "script": {
+   "team": "입장료 구단",
+   "saveChars": 5871138,
+   "lastGoodChars": 5871138,
+   "checks": {
+    "validateTeam": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    },
+    "move": {
+     "ok": 25,
+     "bad": 0,
+     "samples": []
+    },
+    "prize": {
+     "ok": 25,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-rank": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "opinion-clamp-once": {
+     "ok": 4,
+     "bad": 0,
+     "samples": []
+    },
+    "aging": {
+     "ok": 80,
+     "bad": 0,
+     "samples": []
+    },
+    "tickets-from-mlb": {
+     "ok": 1,
+     "bad": 0,
+     "samples": []
+    }
+   },
+   "samples": {
+    "retired": [
+     {
+      "name": "송직구",
+      "age": 37,
+      "reason": "wish",
+      "season": 14
+     }
+    ],
+    "departed": {
+     "disband": 33,
+     "retired": 1
+    },
+    "academy": [],
+    "mlb": {
+     "tries": 0,
+     "success": 0,
+     "rewards": [],
+     "tickets": 0,
+     "used": [],
+     "fees": []
+    },
+    "duplicateNames": [
+     "배주력",
+     "정포구"
+    ],
+    "roster": [
+     "문볼넷#7(35)",
+     "고인물#0(26)",
+     "김해체#1(21)",
+     "이웃찬#2(22)",
+     "배주력#3(25)",
+     "배주력#4(23)",
+     "송직구#5(25)",
+     "정포구#6(24)",
+     "정포구#8(21)",
+     "임수비#9(27)",
+     "해체맨#10(24)",
+     "최타돌#11(21)"
+    ],
+    "ticket": {
+     "fans": 1043,
+     "ticket": 14,
+     "seats": 2000,
+     "demandAt10": 4322,
+     "gateNow": 2800,
+     "bestTicket": 15000,
+     "gateBest": 3000
+    },
+    "historyChars": 5368542,
+    "historyGames": 20,
+    "newsCount": 50,
+    "ledgerCount": 150,
+    "opinionLogKinds": {
+     "match": 35,
+     "season": 4,
+     "rebuild": 1
+    }
+   }
+  },
+  "errors": []
+ }
+}
