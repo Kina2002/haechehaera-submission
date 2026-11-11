@@ -4,11 +4,13 @@
 const fs=require('node:fs'),path=require('node:path');
 const [dir,outFile]=process.argv.slice(2);
 const PERSONAS=['normal','aggressive','thrifty'],NAME={thrifty:'아끼는',normal:'보통',aggressive:'무리하는'};
-const VARIANTS=['base','pressure10','loy15','loy20','abil1','abil2','combo','abil3','abil3x2','choice','pressure15','loy20x5','young3','choice2'];
+const VARIANTS=['base','pressure10','loy15','loy20','abil1','abil2','combo','abil3','abil3x2','choice','pressure15','loy20x5','young3','choice2','young1x15','choice3'];
 const VNAME={base:'지금 규칙',pressure10:'여론 −10%p',loy15:'애정도 +15',loy20:'애정도 +20',abil1:'모두 능력 1개 +10',abil2:'모두 능력 2개 +10',combo:'셋 다 (−10%p·+15·1개 +10)',
   abil3:'3명 능력 1개 +10',abil3x2:'3명 능력 2개 +10',choice:'셋 중 고르기',
   // 참가자 결정 v04 (2026-11-11)
-  pressure15:'여론 −15%p',loy20x5:'무작위 5명 애정도 +20',young3:'어린 3명 능력 1개 +10',choice2:'셋 중 고르기 v04'};
+  pressure15:'여론 −15%p',loy20x5:'무작위 5명 애정도 +20',young3:'어린 3명 능력 1개 +10',choice2:'셋 중 고르기 v04',
+  // 참가자 결정 v05 (2026-11-11)
+  young1x15:'어린 1명 선배 주특기 +15',choice3:'셋 중 고르기 v05'};
 const usable=f=>{if(!fs.existsSync(f))return false;const t=fs.readFileSync(f,'utf8');return !t.startsWith('{"skipped"');};// 건너뛴 자리 표시 파일은 뺍니다
 const file=(p,v,s)=>v==='base'?path.join(__dirname,`persona-sim-20261111-${p}-${s}.json`):path.join(dir,`mlb-bonus-${p}-${v}-${s}.json`);
 const med=a=>{const s=a.filter(Number.isFinite).sort((x,y)=>x-y);return s.length?s[Math.floor(s.length/2)]:null;};
