@@ -10,6 +10,8 @@ const EXP_EVENTS = {
 };
 // v02p (2026-11-11): 야수는 v01 그대로, 투수만 — 투수 앞 타구 처리·송구 0.8 → 0.3, 주자 있을 때 무실점 이닝 0.8 → 0.3, 볼넷 없는 이닝 0.4 → 0.2
 const EXP_PRESETS = { v01: EXP_EVENTS, v02p: { ...EXP_EVENTS, pitch: { ...EXP_EVENTS.pitch, fieldCatch: .3, fieldThrow: .3, escape: .3, cleanInning: .2 } } };
+// 모든 사건 숫자에 같은 배수를 곱합니다(역할 사이 비율은 그대로). 목표 난이도에 맞출 때 씁니다.
+const scaleExp = (E, s) => Object.fromEntries(Object.entries(E).map(([g, o]) => [g, Object.fromEntries(Object.entries(o).map(([k, v]) => [k, Math.round(v * s * 1000) / 1000]))]));
 const OF = ['LF', 'CF', 'RF'], RANGE = ['LF', 'CF', 'RF', 'SS'];
 const KEYS = ['contact', 'power', 'eye', 'speed', 'sense', 'catch', 'throw', 'velocity', 'control', 'stamina'];
 
@@ -95,4 +97,4 @@ function eventExp(pos, s, t, innings, E = EXP_EVENTS) {
   return e;
 }
 
-module.exports = { EXP_EVENTS, EXP_PRESETS, makeTracker, eventExp, KEYS };
+module.exports = { EXP_EVENTS, EXP_PRESETS, scaleExp, makeTracker, eventExp, KEYS };
