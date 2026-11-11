@@ -9,7 +9,9 @@ function fixture(){
  const clone=x=>JSON.parse(JSON.stringify(x)),clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
  const POS=['P','C','1B','2B','3B','SS','LF','CF','RF'],BAT_POS=['C','1B','2B','3B','SS','LF','CF','RF','DH'];let selection='p0';
  const t={players:Array.from({length:12},(_,i)=>({id:'p'+i,name:'선수'+i,number:i,a:{contact:50,power:50,eye:50,speed:50,sense:50},loyalty:100,salary:100,contract:0,lowOffers:2,stats:{games:2},wage26:{ask:100,baseline:{games:0},clubGames:0,expired:true}})),departed:[],lineup:POS.map((pos,i)=>({id:'p'+i,pos})),w:3,l:1,d:1,news:[],debt:0,match:null};
- const team=()=>t,live=t=>!!t.match&&!t.match.done,balance=()=>({contractGames:5,salaryBonusChance:.3,salaryBonusLoyalty:1});
+ const team=()=>t,live=t=>!!t.match&&!t.match.done,balance=()=>({salaryBonusChance:.3,salaryBonusLoyalty:1});
+ // Contracts are per season now (P12); this fixture keeps a 5-game remainder so the expected values stay the same.
+ const contractGamesFor26=()=>5;
  const salaryAsk=p=>p.wage26.ask,wageState26=p=>p.wage26,money=n=>n+'만원';
  const news=(t,title,text)=>t.news.unshift({title,text}),wageEffect26=p=>p.salary*100<=salaryAsk(p)*90?'low':'normal';
  const renewAsk26=()=>{},r=()=>.5;

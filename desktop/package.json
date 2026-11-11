@@ -1,0 +1,8 @@
+{
+  "name": "haechehaera-desktop",
+  "productName": "해체해라",
+  "version": "0.1.0",
+  "private": true,
+  "description": "해체해라 데스크톱 앱 (Electron). 게임 파일은 구현 폴더의 것을 그대로 씁니다.",
+  "main": "main.js"
+}
