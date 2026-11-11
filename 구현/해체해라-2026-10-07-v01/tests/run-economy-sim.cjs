@@ -687,7 +687,9 @@ const SHAPES={t4g10:{name:'4단계 · 10경기',tiers:4,rounds:2},t5g10:{name:'5
   t4g10p:{name:'4단계 · 10경기 · 사건 경험치 v02p',tiers:4,rounds:2,expEvents:'v02p'},
   // 목표 난이도 맞추기(참가자 2026-11-11: 보통 유저 1부 약 50%): v02p 비율 그대로 전체 크기만 키움
   t4g10p12:{name:'4단계 · 10경기 · 사건 v02p ×1.2',tiers:4,rounds:2,expEvents:'v02p',expScale:1.2},
-  t4g10p135:{name:'4단계 · 10경기 · 사건 v02p ×1.35',tiers:4,rounds:2,expEvents:'v02p',expScale:1.35}};
+  t4g10p135:{name:'4단계 · 10경기 · 사건 v02p ×1.35',tiers:4,rounds:2,expEvents:'v02p',expScale:1.35},
+  // ×1.2(45%)와 ×1.35(65%) 사이에서 보통 유저 50%를 노린 확인 시험(2026-11-11)
+  t4g10p125:{name:'4단계 · 10경기 · 사건 v02p ×1.25',tiers:4,rounds:2,expEvents:'v02p',expScale:1.25}};
 function mainShape(n,out,key='t4g10',pk='normal',seasons=25,worldSeed=20261130,seedBase=21000){
   const started=Date.now(),sh=SHAPES[key];if(!sh)throw new Error('리그 모양이 없습니다: '+key);
   const g20=sh.rounds===4,L=sh.tiers===5?(sh.mids==='b'?LEAGUE5B:LEAGUE5):null;
@@ -929,7 +931,8 @@ function mainTop(n,out,seasons=20,set='top',worldSeed=20261115,seedBase=16000){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 function main(){
-  if(process.argv[4]==='shape')return mainShape(Number(process.argv[2])||20,process.argv[3],process.argv[5]||'t4g10',process.argv[6]||'normal',Number(process.argv[7])||25);
+  // shape: [world 시드 시작=20261130] [구단 시드 시작=21000]으로 다른 구단 묶음도 돌릴 수 있습니다(예: 20261150 22000).
+  if(process.argv[4]==='shape')return mainShape(Number(process.argv[2])||20,process.argv[3],process.argv[5]||'t4g10',process.argv[6]||'normal',Number(process.argv[7])||25,Number(process.argv[8])||20261130,Number(process.argv[9])||21000);
   if(process.argv[4]==='personas')return mainPersona(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,process.argv[6]||'normal',Number(process.argv[7])||20261130,Number(process.argv[8])||21000,process.argv[9]||null);
   if(process.argv[4]==='loyalty')return mainLoyalty(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||12,process.argv[6]||null);
   if(process.argv[4]==='rebuild')return mainRebuild(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||15,process.argv[6]||null);
