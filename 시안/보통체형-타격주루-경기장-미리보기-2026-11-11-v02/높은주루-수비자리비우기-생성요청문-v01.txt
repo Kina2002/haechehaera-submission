@@ -1,0 +1,7 @@
+Use case: precise-object-edit.
+Edit this supplied HIGH WIDE Korean pixel-art baseball stadium background. Preserve the full1672x941 composition, field/base geometry, ALL physical scoreboard, our attacking lineup9 and portrait cards, peaceful TWO cloth banners, controls, bottom record, catcher and FOUR umpires including first-base umpire at far right. Keep exact camera and all text.
+We will overlay two animated defenders, so ONLY REMOVE THESE TWO GREEN FIELDERS:
+A: the fielder on the right infield around x1093,y550 with feet at y582 (second baseman).
+B: the fielder immediately RIGHT of first base around x1304,y545 with feet at y575 (first baseman).
+Reconstruct the clean dirt/grass/white foul line behind these two removed bodies. Do NOT remove the white FIRST BASE BAG centered around x1239,y581. Keep that white bag unchanged and clearly visible.
+Do not remove any other fielder, catcher, umpire, label or UI. Do not add new players, gloves, balls, runners or markers. Keep the original entire field geometry, daylight and pixel-art colors. This is a clean background plate, not a storyboard.

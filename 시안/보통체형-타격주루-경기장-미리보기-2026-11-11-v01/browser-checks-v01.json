@@ -1,0 +1,188 @@
+{
+  "date": "2026-11-11",
+  "browser": "Ego Browser",
+  "standalone": "보통체형-타격주루-경기장-미리보기-v03.html",
+  "samples": [
+    {
+      "time": 0.45,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "recording": false,
+      "phase": "서기",
+      "frame": 0,
+      "progress": 0,
+      "position": [
+        636,
+        782
+      ],
+      "cameraWeight": 0
+    },
+    {
+      "time": 1.7,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "recording": false,
+      "phase": "타격 준비",
+      "frame": 2,
+      "progress": 0,
+      "position": [
+        636,
+        782
+      ],
+      "cameraWeight": 0
+    },
+    {
+      "time": 2.58,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "recording": false,
+      "phase": "스윙",
+      "frame": 4,
+      "progress": 0,
+      "position": [
+        636,
+        782
+      ],
+      "cameraWeight": 0
+    },
+    {
+      "time": 3.43,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "recording": false,
+      "phase": "배트 놓기",
+      "frame": 7,
+      "progress": 0,
+      "position": [
+        636,
+        782
+      ],
+      "cameraWeight": 0
+    },
+    {
+      "time": 4.15,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "recording": false,
+      "phase": "출발",
+      "frame": 9,
+      "progress": 0.04982698961937725,
+      "position": [
+        800.970242214533,
+        762.483044982699
+      ],
+      "cameraWeight": 1
+    },
+    {
+      "time": 6.3,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "recording": false,
+      "phase": "질주",
+      "frame": 10,
+      "progress": 0.5499999999999999,
+      "position": [
+        1031.55,
+        666.95
+      ],
+      "cameraWeight": 1
+    },
+    {
+      "time": 8.28,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "recording": false,
+      "phase": "1루 통과",
+      "frame": 16,
+      "progress": 1.0147692307692309,
+      "position": [
+        1245.8086153846155,
+        578.1790769230769
+      ],
+      "cameraWeight": 1
+    },
+    {
+      "time": 9.65,
+      "playing": false,
+      "speed": 1,
+      "camera": "auto",
+      "loop": false,
+      "ready": true,
+      "errors": [],
+      "recording": false,
+      "phase": "감속",
+      "frame": 19,
+      "progress": 1.2420160701241785,
+      "position": [
+        1389.0336251367944,
+        588.2404790623646
+      ],
+      "cameraWeight": 1
+    }
+  ],
+  "firstBaseContact": {
+    "time": 8.2,
+    "playing": false,
+    "speed": 1,
+    "camera": "auto",
+    "loop": false,
+    "ready": true,
+    "errors": [],
+    "recording": false,
+    "phase": "1루 통과",
+    "frame": 16,
+    "progress": 1,
+    "position": [
+      1239,
+      581
+    ],
+    "cameraWeight": 1
+  },
+  "video": {
+    "duration": 12.436633,
+    "width": 1280,
+    "height": 720,
+    "error": null
+  },
+  "controls": {
+    "playPause": "passed",
+    "restartEnd": "passed",
+    "cameraHighAndLow": "passed",
+    "speed1_5": "passed",
+    "storyboardDownload": "passed",
+    "mp4DownloadAndPlayback": "passed"
+  },
+  "layout": {
+    "width": 1536,
+    "height": 706,
+    "pageHeight": 706
+  }
+}
