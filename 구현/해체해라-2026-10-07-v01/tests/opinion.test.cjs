@@ -164,7 +164,7 @@ test('rebuild: 동네, start funds, no debt or loan, facilities gone, stadium 1,
  const {run}=world();
  const r=run(`(()=>{const t=club(),loy=[90,85,85,80,72,70,69,50,40,30,20,10];t.players.forEach((p,i)=>{p.loyalty=loy[i];});
   const ids=t.players.map(p=>p.id),before=t.players.slice(0,3).map(p=>JSON.stringify(p.a));
-  Object.assign(t,{funds:9000,debt:120,stadium:3,ticket:25,facilities:['bat','run','shower','goods'],w:30,l:20,d:2,trophies:30,mlbHistory:[{success:true,player:{id:'mlb1'}}],achievements:{version:1,catalog:2,unlocked:[]}});
+  Object.assign(t,{funds:9000,debt:120,stadium:3,ticket:25,facilities:['bat','conditioning','locker','uniform'],w:30,l:20,d:2,trophies:30,mlbHistory:[{success:true,player:{id:'mlb1'}}],achievements:{version:1,catalog:2,unlocked:[]}});
   t.loan={v:1,amount:500,repay:550,left:550,repaid:0,season:1,at:0};t.history.push({id:'old-game'});t.league.tier=1;
   const s=endSeason(t,5,95);
   return {s,kept:t.players.slice(0,3).map(p=>p.id),keptA:t.players.slice(0,3).map(p=>JSON.stringify(p.a)),before,ids,n:t.players.length,

@@ -9,7 +9,7 @@ if(TEST_ONLY){
   t.balance.fanEventChance=0;activeGame=true;screen='achievements';selection=t.players[0].id;
   if(['notice','legacy'].includes(mode)){
    if(mode==='notice')syncAchievements(t);
-   t.w=12;t.l=8;t.d=1;t.trophies=12;t.facilities=['bat','field','pitch','shower','fans'];t.players[0].stats={...freshStats(),games:21,h:72,ab:160,hr:10};
+   t.w=12;t.l=8;t.d=1;t.trophies=12;t.facilities=['bat','field','pitch','locker','fans'];t.players[0].stats={...freshStats(),games:21,h:72,ab:160,hr:10};
   }
   if(mode==='expanded'){
    t.players[0].name='박끝까지';t.players[0].a.contact=100;
