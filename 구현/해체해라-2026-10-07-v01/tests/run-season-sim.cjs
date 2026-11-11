@@ -39,7 +39,8 @@ function createWorld(seed=20261109){
       o.lineup=lineupMode==='auto'?autoLineup(o.players):dhLineup(o.players);return o;}
     const realBH=chooseBH;
     // boneheads:false는 가상 팀끼리의 경기용입니다(현재 규칙상 본헤드는 이용자 구단에만 있음).
-    function playGame(us,opp,home,seed,{boneheads=true}={}){
+    // onEvent(m,e): 투구마다 경기 판정의 사건 기록을 넘깁니다(경기 경험치 사건 세기, 2026-11-11). 없으면 예전과 같습니다.
+    function playGame(us,opp,home,seed,{boneheads=true,onEvent=null}={}){
       chooseBH=boneheads?realBH:()=>null;
       data.slots=[us,null];data.current=0;
       for(const tm of [us,opp])tm.players.forEach(fresh);
@@ -48,7 +49,7 @@ function createWorld(seed=20261109){
         pitches:0,bh:[0,0],bhBase:[2,0],bhBaseUsed:[0,0],opportunities:[0,0],events:[],rng:(seed>>>0)||7,done:false,
         rewarded:false,lastLines:{},reactionCount:0,recap:{},checks:{events:0,violations:[],motions:0,reactions:0},defense:{side:1,depth:1}};
       us.match=m;
-      for(let i=0;i<4000&&!m.done;i++){prepare(m);resolvePitch(m);if(m.events.length>40)m.events.splice(0,m.events.length-40);}
+      for(let i=0;i<4000&&!m.done;i++){prepare(m);const ev=resolvePitch(m);if(onEvent)onEvent(m,ev);if(m.events.length>40)m.events.splice(0,m.events.length-40);}
       if(!m.done)throw Error('경기가 끝나지 않았습니다');
       if(m.checks.violations.length)throw Error(m.checks.violations.join('; '));
       us.match=null;
