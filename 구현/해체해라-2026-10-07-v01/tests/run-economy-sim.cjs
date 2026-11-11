@@ -95,6 +95,24 @@ const DISBAND={
 // MLB 진출 (현재 게임 src/mlb.js 기본값과 같음): 주요 3능력 평균 75 이상·출전 5경기 이상, 성공 35%+2%p/점(최대 85%),
 // 이적료 5,000만+400만/점, 실패 시 애정도 −20, 3경기 뒤 재도전, 도전하려면 11명 이상.
 const MLB={minAbility:75,minGames:5,baseChance:.35,perPoint:.02,maxChance:.85,baseFee:5000,feePerPoint:400,failLoyalty:20,retryGames:3};
+// MLB 진출 보상 후보 (참가자 아이디어 2026-11-11, 숫자는 참가자 제안 · 시험값). 진출에 성공한 순간 구단에 남아 있는 선수에게 줍니다.
+// pressure: 해체 여론 −%p · loyalty: 남은 선수 모두 애정도 + · count/amount: 남은 선수마다 서로 다른 능력 count개(10개 능력 중 무작위)에 각각 +amount
+const MLB_BONUS={
+  pressure10:{name:'여론 −10%p',pressure:10},
+  loy15:{name:'남은 선수 애정도 +15',loyalty:15},
+  loy20:{name:'남은 선수 애정도 +20',loyalty:20},
+  abil1:{name:'남은 선수 능력 1개 +10',count:1,amount:10},
+  abil2:{name:'남은 선수 능력 2개 +10',count:2,amount:10},
+  combo:{name:'여론 −10%p + 애정도 +15 + 능력 1개 +10',pressure:10,loyalty:15,count:1,amount:10},
+  // 참가자 수정 (2026-11-11): 능력 +10은 남은 선수 전부가 아니라 3명만(무작위), 세 보상 중 하나를 고르게 하기.
+  // pool 'main'(참가자 선택 "대안 1"): 오르는 능력은 그 선수의 주 능력 3개 중에서 고릅니다. 타격(컨택·파워·선구안)과
+  // 투구(구속·제구·스태미나) 평균 중 높은 쪽이 주 능력이고, 같으면 타격입니다(F25 MLB 평가와 같은 기준).
+  abil3:{name:'남은 선수 3명 주 능력 1개 +10',players:3,count:1,amount:10,pool:'main'},
+  abil3x2:{name:'남은 선수 3명 주 능력 2개 +10',players:3,count:2,amount:10,pool:'main'},
+  // 고르기: 시험용 감독은 여론 60% 이상이면 여론, 애정도 50 미만 선수가 3명 이상이면 애정도, 그 밖에는 능력을 고릅니다(Claude 초안 규칙).
+  choice:{name:'셋 중 고르기 (여론 −10%p · 애정도 +15 · 3명 주 능력 1개 +10)',choose:{pressure:{pressure:10},loyalty:{loyalty:15},ability:{players:3,count:1,amount:10,pool:'main'}}}};
+const MAIN_BAT=['contact','power','eye'],MAIN_PITCH=['velocity','control','stamina'];
+const mainAbilities=p=>(MAIN_PITCH.reduce((s,k)=>s+p.a[k],0)>MAIN_BAT.reduce((s,k)=>s+p.a[k],0))?MAIN_PITCH:MAIN_BAT;
 const mlbScore=p=>Math.max((p.a.contact+p.a.power+p.a.eye)/3,(p.a.velocity+p.a.control+p.a.stamina)/3);
 // awayShare: 원정 경기에서 따라온 우리 관객 비율(참가자 아이디어 2026-11-10). 0이면 지금 게임처럼 원정 입장료 없음.
 // 1부까지 키울 돈 후보 (이슈 #46-5, Claude 초안 · 시험값, 2026-11-10): 리그 배당금(경기마다), 순위 상금(시즌 끝 1~3위), 상위 리그 관객 수요 배수
@@ -131,7 +149,9 @@ function entryP21(p,rnd,rule=P21_ENTRY){
   return bonus;
 }
 // reform: 시설·경기장 개편안(P17)을 씁니다. 이때 원정 응원 비율은 awayShare 대신 응원단 버스 단계로 정합니다(P16).
-function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null,mlb=null,awayShare=0,reform=false,invest=false,leagueNeed=null,leagueMoney=null,mlbOff=false,mids=null,ages=null,market=null,playYoung=0,rebuildRule=null,loyalty=null}){
+function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,seed=1,growth=null,disband=null,mlb=null,awayShare=0,reform=false,invest=false,leagueNeed=null,leagueMoney=null,mlbOff=false,mids=null,ages=null,market=null,playYoung=0,rebuildRule=null,loyalty=null,mlbBonus=null}){
+  // mlbBonus: 위 MLB_BONUS 중 하나. 없으면 지금과 같습니다. 능력 추첨은 전용 난수를 써서 다른 판단의 난수 흐름을 건드리지 않습니다.
+  const bonusRnd=seeded(seed^0x3c1b2d77);
   // loyalty(애정도 수단 시험, 참가자 요청 2026-11-10): 없으면 지금과 같습니다. 아래 값은 모두 Claude 초안 · 시험값입니다.
   //  events: 구단 사건의 애정도 변화(EVENT_LOY)도 반영 · lockerFirst: 라커룸을 다른 시설보다 먼저 짓기
   //  lounge: 선수 가족 라운지(EXTRA_FAC)를 라커룸 다음에 짓기 · tenure: [완료 시즌 수, 시즌 끝 +애정도] 같은 구단 근속 보너스
@@ -159,7 +179,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     alumni:[],mlbCount:0,mlbFails:0,mlbFee:0,donations:0,donationSum:0,tickets:0,ticketsUsed:0,
     requests:0,refusals:0,requestSum:0,regularSum:0,regularGames:0,
     // 시설 개편안(P17): 시설 단계, 지금 리그 단계, 경기장 때문에 미뤄진 승격 수, 시설별 비용·수입·유지비·보유 경기 수
-    lvl:{},lv:0,delays:0,facStats:{},prospects:0,retired:0,retiredWish:0,retiredByManager:0,youngStarts:0,ageLoss:0,rebuildLog:[]};
+    lvl:{},lv:0,delays:0,facStats:{},prospects:0,retired:0,retiredWish:0,retiredByManager:0,youngStarts:0,ageLoss:0,rebuildLog:[],bonusLoy:0,bonusAbil:0,bonusPick:{pressure:0,loyalty:0,ability:0}};
   const addPressure=v=>{if(disband)club.pressure=clamp(club.pressure+v,0,100);};
   const has=id=>club.fac.includes(id);
   const stat=id=>club.facStats[id]??={cost:0,inc:0,maint:0,games:0};
@@ -218,6 +238,19 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
       const fee=Math.round(MLB.baseFee+MLB.feePerPoint*over);club.funds+=fee;club.mlbFee+=fee;club.mlbCount++;
       club.alumni.push({loyalty:c.loyalty,memory:c.loyalty,fee,donatedSeason:-1,requestedSeason:-1});t.players=t.players.filter(p=>p!==c);
       if(mlb.ticket&&(mlb.ticketAt||[3,10]).includes(club.mlbCount))club.tickets=Math.min(2,club.tickets+1);
+      // MLB 진출 보상(후보): 다시 영입하기 전, 남아 있는 선수에게만
+      if(mlbBonus){
+        let bo=mlbBonus;
+        if(bo.choose){const pick=club.pressure>=60?'pressure':t.players.filter(p=>p.loyalty<50).length>=3?'loyalty':'ability';club.bonusPick[pick]++;bo=bo.choose[pick];}
+        if(bo.pressure)addPressure(-bo.pressure);
+        // players: 이 수만큼 무작위로 고른 선수만 능력 보상(없으면 남은 선수 모두). 애정도 보상은 늘 남은 선수 모두.
+        let abilTo=null;if(bo.players&&bo.players<t.players.length){const pool=[...t.players];for(let i=0;i<bo.players;i++){const j=i+Math.floor(bonusRnd()*(pool.length-i));[pool[i],pool[j]]=[pool[j],pool[i]];}abilTo=new Set(pool.slice(0,bo.players));}
+        for(const p of t.players){
+          if(bo.loyalty){const before=p.loyalty;p.loyalty=clamp(p.loyalty+bo.loyalty,0,100);club.bonusLoy+=p.loyalty-before;}
+          if(bo.count&&(!abilTo||abilTo.has(p))){const keys=[...(bo.pool==='main'?mainAbilities(p):TEN)];for(let i=0;i<Math.min(bo.count,keys.length);i++){const j=i+Math.floor(bonusRnd()*(keys.length-i));[keys[i],keys[j]]=[keys[j],keys[i]];
+            const before=p.a[keys[i]];p.a[keys[i]]=Math.min(100,before+bo.amount);club.bonusAbil+=p.a[keys[i]]-before;}}
+        }
+      }
       while(t.players.length<12){const p=pickRecruit(),cost=Math.round(price(p)*B.hireFactor);if(club.funds-cost<reserve())break;spend(cost,'recruit');t.players.push(p);}
     }else{c.loyalty=Math.max(0,c.loyalty-MLB.failLoyalty);c.mlbRetryAt=club.games+MLB.retryGames;club.mlbFails++;}
   }
@@ -356,6 +389,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
   const snapshot=extra=>{const s=starters().filter(x=>x.p);return {games:club.games,funds:club.funds,debt:club.debt,w:club.w,l:club.l,d:club.d,
     starterMean:s.reduce((a,x)=>a+meanA(x.p),0)/s.length,salary:t.players.reduce((a,p)=>a+p.salary,0),fixed:fixed(),ticket:club.ticket,
     stadium:club.stadium,facilities:club.fac.length,trainPoints:club.trainPoints,perfPoints:club.perfPoints,departures:club.departures,stuck:club.stuck,
+    ...(mlbBonus?{bonusLoy:club.bonusLoy,bonusAbil:club.bonusAbil,...(mlbBonus.choose?{bonusPick:{...club.bonusPick}}:{})}:{}),
     ...(ages?{ageMean:s.reduce((a,x)=>a+x.p.age,0)/s.length,retired:club.retired,retiredWish:club.retiredWish,retiredByManager:club.retiredByManager,oldest:Math.max(...t.players.map(p=>p.age)),youngStarters:s.filter(x=>x.p.age<=25).length,youngStarts:club.youngStarts,...(ages.p21?{ageLoss:club.ageLoss}:{})}:{}),
     ...(loyalty?{loyMean:t.players.reduce((a,p)=>a+p.loyalty,0)/t.players.length,loy70:t.players.filter(p=>p.loyalty>=70).length,loy50:t.players.filter(p=>p.loyalty>=50).length}:{}),...extra};};
   if(!league){
@@ -572,16 +606,18 @@ function mainLoyalty(n,out,seasons=12,only=null){
 // 세 유저 유형 플레이 분석 (참가자 요청 2026-11-11): 지금까지 정한 규칙을 모두 넣고, 같은 구단을 아끼는·보통·무리한 투자 유저가 각각 운영합니다.
 // 규칙: 시설 개편 v03·리그별 수입·영입 시장·P21 나이와 입단 보정·젊은 선수 보너스·해체 여론·긴급 대출·재창단 초안·MLB 후원과 회생권·구단 사건 애정도.
 // 구단마다 따로 만든 world를 쓰므로 세 유저가 같은 구단(같은 운)으로 시작합니다.
-// node tests/run-economy-sim.cjs 20 결과.json personas [시즌 수=25] [thrifty|normal|aggressive] [world 시드 시작=20261130] [구단 시드 시작=21000]
-function mainPersona(n,out,seasons=25,pk='normal',worldSeed=20261130,seedBase=21000){
+// node tests/run-economy-sim.cjs 20 결과.json personas [시즌 수=25] [thrifty|normal|aggressive] [world 시드 시작=20261130] [구단 시드 시작=21000] [MLB 보상 후보=MLB_BONUS 키]
+function mainPersona(n,out,seasons=25,pk='normal',worldSeed=20261130,seedBase=21000,bonusKey=null){
   const started=Date.now();
   const ages={bonus:true,bonusTable:[[21,1.5],[25,1.3],[99,1]],capUp:true,aware:true,p21:true,entry:true,retireAt:null,
     retireWish:[[35,.1],[36,.2],[37,.35],[38,.5],[39,.65],[40,.8]],managerRetire:true};
   const base={league:true,contractGames:10,seasons,growth:{K:10,cap:80},disband:DISBAND.base,mlb:{request:true,regular:true,ticket:true,ticketAt:[1]},
     reform:true,invest:true,leagueMoney:LEAGUE_MONEY,market:MARKET,ages,rebuildRule:{},loyalty:{events:true}};
-  const runs=[];for(let i=0;i<n;i++)runs.push(career(createWorld(worldSeed+i),REFORM_POLICIES[pk],{...base,seed:seedBase+i*31}));
-  const report={version:'2026-11-11-personas-v01',persona:pk,personaName:REFORM_POLICIES[pk].name,policy:REFORM_POLICIES[pk],clubs:n,seasons,worldSeed,seedBase,
-    settings:{...base,disband:'base'},reform:REFORM,results:runs.map(r=>r.log)};
+  if(bonusKey&&!MLB_BONUS[bonusKey])throw new Error('MLB 보상 후보가 없습니다: '+bonusKey);
+  const bonus=bonusKey?{mlbBonus:MLB_BONUS[bonusKey]}:{};
+  const runs=[];for(let i=0;i<n;i++)runs.push(career(createWorld(worldSeed+i),REFORM_POLICIES[pk],{...base,...bonus,seed:seedBase+i*31}));
+  const report={version:bonusKey?'2026-11-11-mlb-bonus-v01':'2026-11-11-personas-v01',persona:pk,personaName:REFORM_POLICIES[pk].name,policy:REFORM_POLICIES[pk],clubs:n,seasons,worldSeed,seedBase,
+    ...(bonusKey?{bonusKey,bonus:MLB_BONUS[bonusKey]}:{}),settings:{...base,disband:'base'},reform:REFORM,results:runs.map(r=>r.log)};
   report.seconds=Math.round((Date.now()-started)/1000);console.log(REFORM_POLICIES[pk].name,'구단',n,'· 소요 시간',report.seconds,'초');
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
@@ -811,7 +847,7 @@ function mainTop(n,out,seasons=20,set='top',worldSeed=20261115,seedBase=16000){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 function main(){
-  if(process.argv[4]==='personas')return mainPersona(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,process.argv[6]||'normal',Number(process.argv[7])||20261130,Number(process.argv[8])||21000);
+  if(process.argv[4]==='personas')return mainPersona(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||25,process.argv[6]||'normal',Number(process.argv[7])||20261130,Number(process.argv[8])||21000,process.argv[9]||null);
   if(process.argv[4]==='loyalty')return mainLoyalty(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||12,process.argv[6]||null);
   if(process.argv[4]==='rebuild')return mainRebuild(Number(process.argv[2])||20,process.argv[3],Number(process.argv[5])||15,process.argv[6]||null);
   // p21 추가 표본: node tests/run-economy-sim.cjs 20 결과.json p21 25 [world 시드=20261115] [구단 시드 시작=16000]
@@ -865,4 +901,4 @@ function main(){
   if(out)fs.writeFileSync(out,JSON.stringify(report,null,1)+'\n');
 }
 if(require.main===module)main();
-module.exports={career,POLICIES,DISBAND,REFORM,REFORM_POLICIES,LEAGUE_MONEY,AGES,MARKET,TEN,P21_AGING,ageP21,P21_ENTRY,entryP21,TENURE_BONUS};
+module.exports={career,POLICIES,DISBAND,REFORM,REFORM_POLICIES,LEAGUE_MONEY,AGES,MARKET,TEN,P21_AGING,ageP21,P21_ENTRY,entryP21,TENURE_BONUS,MLB_BONUS};
