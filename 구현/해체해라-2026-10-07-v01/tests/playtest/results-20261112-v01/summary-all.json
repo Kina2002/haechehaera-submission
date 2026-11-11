@@ -1,0 +1,208 @@
+{
+ "made": "2026-11-11T22:43:50.161Z",
+ "overview": [
+  {
+   "user": "thrifty",
+   "label": "아끼는 유저",
+   "reason": "cap",
+   "seasons": 40,
+   "reached": {
+    "1": 6
+   },
+   "disbands": 5,
+   "loans": 4,
+   "mlb": 0,
+   "mlbTries": 0,
+   "ticketsGot": 0,
+   "ticketsUsed": 0,
+   "forfeits": 18,
+   "finalFunds": 2610,
+   "finalTier": 0,
+   "stadium": 1,
+   "facilities": [],
+   "wallMin": 35,
+   "launches": 11,
+   "gameSec": 4.6,
+   "maxSave": 6694477,
+   "findings": 2,
+   "consoleErrors": 0
+  },
+  {
+   "user": "normal",
+   "label": "보통 유저",
+   "reason": "cap",
+   "seasons": 40,
+   "reached": {
+    "1": 1
+   },
+   "disbands": 6,
+   "loans": 5,
+   "mlb": 0,
+   "mlbTries": 0,
+   "ticketsGot": 0,
+   "ticketsUsed": 0,
+   "forfeits": 38,
+   "finalFunds": 2860,
+   "finalTier": 0,
+   "stadium": 1,
+   "facilities": [
+    "bat"
+   ],
+   "wallMin": 33,
+   "launches": 10,
+   "gameSec": 4.5,
+   "maxSave": 6212794,
+   "findings": 0,
+   "consoleErrors": 0
+  },
+  {
+   "user": "aggressive",
+   "label": "무리하는 유저",
+   "reason": "cap",
+   "seasons": 40,
+   "reached": {
+    "1": 2
+   },
+   "disbands": 11,
+   "loans": 11,
+   "mlb": 0,
+   "mlbTries": 0,
+   "ticketsGot": 0,
+   "ticketsUsed": 0,
+   "forfeits": 38,
+   "finalFunds": 230,
+   "finalTier": 0,
+   "stadium": 1,
+   "facilities": [
+    "bat",
+    "pitch"
+   ],
+   "wallMin": 36,
+   "launches": 10,
+   "gameSec": 4.9,
+   "maxSave": 6981449,
+   "findings": 0,
+   "consoleErrors": 0
+  },
+  {
+   "user": "youth",
+   "label": "육성형 유저",
+   "reason": "cap",
+   "seasons": 40,
+   "reached": {
+    "1": 12
+   },
+   "disbands": 9,
+   "loans": 9,
+   "mlb": 0,
+   "mlbTries": 0,
+   "ticketsGot": 0,
+   "ticketsUsed": 0,
+   "forfeits": 59,
+   "finalFunds": 1170,
+   "finalTier": 0,
+   "stadium": 1,
+   "facilities": [
+    "academy",
+    "bat"
+   ],
+   "wallMin": 34,
+   "launches": 10,
+   "gameSec": 5,
+   "maxSave": 6585661,
+   "findings": 0,
+   "consoleErrors": 0
+  },
+  {
+   "user": "star",
+   "label": "스타 지키기 유저",
+   "reason": "cap",
+   "seasons": 40,
+   "reached": {
+    "1": 9
+   },
+   "disbands": 11,
+   "loans": 9,
+   "mlb": 0,
+   "mlbTries": 0,
+   "ticketsGot": 0,
+   "ticketsUsed": 0,
+   "forfeits": 50,
+   "finalFunds": 3000,
+   "finalTier": 0,
+   "stadium": 1,
+   "facilities": [],
+   "wallMin": 34,
+   "launches": 10,
+   "gameSec": 4.9,
+   "maxSave": 6755008,
+   "findings": 0,
+   "consoleErrors": 0
+  },
+  {
+   "user": "normal_ticket",
+   "label": "보통 유저 + 입장료 조정 (비교용)",
+   "reason": "cap",
+   "seasons": 25,
+   "reached": {
+    "1": 7
+   },
+   "disbands": 3,
+   "loans": 0,
+   "mlb": 0,
+   "mlbTries": 0,
+   "ticketsGot": 0,
+   "ticketsUsed": 0,
+   "forfeits": 0,
+   "finalFunds": 3730,
+   "finalTier": 1,
+   "stadium": 1,
+   "facilities": [
+    "bat",
+    "pitch"
+   ],
+   "wallMin": 26,
+   "launches": 6,
+   "gameSec": 4.4,
+   "maxSave": 6636644,
+   "findings": 0,
+   "consoleErrors": 0
+  }
+ ],
+ "findings": [
+  {
+   "id": "next-season-blocked",
+   "cat": "stuck",
+   "text": "\"다음 시즌 시작\"이 꺼져 있음: 선수가 9명이고 영입할 자금이 없습니다. 긴급 대출을 받아 영입한 뒤 시작해 주세요.",
+   "users": {
+    "thrifty": 2
+   },
+   "first": {
+    "season": 23,
+    "round": 10,
+    "data": {
+     "roster": 9,
+     "funds": 9,
+     "text": "H 리그 · 지역 리그 시즌 23 · 오프시즌 시즌 23 결과 · 동네 리그 1위 시즌 23 해체 여론 정산 30% → 0% · 평온 시즌 1위 −30%p 운영 불가 · 선수 9명, 자금 9만 원으로는 가장 싼 후보(1,425만 원)도 데려올 수 없습니다. 빌릴 금액 1,710만 원 모자란 1명 × 1,425만 원 × 1.2 갚을 금액 (이자 10%) 1,881만 원 미지급금은 받는 즉시 갚습니다. 경기마다 급여·유지비를 낸 뒤 경기 수입의 30%까지 갚습니다. 받는 순간 해체 여론 +15%p, 시즌 끝에 남아 있으면 +10%p. "
+    }
+   }
+  },
+  {
+   "id": "promotion-blocked-money",
+   "cat": "balance",
+   "text": "1위를 했지만 경기장 확장비가 없어 승격하지 못함",
+   "users": {
+    "thrifty": 1
+   },
+   "first": {
+    "season": 34,
+    "round": 10,
+    "data": {
+     "tier": 1,
+     "cost": 8000,
+     "funds": 5450
+    }
+   }
+  }
+ ]
+}
