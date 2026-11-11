@@ -110,7 +110,15 @@ const MLB_BONUS={
   abil3:{name:'남은 선수 3명 주 능력 1개 +10',players:3,count:1,amount:10,pool:'main'},
   abil3x2:{name:'남은 선수 3명 주 능력 2개 +10',players:3,count:2,amount:10,pool:'main'},
   // 고르기: 시험용 감독은 여론 60% 이상이면 여론, 애정도 50 미만 선수가 3명 이상이면 애정도, 그 밖에는 능력을 고릅니다(Claude 초안 규칙).
-  choice:{name:'셋 중 고르기 (여론 −10%p · 애정도 +15 · 3명 주 능력 1개 +10)',choose:{pressure:{pressure:10},loyalty:{loyalty:15},ability:{players:3,count:1,amount:10,pool:'main'}}}};
+  choice:{name:'셋 중 고르기 (여론 −10%p · 애정도 +15 · 3명 주 능력 1개 +10)',choose:{pressure:{pressure:10},loyalty:{loyalty:15},ability:{players:3,count:1,amount:10,pool:'main'}}},
+  // 참가자 결정 (2026-11-11): 고르기 유지, 다른 둘을 키움. loyPlayers: 애정도를 받을 무작위 선수 수. youngest: 능력 보상을 가장 어린 선수부터(같은 나이는 무작위).
+  pressure15:{name:'여론 −15%p',pressure:15},
+  loy20x5:{name:'무작위 선수 5명 애정도 +20',loyalty:20,loyPlayers:5},
+  young3:{name:'가장 어린 3명 주 능력 1개 +10',players:3,count:1,amount:10,pool:'main',youngest:true},
+  // 참가자 결정 (2026-11-11): 능력 보상을 가장 어린 1명에게, MLB로 떠난 선수의 가장 높은 능력(10개 중, 같으면 무작위) +15. 포지션이 고정되지 않아 유형 구분 없음.
+  young1x15:{name:'가장 어린 1명 선배 주특기 +15',players:1,count:1,amount:15,youngest:true,inherit:true},
+  choice3:{name:'셋 중 고르기 (여론 −15%p · 무작위 5명 애정도 +20 · 가장 어린 1명 선배 주특기 +15)',choose:{pressure:{pressure:15},loyalty:{loyalty:20,loyPlayers:5},ability:{players:1,count:1,amount:15,youngest:true,inherit:true}}},
+  choice2:{name:'셋 중 고르기 (여론 −15%p · 무작위 5명 애정도 +20 · 가장 어린 3명 주 능력 1개 +10)',choose:{pressure:{pressure:15},loyalty:{loyalty:20,loyPlayers:5},ability:{players:3,count:1,amount:10,pool:'main',youngest:true}}}};
 const MAIN_BAT=['contact','power','eye'],MAIN_PITCH=['velocity','control','stamina'];
 const mainAbilities=p=>(MAIN_PITCH.reduce((s,k)=>s+p.a[k],0)>MAIN_BAT.reduce((s,k)=>s+p.a[k],0))?MAIN_PITCH:MAIN_BAT;
 const mlbScore=p=>Math.max((p.a.contact+p.a.power+p.a.eye)/3,(p.a.velocity+p.a.control+p.a.stamina)/3);
@@ -243,11 +251,16 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
         let bo=mlbBonus;
         if(bo.choose){const pick=club.pressure>=60?'pressure':t.players.filter(p=>p.loyalty<50).length>=3?'loyalty':'ability';club.bonusPick[pick]++;bo=bo.choose[pick];}
         if(bo.pressure)addPressure(-bo.pressure);
-        // players: 이 수만큼 무작위로 고른 선수만 능력 보상(없으면 남은 선수 모두). 애정도 보상은 늘 남은 선수 모두.
-        let abilTo=null;if(bo.players&&bo.players<t.players.length){const pool=[...t.players];for(let i=0;i<bo.players;i++){const j=i+Math.floor(bonusRnd()*(pool.length-i));[pool[i],pool[j]]=[pool[j],pool[i]];}abilTo=new Set(pool.slice(0,bo.players));}
+        // players: 이 수만큼 무작위로 고른 선수만 능력 보상(없으면 남은 선수 모두). 애정도 보상은 loyPlayers가 없으면 남은 선수 모두.
+        let abilTo=null;if(bo.players&&bo.players<t.players.length){const pool=[...t.players];for(let i=0;i<bo.players;i++){const j=i+Math.floor(bonusRnd()*(pool.length-i));[pool[i],pool[j]]=[pool[j],pool[i]];}
+          if(bo.youngest){for(let i=pool.length-1;i>0;i--){const j=Math.floor(bonusRnd()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}pool.sort((a,b)=>(a.age??99)-(b.age??99));}// 가장 어린 선수부터, 같은 나이는 무작위
+          abilTo=new Set(pool.slice(0,bo.players));}
+        // inherit: 오르는 능력은 MLB로 떠난 선수(c)의 가장 높은 능력(10개 중). 같으면 무작위
+        let inheritKey=null;if(bo.inherit){const best=Math.max(...TEN.map(k=>c.a[k])),tops=TEN.filter(k=>c.a[k]===best);inheritKey=tops[Math.floor(bonusRnd()*tops.length)];}
+        let loyTo=null;if(bo.loyPlayers&&bo.loyPlayers<t.players.length){const pool=[...t.players];for(let i=0;i<bo.loyPlayers;i++){const j=i+Math.floor(bonusRnd()*(pool.length-i));[pool[i],pool[j]]=[pool[j],pool[i]];}loyTo=new Set(pool.slice(0,bo.loyPlayers));}
         for(const p of t.players){
-          if(bo.loyalty){const before=p.loyalty;p.loyalty=clamp(p.loyalty+bo.loyalty,0,100);club.bonusLoy+=p.loyalty-before;}
-          if(bo.count&&(!abilTo||abilTo.has(p))){const keys=[...(bo.pool==='main'?mainAbilities(p):TEN)];for(let i=0;i<Math.min(bo.count,keys.length);i++){const j=i+Math.floor(bonusRnd()*(keys.length-i));[keys[i],keys[j]]=[keys[j],keys[i]];
+          if(bo.loyalty&&(!loyTo||loyTo.has(p))){const before=p.loyalty;p.loyalty=clamp(p.loyalty+bo.loyalty,0,100);club.bonusLoy+=p.loyalty-before;}
+          if(bo.count&&(!abilTo||abilTo.has(p))){const keys=inheritKey?[inheritKey]:[...(bo.pool==='main'?mainAbilities(p):TEN)];for(let i=0;i<Math.min(bo.count,keys.length);i++){const j=i+Math.floor(bonusRnd()*(keys.length-i));[keys[i],keys[j]]=[keys[j],keys[i]];
             const before=p.a[keys[i]];p.a[keys[i]]=Math.min(100,before+bo.amount);club.bonusAbil+=p.a[keys[i]]-before;}}
         }
       }
