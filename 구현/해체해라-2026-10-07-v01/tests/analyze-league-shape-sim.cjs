@@ -1,16 +1,16 @@
 // 리그 모양 비교(run-economy-sim.cjs shape) 결과를 요약합니다.
-// 사용: node tests/analyze-league-shape-sim.cjs <결과 폴더> [요약.json]
+// 사용: node tests/analyze-league-shape-sim.cjs <결과 폴더> [요약.json] [보여 줄 안, 쉼표로: t4g10,t5bg10,...]
 // 결과 폴더에는 shape-<t4g10|t5g10|t4g20|t5g20>-<thrifty|normal|aggressive>.json이 있어야 합니다.
 const fs = require('fs'), path = require('path');
 const dir = process.argv[2], out = process.argv[3];
-const SHAPES = ['t4g10', 't5g10', 't4g20', 't5g20'], PERSONAS = ['thrifty', 'normal', 'aggressive'];
+const SHAPES = (process.argv[4] || 't4g10,t5g10,t4g20,t5g20,t5bg10,t5bg20h,t4g20h').split(','), PERSONAS = ['thrifty', 'normal', 'aggressive'];
 const median = a => { if (!a.length) return null; const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 const pct = (a, b) => b ? Math.round(1000 * a / b) / 10 : 0;
 const summary = { version: '2026-11-11-league-shape-v01', cells: {} };
 
 for (const sh of SHAPES) for (const pk of PERSONAS) {
   const f = path.join(dir, `shape-${sh}-${pk}.json`);
-  if (!fs.existsSync(f)) { console.log('없음', f); continue; }
+  if (!fs.existsSync(f)) continue;
   const r = JSON.parse(fs.readFileSync(f, 'utf8'));
   const TOP = r.tiers - 1, G = r.gamesPerSeason, sameGames = Math.floor(240 / G);
   const clubs = r.results, n = clubs.length;
