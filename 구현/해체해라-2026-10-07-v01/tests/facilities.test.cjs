@@ -81,7 +81,7 @@ test('the P17 table: 15 facilities in five groups, prices, upkeep, levels, slots
   ['fans','팬','팬 만남 광장',1000,100],['bus','팬','응원단 버스',1000,'away 100'],['hall','팬','명예의 전당',2000,100],['academy','특별','유소년 아카데미',2000,150]]);
  const F=run('FACILITY');
  assert.deepEqual(F.train.slice(1),[{add:1000,upkeep:150,discount:0,exp:1,cap:0},{add:2500,upkeep:250,discount:.2,exp:1.2,cap:0},{add:5000,upkeep:300,discount:.4,exp:1.4,cap:5}]);
- assert.deepEqual(F.bus.slice(1),[{add:1000,share:.05},{add:2000,share:.1},{add:5000,share:.15},{add:8000,share:.2}]);
+ assert.deepEqual(F.bus.slice(1),[{add:1000,share:.15},{add:2000,share:.2},{add:5000,share:.25},{add:8000,share:.3}]);
  assert.deepEqual([F.uniformPerFan,F.restaurantPerCrowd,F.billboard,F.lockerLoyalty,F.plazaFans,F.massageSave,F.sleepSense,F.foodExp,F.hallOpinion,F.hallMemoryDrop,F.refund],[.05,1,[120,200,350,600],1,2,.15,5,1.1,-5,5,.3]);
  assert.deepEqual(run('[1,2,3,4,5].map(n=>facilitySlots({stadium:n}))'),[5,8,11,14,17]);
  assert.deepEqual(run('FACILITY_TABLE.map(f=>facilityMaxLevel(f))'),[3,3,3,3,1,1,1,1,1,1,1,1,4,1,1]);
@@ -105,7 +105,7 @@ test('numbers match the simulator REFORM table (P17 v03); listed differences: th
  // the simulator caps 80/80/85 (match cap 80); the game's match cap is 85 since ②, so level 3 gives 90 (+5 in both)
  assert.deepEqual(REFORM.trainLevels.slice(1).map(x=>x.cap-80),F.train.slice(1).map(x=>x.cap));
  assert.deepEqual(REFORM.busLevels.slice(1),F.bus.slice(1).map(x=>x.add));
- assert.deepEqual([1,2,3,4].map(n=>Math.round(REFORM.busShare*n*100)),F.bus.slice(1).map(x=>Math.round(x.share*100)));
+ assert.deepEqual(REFORM.busShares,[0,...F.bus.slice(1).map(x=>x.share)]);
  assert.deepEqual([REFORM.uniformPerFan,REFORM.restaurantPerCrowd,REFORM.billboard,REFORM.foodExp,REFORM.hallPressure,REFORM.hallMemory],[F.uniformPerFan,F.restaurantPerCrowd,F.billboard,F.foodExp,F.hallOpinion,F.hallMemoryDrop]);
  // the simulator's academy ×1.3 is replaced by the 19-year-old youth bonus (P17 · P10 notes): no facility factor for a prospect
  assert.equal(REFORM.academyExp,1.3);
@@ -158,9 +158,9 @@ test('the real settlement: home game (uniform, restaurant, billboard, locker +1,
  assert.equal(f1.maintenance,400,'locker, plaza, restaurant, billboard 100 each; uniform 0; bus 0 at home');assert.equal(f1.facility.upkeep,400);
  close(r.d1,f1.net,'funds change = the settlement net');
  assert.ok(r.loy1.every(v=>v===61),'locker +1');assert.ok(r.fans1.every(v=>v===55),'win +3 and plaza +2');
- // away: round(crowd × 10%) × our ticket, only the billboard of the shops, the bus upkeep
- assert.equal(f2.facility.home,false);assert.equal(f2.facility.awayCrowd,Math.round(r.crowd2*.1));assert.equal(f2.ticket,Math.round(r.crowd2*.1)*10);assert.equal(f2.facility.awayGate,f2.ticket);
- assert.deepEqual([f2.facility.bus,f2.facility.share,f2.stores,f2.facility.uniform,f2.facility.restaurant],[2,.1,120,0,0]);
+ // away: round(crowd × 20%) × our ticket, only the billboard of the shops, the bus upkeep
+ assert.equal(f2.facility.home,false);assert.equal(f2.facility.awayCrowd,Math.round(r.crowd2*.2));assert.equal(f2.ticket,Math.round(r.crowd2*.2)*10);assert.equal(f2.facility.awayGate,f2.ticket);
+ assert.deepEqual([f2.facility.bus,f2.facility.share,f2.stores,f2.facility.uniform,f2.facility.restaurant],[2,.2,120,0,0]);
  assert.equal(f2.maintenance,500,'the bus upkeep is paid on away games');assert.deepEqual(f2.facility.rows.map(x=>x.id),['locker','fans','restaurant','billboard','bus']);
  close(r.d2,f2.net,'funds change = the settlement net');
  assert.ok(r.loy2.every(v=>v===62),'locker +1 after a loss too');assert.ok(r.fans2.every(v=>v===57),'plaza +2 without a win');
@@ -182,10 +182,10 @@ test('away gate share by bus level (P16) and shop income by league tier and pers
   t.league.tier=0;t.players.forEach((p,i)=>{p.fans=i===0?61:50;});const u=facilitySettlement(t,{home:0},crowd);
   return {crowd,out,tiers,u:[u.fans,u.uniform,u.restaurant],away:facilitySettlement(t,{home:1},crowd).uniform,budget:facilityBudgetShops(t),crowdB:attendance(t)};})()`);
  const c=r.crowd;
- assert.deepEqual(r.out,[[0,0],[.05,Math.round(c*.05)*12,Math.round(c*.05)],[.1,Math.round(c*.1)*12,Math.round(c*.1)],[.15,Math.round(c*.15)*12,Math.round(c*.15)],[.2,Math.round(c*.2)*12,Math.round(c*.2)]]);
+ assert.deepEqual(r.out,[[0,0],[.15,Math.round(c*.15)*12,Math.round(c*.15)],[.2,Math.round(c*.2)*12,Math.round(c*.2)],[.25,Math.round(c*.25)*12,Math.round(c*.25)],[.3,Math.round(c*.3)*12,Math.round(c*.3)]]);
  assert.deepEqual(r.tiers,[[120,120],[200,200],[350,350],[600,600]],'billboard every game by tier');
  assert.deepEqual(r.u,[611,30.55,c],'500원 per fan, exact');assert.equal(r.away,0,'uniform shop only at home');
- const b=r.crowdB;close(r.budget,30.55+b+120+120+Math.round(b*.2)*12,'next-game estimate: home shops + away shops + away gate');
+ const b=r.crowdB;close(r.budget,30.55+b+120+120+Math.round(b*.3)*12,'next-game estimate: home shops + away shops + away gate');
 });
 
 test('마사지실: our players use 15% less stamina in real pitches; the opponent is unchanged',()=>{
@@ -269,6 +269,16 @@ test('유소년 아카데미: one free 19-year-old prospect per season at the se
  assert.deepEqual(r.hired,{id:true,n:1,funds:0,contract:10,age:19,unique:true,wage:true,left:null,log:['hired']});
  assert.equal(r.hireAgain,'데려올 유망주가 없습니다.');
  assert.deepEqual(r.next,{s2:3,s3:4,log:['hired','missed']},'an unsigned prospect leaves when the next one comes');assert.equal(r.valid2,'ok');
+});
+
+test('academy prospect names avoid current players and recruitment candidates',()=>{
+ const {run}=world();
+ const r=run(`(()=>{const t=club();t.market=createMarketCandidates(t);const before=JSON.stringify(t);
+  const blocked=[...t.players,...t.market].map(p=>p.name),names=[];
+  for(let i=0;i<30;i++)names.push(academyProspect(t,2).name);
+  return {blocked,names,unchanged:before===JSON.stringify(t)};})()`);
+ assert.ok(r.unchanged,'generating prospects leaves existing names intact');
+ assert.ok(r.names.every(name=>!r.blocked.includes(name)));
 });
 
 test('the rebuild (③) removes the new facilities, their levels and a waiting prospect; the hall list stays',()=>{

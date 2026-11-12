@@ -427,7 +427,7 @@ function revivalDialogHTML(t,P,confirming){
  }else{
   const L=t.league;
   html+='<h2>시즌 '+P.season+' 강등 판정</h2><p>'+tier+' 6위 · 강등 판정. 구단 회생권 <b class="gold">'+S.tickets+'장</b>이 있습니다.'+(L.history.at(-1)?.disbandPrevented==='ticket'?' 해체는 회생권으로 막았습니다.':'')+'</p><div class="mlb-offer-terms">'+
-   choice('use','회생권 1장 사용','강등 막기',tier+'에 한 시즌 더 남아 리그 배당금 '+money(leaguePayout(P.tier))+', 영입 후보 능력 +'+leagueMarketOffset(P.tier)+(typeof growthLeagueMultiplier==='function'?', 경기 경험치 ×'+growthLeagueMultiplier(P.tier):'')+'를 지킵니다.','회생권 쓰기',true)+
+   choice('use','회생권 1장 사용','강등 막기',tier+'에 한 시즌 더 남아 리그 배당금 '+money(leaguePayout(P.tier))+', 영입 후보 능력 +'+leagueMarketOffset(P.tier)+(typeof growthLeagueMultiplier==='function'?', 경기 경험치 ×'+growthLeagueMultiplier(P.tier):'')+' 혜택을 유지합니다.','회생권 쓰기',true)+
    choice('proceed','그대로 진행',down+' 강등','다음 시즌은 '+down+'(배당금 '+money(leaguePayout(P.tier-1))+')에서 뜁니다. 회생권 '+S.tickets+'장은 그대로 남습니다.','강등 받아들이기',false)+'</div>';
  }
  return html+'<p class="mlb-error" role="status">'+(confirming?'한 번 더 누르면 해체합니다. 되돌릴 수 없습니다.':'')+'</p></article>';
@@ -545,7 +545,7 @@ document.addEventListener('click',e=>{
  const h=mlbSuccessRecords(t).find(x=>x.id===b.dataset.mlbSupport),q=mlbSupportQuote(t,h);
  if(!q){toast('MLB 진출 선수의 기록이 아닙니다.');return;}
  if(!q.ok){toast(q.reasons[0]);return;}
- confirmBox('MLB 출신 후원 요청',h.player.name+' 선수에게 후원을 요청합니다. 기억하는 애정도 '+Math.round(q.memory)+(q.refuse?' · 30 미만이라 거절할 것 같습니다.':' · 예상 금액 '+money(q.amount)+'(이적료의 '+Math.round(q.rate*100)+'%) · 해체 여론 '+mlbPct(MLB_SUPPORT.requestOpinion)+'.')+' 요청하면 기억하는 애정도가 '+Math.round(q.memory)+' → '+Math.round(q.after)+'로 내려가고, 이 선수에게는 다음 시즌에 다시 요청할 수 있습니다.',()=>{
+ confirmBox('MLB 출신 후원 요청',h.player.name+' 선수에게 후원을 요청합니다. 기억하는 애정도 '+Math.round(q.memory)+(q.refuse?' · 30 미만이라 거절할 것 같습니다.':' · 예상 금액 '+money(q.amount)+'(이적료의 '+Math.round(q.rate*100)+'%) · 해체 여론 '+mlbPct(MLB_SUPPORT.requestOpinion)+'.')+' 요청 후 기억하는 애정도: '+Math.round(q.memory)+' → '+Math.round(q.after)+'. 이 선수에게는 다음 시즌에 다시 요청할 수 있습니다.',()=>{
   const r=requestMlbSupport(team(),h.id);if(r.error){toast(r.error);return;}
   save();toast(r.refused?h.player.name+' 선수가 후원 요청을 거절했습니다.':h.player.name+' 선수가 '+money(r.amount)+'을 후원했습니다.');render();
  },'후원 요청');

@@ -256,7 +256,7 @@ function rebuildClub(t,d={},rnd=Math.random){
  // New starting players by F03 (player(true)) with the ② entry age; wage and ask from the raised abilities.
  const added=[];
  while(t.players.length<REBUILD.roster){
-  const p=player(true,t.players.map(x=>x.number));
+  const p=player(true,t.players.map(x=>x.number),false,0,t.players.map(x=>x.name));
   if(typeof enterPlayerAge==='function')enterPlayerAge(p,rnd);
   p.salary=Math.max(3,Math.round(abilityPrice(p)*balance(t).salaryFactor));delete p.wage26;if(typeof wageState26==='function')wageState26(p,t);
   p.contract=LEAGUE.seasonGames;p.energy=p.a.stamina;t.players.push(p);added.push(p);

@@ -2,7 +2,7 @@
 // P17 시설과 경기장 개편 (v03 numbers; the stadium part came with ①): 15 facilities in five groups, training-facility levels 1~3,
 // 응원단 버스 levels 1~4, upkeep split (training and academy 150, uniform shop 0, bus on away games only, the rest 100), demolition
 // with a 30% refund of the build cost and every upgrade, building slots 5 + (stadium grade − 1) × 3, and each facility's effect.
-// P16 원정 응원 관객 입장료: an away game earns round(our home crowd × bus share) × our ticket price; the share is +5%p per bus level.
+// P16 원정 응원 관객 입장료: an away game earns round(our home crowd × bus share) × our ticket price; bus levels 1–4 give 15/20/25/30% (2026-11-12).
 // Layout like src/league.js … src/mlb-support.js: pure rules first, then the game-hook marker comment, then the UI marker comment.
 // Tests slice the source at those two marker comments, so keep them unique.
 // Where the effects plug in:
@@ -20,8 +20,8 @@ const FACILITY={
  // P17 §5 training levels: added cost, upkeep per game, training-cost discount, match-experience factor, match-growth cap bonus.
  // The cap bonus is +5 on the match-growth cap of ② (85 → 90), as P17 notes for the youth bonus (the simulator's 80 → 85).
  train:[null,{add:1000,upkeep:150,discount:0,exp:1,cap:0},{add:2500,upkeep:250,discount:.2,exp:1.2,cap:0},{add:5000,upkeep:300,discount:.4,exp:1.4,cap:5}],
- // P17 §4 · P16 응원단 버스: added cost and the away share (0% without a bus, +5%p per level, 20% at level 4).
- bus:[null,{add:1000,share:.05},{add:2000,share:.1},{add:5000,share:.15},{add:8000,share:.2}],
+ // P17 §4 · P16 응원단 버스: added cost and the away share (0% without a bus, then 15/20/25/30%).
+ bus:[null,{add:1000,share:.15},{add:2000,share:.2},{add:5000,share:.25},{add:8000,share:.3}],
  uniformPerFan:.05,                      // P17 §3 (v03): 500원 per personal fan of every player, home games (만원 units)
  restaurantPerCrowd:1,                   // P17: 1,000원 per home spectator = 1만원 per crowd unit (10 spectators)
  billboard:[120,200,350,600],            // P17: every game (home and away) by league tier 동네 · 지역 · 2부 · 1부
@@ -171,7 +171,7 @@ function academyLog(t,p,result){
  if(A.log.length>FACILITY.logSize)A.log.splice(0,A.log.length-FACILITY.logSize);
 }
 function academyProspect(t,season,rnd=Math.random){
- const p=player(false,(t.players||[]).map(x=>x.number));
+ const p=player(false,(t.players||[]).map(x=>x.number),false,0,[...(t.players||[]),...(t.market||[])].map(x=>x.name));
  for(const k of FACILITY_NINE){const v=p.a[k];p.a[k]=Math.min(v,Math.max(FACILITY.academyFloor,v-FACILITY.academyMinus));}// lower than a 동네 recruit; a value under 20 stays
  if(typeof enterPlayerAge==='function')enterPlayerAge(p,rnd,FACILITY.academyAge);else p.age=FACILITY.academyAge;// 19 → no entry bonus
  p.salary=Math.max(3,Math.round(abilityPrice(p)*balance(t).salaryFactor));p.price=0;p.energy=p.a.stamina;delete p.wage26;
@@ -361,7 +361,7 @@ function facilityEffectText(t,def){
   case 'restaurant':{const c=attendance(t);return '홈 관중 1명당 1,000원. 지금 예상 홈 관중 '+spectators(c)+'명 → 홈경기당 '+money(c*FACILITY.restaurantPerCrowd)+'.';}
   case 'billboard':return '경기마다(홈 · 원정) 리그별 고정 수입: '+FACILITY.billboard.map((v,i)=>leagueTierName(i).replace(' 리그','')+' '+money(v)).join(' · ')+'. 지금 '+leagueTierName(tier)+' '+money(FACILITY.billboard[tier]??0)+'.';
   case 'fans':return '경기 후 모든 선수 개인 팬 +2 (관중과 유니폼 매장 수입도 따라 늘어납니다).';
-  case 'bus':{const c=attendance(t),s=busShare(t);return '원정 경기에서 따라온 우리 관객의 입장료: 홈경기였다면 왔을 관객 × 원정 응원 비율 × 우리 입장료. 단계마다 +5%p, 4단계 20%. 지금 '+Math.round(s*100)+'% → 원정 경기당 약 '+money(Math.round(c*s)*t.ticket)+'.';}
+  case 'bus':{const c=attendance(t),s=busShare(t);return '원정 경기에서 따라온 우리 관객의 입장료: 홈경기였다면 왔을 관객 × 원정 응원 비율 × 우리 입장료. 버스 없음 0%, 1~4단계 '+FACILITY.bus.slice(1).map(x=>Math.round(x.share*100)+'%').join(' · ')+'. 지금 '+Math.round(s*100)+'% → 원정 경기당 약 '+money(Math.round(c*s)*t.ticket)+'.';}
   case 'hall':return '시즌 끝 해체 여론 −5%p. MLB 출신에게 후원을 요청할 때 기억하는 애정도가 −10 대신 −5. 재창단해도 헌액 기록은 남습니다.';
   case 'academy':return '시즌이 끝날 때마다 다음 시즌에 뛸 19세 유망주 1명이 영입비 없이 영입 후보로 옵니다. 능력은 동네 리그 후보보다 5 낮고, 19세라 경기 경험치 ×1.5(젊은 선수 보너스)를 받습니다.';
  }

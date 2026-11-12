@@ -26,7 +26,11 @@ function fixture() {
     location: {hash: ''}, document: {documentElement: {hasAttribute: () => true}},
     performance: {now: () => 0}});
   vm.runInContext(game.slice(0, coreEnd), context);
+  for (const name of ['setupStage','ensureInitialRoster']) {
+    vm.runInContext(game.match(new RegExp('^function '+name+'\\(.*$','m'))[0], context);
+  }
   vm.runInContext(extensions.slice(extensionStart, extensionEnd), context);
+  vm.runInContext(extensions.match(/^function createMarketCandidates\(.*$/m)[0], context);
   return {
     run(code, values = []) {
       draws.push(...values);
@@ -72,6 +76,36 @@ test('new clubs receive 12 players with the updated ability ranges', () => {
     assert.ok(p.a[p.strong] <= (p.strong === 'sense' ? 65 : 80));
     assert.ok(p.a[p.weak] >= 1 && p.a[p.weak] <= 25);
     assert.ok(p.a.stamina >= 40 && p.a.stamina <= 60);
+  }
+});
+
+test('automatic names stay distinct through initial setup and an exhausted name pool', () => {
+  const r = fixture().run(`(() => {
+    const t=newTeam('이름 검사',11,5,true);ensureInitialRoster(t);
+    const generated=[];
+    for(let i=0;i<102;i++)generated.push(player(false,[],false,0,generated).name);
+    t.players[0].name='우리대장';enrich(t.players[0]);ensureInitialRoster(t);
+    return {initial:t.players.map(p=>p.name),generated,custom:t.players[0].name};
+  })()`);
+  assert.equal(new Set(r.initial).size,12);
+  assert.equal(new Set(r.generated).size,102);
+  assert.ok(r.generated.every(name=>name.length>=1&&name.length<=8));
+  assert.equal(r.custom,'우리대장');
+});
+
+test('recruitment candidates avoid the roster, the academy prospect and each other', () => {
+  const r = fixture().run(`(() => {
+    const t=newTeam('영입 검사',11,5);t.players[0].name='우리대장';
+    t.facilityData={academy:{prospect:{name:NAMES.at(-1)}}};
+    const blocked=[...t.players.map(p=>p.name),t.facilityData.academy.prospect.name];
+    const before=JSON.stringify(t),batches=[];
+    for(let i=0;i<30;i++)batches.push(createMarketCandidates(t).map(p=>p.name));
+    return {blocked,batches,unchanged:before===JSON.stringify(t)};
+  })()`);
+  assert.ok(r.unchanged,'generating candidates preserves existing player names and state');
+  for(const names of r.batches){
+    assert.equal(new Set(names).size,3);
+    assert.ok(names.every(name=>!r.blocked.includes(name)));
   }
 });
 

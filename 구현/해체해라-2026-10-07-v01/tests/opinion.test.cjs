@@ -167,7 +167,7 @@ test('rebuild: 동네, start funds, no debt or loan, facilities gone, stadium 1,
   Object.assign(t,{funds:9000,debt:120,stadium:3,ticket:25,facilities:['bat','conditioning','locker','uniform'],w:30,l:20,d:2,trophies:30,mlbHistory:[{success:true,player:{id:'mlb1'}}],achievements:{version:1,catalog:2,unlocked:[]}});
   t.loan={v:1,amount:500,repay:550,left:550,repaid:0,season:1,at:0};t.history.push({id:'old-game'});t.league.tier=1;
   const s=endSeason(t,5,95);
-  return {s,kept:t.players.slice(0,3).map(p=>p.id),keptA:t.players.slice(0,3).map(p=>JSON.stringify(p.a)),before,ids,n:t.players.length,
+  return {s,kept:t.players.slice(0,3).map(p=>p.id),keptA:t.players.slice(0,3).map(p=>JSON.stringify(p.a)),before,ids,n:t.players.length,names:t.players.map(p=>p.name),
    ages:t.players.slice(3).map(p=>p.age),contracts:t.players.map(p=>p.contract),energy:t.players.every(p=>p.energy===p.a.stamina),lineup:lineupError(t),
    club:{funds:t.funds,debt:t.debt,loan:t.loan,stadium:t.stadium,ticket:t.ticket,facilities:t.facilities,tier:t.league.tier,w:t.w,l:t.l,trophies:t.trophies,history:t.history.length,mlb:t.mlbHistory.length,ach:!!t.achievements},
    opinion:{v:t.opinion.value,disbands:t.opinion.disbands,last6:t.opinion.last6,rebuild:t.opinion.rebuilds[0],lastLog:t.opinion.log.at(-1).kind},
@@ -176,6 +176,7 @@ test('rebuild: 동네, start funds, no debt or loan, facilities gone, stadium 1,
  assert.equal(r.s.disband,true);
  assert.deepEqual(r.kept,r.ids.slice(0,3),'90, then the two 85s in roster order');assert.deepEqual(r.keptA,r.before,'kept players keep their abilities');
  assert.equal(r.n,12);assert.ok(r.ages.every(a=>a>=19&&a<=26),'newcomers enter at 19~26');
+ assert.equal(new Set(r.names).size,12,'rebuild names avoid keepers and other newcomers');
  assert.ok(r.contracts.every(c=>c===10));assert.equal(r.energy,true);assert.equal(r.lineup,'');
  assert.deepEqual(r.club,{funds:3000,debt:0,loan:null,stadium:1,ticket:10,facilities:[],tier:0,w:30,l:20,trophies:30,history:1,mlb:1,ach:true});
  assert.deepEqual([r.opinion.v,r.opinion.disbands,r.opinion.last6,r.opinion.lastLog],[20,1,0,'rebuild']);
