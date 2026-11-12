@@ -60,7 +60,7 @@ function costGrowth(p,k){const b=balance();return p.a[k]>=(k==='stamina'?b.stami
 function trainingFacility(k){return FACILITIES.find(f=>f[3].includes(k));}
 function energyHTML(p){const pct=Math.round(100*p.energy/p.a.stamina);return '<span class="energy"><i style="width:'+pct+'%;background:'+(pct<25?'#ff736f':'#68d2a4')+'"></i></span><small>체력 '+Math.round(p.energy)+' / '+p.a.stamina+(pct<25?' · 능력 저하':'')+'</small>';}
 const MARKET_REFRESH_COST=100;
-function createMarketCandidates(t){return Array.from({length:3},()=>{const p=player(false,t.players.map(x=>x.number));p.price=Math.round(abilityPrice(p)*balance(t).hireFactor);return p;});}
+function createMarketCandidates(t){const candidates=[],usedNames=[...t.players.map(p=>p.name),t.facilityData?.academy?.prospect?.name].filter(Boolean);for(let i=0;i<3;i++){const p=player(false,t.players.map(x=>x.number),false,0,usedNames);p.price=Math.round(abilityPrice(p)*balance(t).hireFactor);candidates.push(p);usedNames.push(p.name);}return candidates;}
 function refreshMarket(t){const round=t.w+t.l+t.d;if(t.marketRound===round)return;const candidates=createMarketCandidates(t);t.marketRound=round;t.market=candidates;save();}
 function rerollMarket(t){if(live(t)||!Number.isFinite(t.funds)||t.funds<MARKET_REFRESH_COST)return false;const candidates=createMarketCandidates(t);if(!spend(t,MARKET_REFRESH_COST,'영입 후보 새로 찾기'))return false;t.market=candidates;t.marketRound=t.w+t.l+t.d;return true;}
 function preGameEconomy(t){ensureClub(t);if(t.players.some(p=>p.contract===0)){toast('계약이 끝난 선수의 연봉을 재협상해 주세요.');go('finance');return false;}return true;}

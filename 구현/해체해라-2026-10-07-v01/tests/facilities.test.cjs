@@ -271,6 +271,16 @@ test('유소년 아카데미: one free 19-year-old prospect per season at the se
  assert.deepEqual(r.next,{s2:3,s3:4,log:['hired','missed']},'an unsigned prospect leaves when the next one comes');assert.equal(r.valid2,'ok');
 });
 
+test('academy prospect names avoid current players and recruitment candidates',()=>{
+ const {run}=world();
+ const r=run(`(()=>{const t=club();t.market=createMarketCandidates(t);const before=JSON.stringify(t);
+  const blocked=[...t.players,...t.market].map(p=>p.name),names=[];
+  for(let i=0;i<30;i++)names.push(academyProspect(t,2).name);
+  return {blocked,names,unchanged:before===JSON.stringify(t)};})()`);
+ assert.ok(r.unchanged,'generating prospects leaves existing names intact');
+ assert.ok(r.names.every(name=>!r.blocked.includes(name)));
+});
+
 test('the rebuild (③) removes the new facilities, their levels and a waiting prospect; the hall list stays',()=>{
  const {run}=world();
  const r=run(`(()=>{const t=club();t.stadium=3;builds(t,['bat','bus','hall','academy','uniform']);upgradeFacility(t,'bat');upgradeFacility(t,'bus');send(t,60);

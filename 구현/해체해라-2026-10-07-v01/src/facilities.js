@@ -171,7 +171,7 @@ function academyLog(t,p,result){
  if(A.log.length>FACILITY.logSize)A.log.splice(0,A.log.length-FACILITY.logSize);
 }
 function academyProspect(t,season,rnd=Math.random){
- const p=player(false,(t.players||[]).map(x=>x.number));
+ const p=player(false,(t.players||[]).map(x=>x.number),false,0,[...(t.players||[]),...(t.market||[])].map(x=>x.name));
  for(const k of FACILITY_NINE){const v=p.a[k];p.a[k]=Math.min(v,Math.max(FACILITY.academyFloor,v-FACILITY.academyMinus));}// lower than a 동네 recruit; a value under 20 stays
  if(typeof enterPlayerAge==='function')enterPlayerAge(p,rnd,FACILITY.academyAge);else p.age=FACILITY.academyAge;// 19 → no entry bonus
  p.salary=Math.max(3,Math.round(abilityPrice(p)*balance(t).salaryFactor));p.price=0;p.energy=p.a.stamina;delete p.wage26;
