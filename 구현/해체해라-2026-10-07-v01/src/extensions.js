@@ -314,8 +314,8 @@ check('교체 선수는 타순·포지션 유지',()=>{const {t,m}=fixture(),out
 check('교체 후 재출전 거부',()=>{const {t}=fixture(),out=t.lineup[0].id,inp=t.players[10].id;substitute(t,out,inp);return !!substitute(t,inp,out);});
 check('누적 보상 중복 지급 방지',()=>{const {t,m}=fixture();m.done=true;m.score=[2,1];reward(m);const funds=t.funds;reward(m);return t.w===1&&t.trophies===1&&t.history.length===1&&t.funds===funds&&!t.offer;});
 check('피로 적용 후 영구 능력은 유지',()=>{const {t,m}=fixture(),p=t.players[0],a=JSON.stringify(p.a);p.energy=0;resolvePitch(m);return JSON.stringify(p.a)===a;});
-check('기준 요구액 재계약',()=>{const {t}=fixture();t.match=null;const p=t.players[0];p.contract=0;negotiate(p,salaryAsk(p));return p.contract===contractGamesFor26(t);});
-check('낮은 급여 제안 수락·애정도 1회 하락',()=>{const {t}=fixture(),p=t.players[0],l=p.loyalty;p.salary=100;negotiate(p,1,()=>0);return p.salary===1&&p.loyalty===Math.max(0,l-30)&&p.lowOffers===0;});
+check('기준 요구액 재계약',()=>{const {t}=fixture();t.match=null;if(t.league)t.league.phase='offseason';const p=t.players[0];p.contract=0;negotiate(p,salaryAsk(p));return p.contract===contractGamesFor26(t);});
+check('낮은 급여 제안 수락·애정도 1회 하락',()=>{const {t}=fixture(),p=t.players[0],l=p.loyalty;t.match=null;if(t.league)t.league.phase='offseason';p.contract=0;p.salary=100;negotiate(p,1);return p.salary===1&&p.loyalty===Math.max(0,l-20)&&p.lowOffers===0;});
 check('두 슬롯 독립 직렬화 복원',()=>{const {t}=fixture();t.match=null;data.slots[1]=newTeam('두번째',8,4);const round=JSON.parse(JSON.stringify(data));validateRoot(round);return round.slots[0].id!==round.slots[1].id&&round.slots[1].funds===3000;});
 check('손상된 외형 저장 거부',()=>{const {t}=fixture();t.players[0].appearance.body=7;try{validateTeam(t);return false;}catch{return true;}});
 check('6체형 모두 경기용 파츠 소스 존재',()=>LAB_DATA.bodies.length===6&&Object.keys(PLAYER_PARTS.motion).length===21&&Object.values(PLAYER_PARTS.motion).every(p=>p.views.length===4));
@@ -1432,12 +1432,13 @@ if($('#qaTools')){
 BALANCE.salaryBonusChance=.3;BALANCE.salaryBonusLoyalty=1;
 BALANCE_LABELS.salaryBonusChance='고급여 애정도 상승 확률';BALANCE_LABELS.salaryBonusLoyalty='고급여 애정도 상승량';
 const legacyAsk26=salaryAsk;
+const WAGE_RULES26={lowPercent:80,severePercent:70,severeLoss:20,perGameLoss:3,warningAt:20};
 function wageState26(p,t=team()){
  if(!p.wage26)p.wage26={ask:Math.min(10000,legacyAsk26(p)),baseline:clone(p.stats),clubGames:(t?.w||0)+(t?.l||0)+(t?.d||0),expired:p.contract===0,lastChange:null};
  return p.wage26;
 }
 salaryAsk=function(p){return wageState26(p).ask;};
-function wageEffect26(p){const ask=salaryAsk(p);return p.salary*100<=ask*90?'low':p.salary*100>=ask*120?'high':'normal';}
+function wageEffect26(p){const ask=salaryAsk(p);return p.salary*100<ask*WAGE_RULES26.lowPercent?'low':p.salary*100>=ask*120?'high':'normal';}
 function renewAsk26(t,p){
  const w=wageState26(p,t),elapsed=Math.max(1,t.w+t.l+t.d-w.clubGames),d={};
  for(const k of Object.keys(freshStats()))d[k]=Math.max(0,(p.stats[k]||0)-(w.baseline[k]||0));
@@ -1453,15 +1454,30 @@ function renewAsk26(t,p){
 function settleContract26(t,p,m,welfare){
  const w=wageState26(p,t),before=p.loyalty,effect=wageEffect26(p),b=balance(t);let wageDelta=0;
  if(before<=0){p.loyalty=0;p.exitPending26=true;return;}
- if(effect==='low')wageDelta=-3;
+ if(effect==='low')wageDelta=-WAGE_RULES26.perGameLoss;
  else if(effect==='high'&&r(m)<clamp(b.salaryBonusChance,0,1))wageDelta=Math.max(0,Math.round(b.salaryBonusLoyalty));
  // Underpaid players do not have the wage penalty cancelled by passive welfare.
  p.loyalty=clamp(p.loyalty+wageDelta+(effect==='low'?0:welfare)-(t.debt?8:0),0,100);
  if(p.loyalty===0)p.exitPending26=true;
+ else if(before>WAGE_RULES26.warningAt&&wageWarning26(t,p))news(t,p.name+' · 급여 불만',wageWarning26(t,p));
  m.wageEffects26??=[];m.wageEffects26.push({id:p.id,name:p.name,salary:p.salary,ask:w.ask,wageDelta,before,after:p.loyalty});
  const remaining=p.contract;p.contract=Math.max(0,p.contract-1);
  if(remaining>0&&p.contract===0&&!w.expired)renewAsk26(t,p);
 }
+function canRenewContract26(t,p){return (!t?.league||t.league.phase==='offseason')&&p.contract===0;}
+function contractOfferError26(t,p,amount){
+ if(!p||!t?.players?.some(x=>x.id===p.id))return '이미 팀을 떠난 선수입니다.';
+ if(live(t))return '경기가 끝난 뒤 급여를 조정할 수 있습니다.';
+ if(p.loyalty<=0)return p.name+' 선수가 팀을 떠났습니다.';
+ if(!Number.isInteger(amount)||amount<1||amount>10000)return '제안 급여는 1만~1억 원, 1만 원 단위입니다.';
+ if(!canRenewContract26(t,p)){
+  if(!(p.contract>0)||wageState26(p,t).expired)return '재계약은 시즌이 끝난 뒤 할 수 있습니다.';
+  if(amount<=p.salary)return '계약 기간에는 현재 급여보다 높은 금액만 제안할 수 있습니다.';
+ }
+ return '';
+}
+function wageWarning26(t,p){return p.loyalty>0&&p.loyalty<=WAGE_RULES26.warningAt&&p.contract>0&&wageEffect26(p)==='low'?'선수가 급여에 불만을 느끼고 있습니다. 불만이 쌓이면 팀을 떠날 수 있습니다. 급여 인상을 검토해 주세요.':'';}
+function wageWarningsHTML26(t){const ps=t.players.filter(p=>wageWarning26(t,p));return ps.length?'<section class="panel" data-wage-warning role="status"><h3 class="bad">급여 불만 · 이탈 주의</h3>'+ps.map(p=>'<p><b>'+esc(p.name)+'</b> · '+wageWarning26(t,p)+' <button class="small" data-contract-open="'+esc(p.id)+'">급여 인상</button></p>').join('')+'</section>':'';}
 function snapshotRoster26(t){const m=t.match;if(m?.done&&!m.completedRoster26){m.completedRoster26=clone(t.players);m.completedLineup26=clone(t.lineup);}}
 function repairRoster26(t){
  adoptDH(t);const used=new Set();t.lineup=lineupSlots(t.lineup).map(old=>{const id=old.id&&t.players.some(p=>p.id===old.id)&&!used.has(old.id)?old.id:null;if(id)used.add(id);return {id,pos:old.pos};});
@@ -1493,22 +1509,30 @@ const preGameBefore26=preGameEconomy;
 preGameEconomy=function(t){ensureClub(t);if(t.players.length<10){toast('지명타자를 포함해 출전 선수 10명이 필요합니다. 선수를 영입해 주세요.');go('market');return false;}return preGameBefore26(t);};
 const marketBefore26=refreshMarket;
 refreshMarket=function(t){if(t.players.length<10&&t.market?.length===0)t.marketRound=null;marketBefore26(t);t.market.forEach(p=>wageState26(p,t));};
-negotiate=function(p,amount,random=Math.random){
+negotiate=function(p,amount){
  const t=team();if(!p||!t.players.some(x=>x.id===p.id))return '이미 팀을 떠난 선수입니다.';
+ if(live(t))return '경기가 끝난 뒤 급여를 조정할 수 있습니다.';
  if(p.loyalty<=0){departUnhappy26(t);return p.name+' 선수가 팀을 떠났습니다.';}
- const ask=salaryAsk(p);if(!Number.isInteger(amount)||amount<1||amount>10000)return '제안 급여는 1만~1억 원, 1만 원 단위입니다.';
- const before=p.loyalty,penalty=amount*100<=ask*80&&random()<.9;
+ const error=contractOfferError26(t,p,amount);if(error)return error;
+ const ask=salaryAsk(p);
+ if(!canRenewContract26(t,p)){
+  const before=p.salary;p.salary=amount;
+  news(t,p.name+' 급여 인상','경기 급여 '+money(before)+' → '+money(amount)+'. 다음 경기부터 적용됩니다. 계약 기간과 희망급여는 그대로입니다.');
+  return '급여를 인상했습니다. 다음 경기부터 적용됩니다.';
+ }
+ const penalty=amount*100<=ask*WAGE_RULES26.severePercent;
  p.salary=amount;p.contract=Math.max(1,contractGamesFor26(t));p.lowOffers=0;
  Object.assign(wageState26(p,t),{baseline:clone(p.stats),clubGames:t.w+t.l+t.d,expired:false});
- if(penalty)p.loyalty=Math.max(0,p.loyalty-30);
- const delta=before-p.loyalty;news(t,p.name+' 재계약','경기 급여 '+money(amount)+' · 희망급여 '+money(ask)+' · '+p.contract+'경기 계약'+(penalty?' · 협상 애정도 -'+delta:''));
+ if(penalty)p.loyalty=Math.max(0,p.loyalty-WAGE_RULES26.severeLoss);
+ news(t,p.name+' 재계약','경기 급여 '+money(amount)+' · 희망급여 '+money(ask)+' · '+p.contract+'경기 계약'+(penalty?' · 낮은 급여 제안으로 선수의 애정이 떨어졌습니다.':''));
  const left=departUnhappy26(t);if(left.some(x=>x.id===p.id))return '재계약했으나 '+p.name+' 선수가 애정도 0으로 팀을 떠났습니다.';
- return penalty?'재계약했습니다. 협상으로 애정도 -'+delta+' (이번 제안에 1회 적용).':'재계약했습니다.';
+ if(wageWarning26(t,p))news(t,p.name+' · 급여 불만',wageWarning26(t,p));
+ return penalty?'재계약했습니다. 낮은 급여 제안으로 선수의 애정이 떨어졌습니다.':'재계약했습니다.';
 };
 const commitBefore26=commitBattingDraft;
 commitBattingDraft=function(t){const error=commitBefore26(t);if(!error)t.rosterVacancy26=false;return error;};
 
-homeArtworkHTML=function(t){return homeBefore24(t)
+homeArtworkHTML=function(t){return wageWarningsHTML26(t)+homeBefore24(t)
  .replace('<canvas class="club-cast" id="clubCast" width="760" height="350"></canvas>','')
  .replace(/<section class="panel stack ace">[\s\S]*?<\/section>/,'');};
 let financeFocus26=null;const openRecords26=new Set();
@@ -1517,7 +1541,7 @@ playersArtworkHTML=function(t){
  const p=t.players.find(p=>p.id===selection)||t.players[0];if(!p)return emptyPlayers26();selection=p.id;
  return head('선수 관리','선수의 능력과 계약을 확인하세요.')+'<section class="scene-frame scene-locker management26">'+playerListHTML(t)+
  '<section class="panel profile26"><h2>'+esc(p.name)+' <span class="gold">#'+p.number+'</span></h2><p class="muted tiny">'+p.hand+' · '+p.tendency+' · '+LAB_DATA.bodies[p.appearance.body].name+'</p><canvas data-portrait="'+esc(p.id)+'" width="240" height="320" role="img" aria-label="'+esc(p.name)+' 관리용 전신 캐릭터"></canvas>'+
- '<div class="meta26"><div><small>개인 팬</small><b>'+p.fans+'명</b></div><div><small>구단 애정도</small><b>'+p.loyalty+' / 100</b></div><button data-contract-finance="'+p.id+'"><small>경기 급여 · 협상으로 ↗</small><b>'+money(p.salary)+'</b></button><div><small>계약 잔여 경기</small><b>'+(p.contract?p.contract+'경기':'계약 만료')+'</b></div></div>'+
+ '<div class="meta26"><div><small>개인 팬</small><b>'+p.fans+'명</b></div><div><small>구단 애정도</small><b>'+p.loyalty+' / 100</b></div><button data-contract-finance="'+p.id+'"><small>경기 급여 · 조정하기 ↗</small><b>'+money(p.salary)+'</b></button><div><small>계약 잔여 경기</small><b>'+(p.contract?p.contract+'경기':'계약 만료')+'</b></div></div>'+
  '<button class="small" data-action="edit-player" '+(live(t)?'disabled':'')+'>이름·등번호 수정</button></section>'+
  '<section class="panel abilities26"><h2>선수 능력</h2>'+statBars(p)+energyHTML(p)+'<details class="personal-records26" data-personal-records="'+p.id+'" '+(openRecords26.has(p.id)?'open':'')+'><summary>개인 누적 기록 <span>펼치기 / 접기</span></summary>'+playerRecords(p)+'</details></section></section>';
 };
@@ -1525,17 +1549,21 @@ const growthBefore26=growthArtworkHTML;
 growthArtworkHTML=function(t){return t.players.length?growthBefore26(t):emptyPlayers26();};
 document.addEventListener('toggle',ev=>{const id=ev.target.dataset?.personalRecords;if(id){if(ev.target.open)openRecords26.add(id);else openRecords26.delete(id);}},true);
 const financeBefore26=financeHTML;
-function payMessage26(p){const mode=wageEffect26(p),b=balance();return mode==='low'?'매 경기 애정도 -3':mode==='high'?'매 경기 '+Math.round(clamp(b.salaryBonusChance,0,1)*100)+'% 확률로 애정도 +'+Math.round(b.salaryBonusLoyalty):'급여에 따른 애정도 변동 없음';}
+function payMessage26(p){const mode=wageEffect26(p);return mode==='low'?'낮은 급여에 불만을 느끼고 있습니다':mode==='high'?'넉넉한 급여로 애정도가 오를 수 있습니다':'급여에 따른 불만 없음';}
 financeHTML=function(t){
  t.players.forEach(p=>wageState26(p,t));const root=document.createElement('div');root.innerHTML=financeBefore26(t);
- const note=root.querySelector('.muted-note');if(note)note.textContent='희망급여는 계약 동안 고정됩니다. 120% 이상 지급하면 확률적으로 애정도가 오르고, 90% 이하 지급하면 매 경기 애정도 -3입니다. 애정도 0이면 인원수와 관계없이 이적합니다. 희망급여는 계약 종료 시 출전 비율·활약을 반영해 재산정됩니다.';
- const table=root.querySelector('.economy-table');table.classList.add('contracts26');table.querySelector('thead').innerHTML='<tr><th>선수</th><th>급여 / 남은 경기</th><th>희망급여 / 경기</th><th>애정도</th><th>협상</th></tr>';
- table.querySelector('tbody').innerHTML=t.players.map(p=>'<tr data-contract-row="'+p.id+'" tabindex="-1" class="'+(financeFocus26===p.id?'focused-contract26':'')+'"><td><button class="text-link26" data-contract-profile="'+p.id+'">'+esc(p.name)+' <small>#'+p.number+'</small></button></td><td>'+money(p.salary)+'<small class="contract-note26">'+(p.contract?'잔여 '+p.contract+'경기':'계약 만료')+'</small></td><td><b>'+money(salaryAsk(p))+'</b><small class="contract-note26">'+payMessage26(p)+'</small></td><td>'+p.loyalty+'</td><td><button class="small" data-contract-open="'+p.id+'" '+(live(t)?'disabled':'')+'>협상</button></td></tr>').join('');
+ const note=root.querySelector('.muted-note');if(note)note.textContent='희망급여는 계약 동안 고정됩니다. 재계약은 시즌이 끝난 뒤에 하며, 계약 중에는 급여를 올릴 수 있습니다. 너무 낮은 급여가 이어지면 불만이 쌓이고 선수가 팀을 떠날 수 있습니다. 희망급여보다 넉넉히 지급하면 애정도가 오를 수 있습니다.';
+ const table=root.querySelector('.economy-table');table.classList.add('contracts26');table.querySelector('thead').innerHTML='<tr><th>선수</th><th>급여 / 남은 경기</th><th>희망급여 / 경기</th><th>애정도</th><th>급여 조정</th></tr>';
+ table.querySelector('tbody').innerHTML=t.players.map(p=>{const renewal=canRenewContract26(t,p),blocked=live(t)||(!renewal&&(!(p.contract>0)||wageState26(p,t).expired||p.salary>=10000));return '<tr data-contract-row="'+p.id+'" tabindex="-1" class="'+(financeFocus26===p.id?'focused-contract26':'')+'"><td><button class="text-link26" data-contract-profile="'+p.id+'">'+esc(p.name)+' <small>#'+p.number+'</small></button></td><td>'+money(p.salary)+'<small class="contract-note26">'+(p.contract?'잔여 '+p.contract+'경기':'계약 만료')+'</small></td><td><b>'+money(salaryAsk(p))+'</b><small class="contract-note26">'+payMessage26(p)+'</small></td><td>'+p.loyalty+'</td><td><button class="small" data-contract-open="'+p.id+'" '+(blocked?'disabled':'')+'>'+(renewal?'재계약':'급여 인상')+'</button></td></tr>';}).join('');
  const pair=table.closest('.grid2');if(pair)pair.classList.add('finance26');
- return root.innerHTML;
+ return wageWarningsHTML26(t)+root.innerHTML;
 };
-function openContract26(p){const t=team();if(live(t))return toast('경기가 끝난 뒤 협상할 수 있습니다.');const w=wageState26(p,t);
- note(p.name+' · 연봉 협상','<button class="text-link26" data-contract-profile="'+p.id+'">'+esc(p.name)+' 선수 정보 보기 ↗</button><p>현재 급여 '+money(p.salary)+' · 잔여 '+p.contract+'경기<br><b class="gold">희망급여: 경기당 '+money(w.ask)+'</b> · 애정도 '+p.loyalty+'</p><p class="muted tiny">희망급여의 80% 이하 제안도 수락합니다. 협상할 때마다 90% 확률로 애정도 -30을 한 번 적용합니다.<br>새 계약은 '+(t.league?.phase==='offseason'?'다음 시즌':'이번 시즌')+' 끝까지 '+contractGamesFor26(t)+'경기 · 계약 중 희망급여는 고정됩니다.</p>'+(w.lastChange?'<p class="muted tiny">직전 계약 출전 '+w.lastChange.games+'/'+w.lastChange.clubGames+'경기<br>희망급여 '+money(w.lastChange.from)+' → '+money(w.lastChange.to)+'</p>':'')+'<label>제안 경기 급여 (원)<input id="salaryOffer26" type="number" min="10000" max="100000000" step="10000" value="'+wonValue(w.ask)+'"></label><p id="offerMessage26" class="bad" role="status"></p><button class="primary" data-contract-offer="'+p.id+'">제안하기</button>');
+function openContract26(p){const t=team();if(live(t))return toast('경기가 끝난 뒤 급여를 조정할 수 있습니다.');const w=wageState26(p,t),renewal=canRenewContract26(t,p);
+ if(!renewal&&(!(p.contract>0)||w.expired))return toast('재계약은 시즌이 끝난 뒤 할 수 있습니다.');
+ if(!renewal&&p.salary>=10000)return toast('이미 최고 급여를 지급하고 있습니다.');
+ const action=renewal?'재계약':'급여 인상',warning=wageWarning26(t,p),min=renewal?1:p.salary+1,value=Math.min(10000,renewal?w.ask:Math.max(min,w.ask));
+ const terms=renewal?'선수의 희망급여보다 너무 낮은 금액을 제안하면, 선수가 수락하더라도 구단에 대한 애정이 떨어집니다. 낮은 급여가 이어지면 불만이 쌓여 팀을 떠날 수 있습니다.<br>새 계약은 다음 시즌 끝까지 '+contractGamesFor26(t)+'경기 · 계약 중 희망급여는 고정됩니다.':'현재 급여보다 높은 금액만 제안할 수 있습니다. 다음 경기부터 적용되며 계약 기간과 희망급여는 그대로입니다. 이미 줄어든 애정도가 즉시 회복되지는 않습니다.';
+ note(p.name+' · '+action,'<button class="text-link26" data-contract-profile="'+p.id+'">'+esc(p.name)+' 선수 정보 보기 ↗</button><p>현재 급여 '+money(p.salary)+' · 잔여 '+p.contract+'경기<br><b class="gold">희망급여: 경기당 '+money(w.ask)+'</b> · 애정도 '+p.loyalty+'</p><p class="muted tiny">'+terms+'</p>'+(warning?'<p class="bad" role="status">'+warning+'</p>':renewal&&p.loyalty<=WAGE_RULES26.severeLoss?'<p class="bad" role="status">애정도가 매우 낮습니다. 무리하게 급여를 낮추면 계약 직후 팀을 떠날 수 있습니다.</p>':'')+(w.lastChange?'<p class="muted tiny">직전 계약 출전 '+w.lastChange.games+'/'+w.lastChange.clubGames+'경기<br>희망급여 '+money(w.lastChange.from)+' → '+money(w.lastChange.to)+'</p>':'')+'<label>제안 경기 급여 (원)<input id="salaryOffer26" type="number" min="'+wonValue(min)+'" max="100000000" step="10000" value="'+wonValue(value)+'"></label><p id="offerMessage26" class="bad" role="status"></p><button class="primary" data-contract-offer="'+p.id+'">'+action+' 제안하기</button>');
 }
 document.addEventListener('click',ev=>{
  const el=ev.target.closest('[data-contract-profile],[data-contract-finance],[data-contract-open],[data-contract-offer]');if(!el||el.disabled)return;
@@ -1546,7 +1574,7 @@ document.addEventListener('click',ev=>{
  if(el.dataset.contractOpen)return openContract26(p);
  if(live(t))return toast('경기가 끝난 뒤 협상할 수 있습니다.');
  const n=salaryFromInput($('#salaryOffer26').value);if(!Number.isInteger(n)||n<1||n>10000){$('#offerMessage26').textContent='1만~1억 원 사이, 1만 원 단위로 입력해 주세요.';return;}
- const msg=negotiate(p,n);$('#dialog').close();save();render();toast(msg);
+ const error=contractOfferError26(t,p,n);if(error){$('#offerMessage26').textContent=error;return;}const msg=negotiate(p,n);$('#dialog').close();save();render();toast(msg);
 },true);
 const uiStyle26=document.createElement('style');uiStyle26.textContent=`
 .management26{display:grid;grid-template-columns:220px minmax(350px,1.05fr) minmax(370px,1fr);gap:18px;padding:20px;align-items:start;min-height:720px}
@@ -1561,20 +1589,20 @@ const uiStyle26=document.createElement('style');uiStyle26.textContent=`
 function checks26(){const keep={selection,activeGame};try{return context23(()=>{
  const rows=[],check=(name,fn)=>{try{if(!fn())throw Error('기대 결과와 다름');rows.push({name,ok:true});}catch(e){rows.push({name,ok:false,error:e.stack});}};
  const fixture=()=>{const f=fixture23();f.t.balance.fanEventChance=0;f.t.funds=1000000;f.t.debt=0;f.t.players.forEach(p=>{p.wage26={ask:100,baseline:clone(p.stats),clubGames:0,expired:false,lastChange:null};p.salary=100;p.contract=8;p.loyalty=60;});return f;};
- check('희망급여 90% 이하는 -3 · 복지로 상쇄하지 않음',()=>{const {t,m}=fixture(),p=t.players[0];p.salary=90;settleContract26(t,p,m,3);return p.loyalty===57&&m.wageEffects26[0].wageDelta===-3;});
- check('91%와 119%는 급여 애정도 변화 없음',()=>{const {t,m}=fixture(),p=t.players[0];for(const n of [91,100,119]){p.salary=n;settleContract26(t,p,m,0);}return p.loyalty===60;});
+ check('희망급여 80% 미만은 -3 · 복지로 상쇄하지 않음',()=>{const {t,m}=fixture(),p=t.players[0];p.salary=79;settleContract26(t,p,m,3);return p.loyalty===57&&m.wageEffects26[0].wageDelta===-3;});
+ check('80%와 119%는 급여 애정도 변화 없음',()=>{const {t,m}=fixture(),p=t.players[0];for(const n of [80,100,119]){p.salary=n;settleContract26(t,p,m,0);}return p.loyalty===60;});
  check('120% 상승확률 100%/0% 경계',()=>{const {t,m}=fixture(),p=t.players[0];p.salary=120;t.balance.salaryBonusChance=1;settleContract26(t,p,m,0);t.balance.salaryBonusChance=0;settleContract26(t,p,m,0);return p.loyalty===61;});
  check('기본 확률 30% · 2000회 분포와 상한',()=>{const {t,m}=fixture(),p=t.players[0];p.salary=120;let count=0;for(let i=0;i<2000;i++){p.loyalty=60;p.contract=8;settleContract26(t,p,m,0);if(p.loyalty===61)count++;}p.loyalty=100;t.balance.salaryBonusChance=1;settleContract26(t,p,m,0);return count>480&&count<720&&p.loyalty===100;});
  check('계약 중 능력·애정도 변화에도 희망급여 고정',()=>{const {t}=fixture(),p=t.players[0];p.loyalty=12;p.a.power=100;return salaryAsk(p)===100;});
  check('활약과 출전으로 계약 만료 때만 재산정',()=>{const {t,m}=fixture(),p=t.players[0];p.contract=2;t.w=7;p.stats.games=7;p.stats.pa=28;p.stats.ab=25;p.stats.h=15;p.stats.hr=5;p.stats.bb=3;settleContract26(t,p,m,0);const held=salaryAsk(p)===100;t.w++;settleContract26(t,p,m,0);const changed=salaryAsk(p)>100&&salaryAsk(p)<=120&&p.wage26.lastChange.games===7;const ask=salaryAsk(p);settleContract26(t,p,m,0);return held&&changed&&salaryAsk(p)===ask;});
  check('저활약·미출전 선수 희망급여 하락도 가능',()=>{const {t}=fixture(),p=t.players[0];p.wage26.ask=1000;t.w=8;renewAsk26(t,p);return salaryAsk(p)<1000&&salaryAsk(p)>=800;});
- check('81% 제안 수락 · 즉시 애정도 보너스 없음',()=>{const {t}=fixture(),p=t.players[0];t.match=null;const result=negotiate(p,81,()=>0);return result==='재계약했습니다.'&&p.salary===81&&p.loyalty===60&&!p.wage26.expired;});
- check('80% 포함 낮은 제안 수락 · 90% 확률 경계',()=>{const {t}=fixture(),p=t.players[0];t.match=null;negotiate(p,80,()=>.8999);const reduced=p.salary===80&&p.loyalty===30;negotiate(p,79,()=>.9);return reduced&&p.salary===79&&p.loyalty===30;});
- check('매 협상 한 번 감소 · 화면·저장·정산에서 반복하지 않음',()=>{const {t,m}=fixture(),p=t.players[0];t.match=null;p.loyalty=100;let draws=0;negotiate(p,80,()=>{draws++;return 0;});const restored=clone(t);validateTeam(restored);ensureClub(t);financeHTML(t);settleContract26(t,p,m,0);const held=p.loyalty===67;negotiate(p,80,()=>{draws++;return 0;});return held&&p.loyalty===37&&draws===2;});
- check('낮은 제안으로 애정도 0이면 12명도 즉시 이적',()=>{const {t}=fixture(),p=t.players[0];t.match=null;p.loyalty=15;const id=p.id;negotiate(p,80,()=>0);return t.players.length===11&&!t.players.some(x=>x.id===id)&&t.departed.some(x=>x.id===id)&&!lineupError(t);});
+ check('80% 재계약 수락 · 즉시 애정도 보너스 없음',()=>{const {t}=fixture(),p=t.players[0];t.match=null;if(t.league)t.league.phase='offseason';p.contract=0;const result=negotiate(p,80);return result==='재계약했습니다.'&&p.salary===80&&p.loyalty===60&&!p.wage26.expired;});
+ check('70% 이하 재계약은 한 번 -20 · 71%는 즉시 감소 없음',()=>{const {t}=fixture(),p=t.players[0];t.match=null;if(t.league)t.league.phase='offseason';p.contract=0;negotiate(p,70);const reduced=p.salary===70&&p.loyalty===40;p.contract=0;p.wage26.expired=true;negotiate(p,71);return reduced&&p.salary===71&&p.loyalty===40;});
+ check('시즌 중 인상은 계약·희망급여 유지 · 감소 재적용 없음',()=>{const {t,m}=fixture(),p=t.players[0];t.match=null;if(t.league)t.league.phase='offseason';p.contract=0;p.loyalty=100;negotiate(p,70);if(t.league)t.league.phase='season';const restored=clone(t);validateTeam(restored);ensureClub(t);financeHTML(t);settleContract26(t,p,m,0);const contract=p.contract,ask=salaryAsk(p);negotiate(p,80);negotiate(p,70);return p.loyalty===77&&p.salary===80&&p.contract===contract&&salaryAsk(p)===ask;});
+ check('낮은 제안으로 애정도 0이면 12명도 즉시 이적',()=>{const {t}=fixture(),p=t.players[0];t.match=null;if(t.league)t.league.phase='offseason';p.contract=0;p.loyalty=15;const id=p.id;negotiate(p,70);return t.players.length===11&&!t.players.some(x=>x.id===id)&&t.departed.some(x=>x.id===id)&&!lineupError(t);});
  check('9명 중 이적 → 8명과 빈 출전 2자리 저장·복원',()=>{const {t}=fixture();t.match=null;t.players=t.players.slice(0,9);t.players[0].loyalty=0;departUnhappy26(t);validateTeam(clone(t));return t.players.length===8&&t.lineup.filter(x=>!x.id).length===2&&validVacancy26(t);});
  check('전원 이적 후에도 관리·훈련·홈·협상 화면 생성',()=>{const {t}=fixture();t.match=null;t.players.forEach(p=>p.loyalty=0);departUnhappy26(t);validateTeam(clone(t));return !t.players.length&&[playersArtworkHTML(t),growthArtworkHTML(t),homeArtworkHTML(t),financeHTML(t)].every(x=>typeof x==='string'&&x.length>0);});
- check('경기 정산에서 0 이적 · 기존 경기 선수와 기록 보존',()=>{const {t,m}=fixture(),p=t.players[0];p.loyalty=3;p.salary=90;const id=p.id;m.done=true;m.score=[4,3];reward(m);validateTeam(clone(t));const ok=t.players.length===11&&t.departed.some(x=>x.id===id)&&tside(m,0).players.some(x=>x.id===id)&&t.history.length===1;const state=JSON.stringify(t);reward(m);return ok&&state===JSON.stringify(t);});
+ check('경기 정산에서 0 이적 · 기존 경기 선수와 기록 보존',()=>{const {t,m}=fixture(),p=t.players[0];p.loyalty=3;p.salary=79;const id=p.id;m.done=true;m.score=[4,3];reward(m);validateTeam(clone(t));const ok=t.players.length===11&&t.departed.some(x=>x.id===id)&&tside(m,0).players.some(x=>x.id===id)&&t.history.length===1;const state=JSON.stringify(t);reward(m);return ok&&state===JSON.stringify(t);});
  check('계약 자료 저장·복원과 9명 미만 영입 가능',()=>{const {t}=fixture();t.match=null;t.players=t.players.slice(0,9);t.players[0].loyalty=0;departUnhappy26(t);refreshMarket(t);const c=clone(t);validateTeam(c);return c.players[0].wage26.ask===100&&c.market.length===3;});
  check('홈 선수 장식과 기대주 제거',()=>{const {t}=fixture();return !homeArtworkHTML(t).includes('clubCast')&&!homeArtworkHTML(t).includes('기대주');});
  check('관리 상세 캐릭터·접히는 기록·협상 연결',()=>{const {t}=fixture();const html=playersArtworkHTML(t);return html.includes('data-portrait')&&html.includes('<details')&&html.includes('data-contract-finance')&&financeHTML(t).includes('data-contract-profile');});
