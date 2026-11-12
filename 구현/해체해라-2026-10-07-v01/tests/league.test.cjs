@@ -22,7 +22,7 @@ function world({seed=20261111}={}){
  for(const re of [/^const oldValidate=validateTeam;.*$/m,/^const live=.*$/m,/^function ledger\(.*$/m,/^function spend\(.*$/m,/^function gain\(.*$/m,/^function news\(.*$/m,
   /^function crowdDemand\(.*$/m,/^function attendance\(.*$/m,/^const MARKET_REFRESH_COST=.*$/m,/^function createMarketCandidates\(.*$/m,/^function salaryAsk\(.*$/m])vm.runInContext(line(ext,re),ctx);
  vm.runInContext(ext.slice(ext.indexOf('const legacyAsk26='),ext.indexOf('function validVacancy26(')),ctx);
- vm.runInContext(ext.slice(ext.indexOf('negotiate=function(p,amount,random='),ext.indexOf('\nconst commitBefore26=')),ctx);
+ vm.runInContext(ext.slice(ext.indexOf('negotiate=function(p,amount'),ext.indexOf('\nconst commitBefore26=')),ctx);
  vm.runInContext(league.slice(0,HOOKS_END),ctx);
  vm.runInContext(`
   const club=(name='우리')=>{const t=newTeam(name,11,5);data.slots=[t,null];data.current=0;ensureClub(t);return t;};

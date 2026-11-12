@@ -46,7 +46,7 @@ function world({seed=20261111}={}){
  vm.runInContext(ext.slice(ext.indexOf('let fatigueSnapshot=null;'),ext.indexOf('reward=function(m){')),ctx);
  vm.runInContext(ext.slice(ext.indexOf('const legacyAsk26='),ext.indexOf('function validVacancy26(')),ctx);
  for(const re of [/^function validVacancy26\(.*$/m,/^const plyBefore26=ply;$/m,/^ply=function\(t,id\).*$/m])vm.runInContext(line(ext,re),ctx);
- vm.runInContext(ext.slice(ext.indexOf('negotiate=function(p,amount,random='),ext.indexOf('\nconst commitBefore26=')),ctx);
+ vm.runInContext(ext.slice(ext.indexOf('negotiate=function(p,amount'),ext.indexOf('\nconst commitBefore26=')),ctx);
  vm.runInContext(events.slice(events.indexOf('const CLUB_EVENT_TYPES'),events.indexOf('const CLUB_EVENT_DURATION')),ctx);
  vm.runInContext(auto,ctx);
  vm.runInContext(mlb.split('// UI integration.')[0],ctx);
