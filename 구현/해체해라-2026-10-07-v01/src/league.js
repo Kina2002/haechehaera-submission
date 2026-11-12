@@ -485,7 +485,7 @@ document.addEventListener('click',e=>{
  const t=team();if(!t?.league)return;
  if(b.hasAttribute('data-league-expand')){const error=expandStadium(t);toast(error||('경기장을 '+t.stadium+'등급으로 확장했습니다.'+(t.league.pendingPromotion?'':' 다음 시즌은 '+leagueTierName(t.league.tier)+'입니다.')));save();render();return;}
  const block=leagueNextSeasonBlock(t);if(block){toast(block);return;}
- const begin=()=>{const error=startNextSeason(t);if(error){toast(error);return;}save();toast(leagueTierName(t.league.tier)+' 시즌 '+t.league.season+'을 시작합니다.');render();};
+ const begin=()=>{const error=startNextSeason(t);if(error){toast(error);return;}save();toast(leagueTierName(t.league.tier)+' 시즌 '+t.league.season+' 시작');render();};
  const p=t.league.pendingPromotion;
  if(p&&t.stadium<p.need)confirmBox('승격 없이 다음 시즌 시작','경기장 '+p.need+'등급이 없어 이번에는 승격하지 못하고 '+leagueTierName(t.league.tier)+'에 남습니다. 다음 시즌에 다시 1위를 하면 승격할 수 있습니다.',begin,'다음 시즌 시작');
  else begin();
