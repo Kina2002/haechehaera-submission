@@ -1,0 +1,682 @@
+{
+  "version": "20261113-v03",
+  "rule": {
+    "id": "balanced",
+    "leagueStep": 10,
+    "title": 20,
+    "mlbEvery": 1,
+    "mlb": 2,
+    "winEvery": 30,
+    "win": 1,
+    "perPlayer": 10
+  },
+  "reference": {
+    "peak": 3,
+    "titles": 1,
+    "mlb": 30,
+    "wins": 300
+  },
+  "assumptions": [
+    "The user selected a comparable difficulty, not mandatory title/MLB gates.",
+    "300 wins is an analyst reference, not an observed requirement or user decision.",
+    "Points are evaluated within the immediately previous club; no score carryover or free baseline companion is assumed.",
+    "AI management is a limited policy, not a human optimum; no probability of human success is inferred.",
+    "Age 19 once per player is user-confirmed; numerical score weights are proposals."
+  ],
+  "search": {
+    "count": 6480,
+    "anchorPass": 114,
+    "best": {
+      "leagueStep": 10,
+      "title": 20,
+      "mlbEvery": 1,
+      "mlb": 2,
+      "winEvery": 30,
+      "win": 1,
+      "perPlayer": 10,
+      "anchorPenalty": 0,
+      "preferencePenalty": 0,
+      "simplicity": 0
+    },
+    "top": [
+      {
+        "leagueStep": 10,
+        "title": 20,
+        "mlbEvery": 1,
+        "mlb": 2,
+        "winEvery": 30,
+        "win": 1,
+        "perPlayer": 10,
+        "anchorPenalty": 0,
+        "preferencePenalty": 0,
+        "simplicity": 0
+      },
+      {
+        "leagueStep": 10,
+        "title": 20,
+        "mlbEvery": 5,
+        "mlb": 10,
+        "winEvery": 30,
+        "win": 1,
+        "perPlayer": 10,
+        "anchorPenalty": 0,
+        "preferencePenalty": 0,
+        "simplicity": 1
+      },
+      {
+        "leagueStep": 10,
+        "title": 20,
+        "mlbEvery": 5,
+        "mlb": 10,
+        "winEvery": 50,
+        "win": 2,
+        "perPlayer": 10,
+        "anchorPenalty": 0,
+        "preferencePenalty": 0,
+        "simplicity": 2
+      },
+      {
+        "leagueStep": 15,
+        "title": 30,
+        "mlbEvery": 1,
+        "mlb": 3,
+        "winEvery": 20,
+        "win": 1,
+        "perPlayer": 15,
+        "anchorPenalty": 0,
+        "preferencePenalty": 0,
+        "simplicity": 2
+      },
+      {
+        "leagueStep": 5,
+        "title": 10,
+        "mlbEvery": 5,
+        "mlb": 5,
+        "winEvery": 50,
+        "win": 1,
+        "perPlayer": 5,
+        "anchorPenalty": 0,
+        "preferencePenalty": 0,
+        "simplicity": 3
+      },
+      {
+        "leagueStep": 5,
+        "title": 10,
+        "mlbEvery": 5,
+        "mlb": 5,
+        "winEvery": 100,
+        "win": 2,
+        "perPlayer": 5,
+        "anchorPenalty": 0,
+        "preferencePenalty": 0,
+        "simplicity": 3
+      },
+      {
+        "leagueStep": 5,
+        "title": 10,
+        "mlbEvery": 10,
+        "mlb": 10,
+        "winEvery": 50,
+        "win": 1,
+        "perPlayer": 5,
+        "anchorPenalty": 0,
+        "preferencePenalty": 0,
+        "simplicity": 3
+      },
+      {
+        "leagueStep": 5,
+        "title": 10,
+        "mlbEvery": 10,
+        "mlb": 10,
+        "winEvery": 100,
+        "win": 2,
+        "perPlayer": 5,
+        "anchorPenalty": 0,
+        "preferencePenalty": 0,
+        "simplicity": 3
+      },
+      {
+        "leagueStep": 10,
+        "title": 20,
+        "mlbEvery": 5,
+        "mlb": 10,
+        "winEvery": 20,
+        "win": 1,
+        "perPlayer": 10,
+        "anchorPenalty": 0,
+        "preferencePenalty": 2,
+        "simplicity": 2
+      },
+      {
+        "leagueStep": 10,
+        "title": 20,
+        "mlbEvery": 5,
+        "mlb": 10,
+        "winEvery": 50,
+        "win": 3,
+        "perPlayer": 10,
+        "anchorPenalty": 0,
+        "preferencePenalty": 2,
+        "simplicity": 2
+      }
+    ],
+    "recommendedLoss": {
+      "leagueStep": 10,
+      "title": 20,
+      "mlbEvery": 1,
+      "mlb": 2,
+      "winEvery": 30,
+      "win": 1,
+      "perPlayer": 10,
+      "anchorPenalty": 0,
+      "preferencePenalty": 0,
+      "simplicity": 0
+    }
+  },
+  "comparison": [
+    {
+      "id": "fast-mlb",
+      "rule": {
+        "id": "fast-mlb",
+        "leagueStep": 10,
+        "title": 20,
+        "mlbEvery": 1,
+        "mlb": 3,
+        "winEvery": 30,
+        "win": 1,
+        "perPlayer": 10
+      },
+      "atReference": 15,
+      "firstFullAt300Wins": 20,
+      "atTenMlb": 9,
+      "atTwentyMlb": 12
+    },
+    {
+      "id": "title-heavy",
+      "rule": {
+        "id": "title-heavy",
+        "leagueStep": 10,
+        "title": 40,
+        "mlbEvery": 1,
+        "mlb": 1,
+        "winEvery": 30,
+        "win": 1,
+        "perPlayer": 10
+      },
+      "atReference": 11,
+      "firstFullAt300Wins": 40,
+      "atTenMlb": 9,
+      "atTwentyMlb": 10
+    },
+    {
+      "id": "balanced",
+      "rule": {
+        "id": "balanced",
+        "leagueStep": 10,
+        "title": 20,
+        "mlbEvery": 1,
+        "mlb": 2,
+        "winEvery": 30,
+        "win": 1,
+        "perPlayer": 10
+      },
+      "atReference": 12,
+      "firstFullAt300Wins": 30,
+      "atTenMlb": 8,
+      "atTwentyMlb": 10
+    },
+    {
+      "id": "slow-mlb",
+      "rule": {
+        "id": "slow-mlb",
+        "leagueStep": 10,
+        "title": 20,
+        "mlbEvery": 1,
+        "mlb": 1,
+        "winEvery": 30,
+        "win": 1,
+        "perPlayer": 10
+      },
+      "atReference": 9,
+      "firstFullAt300Wins": 60,
+      "atTenMlb": 7,
+      "atTwentyMlb": 8
+    }
+  ],
+  "milestones": [
+    {
+      "label": "지역 도달",
+      "peak": 1,
+      "titles": 0,
+      "mlb": 0,
+      "wins": 30,
+      "score": 11,
+      "quota": 1
+    },
+    {
+      "label": "2부 도달",
+      "peak": 2,
+      "titles": 0,
+      "mlb": 0,
+      "wins": 80,
+      "score": 22,
+      "quota": 2
+    },
+    {
+      "label": "1부 도달",
+      "peak": 3,
+      "titles": 0,
+      "mlb": 0,
+      "wins": 150,
+      "score": 35,
+      "quota": 3
+    },
+    {
+      "label": "1부 우승 1회·MLB 10명",
+      "peak": 3,
+      "titles": 1,
+      "mlb": 10,
+      "wins": 300,
+      "score": 80,
+      "quota": 8
+    },
+    {
+      "label": "1부 우승 1회·MLB 20명",
+      "peak": 3,
+      "titles": 1,
+      "mlb": 20,
+      "wins": 300,
+      "score": 100,
+      "quota": 10
+    },
+    {
+      "label": "1부 우승 1회·MLB 30명",
+      "peak": 3,
+      "titles": 1,
+      "mlb": 30,
+      "wins": 300,
+      "score": 120,
+      "quota": 12
+    },
+    {
+      "label": "1부 우승 3회·MLB 10명",
+      "peak": 3,
+      "titles": 3,
+      "mlb": 10,
+      "wins": 300,
+      "score": 120,
+      "quota": 12
+    },
+    {
+      "label": "1부 도달·우승 없이 MLB 40명",
+      "peak": 3,
+      "titles": 0,
+      "mlb": 40,
+      "wins": 300,
+      "score": 120,
+      "quota": 12
+    }
+  ],
+  "scenarioCount": 29889,
+  "summary": [
+    {
+      "policy": "thrifty",
+      "careers": 2,
+      "seasons": 120,
+      "games": 1200,
+      "mlbTotal": 0,
+      "maxCareerMlb": 0,
+      "topTitles": 0,
+      "maxTier": 2,
+      "rebuilds": 7,
+      "kept": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1
+      ],
+      "quota": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1
+      ],
+      "achievedReference": false
+    },
+    {
+      "policy": "normal",
+      "careers": 2,
+      "seasons": 120,
+      "games": 1200,
+      "mlbTotal": 1,
+      "maxCareerMlb": 1,
+      "topTitles": 0,
+      "maxTier": 3,
+      "rebuilds": 8,
+      "kept": [
+        3,
+        0,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "quota": [
+        3,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "achievedReference": false
+    },
+    {
+      "policy": "youth",
+      "careers": 2,
+      "seasons": 120,
+      "games": 1200,
+      "mlbTotal": 0,
+      "maxCareerMlb": 0,
+      "topTitles": 0,
+      "maxTier": 1,
+      "rebuilds": 7,
+      "kept": [
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "quota": [
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "achievedReference": false
+    }
+  ],
+  "raw": {
+    "path": "rebuild-score-careers-20261113-v03.json",
+    "sha256": "b0b17ea724106952e1da608a9b6af5ca23c49fe173596b9cd137bd84f26c0993"
+  },
+  "sourceHashes": {
+    "game.js": "f4c4f6f46d497630a6f88fe3dcb83f9414d7dd6b83b6297b2c1b96e6c2b5f8ef",
+    "extensions.js": "a606e7782b9f2563091b46ca9abc4a5ef75625f99b2a2ab1768b38662e573d21",
+    "auto-lineup.js": "dbb58727e7ae771a0324be9970926b5021c1daa3aa567f568d1ce8b03f589f5a",
+    "club-events.js": "4fb863c6a894467cbd719fd8b518a4042ed497b36bb3742a18c22e6e3810ac84",
+    "mlb.js": "14103c7151ffdfa9500e33ec6e361d7aab075781a6f514af3d2ed790f010c9e6",
+    "league.js": "c348e64074eb5e3311766d6d4f0a6083ddf4daf8ab422f4bb7719869d403e4ee",
+    "growth.js": "0177473ae05a629e99af8407b07bb8552f8479d49844278c056102255b6c094c",
+    "opinion.js": "e6f31497bd64e2eeb81d518e5435963a0daeef38ba685f5481f7bcda0b3bba4d",
+    "mlb-support.js": "12c8b398bf501adff2fda528a487ea5e757c4247eeb062943c80274c9b69b726",
+    "facilities.js": "ced89110d5b17db7e2eed1fe35ab8d9f3f645267c704ded04bbb5695ee348d68"
+  },
+  "simulatorHashes": {
+    "run-rebuild-score-sim.cjs": "16b89a529f204411a77215ab6f6db4cf53aaf04c553f3db2aadd06f9052eab9b",
+    "rebuild-score-model.cjs": "2e6245c5c3cadd45557a5fa9f9287ae1cc4377b68082bb9c8db3c73dace5e3d9",
+    "facilities.test.cjs": "4f16183f7a6aa221202cf042d2cea2d347d2ca2f2aeeb35dfed2aa2ebc67ffc6"
+  },
+  "chart": [
+    [
+      0,
+      6
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      2,
+      6
+    ],
+    [
+      3,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      8,
+      7
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      10,
+      8
+    ],
+    [
+      11,
+      8
+    ],
+    [
+      12,
+      8
+    ],
+    [
+      13,
+      8
+    ],
+    [
+      14,
+      8
+    ],
+    [
+      15,
+      9
+    ],
+    [
+      16,
+      9
+    ],
+    [
+      17,
+      9
+    ],
+    [
+      18,
+      9
+    ],
+    [
+      19,
+      9
+    ],
+    [
+      20,
+      10
+    ],
+    [
+      21,
+      10
+    ],
+    [
+      22,
+      10
+    ],
+    [
+      23,
+      10
+    ],
+    [
+      24,
+      10
+    ],
+    [
+      25,
+      11
+    ],
+    [
+      26,
+      11
+    ],
+    [
+      27,
+      11
+    ],
+    [
+      28,
+      11
+    ],
+    [
+      29,
+      11
+    ],
+    [
+      30,
+      12
+    ],
+    [
+      31,
+      12
+    ],
+    [
+      32,
+      12
+    ],
+    [
+      33,
+      12
+    ],
+    [
+      34,
+      12
+    ],
+    [
+      35,
+      13
+    ],
+    [
+      36,
+      13
+    ],
+    [
+      37,
+      13
+    ],
+    [
+      38,
+      13
+    ],
+    [
+      39,
+      13
+    ],
+    [
+      40,
+      14
+    ],
+    [
+      41,
+      14
+    ],
+    [
+      42,
+      14
+    ],
+    [
+      43,
+      14
+    ],
+    [
+      44,
+      14
+    ],
+    [
+      45,
+      15
+    ],
+    [
+      46,
+      15
+    ],
+    [
+      47,
+      15
+    ],
+    [
+      48,
+      15
+    ],
+    [
+      49,
+      15
+    ],
+    [
+      50,
+      16
+    ],
+    [
+      51,
+      16
+    ],
+    [
+      52,
+      16
+    ],
+    [
+      53,
+      16
+    ],
+    [
+      54,
+      16
+    ],
+    [
+      55,
+      17
+    ],
+    [
+      56,
+      17
+    ],
+    [
+      57,
+      17
+    ],
+    [
+      58,
+      17
+    ],
+    [
+      59,
+      17
+    ],
+    [
+      60,
+      18
+    ]
+  ]
+}
