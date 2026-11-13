@@ -266,14 +266,13 @@ function mlbClubInTrouble(t){return (Number(t?.opinion?.value)||0)>=MLB_SUPPORT.
 // Qualifies by the loyalty he left with, even after requests lowered the remembered loyalty (Temporary ④, P15 미정).
 function mlbRegularSupporters(t){return mlbSuccessRecords(t).filter(h=>h.support&&h.support.loyalty>=MLB_SUPPORT.regularLoyalty);}
 // Checked with the club's state entering the game (before its opinion change and loan repayment), paid before the wages.
+function regularSupportQuote(t){const rows=(mlbClubInTrouble(t)?mlbRegularSupporters(t):[]).map(h=>({id:h.id,name:h.player.name,amount:Math.round((Number(h.fee)||0)*MLB_SUPPORT.regularShare)})).filter(r=>r.amount>0);return {rows,total:rows.reduce((sum,r)=>sum+r.amount,0)};}
 function payRegularSupport(t,m){
  if(!t||!m||m.mlbSupport!==undefined)return null;
- const S=mlbSupportState(t),list=mlbClubInTrouble(t)?mlbRegularSupporters(t):[];
- const rows=[];let total=0;
- for(const h of list){
-  const amount=Math.round((Number(h.fee)||0)*MLB_SUPPORT.regularShare);if(!(amount>0))continue;
-  gain(t,amount,'MLB 출신 정기 후원 · '+h.player.name);h.support.regular=mlbRound(h.support.regular+amount);
-  rows.push({id:h.id,name:h.player.name,amount});total+=amount;
+ const S=mlbSupportState(t),quote=regularSupportQuote(t),rows=quote.rows,total=quote.total;
+ for(const row of rows){
+  const h=mlbSuccessRecords(t).find(h=>h.id===row.id);
+  gain(t,row.amount,'MLB 출신 정기 후원 · '+row.name);h.support.regular=mlbRound(h.support.regular+row.amount);
  }
  if(!rows.length){S.regular=false;return null;}
  if(!S.regular)news(t,'MLB 출신 정기 후원 시작','구단이 어렵다는 소식에 '+rows.map(r=>r.name).join(', ')+' 선수가 경기마다 이적료의 5%를 보내기로 했습니다. 해체 여론이 '+MLB_SUPPORT.troubleOpinion+'% 아래로 내려가고 긴급 대출을 다 갚으면 멈춥니다.');

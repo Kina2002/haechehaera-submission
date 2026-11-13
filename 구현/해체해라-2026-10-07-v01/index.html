@@ -341,6 +341,14 @@ dialog.mlb-dialog{padding:0;width:min(740px,94vw);max-width:94vw;max-height:94dv
 .ach-card.locked{min-height:145px}.ach-card .ach-hidden-condition{color:#8ba9b9;margin-top:18px}.ach-card .ach-proof{color:#ffe1a0;margin-bottom:10px}.ach-toolbar{flex-wrap:wrap}@media(max-width:700px){.ach-grid{grid-template-columns:1fr}.ach-hero{gap:16px;padding:22px 18px}.ach-hero h1{font-size:27px}.ach-total{min-width:95px;padding-left:15px}.ach-total strong{font-size:40px}.ach-total small{font-size:18px}.ach-filters button{padding:9px 12px}.ach-toolbar label{width:100%}.ach-card{min-height:145px}}
 </style>
 <style>/* Keep the club overview, achievements and next-game budget in one viewport. */
+.operating-budget .row{flex-wrap:wrap;align-items:baseline}
+.operating-budget .row>span{flex:1 1 120px}
+.operating-budget .row>b{margin-left:auto;overflow-wrap:anywhere}
+.operating-budget .budget-details{margin-top:0}
+.operating-budget .budget-details summary{padding:6px 0}
+.operating-budget .budget-details h4{margin:8px 0 4px;color:var(--cyan)}
+.operating-budget .budget-details[open]{max-height:240px;overflow:auto}
+body[data-screen="home"] .club-report .operating-budget .row b{white-space:normal}
 body[data-screen="home"]{height:100dvh;min-height:640px;display:flex;flex-direction:column}
 body[data-screen="home"]>header,body[data-screen="home"]>footer{flex-shrink:0}
 body[data-screen="home"]>footer{width:100%;margin:0 auto;align-items:center;padding-top:0;padding-bottom:5px}
@@ -372,6 +380,9 @@ body[data-screen="home"] .club-stage .field-note{left:calc(50% - 145px)!importan
  body[data-screen="home"] .club-report .row{font-size:12px}
  body[data-screen="home"] .home-budget .budget-note{font-size:10px}
 }
+
+body[data-screen="home"] .club-report>.home-budget{flex:1 1 0;min-height:180px;overflow-y:auto;justify-content:flex-start}
+body[data-screen="home"] .home-budget .budget-details[open]{max-height:none;overflow:visible;flex-shrink:0}
 </style>
 <style>#sideSwitchHost{position:absolute;inset:0;display:grid;place-items:center;z-index:6;pointer-events:none}
 #sideSwitchHost[hidden]{display:none}
@@ -1428,9 +1439,34 @@ function awayGateIncome(t,m,crowd){return 0;}// P16: an away game's gate from ou
 function facilityLoyalty(t){return 0;}// loyalty every player gets after a game
 function facilityBudgetShops(t){return 0;}// home + away shop income and the away gate, for the next-game estimate
 function operatingBudget(t){const salary=t.players.reduce((n,p)=>n+p.salary,0),maintenance=facilityUpkeep(t,null);return {salary,maintenance,total:salary+maintenance};}
-function budgetHTML(t,compact=false){const b=balance(t),o=operatingBudget(t),gate=attendance(t)*t.ticket,shops=facilityBudgetShops(t),loss=b.baseReward+3*b.runReward+(gate+shops)/2-o.total;
-if(compact)return '<section class="panel operating-budget home-budget"><h3>다음 경기 운영비</h3><div class="row between"><span>선수 '+t.players.length+'명 급여</span><b>'+money(o.salary)+'</b></div><div class="row between"><span>시설 '+t.facilities.length+'개 유지비</span><b>'+money(o.maintenance)+'</b></div><div class="row between budget-total"><strong>고정 지출</strong><strong class="bad">'+money(o.total)+'</strong></div><p class="budget-forecast">예상 손익 · 패배 '+(loss>=0?'+':'')+money(loss)+'<br>승리 '+(loss+b.winReward>=0?'+':'')+money(loss+b.winReward)+'</p><p class="budget-note">홈·원정 반반, 경기당 3득점 가정<br>관중·득점·시설·선수단에 따라 달라집니다.</p><div class="row between"><span>미지급금 별도</span><b>'+money(t.debt)+'</b></div>'+(t.funds<o.total?'<p class="bad budget-warning">운영비가 부족합니다. 추가 투자 전 결산을 확인하세요.</p>':'')+'</section>';
-return '<section class="panel settings-extra"><h3>다음 경기 운영비</h3><div class="row between"><span>선수 '+t.players.length+'명 급여</span><b>'+money(o.salary)+'</b></div><div class="row between"><span>시설 '+t.facilities.length+'개 유지비</span><b>'+money(o.maintenance)+'</b></div><div class="row between"><strong>매 경기 고정 지출</strong><strong class="bad">'+money(o.total)+'</strong></div><p class="muted-note">홈·원정 반반, 경기당 3득점 가정 · 경기당 예상 손익<br>패배 '+(loss>=0?'+':'')+money(loss)+' / 승리 '+(loss+b.winReward>=0?'+':'')+money(loss+b.winReward)+'<br>관중·득점·시설·선수단에 따라 달라집니다. 현재 미지급금은 별도 '+money(t.debt)+'.</p>'+(t.funds<o.total?'<p class="bad">보유 자금이 1경기 운영비보다 적습니다. 추가 투자 전 결산을 확인하세요.</p>':'')+'</section>';
+// Shared with the actual per-game settlement. Amounts stay in the existing 10,000-won units.
+function matchMoneyQuote(t,m){const b=balance(t),crowd=attendance(t),win=m.score[0]>m.score[1],ticket=m.home===0?crowd*t.ticket:awayGateIncome(t,m,crowd),stores=facilityShopIncome(t,m,crowd),reward=b.baseReward+m.score[0]*b.runReward+(win?b.winReward:0),salary=t.players.reduce((s,p)=>s+p.salary,0),maintenance=facilityUpkeep(t,m);return {crowd,ticket,stores,reward,salary,maintenance,total:reward+ticket+stores};}
+function budgetFixture(t){
+ if(t.match&&!t.match.done)return {available:false,reason:'경기가 끝난 뒤 다음 경기 예상을 확인할 수 있습니다.'};
+ const L=t.league;
+ if(L?.phase==='season'&&typeof leagueFixture==='function'){const fx=leagueFixture(L);if(!fx)return {available:false,reason:'시즌 결과를 확정한 뒤 다음 경기 예상을 확인할 수 있습니다.'};return {available:true,home:fx.usHome?0:1,tier:L.tier,opponent:typeof leagueTeamName==='function'?leagueTeamName(t,fx.oppId):'',nextSeason:false};}
+ return {available:true,home:0,tier:L?.tier??0,opponent:'',nextSeason:L?.phase==='offseason'};
+}
+function budgetForecast(t){
+ const fixture=budgetFixture(t);if(!fixture.available)return {fixture};
+ const support=typeof regularSupportQuote==='function'?regularSupportQuote(t).total:0,league=typeof leaguePayout==='function'?leaguePayout(fixture.tier):0;
+ const scenario=win=>{const m={home:fixture.home,score:win?[3,2]:[3,4],league:{tier:fixture.tier}},q=matchMoneyQuote(t,m),income=q.total+league+support,arrears=Number(t.debt)||0,due=q.salary+q.maintenance+arrears,available=(Number(t.funds)||0)+income,paid=Math.min(available,due),debt=due-paid,fundsAfterWages=available-paid;
+  const loanRepay=typeof loanRepaymentQuote==='function'?loanRepaymentQuote(t,q.total+league,fundsAfterWages):0,expense=due+loanRepay,fundsAfter=fundsAfterWages-loanRepay;
+  return {...q,league,support,arrears,income,due,paid,debt,loanRepay,expense,net:income-expense,fundsAfter,cashChange:fundsAfter-(Number(t.funds)||0)};
+ };
+ return {fixture,runs:3,loss:scenario(false),win:scenario(true)};
+}
+function budgetHTML(t,compact=false){
+ const f=budgetForecast(t),o=operatingBudget(t),row=(label,value)=>'<div class="row between"><span>'+label+'</span><b>'+value+'</b></div>',moneyPair=(a,b)=>a===b?money(a):money(a)+' / '+money(b),signed=n=>(n>=0?'+':'')+money(n);
+ let html='<section class="panel operating-budget '+(compact?'home-budget':'settings-extra')+'"><h3>다음 경기 운영비</h3>';
+ if(!f.fixture.available)return html+row('선수 급여',money(o.salary))+'<p class="muted-note">'+f.fixture.reason+'</p></section>';
+ const a=f.loss,w=f.win,place=f.fixture.home===0?'홈 경기':'원정 경기',title=(f.fixture.nextSeason?'다음 시즌 첫 경기 · ':'다음 경기 · ')+place+(f.fixture.opponent?' · '+esc(f.fixture.opponent):'');
+ html+='<p class="budget-note">'+title+'</p>'+row('예상 수입 · 패배 / 승리',moneyPair(a.income,w.income))+row('예상 지출 · 패배 / 승리',moneyPair(a.expense,w.expense))+
+  '<p class="budget-forecast">예상 손익 · 패배 <b class="'+(a.net<0?'bad':'good')+'">'+signed(a.net)+'</b><br>승리 <b class="'+(w.net<0?'bad':'good')+'">'+signed(w.net)+'</b></p>';
+ html+='<details class="audit budget-details"'+(compact?'':' open')+'><summary>수입·지출 상세 보기</summary><h4>받을 돈</h4>'+row('경기 완료·3득점 보상',money(a.reward))+row('승리 시 추가 보상',money(w.reward-a.reward))+row(f.fixture.home===0?'예상 홈 입장료':'예상 원정 응원 입장료',money(a.ticket))+row('매장·광고 수입',money(a.stores))+row('리그 배당금',money(a.league))+row('MLB 정기 후원 · 현재 조건',money(a.support))+
+  '<h4>낼 돈</h4>'+row('선수 '+t.players.length+'명 급여',money(a.salary))+row('시설 유지비',money(a.maintenance))+row('이전 미지급금',money(a.arrears))+row('대출 상환 · 패배 / 승리',moneyPair(a.loanRepay,w.loanRepay))+row('경기 후 예상 잔액 · 패배 / 승리',moneyPair(a.fundsAfter,w.fundsAfter))+'</details>';
+ if(a.debt>0||w.debt>0)html+='<p class="bad budget-warning">경기 수입을 받아도 운영비가 부족할 수 있습니다.<br>미지급 예상 · 패배 '+money(a.debt)+' / 승리 '+money(w.debt)+'.</p>';
+ return html+'<p class="budget-note">현재 선수단·시설·입장료, 3득점 가정'+(f.fixture.nextSeason?' · 현재 리그의 첫 홈경기 기준':'')+'<br>관객 수와 득점에 따라 달라집니다. 시즌 상금·경기 후 별도 지출은 제외합니다.</p></section>';
 }
 function appearance(){return {version:12,body:randomInt(0,5),skin:randomInt(0,5),hairColor:randomInt(1,6),eyeColor:randomInt(0,5),parts:{hair:Math.random()<.3?-1:randomInt(0,6),beard:Math.random()<.65?-1:randomInt(0,4),wear:Math.random()<.7?-1:randomInt(0,5),black:Math.random()<.65?-1:randomInt(0,2),eyes:randomInt(0,5),nose:randomInt(0,5),brows:randomInt(0,5),mouth:randomInt(0,5)}};}
 function migrateAppearance(a){if(!a)return;if(!a.parts)a.parts={};const p=a.parts;if(a.version!==12){if(p.beard>=0)p.beard=[4,0,1,2,3][p.beard]??p.beard;if(p.wear>=0)p.wear=[0,1,4,5][p.wear]??p.wear;if(p.brows>=0)p.brows=[0,1,4,2,3,5,5][p.brows]??p.brows;a.version=12;}p.black??=-1;}
@@ -1478,7 +1514,7 @@ function restoreAbilities(){if(!fatigueSnapshot)return;for(const [p,a]of fatigue
 function effective(p,k){if(k==='stamina')return p.a[k];const ratio=clamp(p.energy/p.a.stamina,0,1),mult=ratio>=.5?1:balance().fatigueFloor+(1-balance().fatigueFloor)*(ratio/.5);return Math.max(1,Math.round(p.a[k]*mult));}
 const originalBuildMotion=buildMotion;buildMotion=function(m,e){originalBuildMotion(m,e);for(const move of e.fieldMoves){if(move.knots||e.bh)continue;const p=ply(tside(m,1-e.attack),move.id),dist=Math.hypot(move.to[0]-move.from[0],move.to[1]-move.from[1]);move.end=clamp(.22+dist/(70+p.a.speed*1.2)*.28,.29,.85);}};
 const oldResolve=resolvePitch;resolvePitch=function(m){const t=team();fatigueSnapshot=[t,m.opp].flatMap(tm=>tm.players.map(p=>[p,p.a]));for(const [p,a]of fatigueSnapshot)p.a=Object.fromEntries(KEYS.map(k=>[k,k==='stamina'?a[k]:effective(p,k)]));let e;try{e=oldResolve(m);}finally{restoreAbilities();}const b=balance(t),at=tside(m,e.attack),df=tside(m,1-e.attack),deduct=(p,n)=>{if(p)p.energy=Math.max(0,p.energy-n*staminaUseFactor(t,p));};if(e.pitchThrown)deduct(ply(df,e.pitcher),b.pitchCost);if(e.swing)deduct(ply(at,e.batter),e.inputCommand==='power'?b.powerCost:b.swingCost);for(const mv of e.moves){let d=0;for(let i=1;i<mv.points.length;i++)d+=Math.hypot(mv.points[i][0]-mv.points[i-1][0],mv.points[i][1]-mv.points[i-1][1]);deduct(ply(at,mv.id),d*b.runCost*.22);}for(const mv of e.fieldMoves)deduct(ply(df,mv.id),Math.hypot(mv.to[0]-mv.from[0],mv.to[1]-mv.from[1])*b.runCost);save();return e;};
-reward=function(m){if(m.rewarded)return;const t=team(),b=balance(t);m.rewarded=true;const win=m.score[0]>m.score[1];if(win)t.w++;else if(m.score[0]<m.score[1])t.l++;else t.d++;t.trophies=t.w;t.offer=null;m.result=win?'승리':m.score[0]===m.score[1]?'무승부':'패배';const crowd=attendance(t),ticket=m.home===0?crowd*t.ticket:awayGateIncome(t,m,crowd),stores=facilityShopIncome(t,m,crowd),reward=b.baseReward+m.score[0]*b.runReward+(win?b.winReward:0),salary=t.players.reduce((s,p)=>s+p.salary,0),maint=facilityUpkeep(t,m),total=reward+ticket+stores;
+reward=function(m){if(m.rewarded)return;const t=team(),b=balance(t);m.rewarded=true;const win=m.score[0]>m.score[1];if(win)t.w++;else if(m.score[0]<m.score[1])t.l++;else t.d++;t.trophies=t.w;t.offer=null;m.result=win?'승리':m.score[0]===m.score[1]?'무승부':'패배';const {crowd,ticket,stores,reward,salary,maintenance:maint,total}=matchMoneyQuote(t,m);
 gain(t,total,'경기 수입 · '+gameResultLabel(m));const due=salary+maint+t.debt,paid=Math.min(t.funds,due);spend(t,paid,'급여·시설·미지급금 결산');t.debt=due-paid;m.reward=reward;m.finance={reward,ticket,stores,crowd,salary,maintenance:maint,paid,debt:t.debt,net:total-paid};
 const welfare=facilityLoyalty(t);for(const p of t.players){settleContract26(t,p,m,welfare);p.fans=Math.max(0,p.fans+(win?3:0)+(t.facilities.includes('fans')?2:0));}if(t.debt)news(t,'급여·유지비 일부 미지급','미지급금 '+money(t.debt)+'가 다음 결산으로 이어집니다. 선수 애정도가 8 감소했습니다.');
 if(r(m)<b.fanEventChance)rollClubEvent(t,m);t.market=[];
@@ -5645,10 +5681,11 @@ function takeEmergencyLoan(t){
  return '';
 }
 // P14: after wages and upkeep, up to 30% of this game's settlement income (fees, gate, shops, league payout; no prizes).
+function loanRepaymentQuote(t,income,funds=t?.funds??0){return loanLeft(t)?Math.max(0,Math.min(t.loan.left,Math.max(0,funds),Math.round(income*EMERGENCY_LOAN.repayShare))):0;}
 function repayLoanFromMatch(t,m){
  const f=m?.finance;if(!t||!f||f.loanRepay!==undefined||!loanLeft(t))return 0;
  const income=(Number(f.reward)||0)+(Number(f.ticket)||0)+(Number(f.stores)||0)+(Number(f.league)||0);
- const pay=Math.max(0,Math.min(t.loan.left,Math.max(0,t.funds),Math.round(income*EMERGENCY_LOAN.repayShare)));
+ const pay=loanRepaymentQuote(t,income);
  if(pay>0&&spend(t,pay,'긴급 대출 상환')){t.loan.left=Math.round((t.loan.left-pay)*100)/100;t.loan.repaid=Math.round((t.loan.repaid+pay)*100)/100;}
  f.loanRepay=pay>0?pay:0;f.loanLeft=t.loan.left;if(Number.isFinite(f.net))f.net-=f.loanRepay;
  const h=t.history?.find(x=>x.id===m.id);if(h?.finance)h.finance=JSON.parse(JSON.stringify(f));
@@ -6222,14 +6259,13 @@ function mlbClubInTrouble(t){return (Number(t?.opinion?.value)||0)>=MLB_SUPPORT.
 // Qualifies by the loyalty he left with, even after requests lowered the remembered loyalty (Temporary ④, P15 미정).
 function mlbRegularSupporters(t){return mlbSuccessRecords(t).filter(h=>h.support&&h.support.loyalty>=MLB_SUPPORT.regularLoyalty);}
 // Checked with the club's state entering the game (before its opinion change and loan repayment), paid before the wages.
+function regularSupportQuote(t){const rows=(mlbClubInTrouble(t)?mlbRegularSupporters(t):[]).map(h=>({id:h.id,name:h.player.name,amount:Math.round((Number(h.fee)||0)*MLB_SUPPORT.regularShare)})).filter(r=>r.amount>0);return {rows,total:rows.reduce((sum,r)=>sum+r.amount,0)};}
 function payRegularSupport(t,m){
  if(!t||!m||m.mlbSupport!==undefined)return null;
- const S=mlbSupportState(t),list=mlbClubInTrouble(t)?mlbRegularSupporters(t):[];
- const rows=[];let total=0;
- for(const h of list){
-  const amount=Math.round((Number(h.fee)||0)*MLB_SUPPORT.regularShare);if(!(amount>0))continue;
-  gain(t,amount,'MLB 출신 정기 후원 · '+h.player.name);h.support.regular=mlbRound(h.support.regular+amount);
-  rows.push({id:h.id,name:h.player.name,amount});total+=amount;
+ const S=mlbSupportState(t),quote=regularSupportQuote(t),rows=quote.rows,total=quote.total;
+ for(const row of rows){
+  const h=mlbSuccessRecords(t).find(h=>h.id===row.id);
+  gain(t,row.amount,'MLB 출신 정기 후원 · '+row.name);h.support.regular=mlbRound(h.support.regular+row.amount);
  }
  if(!rows.length){S.regular=false;return null;}
  if(!S.regular)news(t,'MLB 출신 정기 후원 시작','구단이 어렵다는 소식에 '+rows.map(r=>r.name).join(', ')+' 선수가 경기마다 이적료의 5%를 보내기로 했습니다. 해체 여론이 '+MLB_SUPPORT.troubleOpinion+'% 아래로 내려가고 긴급 대출을 다 갚으면 멈춥니다.');
