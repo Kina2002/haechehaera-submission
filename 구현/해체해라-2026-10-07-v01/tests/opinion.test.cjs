@@ -45,6 +45,7 @@ function world({seed=20261111}={}){
  vm.runInContext(league.slice(0,league.indexOf('// UI integration.')),ctx);
  vm.runInContext(growth.slice(0,growth.indexOf('// UI integration.')),ctx);
  vm.runInContext(opinion.slice(0,O_UI),ctx);
+ vm.runInContext(line(opinion,/^function opinionPct\(.*$/m),ctx);
  vm.runInContext(helpers,ctx);
  const run=code=>JSON.parse(vm.runInContext('JSON.stringify('+code+')',ctx));
  return {run,exec:code=>vm.runInContext(code,ctx)};
@@ -240,10 +241,11 @@ test('forfeits: 0:9 losses for the rest of the season, only when no money and no
   const before={l:t.l,w:t.w,funds:t.funds,games:t.players.map(p=>p.stats.games)};
   const res=forfeitRemainingGames(t);
   const ours=t.league.history.at(-1).table.find(x=>x.id==='us');
-  return {asLoan,res,before,after:{l:t.l,w:t.w},results:t.league.results.filter(g=>g.home==='us'||g.away==='us').map(g=>({round:g.round,us:g.home==='us'?g.score[0]:g.score[1],them:g.home==='us'?g.score[1]:g.score[0],forfeit:!!g.forfeit})),
+  return {asLoan,res,message:forfeitResultMessage(t,res),before,after:{l:t.l,w:t.w},results:t.league.results.filter(g=>g.home==='us'||g.away==='us').map(g=>({round:g.round,us:g.home==='us'?g.score[0]:g.score[1],them:g.home==='us'?g.score[1]:g.score[0],forfeit:!!g.forfeit})),
    forfeitLog:t.opinion.log.filter(e=>e.kind==='forfeit').map(e=>e.to),phase:t.league.phase,entry:{forfeits:t.league.history.at(-1).forfeits,l:ours.l,w:ours.w},forfeits:t.opinion.forfeits,news:t.news.map(x=>x.title),valid:tryValidate(t)};})()`);
  assert.match(r.asLoan,/긴급 대출/);
  assert.equal(r.res.count,7);assert.equal(r.after.l-r.before.l,7);assert.equal(r.after.w,r.before.w);
+ assert.match(r.message,/부전패 7경기/);assert.match(r.message,/해체 여론 .* → /);assert.doesNotMatch(r.message,/재창단했습니다/);
  assert.equal(r.results.length,10);
  for(const g of r.results.slice(3))assert.deepEqual([g.us,g.them,g.forfeit],[0,9,true]);
  for(const g of r.results.slice(0,3))assert.equal(g.forfeit,false);
@@ -266,10 +268,17 @@ test('a short roster never blocks "다음 시즌 시작" for good: hire, loan, o
   const start=startNextSeason(t),state=operationState(t).kind;
   // a whole season of forfeits at 60%: +5+5+7×8 = 66 → 100, 6th +20, loan +10 → disband and rebuild with 12 players
   t.opinion.value=60;t.opinion.lossStreak=0;const res=forfeitRemainingGames(t);
-  return {hire,loan,none,start,state,count:res.count,disband:res.seasonEnd.disband,n:t.players.length,next:leagueNextSeasonBlock(t),loanAfter:t.loan,valid:tryValidate(t)};})()`);
+  return {hire,loan,none,start,state,count:res.count,disband:res.seasonEnd.disband,message:forfeitResultMessage(t,res),n:t.players.length,next:leagueNextSeasonBlock(t),loanAfter:t.loan,valid:tryValidate(t)};})()`);
  assert.match(r.hire,/10명/);assert.match(r.loan,/긴급 대출/);assert.equal(r.none,'');
  assert.equal(r.start,'');assert.equal(r.state,'forfeit');assert.equal(r.count,10);
  assert.equal(r.disband,true);assert.equal(r.n,12);assert.equal(r.next,'');assert.equal(r.loanAfter,null);assert.equal(r.valid,'ok');
+ assert.match(r.message,/구단이 해체되어 동네 리그에서 재창단했습니다/);assert.match(r.message,/해체 여론 20%로 다시 시작/);assert.doesNotMatch(r.message,/→/);
+});
+
+test('a pending revival decision does not announce a completed rebuild',()=>{
+ const {run}=world();
+ const message=run(`(()=>{const t=club();t.mlbSupport={pending:{kind:'disband',season:1}};return forfeitResultMessage(t,{count:10,season:1,from:93,to:100,seasonEnd:{move:'pending'}});})()`);
+ assert.match(message,/부전패 10경기/);assert.match(message,/해체 판정.*구단 회생권/);assert.doesNotMatch(message,/재창단했습니다/);
 });
 
 test('stage news when the stage changes, and the ④ hook for changes outside games',()=>{
