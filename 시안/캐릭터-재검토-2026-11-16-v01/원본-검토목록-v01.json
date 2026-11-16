@@ -1,0 +1,290 @@
+[
+  {
+    "group": "portrait",
+    "key": "head",
+    "source": "머리-무파츠-v01.png",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/99d238bcd73eaf653db1.png"
+  },
+  {
+    "group": "portrait",
+    "key": "bodies",
+    "source": "상반신-6체형-v03.png",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/f02caf1c841302512cf8.png"
+  },
+  {
+    "group": "portrait",
+    "key": "features",
+    "source": "얼굴파츠-24종-v01.png",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/585e8ac497e413d7a5cb.png"
+  },
+  {
+    "group": "portrait",
+    "key": "hair",
+    "source": "머리카락7종-모자-v01.png",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/a19fb457e823a6627d53.png"
+  },
+  {
+    "group": "portrait",
+    "key": "equipment",
+    "source": "수염장비-16종-v01.png",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/63b6b5a9262e97135292.png"
+  },
+  {
+    "group": "field",
+    "key": "baseHeads",
+    "source": "baseHeads",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/6b6b1d9375114a84e80d.png"
+  },
+  {
+    "group": "field",
+    "key": "body-normal",
+    "source": "body-normal",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/27752ba28e6ee788939f.png"
+  },
+  {
+    "group": "field",
+    "key": "body-heavy",
+    "source": "body-heavy",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/d8f8027f5e5e79611c6e.png"
+  },
+  {
+    "group": "field",
+    "key": "body-slender",
+    "source": "body-slender",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/7ef3aad01dc551b83ace.png"
+  },
+  {
+    "group": "field",
+    "key": "body-broad",
+    "source": "body-broad",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/9039816dba1bfcbbe21a.png"
+  },
+  {
+    "group": "field",
+    "key": "body-tall",
+    "source": "body-tall",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/e48c39c84ce8ab963daa.png"
+  },
+  {
+    "group": "field",
+    "key": "body-compact",
+    "source": "body-compact",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/f26ca556a0e8a08c67b0.png"
+  },
+  {
+    "group": "field",
+    "key": "directions",
+    "source": "directions",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/f8e7c4a22f9ffbbabc77.png"
+  },
+  {
+    "group": "field",
+    "key": "hair",
+    "source": "hair",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/3219db7e593d9b1889fc.png"
+  },
+  {
+    "group": "field",
+    "key": "features",
+    "source": "features",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/bbe77cfdad03169137d9.png"
+  },
+  {
+    "group": "field",
+    "key": "caps",
+    "source": "caps",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/1eadd44ce02e8c70ddc5.png"
+  },
+  {
+    "group": "field",
+    "key": "sideHelmet",
+    "source": "sideHelmet",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/086625a9f0f176e13306.png"
+  },
+  {
+    "group": "field",
+    "key": "equipment",
+    "source": "equipment",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/f5aa8e8ac1b51bba8853.png"
+  },
+  {
+    "group": "field",
+    "key": "normalMotion",
+    "source": "normalMotion",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/e6dae3b038462782eb26.png"
+  },
+  {
+    "group": "field",
+    "key": "normalFollow",
+    "source": "normalFollow",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/6c5280f013c7e8085091.png"
+  },
+  {
+    "group": "field",
+    "key": "heavyMotion",
+    "source": "heavyMotion",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/597d9ec361fb17c77ef8.png"
+  },
+  {
+    "group": "field",
+    "key": "heavyFollow",
+    "source": "heavyFollow",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/54257306bd39e905a1d6.png"
+  },
+  {
+    "group": "field",
+    "key": "slenderMotion",
+    "source": "slenderMotion",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/102382f3a99656145cb9.png"
+  },
+  {
+    "group": "field",
+    "key": "slenderFollow",
+    "source": "slenderFollow",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/222afce1c48ec37cb435.png"
+  },
+  {
+    "group": "field",
+    "key": "broadMotion",
+    "source": "broadMotion",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/94454e58f43a50e4c6cc.png"
+  },
+  {
+    "group": "field",
+    "key": "broadFollow",
+    "source": "broadFollow",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/2032981af40b251329dc.png"
+  },
+  {
+    "group": "field",
+    "key": "tallMotion",
+    "source": "tallMotion",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/c0ff1735a6b551a3f0e6.png"
+  },
+  {
+    "group": "field",
+    "key": "tallFollow",
+    "source": "tallFollow",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/9642a58f1c0f6b82996c.png"
+  },
+  {
+    "group": "field",
+    "key": "compactMotion",
+    "source": "compactMotion",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/5757ef873e86d8b9260a.png"
+  },
+  {
+    "group": "field",
+    "key": "compactFollow",
+    "source": "compactFollow",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/24136b89b4d520afeb5d.png"
+  },
+  {
+    "group": "field",
+    "key": "normalRun",
+    "source": "normalRun",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/2c585ed1291fbe1c5a01.png"
+  },
+  {
+    "group": "field",
+    "key": "normalBatForms",
+    "source": "normalBatForms",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/08491a272a67a7407e4a.png"
+  },
+  {
+    "group": "field",
+    "key": "normalPersonality",
+    "source": "normalPersonality",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/69c6cfd4beea0d2039c1.png"
+  },
+  {
+    "group": "field",
+    "key": "heavyRun",
+    "source": "heavyRun",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/4ac269284ad3d6b283fd.png"
+  },
+  {
+    "group": "field",
+    "key": "heavyBatForms",
+    "source": "heavyBatForms",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/44263f58739477d80457.png"
+  },
+  {
+    "group": "field",
+    "key": "heavyPersonality",
+    "source": "heavyPersonality",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/40852160fe19a9f5e74d.png"
+  },
+  {
+    "group": "field",
+    "key": "slenderRun",
+    "source": "slenderRun",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/78f672252564ae732170.png"
+  },
+  {
+    "group": "field",
+    "key": "slenderBatForms",
+    "source": "slenderBatForms",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/1c3ec6192b567dc65989.png"
+  },
+  {
+    "group": "field",
+    "key": "slenderPersonality",
+    "source": "slenderPersonality",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/c90aff6ef1dfcabfba57.png"
+  },
+  {
+    "group": "field",
+    "key": "broadRun",
+    "source": "broadRun",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/039c398f1312bc7a5e82.png"
+  },
+  {
+    "group": "field",
+    "key": "broadBatForms",
+    "source": "broadBatForms",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/7d431c084de05bfda2bb.png"
+  },
+  {
+    "group": "field",
+    "key": "broadPersonality",
+    "source": "broadPersonality",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/2048052586951623801c.png"
+  },
+  {
+    "group": "field",
+    "key": "tallRun",
+    "source": "tallRun",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/e34d9bdeefd32a4ae6be.png"
+  },
+  {
+    "group": "field",
+    "key": "tallBatForms",
+    "source": "tallBatForms",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/db4038dda6dee2f6860b.png"
+  },
+  {
+    "group": "field",
+    "key": "tallPersonality",
+    "source": "tallPersonality",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/0f66a2055f229e3b8133.png"
+  },
+  {
+    "group": "field",
+    "key": "compactRun",
+    "source": "compactRun",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/3d8a705da13ca497d970.png"
+  },
+  {
+    "group": "field",
+    "key": "compactBatForms",
+    "source": "compactBatForms",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/3c0afe9a4d2c7046cbb2.png"
+  },
+  {
+    "group": "field",
+    "key": "compactPersonality",
+    "source": "compactPersonality",
+    "url": "../../구현/해체해라-2026-10-07-v01/assets/49d5b4bb7650dcf75396.png"
+  }
+]
