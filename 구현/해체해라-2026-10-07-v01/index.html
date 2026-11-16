@@ -536,7 +536,18 @@ body[data-screen="home"] .club-stage .field-note{left:calc(50% - 145px)!importan
 const STATS={contact:"컨택",power:"파워",eye:"선구안",speed:"주력",sense:"야구센스",catch:"포구",throw:"송구",velocity:"구속",control:"제구"};
 const KEYS=Object.keys(STATS), POS=["P","C","1B","2B","3B","SS","LF","CF","RF"], BAT_POS=["C","1B","2B","3B","SS","LF","CF","RF","DH"];
 const COLORS=[["검정","#20252e"],["진홍","#bf174a"],["빨강","#ed4545"],["흰색","#f6f8f4"],["남색","#172e58"],["아이보리","#fff0ce"],["파랑","#2685de"],["금색","#c99732"],["주황","#f68430"],["짙은 와인색","#671c3d"],["노랑","#ffcf35"],["초록","#08654e"],["분홍","#ee81b2"],["보라","#8752cf"]];
-const NAMES=["김해체","이웃찬","박병맛","최타돌","한타오","나가세요","고인물","외인래","해체맨","김막내","장래희망","윤종노","오빠름","강철민","정포구","이강타","한방승","윤태양","임수비","박도전","문볼넷","배주력","송직구","진침착"];
+const NAMES=[
+ "김해체","이웃찬","박병맛","최타돌","한타오","나가세요","고인물","외인래","해체맨","김막내",
+ "장래희망","윤종노","오빠름","강철민","정포구","이강타","한방승","윤태양","임수비","박도전",
+ "문볼넷","배주력","송직구","진침착","강한방","고집중","곽승부","구원찬","권역전","김끝내",
+ "김한점","나안타","나기대","남은힘","노포기","노실책","도루왕","도전중","두근찬","류쾌한",
+ "마구남","맹연습","문장타","민첩해","박반전","박박수","박찬스","반전남","배짱찬","백연습",
+ "백발중","변칙구","봉인해","서성장","서두름","서프찬","성실해","손끝찬","송한방","신기록",
+ "심호흡","안흔들","안놓쳐","양손찬","엄진지","오기적","오승부","오집념","우당탕","원찬스",
+ "유쾌남","유연해","윤반전","이악물","이한번","임끝내","장꾸준","장집념","전력질","전진해",
+ "정정면","정한끝","조찬스","주루찬","진득해","차근찬","차분해","최선을","최집중","한걸음",
+ "한끗승","한판승","허슬찬","홍장타","황금손","황역전","강뚝심","고꾸준","김내일","송희망"
+];
 const DESIGN_ONLY=location.hash==="#reactions";const TEST_ONLY=document.documentElement.hasAttribute('data-test-session');const KEY="haechehaera.integrated.v12.20261006";const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const clone=v=>JSON.parse(JSON.stringify(v)), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -549,7 +560,8 @@ function r(m){m.rng^=m.rng<<13;m.rng^=m.rng>>>17;m.rng^=m.rng<<5;return (m.rng>>
 function ri(m,a,b){return a+Math.floor(r(m)*(b-a+1))}
 function pick(m,arr){return arr[ri(m,0,arr.length-1)]}
 function recruitAbilities(){const keys=KEYS.filter(k=>k!=="stamina"),a={};keys.forEach(k=>a[k]=randomInt(10,70));if(Math.random()<.001)a[keys[randomInt(0,keys.length-1)]]=randomInt(80,100);return a;}
-function player(initial,used=[],bot=false,level=0){let a={},strong=KEYS[randomInt(0,8)],weak;do{weak=KEYS[randomInt(0,8)]}while(strong===weak);if(initial)KEYS.forEach(k=>a[k]=k===strong?(k==="sense"?randomInt(55,65):randomInt(60,80)):k===weak?randomInt(1,25):randomInt(20,55));else a=recruitAbilities();if(bot)KEYS.forEach(k=>a[k]=opponentAbility(randomInt(20,55),level,k));let n=0;while(used.includes(n))n++;return {id:uid(),name:NAMES[randomInt(0,NAMES.length-1)],number:n,a,hand:Math.random()<.4?"좌타":"우타",tendency:["당겨치기","중앙","밀어치기"][randomInt(0,2)],strong:initial?strong:null,weak:initial?weak:null,stats:freshStats()}}
+function randomPlayerName(used=[]){const blocked=new Set(used),available=NAMES.filter(n=>!blocked.has(n));if(available.length)return available[randomInt(0,available.length-1)];let n=1;while(blocked.has("새선수"+n))n++;return "새선수"+n;}
+function player(initial,used=[],bot=false,level=0,usedNames=[]){let a={},strong=KEYS[randomInt(0,8)],weak;do{weak=KEYS[randomInt(0,8)]}while(strong===weak);if(initial)KEYS.forEach(k=>a[k]=k===strong?(k==="sense"?randomInt(55,65):randomInt(60,80)):k===weak?randomInt(1,25):randomInt(20,55));else a=recruitAbilities();if(bot)KEYS.forEach(k=>a[k]=opponentAbility(randomInt(20,55),level,k));let n=0;while(used.includes(n))n++;return {id:uid(),name:randomPlayerName(usedNames),number:n,a,hand:Math.random()<.4?"좌타":"우타",tendency:["당겨치기","중앙","밀어치기"][randomInt(0,2)],strong:initial?strong:null,weak:initial?weak:null,stats:freshStats()}}
 // Designated hitter: lineup[0..8] is the batting order (eight fielders + DH) and lineup[9] is the pitcher, who never bats.
 function dhLineup(ps){return ps.length<10?[]:[...ps.slice(0,9).map((p,i)=>({id:p.id,pos:BAT_POS[i]})),{id:ps[9].id,pos:"P"}]}
 function legacyLineup(l){return l?.length===9&&new Set(l.map(x=>x.pos)).size===9&&l.every(x=>POS.includes(x.pos))}
@@ -610,7 +622,7 @@ function defaultCommand(m){const b=batter(m);return b.a.eye>b.a.contact+15?"take
 function prepare(m){if(m.done)return;m.command=defaultCommand(m);m.chosen=false;if(m.paPitches===0){m.defense=defaultDefense(m);m.defChosen=false;m.defLocked=false}m.inputLeft=RULES.decisionSeconds;m.phase="ready"}
 function setupStage(t){return t.setupStage||(t.match||t.w+t.l+t.d||t.history.length?"complete":"identity")}
 function needsSetup(t){return !!t&&setupStage(t)!=="complete"}
-function ensureInitialRoster(t){if(t.players.length===0){for(let i=0;i<12;i++)t.players.push(player(true,t.players.map(p=>p.number)));t.lineup=dhLineup(t.players)}if(setupStage(t)==="pending"||!t.setupStage)t.setupStage="identity";t.setupDraft??=t.players.map(p=>({id:p.id,name:p.name,number:String(p.number)}))}
+function ensureInitialRoster(t){if(t.players.length===0){for(let i=0;i<12;i++)t.players.push(player(true,t.players.map(p=>p.number),false,0,t.players.map(p=>p.name)));t.lineup=dhLineup(t.players)}if(setupStage(t)==="pending"||!t.setupStage)t.setupStage="identity";t.setupDraft??=t.players.map(p=>({id:p.id,name:p.name,number:String(p.number)}))}
 function setupIdentityError(t,rows){if(!Array.isArray(rows)||rows.length!==t.players.length||new Set(rows.map(x=>x.id)).size!==t.players.length||rows.some(x=>!t.players.some(p=>p.id===x.id)))return "선수 12명의 정보를 확인해 주세요.";if(rows.some(x=>typeof x.name!=="string"||!x.name.trim()||x.name.trim().length>8))return "모든 선수 이름을 1~8자로 입력해 주세요.";if(rows.some(x=>!/^\d{1,2}$/.test(String(x.number))))return "등번호를 빠짐없이 0~99의 정수로 입력해 주세요.";if(new Set(rows.map(x=>Number(x.number))).size!==t.players.length)return "같은 팀의 등번호는 겹칠 수 없습니다.";return ""}
 function commitInitialIdentity(t){const err=setupIdentityError(t,t.setupDraft);if(err)return err;for(const row of t.setupDraft){const p=ply(t,row.id);p.name=row.name.trim();p.number=Number(row.number)}t.setupStage="lineup";return ""}
 function startMatch(){const t=team();adoptDH(t);if(t.battingDraft&&(!t.match||t.match.done)){const err=commitBattingDraft(t);if(err){toast(err);go("lineup");return}}if(needsSetup(t)){ensureInitialRoster(t);selection=t.players[0].id;if(setupStage(t)!=="lineup"||screen!=="lineup"){save();go(setupStage(t)==="lineup"?"lineup":"setup");return}const problem=setupIdentityError(t,t.setupDraft)||lineupError(t);if(problem){toast(problem);go("setup");return}}
@@ -717,7 +729,7 @@ if(e.attack===0){if(e.ab&&ply(team(),e.batter).stats.hitless>=6&&r(m)<.4)return"
 else if(["dp","flydp","line","cs"].includes(e.type)||e.type==="fly"&&e.range>85)return"g17";else return {error:"g19",wp:"g21",pb:"g22"}[e.type]||(e.runs.length?"g32":["single","double","triple"].includes(e.type)?"g31":null)}
 function pickReaction(m,group,N=0){const g=DIALOGUES.find(g=>g[0]===group);if(!g)return null;const last=m.lastLines[group];let options=g[4].map((v,i)=>i).filter(i=>i!==last),index=pick(m,options);m.lastLines[group]=index;m.reactionCount++;return {group,index,speaker:g[4][index][0],line:g[4][index][1].replaceAll("{N}",String(N)),N}}
 function showReaction(group,m,id){const x=pickReaction(m,group);if(x){reaction={...x,left:TUNE.reactionMs,total:TUNE.reactionMs,eventId:id};save();renderReaction()}}
-function reward(m){if(m.rewarded)return;const t=team();m.rewarded=true;m.reward=1+m.score[0];t.coins+=m.reward;if(m.score[0]>m.score[1]){t.w++;t.trophies++;t.offer=player(false,t.players.map(p=>p.number))}else if(m.score[0]<m.score[1])t.l++;else t.d++;m.result=m.score[0]===m.score[1]?"무승부":m.score[0]>m.score[1]?"승리":"패배";t.history.unshift({id:m.id,opp:m.opp.name,score:m.score.slice(),result:m.result,mercy:clone(m.mercy||null),walkoff:clone(m.walkoff||null),coins:m.reward,bh:m.bh[0],pitches:m.pitches,events:clone(m.events),checks:clone(m.checks),innings:clone(m.innings),home:m.home,hits:m.hits.slice(),errors:m.errors.slice(),boneheads:m.bh.slice(),skipped:!!m.skipped,recap:clone(m.recap),at:Date.now()});t.history=t.history.slice(0,30)}
+function reward(m){if(m.rewarded)return;const t=team();m.rewarded=true;m.reward=1+m.score[0];t.coins+=m.reward;if(m.score[0]>m.score[1]){t.w++;t.trophies++;t.offer=player(false,t.players.map(p=>p.number),false,0,t.players.map(p=>p.name))}else if(m.score[0]<m.score[1])t.l++;else t.d++;m.result=m.score[0]===m.score[1]?"무승부":m.score[0]>m.score[1]?"승리":"패배";t.history.unshift({id:m.id,opp:m.opp.name,score:m.score.slice(),result:m.result,mercy:clone(m.mercy||null),walkoff:clone(m.walkoff||null),coins:m.reward,bh:m.bh[0],pitches:m.pitches,events:clone(m.events),checks:clone(m.checks),innings:clone(m.innings),home:m.home,hits:m.hits.slice(),errors:m.errors.slice(),boneheads:m.bh.slice(),skipped:!!m.skipped,recap:clone(m.recap),at:Date.now()});t.history=t.history.slice(0,30)}
 function checkEvent(m,e){const fail=s=>m.checks.violations.push(e.id+": "+s);m.checks.events++;if(e.outsAdded>3-e.before.outs)fail("3아웃 초과");if(e.type==="foul"&&!e.swing)fail("스윙 없는 파울");if(e.contact&&!e.swing)fail("스윙 없는 타격");if(e.bh&&e.bhSide===0&&ownBHInning(m,e.inning)>RULES.ownBoneheadsPerInning)fail("한 회 본헤드 3번 초과");if(e.after.bases.filter(Boolean).length!==new Set(e.after.bases.filter(Boolean)).size)fail("주자 중복");if(e.after.order[e.attack]!==((e.before.order[e.attack]+(e.pa?1:0))%9))fail("타순 불일치");if(e.before.score[e.attack]+e.runs.length!==e.after.score[e.attack])fail("득점 불일치");if(e.reaction&&e.reaction.group==="g23"&&e.reaction.N<6)fail("6타수 미만 무안타 멘트");if(e.reaction?.group.startsWith("b")&&e.bhSide!==0)fail("상대 본헤드에 우리 멘트");if(e.reaction)m.checks.reactions++;for(const motion of e.moves){m.checks.motions++;if(!motion.skip&&motion.points.some(p=>!p.every(Number.isFinite)))fail("주자 좌표 오류");if(motion.to<motion.from)fail("역방향 주루");if(motion.to>4)fail("베이스 범위 오류")}}
 function buildMotion(m,e){const df=tside(m,1-e.attack);let pos=e.fieldPos||"C";if(!e.fielder)e.fielder=fielder(df,pos);e.fieldPos=pos;const start=fielderStart(e,df,pos);const home=[450,441],release=[450,326];
 e.ball=e.pitchThrown?[release,home]:[[450,477]];
@@ -1454,7 +1466,7 @@ function costGrowth(p,k){const b=balance();return p.a[k]>=(k==='stamina'?b.stami
 function trainingFacility(k){return FACILITIES.find(f=>f[3].includes(k));}
 function energyHTML(p){const pct=Math.round(100*p.energy/p.a.stamina);return '<span class="energy"><i style="width:'+pct+'%;background:'+(pct<25?'#ff736f':'#68d2a4')+'"></i></span><small>체력 '+Math.round(p.energy)+' / '+p.a.stamina+(pct<25?' · 능력 저하':'')+'</small>';}
 const MARKET_REFRESH_COST=100;
-function createMarketCandidates(t){return Array.from({length:3},()=>{const p=player(false,t.players.map(x=>x.number));p.price=Math.round(abilityPrice(p)*balance(t).hireFactor);return p;});}
+function createMarketCandidates(t){const candidates=[],usedNames=[...t.players.map(p=>p.name),t.facilityData?.academy?.prospect?.name].filter(Boolean);for(let i=0;i<3;i++){const p=player(false,t.players.map(x=>x.number),false,0,usedNames);p.price=Math.round(abilityPrice(p)*balance(t).hireFactor);candidates.push(p);usedNames.push(p.name);}return candidates;}
 function refreshMarket(t){const round=t.w+t.l+t.d;if(t.marketRound===round)return;const candidates=createMarketCandidates(t);t.marketRound=round;t.market=candidates;save();}
 function rerollMarket(t){if(live(t)||!Number.isFinite(t.funds)||t.funds<MARKET_REFRESH_COST)return false;const candidates=createMarketCandidates(t);if(!spend(t,MARKET_REFRESH_COST,'영입 후보 새로 찾기'))return false;t.market=candidates;t.marketRound=t.w+t.l+t.d;return true;}
 function preGameEconomy(t){ensureClub(t);if(t.players.some(p=>p.contract===0)){toast('계약이 끝난 선수의 연봉을 재협상해 주세요.');go('finance');return false;}return true;}
@@ -1518,7 +1530,7 @@ document.addEventListener('click',ev=>{const tab=ev.target.closest('[data-facili
 if(a==='train'){const p=ply(t,selection),k=el.dataset.stat,price=costGrowth(p,k);if(price&&t.facilities.includes(trainingFacility(k)[0])&&spend(t,price,p.name+' '+STATS[k]+' 훈련')){p.a[k]++;if(k==='stamina')p.energy=p.a.stamina;toast(STATS[k]+' +1');}}
 if(a==='build'){const error=buildFacility(t,id);if(error)toast(error);}// facility rules: src/facilities.js (P17)
 if(a==='upgrade'){const error=expandStadium(t);if(error)toast(error);else toast('경기장을 '+t.stadium+'등급으로 확장했습니다.');}// stadium rules: src/league.js (P17 stadium part)
-if(a==='market-refresh'){if(rerollMarket(t))toast('100만원을 사용해 후보 3명을 새로 찾았습니다.');else toast('후보 갱신에 필요한 자금이 부족합니다.');}
+if(a==='market-refresh'){if(rerollMarket(t))toast('후보 3명을 새로 찾았습니다. 비용: '+money(MARKET_REFRESH_COST)+'.');else toast('후보 갱신에 필요한 자금이 부족합니다.');}
 if(a==='hire'){const p=t.market.find(p=>p.id===id);if(p&&t.players.length<35&&spend(t,p.price,p.name+' 영입')){p.number=Array.from({length:100},(_,i)=>i).find(i=>!t.players.some(x=>x.number===i));t.players.push(p);t.market=t.market.filter(x=>x.id!==id);selection=p.id;news(t,p.name+' 영입','새 선수가 팀에 합류했습니다.');toast('영입 완료 · #'+p.number);}}
 if(a==='ticket'){const n=ticketFromInput($('#ticketPrice').value);if(Number.isInteger(n)&&n>=1&&n<=50)t.ticket=n;else toast('입장료는 1,000~50,000원, 1,000원 단위로 입력해 주세요.');}
 if(a==='negotiate'){const p=ply(t,id);note(p.name+' · 연봉 협상','<p>기준 요구액: 경기당 '+money(salaryAsk(p))+' · 애정도 '+p.loyalty+'<br>계약기간 이번 시즌 끝까지 '+contractGamesFor26(t)+'경기</p><label>제안 경기 급여 (원)<input id="salaryOffer" type="number" min="10000" max="100000000" step="10000" value="'+wonValue(salaryAsk(p))+'"></label><button class="primary" data-v8="offer" data-id="'+p.id+'">제안하기</button>');return;}
@@ -5016,7 +5028,7 @@ document.addEventListener('click',e=>{
  const t=team();if(!t?.league)return;
  if(b.hasAttribute('data-league-expand')){const error=expandStadium(t);toast(error||('경기장을 '+t.stadium+'등급으로 확장했습니다.'+(t.league.pendingPromotion?'':' 다음 시즌은 '+leagueTierName(t.league.tier)+'입니다.')));save();render();return;}
  const block=leagueNextSeasonBlock(t);if(block){toast(block);return;}
- const begin=()=>{const error=startNextSeason(t);if(error){toast(error);return;}save();toast(leagueTierName(t.league.tier)+' 시즌 '+t.league.season+'을 시작합니다.');render();};
+ const begin=()=>{const error=startNextSeason(t);if(error){toast(error);return;}save();toast(leagueTierName(t.league.tier)+' 시즌 '+t.league.season+' 시작');render();};
  const p=t.league.pendingPromotion;
  if(p&&t.stadium<p.need)confirmBox('승격 없이 다음 시즌 시작','경기장 '+p.need+'등급이 없어 이번에는 승격하지 못하고 '+leagueTierName(t.league.tier)+'에 남습니다. 다음 시즌에 다시 1위를 하면 승격할 수 있습니다.',begin,'다음 시즌 시작');
  else begin();
@@ -5693,7 +5705,7 @@ function rebuildClub(t,d={},rnd=Math.random){
  // New starting players by F03 (player(true)) with the ② entry age; wage and ask from the raised abilities.
  const added=[];
  while(t.players.length<REBUILD.roster){
-  const p=player(true,t.players.map(x=>x.number));
+  const p=player(true,t.players.map(x=>x.number),false,0,t.players.map(x=>x.name));
   if(typeof enterPlayerAge==='function')enterPlayerAge(p,rnd);
   p.salary=Math.max(3,Math.round(abilityPrice(p)*balance(t).salaryFactor));delete p.wage26;if(typeof wageState26==='function')wageState26(p,t);
   p.contract=LEAGUE.seasonGames;p.energy=p.a.stamina;t.players.push(p);added.push(p);
@@ -6343,7 +6355,7 @@ function revivalDialogHTML(t,P,confirming){
  }else{
   const L=t.league;
   html+='<h2>시즌 '+P.season+' 강등 판정</h2><p>'+tier+' 6위 · 강등 판정. 구단 회생권 <b class="gold">'+S.tickets+'장</b>이 있습니다.'+(L.history.at(-1)?.disbandPrevented==='ticket'?' 해체는 회생권으로 막았습니다.':'')+'</p><div class="mlb-offer-terms">'+
-   choice('use','회생권 1장 사용','강등 막기',tier+'에 한 시즌 더 남아 리그 배당금 '+money(leaguePayout(P.tier))+', 영입 후보 능력 +'+leagueMarketOffset(P.tier)+(typeof growthLeagueMultiplier==='function'?', 경기 경험치 ×'+growthLeagueMultiplier(P.tier):'')+'를 지킵니다.','회생권 쓰기',true)+
+   choice('use','회생권 1장 사용','강등 막기',tier+'에 한 시즌 더 남아 리그 배당금 '+money(leaguePayout(P.tier))+', 영입 후보 능력 +'+leagueMarketOffset(P.tier)+(typeof growthLeagueMultiplier==='function'?', 경기 경험치 ×'+growthLeagueMultiplier(P.tier):'')+' 혜택을 유지합니다.','회생권 쓰기',true)+
    choice('proceed','그대로 진행',down+' 강등','다음 시즌은 '+down+'(배당금 '+money(leaguePayout(P.tier-1))+')에서 뜁니다. 회생권 '+S.tickets+'장은 그대로 남습니다.','강등 받아들이기',false)+'</div>';
  }
  return html+'<p class="mlb-error" role="status">'+(confirming?'한 번 더 누르면 해체합니다. 되돌릴 수 없습니다.':'')+'</p></article>';
@@ -6461,7 +6473,7 @@ document.addEventListener('click',e=>{
  const h=mlbSuccessRecords(t).find(x=>x.id===b.dataset.mlbSupport),q=mlbSupportQuote(t,h);
  if(!q){toast('MLB 진출 선수의 기록이 아닙니다.');return;}
  if(!q.ok){toast(q.reasons[0]);return;}
- confirmBox('MLB 출신 후원 요청',h.player.name+' 선수에게 후원을 요청합니다. 기억하는 애정도 '+Math.round(q.memory)+(q.refuse?' · 30 미만이라 거절할 것 같습니다.':' · 예상 금액 '+money(q.amount)+'(이적료의 '+Math.round(q.rate*100)+'%) · 해체 여론 '+mlbPct(MLB_SUPPORT.requestOpinion)+'.')+' 요청하면 기억하는 애정도가 '+Math.round(q.memory)+' → '+Math.round(q.after)+'로 내려가고, 이 선수에게는 다음 시즌에 다시 요청할 수 있습니다.',()=>{
+ confirmBox('MLB 출신 후원 요청',h.player.name+' 선수에게 후원을 요청합니다. 기억하는 애정도 '+Math.round(q.memory)+(q.refuse?' · 30 미만이라 거절할 것 같습니다.':' · 예상 금액 '+money(q.amount)+'(이적료의 '+Math.round(q.rate*100)+'%) · 해체 여론 '+mlbPct(MLB_SUPPORT.requestOpinion)+'.')+' 요청 후 기억하는 애정도: '+Math.round(q.memory)+' → '+Math.round(q.after)+'. 이 선수에게는 다음 시즌에 다시 요청할 수 있습니다.',()=>{
   const r=requestMlbSupport(team(),h.id);if(r.error){toast(r.error);return;}
   save();toast(r.refused?h.player.name+' 선수가 후원 요청을 거절했습니다.':h.player.name+' 선수가 '+money(r.amount)+'을 후원했습니다.');render();
  },'후원 요청');
@@ -6474,7 +6486,7 @@ document.head.append(mlbSupportStyle);
 // P17 시설과 경기장 개편 (v03 numbers; the stadium part came with ①): 15 facilities in five groups, training-facility levels 1~3,
 // 응원단 버스 levels 1~4, upkeep split (training and academy 150, uniform shop 0, bus on away games only, the rest 100), demolition
 // with a 30% refund of the build cost and every upgrade, building slots 5 + (stadium grade − 1) × 3, and each facility's effect.
-// P16 원정 응원 관객 입장료: an away game earns round(our home crowd × bus share) × our ticket price; the share is +5%p per bus level.
+// P16 원정 응원 관객 입장료: an away game earns round(our home crowd × bus share) × our ticket price; bus levels 1–4 give 15/20/25/30% (2026-11-12).
 // Layout like src/league.js … src/mlb-support.js: pure rules first, then the game-hook marker comment, then the UI marker comment.
 // Tests slice the source at those two marker comments, so keep them unique.
 // Where the effects plug in:
@@ -6492,8 +6504,8 @@ const FACILITY={
  // P17 §5 training levels: added cost, upkeep per game, training-cost discount, match-experience factor, match-growth cap bonus.
  // The cap bonus is +5 on the match-growth cap of ② (85 → 90), as P17 notes for the youth bonus (the simulator's 80 → 85).
  train:[null,{add:1000,upkeep:150,discount:0,exp:1,cap:0},{add:2500,upkeep:250,discount:.2,exp:1.2,cap:0},{add:5000,upkeep:300,discount:.4,exp:1.4,cap:5}],
- // P17 §4 · P16 응원단 버스: added cost and the away share (0% without a bus, +5%p per level, 20% at level 4).
- bus:[null,{add:1000,share:.05},{add:2000,share:.1},{add:5000,share:.15},{add:8000,share:.2}],
+ // P17 §4 · P16 응원단 버스: added cost and the away share (0% without a bus, then 15/20/25/30%).
+ bus:[null,{add:1000,share:.15},{add:2000,share:.2},{add:5000,share:.25},{add:8000,share:.3}],
  uniformPerFan:.05,                      // P17 §3 (v03): 500원 per personal fan of every player, home games (만원 units)
  restaurantPerCrowd:1,                   // P17: 1,000원 per home spectator = 1만원 per crowd unit (10 spectators)
  billboard:[120,200,350,600],            // P17: every game (home and away) by league tier 동네 · 지역 · 2부 · 1부
@@ -6643,7 +6655,7 @@ function academyLog(t,p,result){
  if(A.log.length>FACILITY.logSize)A.log.splice(0,A.log.length-FACILITY.logSize);
 }
 function academyProspect(t,season,rnd=Math.random){
- const p=player(false,(t.players||[]).map(x=>x.number));
+ const p=player(false,(t.players||[]).map(x=>x.number),false,0,[...(t.players||[]),...(t.market||[])].map(x=>x.name));
  for(const k of FACILITY_NINE){const v=p.a[k];p.a[k]=Math.min(v,Math.max(FACILITY.academyFloor,v-FACILITY.academyMinus));}// lower than a 동네 recruit; a value under 20 stays
  if(typeof enterPlayerAge==='function')enterPlayerAge(p,rnd,FACILITY.academyAge);else p.age=FACILITY.academyAge;// 19 → no entry bonus
  p.salary=Math.max(3,Math.round(abilityPrice(p)*balance(t).salaryFactor));p.price=0;p.energy=p.a.stamina;delete p.wage26;
@@ -6833,7 +6845,7 @@ function facilityEffectText(t,def){
   case 'restaurant':{const c=attendance(t);return '홈 관중 1명당 1,000원. 지금 예상 홈 관중 '+spectators(c)+'명 → 홈경기당 '+money(c*FACILITY.restaurantPerCrowd)+'.';}
   case 'billboard':return '경기마다(홈 · 원정) 리그별 고정 수입: '+FACILITY.billboard.map((v,i)=>leagueTierName(i).replace(' 리그','')+' '+money(v)).join(' · ')+'. 지금 '+leagueTierName(tier)+' '+money(FACILITY.billboard[tier]??0)+'.';
   case 'fans':return '경기 후 모든 선수 개인 팬 +2 (관중과 유니폼 매장 수입도 따라 늘어납니다).';
-  case 'bus':{const c=attendance(t),s=busShare(t);return '원정 경기에서 따라온 우리 관객의 입장료: 홈경기였다면 왔을 관객 × 원정 응원 비율 × 우리 입장료. 단계마다 +5%p, 4단계 20%. 지금 '+Math.round(s*100)+'% → 원정 경기당 약 '+money(Math.round(c*s)*t.ticket)+'.';}
+  case 'bus':{const c=attendance(t),s=busShare(t);return '원정 경기에서 따라온 우리 관객의 입장료: 홈경기였다면 왔을 관객 × 원정 응원 비율 × 우리 입장료. 버스 없음 0%, 1~4단계 '+FACILITY.bus.slice(1).map(x=>Math.round(x.share*100)+'%').join(' · ')+'. 지금 '+Math.round(s*100)+'% → 원정 경기당 약 '+money(Math.round(c*s)*t.ticket)+'.';}
   case 'hall':return '시즌 끝 해체 여론 −5%p. MLB 출신에게 후원을 요청할 때 기억하는 애정도가 −10 대신 −5. 재창단해도 헌액 기록은 남습니다.';
   case 'academy':return '시즌이 끝날 때마다 다음 시즌에 뛸 19세 유망주 1명이 영입비 없이 영입 후보로 옵니다. 능력은 동네 리그 후보보다 5 낮고, 19세라 경기 경험치 ×1.5(젊은 선수 보너스)를 받습니다.';
  }

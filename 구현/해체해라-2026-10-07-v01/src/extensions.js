@@ -60,7 +60,7 @@ function costGrowth(p,k){const b=balance();return p.a[k]>=(k==='stamina'?b.stami
 function trainingFacility(k){return FACILITIES.find(f=>f[3].includes(k));}
 function energyHTML(p){const pct=Math.round(100*p.energy/p.a.stamina);return '<span class="energy"><i style="width:'+pct+'%;background:'+(pct<25?'#ff736f':'#68d2a4')+'"></i></span><small>체력 '+Math.round(p.energy)+' / '+p.a.stamina+(pct<25?' · 능력 저하':'')+'</small>';}
 const MARKET_REFRESH_COST=100;
-function createMarketCandidates(t){return Array.from({length:3},()=>{const p=player(false,t.players.map(x=>x.number));p.price=Math.round(abilityPrice(p)*balance(t).hireFactor);return p;});}
+function createMarketCandidates(t){const candidates=[],usedNames=[...t.players.map(p=>p.name),t.facilityData?.academy?.prospect?.name].filter(Boolean);for(let i=0;i<3;i++){const p=player(false,t.players.map(x=>x.number),false,0,usedNames);p.price=Math.round(abilityPrice(p)*balance(t).hireFactor);candidates.push(p);usedNames.push(p.name);}return candidates;}
 function refreshMarket(t){const round=t.w+t.l+t.d;if(t.marketRound===round)return;const candidates=createMarketCandidates(t);t.marketRound=round;t.market=candidates;save();}
 function rerollMarket(t){if(live(t)||!Number.isFinite(t.funds)||t.funds<MARKET_REFRESH_COST)return false;const candidates=createMarketCandidates(t);if(!spend(t,MARKET_REFRESH_COST,'영입 후보 새로 찾기'))return false;t.market=candidates;t.marketRound=t.w+t.l+t.d;return true;}
 function preGameEconomy(t){ensureClub(t);if(t.players.some(p=>p.contract===0)){toast('계약이 끝난 선수의 연봉을 재협상해 주세요.');go('finance');return false;}return true;}
@@ -124,7 +124,7 @@ document.addEventListener('click',ev=>{const tab=ev.target.closest('[data-facili
 if(a==='train'){const p=ply(t,selection),k=el.dataset.stat,price=costGrowth(p,k);if(price&&t.facilities.includes(trainingFacility(k)[0])&&spend(t,price,p.name+' '+STATS[k]+' 훈련')){p.a[k]++;if(k==='stamina')p.energy=p.a.stamina;toast(STATS[k]+' +1');}}
 if(a==='build'){const error=buildFacility(t,id);if(error)toast(error);}// facility rules: src/facilities.js (P17)
 if(a==='upgrade'){const error=expandStadium(t);if(error)toast(error);else toast('경기장을 '+t.stadium+'등급으로 확장했습니다.');}// stadium rules: src/league.js (P17 stadium part)
-if(a==='market-refresh'){if(rerollMarket(t))toast('100만원을 사용해 후보 3명을 새로 찾았습니다.');else toast('후보 갱신에 필요한 자금이 부족합니다.');}
+if(a==='market-refresh'){if(rerollMarket(t))toast('후보 3명을 새로 찾았습니다. 비용: '+money(MARKET_REFRESH_COST)+'.');else toast('후보 갱신에 필요한 자금이 부족합니다.');}
 if(a==='hire'){const p=t.market.find(p=>p.id===id);if(p&&t.players.length<35&&spend(t,p.price,p.name+' 영입')){p.number=Array.from({length:100},(_,i)=>i).find(i=>!t.players.some(x=>x.number===i));t.players.push(p);t.market=t.market.filter(x=>x.id!==id);selection=p.id;news(t,p.name+' 영입','새 선수가 팀에 합류했습니다.');toast('영입 완료 · #'+p.number);}}
 if(a==='ticket'){const n=ticketFromInput($('#ticketPrice').value);if(Number.isInteger(n)&&n>=1&&n<=50)t.ticket=n;else toast('입장료는 1,000~50,000원, 1,000원 단위로 입력해 주세요.');}
 if(a==='negotiate'){const p=ply(t,id);note(p.name+' · 연봉 협상','<p>기준 요구액: 경기당 '+money(salaryAsk(p))+' · 애정도 '+p.loyalty+'<br>계약기간 이번 시즌 끝까지 '+contractGamesFor26(t)+'경기</p><label>제안 경기 급여 (원)<input id="salaryOffer" type="number" min="10000" max="100000000" step="10000" value="'+wonValue(salaryAsk(p))+'"></label><button class="primary" data-v8="offer" data-id="'+p.id+'">제안하기</button>');return;}

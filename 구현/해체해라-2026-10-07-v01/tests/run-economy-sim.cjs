@@ -50,7 +50,7 @@ const REFORM={
   },
   // 훈련 시설 단계: 올리는 비용·경기당 유지비·훈련비 할인·경기 경험치 배수·경기 성장 한도
   trainLevels:[null,{add:1000,maint:150,disc:0,exp:1,cap:80},{add:2500,maint:250,disc:.2,exp:1.2,cap:80},{add:5000,maint:300,disc:.4,exp:1.4,cap:85}],
-  busLevels:[0,1000,2000,5000,8000],busShare:.05,// 응원단 버스 단계 n으로 올리는 비용, 단계마다 원정 응원 +5%p
+  busLevels:[0,1000,2000,5000,8000],busShares:[0,.15,.2,.25,.3],// 응원단 버스 단계 n으로 올리는 비용과 원정 응원 비율(2026-11-12 결정)
   uniformPerFan:.05,restaurantPerCrowd:1,billboard:[120,200,350,600],// 만원. 유니폼 개인 팬 1명당 500원, 음식점 관중 1명당 1,000원
   foodExp:1.1,academyExp:1.3,hallPressure:-5,hallMemory:5,academyMax:14,
 };
@@ -350,7 +350,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     }
     // 입장료: 관중×(입장료+매장 수) 최대값을 고릅니다. 개편안은 관중×(입장료×(1+원정 응원 비율)+음식점) 최대값.
     const stores=club.fac.filter(id=>STORES.includes(id)).length;let bestT=10,bestV=-1;
-    const share=reform&&has('bus')?REFORM.busShare*club.lvl.bus:0,rest=reform&&has('restaurant')?REFORM.restaurantPerCrowd:0;
+    const share=reform&&has('bus')?REFORM.busShares[club.lvl.bus]:0,rest=reform&&has('restaurant')?REFORM.restaurantPerCrowd:0;
     for(let tk=1;tk<=50;tk++){const v=reform?attendance(tk)*(tk*(1+share)+rest):attendance(tk)*(tk+stores);if(v>bestV){bestV=v;bestT=tk;}}club.ticket=bestT;
   }
   // 젊은 선수 출전 감독: 주전 야수 중 25세 초과로 가장 약한 자리에, 후보 중 가장 좋은 25세 이하 선수를 넣어 playYoung명을 맞춥니다.
@@ -402,7 +402,7 @@ function career(world,policy,{games=60,league=false,contractGames=5,seasons=6,se
     let awayGate=home===0?0:Math.round(crowd*awayShare)*club.ticket;
     if(reform){
       // 개편안 수입: 원정 응원은 버스 단계로, 유니폼 매장(개인 팬 합계)·음식점(관중)은 홈에서만, 광고판은 매 경기 리그별 고정
-      const share=has('bus')?REFORM.busShare*club.lvl.bus:0;awayGate=home===0?0:Math.round(crowd*share)*club.ticket;
+      const share=has('bus')?REFORM.busShares[club.lvl.bus]:0;awayGate=home===0?0:Math.round(crowd*share)*club.ticket;
       const part={uniform:has('uniform')&&home===0?Math.round(t.players.reduce((s,p)=>s+p.fans,0)*REFORM.uniformPerFan):0,
         restaurant:has('restaurant')&&home===0?crowd*REFORM.restaurantPerCrowd:0,billboard:has('billboard')?(billboard||REFORM.billboard)[club.lv]:0,bus:awayGate};
       shop=part.uniform+part.restaurant+part.billboard;
