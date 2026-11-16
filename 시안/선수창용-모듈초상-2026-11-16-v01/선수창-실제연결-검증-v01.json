@@ -1,0 +1,293 @@
+{
+  "testSession": true,
+  "errors": [],
+  "screen": "players",
+  "portraits": [
+    {
+      "player": "13632eab-6716-40a0-b4f8-9fed7445105c",
+      "renderer": "portrait-v13",
+      "body": "0",
+      "appearance": {
+        "version": 12,
+        "body": 0,
+        "skin": 4,
+        "hairColor": 2,
+        "eyeColor": 5,
+        "parts": {
+          "hair": 3,
+          "beard": -1,
+          "wear": 1,
+          "black": -1,
+          "eyes": 5,
+          "nose": 2,
+          "brows": 0,
+          "mouth": 4
+        }
+      }
+    },
+    {
+      "player": "2046816e-2b42-45d3-abfd-092518344f60",
+      "renderer": "portrait-v13",
+      "body": "1",
+      "appearance": {
+        "version": 12,
+        "body": 1,
+        "skin": 2,
+        "hairColor": 5,
+        "eyeColor": 3,
+        "parts": {
+          "hair": -1,
+          "beard": -1,
+          "wear": 0,
+          "black": -1,
+          "eyes": 3,
+          "nose": 5,
+          "brows": 5,
+          "mouth": 5
+        }
+      }
+    },
+    {
+      "player": "430a27d0-7c03-4f8a-9244-cb0b926586ea",
+      "renderer": "portrait-v13",
+      "body": "2",
+      "appearance": {
+        "version": 12,
+        "body": 2,
+        "skin": 4,
+        "hairColor": 2,
+        "eyeColor": 1,
+        "parts": {
+          "hair": 2,
+          "beard": -1,
+          "wear": 3,
+          "black": -1,
+          "eyes": 4,
+          "nose": 1,
+          "brows": 4,
+          "mouth": 5
+        }
+      }
+    },
+    {
+      "player": "585be4ef-8c72-43de-a29d-9393a2a94bfb",
+      "renderer": "portrait-v13",
+      "body": "3",
+      "appearance": {
+        "version": 12,
+        "body": 3,
+        "skin": 5,
+        "hairColor": 6,
+        "eyeColor": 1,
+        "parts": {
+          "hair": 1,
+          "beard": -1,
+          "wear": -1,
+          "black": -1,
+          "eyes": 3,
+          "nose": 5,
+          "brows": 1,
+          "mouth": 4
+        }
+      }
+    },
+    {
+      "player": "a3f2e5eb-7f82-4f21-a748-8b161a63c3a7",
+      "renderer": "portrait-v13",
+      "body": "4",
+      "appearance": {
+        "version": 12,
+        "body": 4,
+        "skin": 4,
+        "hairColor": 6,
+        "eyeColor": 2,
+        "parts": {
+          "hair": -1,
+          "beard": 2,
+          "wear": -1,
+          "black": -1,
+          "eyes": 5,
+          "nose": 4,
+          "brows": 3,
+          "mouth": 3
+        }
+      }
+    },
+    {
+      "player": "0b35d625-e699-448a-83a3-b6a988ffc708",
+      "renderer": "portrait-v13",
+      "body": "5",
+      "appearance": {
+        "version": 12,
+        "body": 5,
+        "skin": 0,
+        "hairColor": 2,
+        "eyeColor": 1,
+        "parts": {
+          "hair": 3,
+          "beard": 3,
+          "wear": -1,
+          "black": -1,
+          "eyes": 3,
+          "nose": 1,
+          "brows": 1,
+          "mouth": 4
+        }
+      }
+    },
+    {
+      "player": "f6da0513-8021-4b6a-8d6c-7a6227b801a5",
+      "renderer": "portrait-v13",
+      "body": "0",
+      "appearance": {
+        "version": 12,
+        "body": 0,
+        "skin": 2,
+        "hairColor": 3,
+        "eyeColor": 3,
+        "parts": {
+          "hair": 1,
+          "beard": 3,
+          "wear": -1,
+          "black": -1,
+          "eyes": 5,
+          "nose": 5,
+          "brows": 0,
+          "mouth": 1
+        }
+      }
+    },
+    {
+      "player": "8c489642-9d76-4b23-b01e-2d2c6d770bfc",
+      "renderer": "portrait-v13",
+      "body": "1",
+      "appearance": {
+        "version": 12,
+        "body": 1,
+        "skin": 1,
+        "hairColor": 6,
+        "eyeColor": 0,
+        "parts": {
+          "hair": -1,
+          "beard": 4,
+          "wear": -1,
+          "black": -1,
+          "eyes": 1,
+          "nose": 3,
+          "brows": 3,
+          "mouth": 2
+        }
+      }
+    },
+    {
+      "player": "6a040baf-85e1-4a67-8b02-ff4d2c957b2f",
+      "renderer": "portrait-v13",
+      "body": "2",
+      "appearance": {
+        "version": 12,
+        "body": 2,
+        "skin": 4,
+        "hairColor": 3,
+        "eyeColor": 3,
+        "parts": {
+          "hair": 2,
+          "beard": -1,
+          "wear": 4,
+          "black": -1,
+          "eyes": 3,
+          "nose": 0,
+          "brows": 2,
+          "mouth": 0
+        }
+      }
+    },
+    {
+      "player": "cd762e2a-db14-4b4f-bc13-90325669392d",
+      "renderer": "portrait-v13",
+      "body": "3",
+      "appearance": {
+        "version": 12,
+        "body": 3,
+        "skin": 5,
+        "hairColor": 5,
+        "eyeColor": 2,
+        "parts": {
+          "hair": 3,
+          "beard": -1,
+          "wear": -1,
+          "black": -1,
+          "eyes": 1,
+          "nose": 5,
+          "brows": 5,
+          "mouth": 3
+        }
+      }
+    },
+    {
+      "player": "1f7c9cba-89c6-42fe-afea-cc924c7d172b",
+      "renderer": "portrait-v13",
+      "body": "4",
+      "appearance": {
+        "version": 12,
+        "body": 4,
+        "skin": 0,
+        "hairColor": 6,
+        "eyeColor": 1,
+        "parts": {
+          "hair": -1,
+          "beard": 3,
+          "wear": -1,
+          "black": -1,
+          "eyes": 5,
+          "nose": 4,
+          "brows": 4,
+          "mouth": 3
+        }
+      }
+    },
+    {
+      "player": "80da5815-0130-4e4d-afd7-cdf37f3f29f8",
+      "renderer": "portrait-v13",
+      "body": "5",
+      "appearance": {
+        "version": 12,
+        "body": 5,
+        "skin": 3,
+        "hairColor": 4,
+        "eyeColor": 1,
+        "parts": {
+          "hair": 1,
+          "beard": -1,
+          "wear": -1,
+          "black": 1,
+          "eyes": 5,
+          "nose": 5,
+          "brows": 3,
+          "mouth": 3
+        }
+      }
+    },
+    {
+      "player": "13632eab-6716-40a0-b4f8-9fed7445105c",
+      "renderer": "portrait-v13",
+      "body": "0",
+      "appearance": {
+        "version": 12,
+        "body": 0,
+        "skin": 4,
+        "hairColor": 2,
+        "eyeColor": 5,
+        "parts": {
+          "hair": 3,
+          "beard": -1,
+          "wear": 1,
+          "black": -1,
+          "eyes": 5,
+          "nose": 2,
+          "brows": 0,
+          "mouth": 4
+        }
+      }
+    }
+  ]
+}

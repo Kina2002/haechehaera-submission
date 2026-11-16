@@ -1,0 +1,25 @@
+{
+  "states": [
+    {
+      "label": "머리만",
+      "head": true,
+      "body": false
+    },
+    {
+      "label": "몸만",
+      "head": false,
+      "body": true
+    },
+    {
+      "label": "머리 + 몸",
+      "head": true,
+      "body": true
+    }
+  ],
+  "overflow": false,
+  "sourceLayers": [
+    "head",
+    "body"
+  ],
+  "boardReady": true
+}

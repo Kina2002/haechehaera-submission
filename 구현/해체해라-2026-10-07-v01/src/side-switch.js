@@ -3,7 +3,7 @@
 // Presentation only: the final pitch has already resolved the next half inning.
 function sideSwitchProgress(){return sideSwitch?clamp(sideSwitch.elapsed/sideSwitch.total,0,1):1;}
 function sideSwitchPhase(){const u=sideSwitchProgress();return u<.16?'out':u<.55?'switch':'next';}
-function sideSwitchBench(side,index=0){return [side===0?58:842,405+(index%3-1)*10];}
+function sideSwitchBench(side,index=0){return [side===(team()?.match?.home??0)?842:58,405+(index%3-1)*10];}
 function beginSideSwitch(m,e){
  if(!e.inningChange||m.done||skipJob)return false;
  const from={...clone(e.before),...clone(e.after),inning:e.inning,half:e.half,attack:e.attack,defense:clone(e.before.defense),outs:3};

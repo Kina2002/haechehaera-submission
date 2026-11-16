@@ -1,0 +1,817 @@
+{
+  "portraitCases": 72,
+  "portraitIssues": [],
+  "fieldCases": 288,
+  "fieldHiddenEyes": [
+    {
+      "eye": 0,
+      "hair": -1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 0,
+      "hair": 0,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 0,
+      "hair": 1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 0,
+      "hair": 2,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 0,
+      "hair": 3,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 0,
+      "hair": 4,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 0,
+      "hair": 5,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 0,
+      "hair": 6,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 1,
+      "hair": -1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 1,
+      "hair": 0,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 1,
+      "hair": 1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 1,
+      "hair": 2,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 1,
+      "hair": 3,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 1,
+      "hair": 4,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 1,
+      "hair": 5,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 1,
+      "hair": 6,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 2,
+      "hair": -1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 2,
+      "hair": 0,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 2,
+      "hair": 1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 2,
+      "hair": 2,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 2,
+      "hair": 3,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 2,
+      "hair": 4,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 2,
+      "hair": 5,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 2,
+      "hair": 6,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ],
+        [
+          16,
+          14
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "eye": 3,
+      "hair": -1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ]
+      ],
+      "visible": []
+    },
+    {
+      "eye": 3,
+      "hair": 0,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ]
+      ],
+      "visible": []
+    },
+    {
+      "eye": 3,
+      "hair": 1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ]
+      ],
+      "visible": []
+    },
+    {
+      "eye": 3,
+      "hair": 2,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ]
+      ],
+      "visible": []
+    },
+    {
+      "eye": 3,
+      "hair": 3,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ]
+      ],
+      "visible": []
+    },
+    {
+      "eye": 3,
+      "hair": 4,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ]
+      ],
+      "visible": []
+    },
+    {
+      "eye": 3,
+      "hair": 5,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ]
+      ],
+      "visible": []
+    },
+    {
+      "eye": 3,
+      "hair": 6,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          14
+        ]
+      ],
+      "visible": []
+    },
+    {
+      "eye": 5,
+      "hair": -1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 5,
+      "hair": 0,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 5,
+      "hair": 1,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 5,
+      "hair": 2,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 5,
+      "hair": 3,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 5,
+      "hair": 4,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 5,
+      "hair": 5,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "eye": 5,
+      "hair": 6,
+      "hat": "helmet",
+      "direction": 1,
+      "baseline": [
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          13
+        ]
+      ],
+      "visible": [
+        [
+          16,
+          13
+        ]
+      ]
+    }
+  ],
+  "bodyIdentityCases": 24,
+  "bodyIdentityIssues": []
+}

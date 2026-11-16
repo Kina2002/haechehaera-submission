@@ -1,0 +1,18 @@
+{
+  "status": "succeeded",
+  "project_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b",
+  "version": 15,
+  "version_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b~appgver_d8834786ccec8191af9f6163aff61ba2",
+  "source_commit": "75e9603fe1fa6f90f020d54a2d9b061060216511",
+  "deployment_id": "appgdep_6afb02d61e0481919e486009d0ad13fc",
+  "completed_at_utc": "2026-11-16T13:19:40.034675+00:00",
+  "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site/",
+  "browser": {
+    "screen": "slots",
+    "FieldRendererV13": "undefined",
+    "stadium_v13_present": false,
+    "errors": [],
+    "charsReady": true
+  },
+  "note": "사용자 요청으로15 복구. 저장된 최신16과 실제 공개15 구분. 새 후보 재배포 없음."
+}

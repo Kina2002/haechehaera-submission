@@ -1,0 +1,22 @@
+[
+  {
+    "layer": "head",
+    "file": "보통형-머리4자세-분리-v01.png",
+    "size": [
+      1774,
+      887
+    ],
+    "alphaZero": 1403913,
+    "alphaOpaque": 152679
+  },
+  {
+    "layer": "body",
+    "file": "보통형-몸4자세-분리-v01.png",
+    "size": [
+      1774,
+      887
+    ],
+    "alphaZero": 1260486,
+    "alphaOpaque": 275642
+  }
+]

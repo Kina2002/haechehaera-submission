@@ -1,0 +1,5 @@
+{
+  "prompt": "Use case: background-extraction. Edit target: the attached 24-frame HEADLESS baseball body atlas. Preserve every torso, arm, neck stub, white pants, shoes and bat EXACTLY in the same place and proportions and preserve 1536x1024 canvas,6columns4rows. Remove ALL of the gray/brown/green blurred background and glow/halo, including faint low-opacity rectangles around sprites. Outside the sharp actual sprite silhouettes must be completely alpha0 TRANSPARENT. Inside sprite pixels opaque. No fog, glow, shadow or checkerboard. Do not change the body shapes, do not add heads or faces, no text. This is a clean sprite cutout only.",
+  "source": "exec-45916ec3-1abe-4863-94a1-6ff67716e919.png",
+  "selected": "어깨넓은형-몸동작24칸-v02.png"
+}

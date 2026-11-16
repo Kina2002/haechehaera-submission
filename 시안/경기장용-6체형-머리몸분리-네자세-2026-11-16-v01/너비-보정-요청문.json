@@ -1,0 +1,23 @@
+{
+  "mode": "built-in GPT image_gen",
+  "jobs": [
+    {
+      "id": "heavy",
+      "name": "단단한 중량형",
+      "old": "중량형-몸4자세-v01.png",
+      "file": "중량형-몸4자세-v02.png",
+      "detail": "HEAVY compact strong athlete: wide thick squared chest, substantial flat waist, thick forearms, thighs and calves. Standing full body silhouette from x60 to380 (about320px), shoulder span about300px, waist180px. Much thicker than normal body255px width. Broad solid waist DIFFERENT from the broad-shoulder narrow-waist type. NO round protruding belly, no obesity, no muscular anatomy details.",
+      "prompt": "Use case: precise-object-edit. INPUT1 edit target is a transparent HEADLESS body sheet with4poses. INPUT2 is original6-body-types reference. Preserve exact4poses, sourcepixel-cluster style, colors, heights, neckpositions, headless structure, uniform, baseline, and bat. ONLY CORRECT BODY WIDTH/SILHOUETTE to match the specified originaltype ininput2. Target body was too similar inwidth to normal. Make the width difference unmistakable in ALL4poses. Do not add a head/face/hair/cap. Four headless bodies: frontstanding, rightwardrunning, rightwardbatting, bowing. 1774x887 transparentcanvas. Standing neckx220, runningneckx640, battingneckx1020, bowedneckx1545. Feetaroundy750, preserve same heights as target. Keep standing withinx40..395, runningwithin410..810, battingwithin820..1370, bowwithin1390..1735. No text/logos/ground/shadows or outlines inempty space. Truealpha0 background.\nHEAVY compact strong athlete: wide thick squared chest, substantial flat waist, thick forearms, thighs and calves. Standing full body silhouette from x60 to380 (about320px), shoulder span about300px, waist180px. Much thicker than normal body255px width. Broad solid waist DIFFERENT from the broad-shoulder narrow-waist type. NO round protruding belly, no obesity, no muscular anatomy details.",
+      "source": "C:\\Users\\Administrator\\.codex\\generated_images\\01a1bdfe-8cc6-7f63-a5f4-f4c346a3c50a\\exec-44d8c4aa-7da7-4543-9479-cefc7f789eb3.png"
+    },
+    {
+      "id": "broad",
+      "name": "어깨 넓은형",
+      "old": "어깨넓은형-몸4자세-v01.png",
+      "file": "어깨넓은형-몸4자세-v02.png",
+      "detail": "BROAD SHOULDER INVERTED TRIANGLE athlete: visibly broad squared shoulders (about320px span at standing) and tapered upper torso to slim120px waist. Fullstanding silhouette x60..380. Sloping triangular taper from very broad chest to narrow waist, strong upper arms but normal slender thighs and calves, unlike heavyweight thick waist/legs. Do NOT just make normal body again. No round belly.",
+      "prompt": "Use case: precise-object-edit. INPUT1 edit target is a transparent HEADLESS body sheet with4poses. INPUT2 is original6-body-types reference. Preserve exact4poses, sourcepixel-cluster style, colors, heights, neckpositions, headless structure, uniform, baseline, and bat. ONLY CORRECT BODY WIDTH/SILHOUETTE to match the specified originaltype ininput2. Target body was too similar inwidth to normal. Make the width difference unmistakable in ALL4poses. Do not add a head/face/hair/cap. Four headless bodies: frontstanding, rightwardrunning, rightwardbatting, bowing. 1774x887 transparentcanvas. Standing neckx220, runningneckx640, battingneckx1020, bowedneckx1545. Feetaroundy750, preserve same heights as target. Keep standing withinx40..395, runningwithin410..810, battingwithin820..1370, bowwithin1390..1735. No text/logos/ground/shadows or outlines inempty space. Truealpha0 background.\nBROAD SHOULDER INVERTED TRIANGLE athlete: visibly broad squared shoulders (about320px span at standing) and tapered upper torso to slim120px waist. Fullstanding silhouette x60..380. Sloping triangular taper from very broad chest to narrow waist, strong upper arms but normal slender thighs and calves, unlike heavyweight thick waist/legs. Do NOT just make normal body again. No round belly.",
+      "source": "C:\\Users\\Administrator\\.codex\\generated_images\\01a1bdfe-8cc6-7f63-a5f4-f4c346a3c50a\\exec-9c25549b-e574-48c1-85a2-f92362ad083d.png"
+    }
+  ]
+}

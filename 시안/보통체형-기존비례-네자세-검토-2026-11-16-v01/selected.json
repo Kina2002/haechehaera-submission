@@ -1,0 +1,7 @@
+{
+  "mode": "built-in GPT image_gen",
+  "source": "C:\\Users\\Administrator\\.codex\\generated_images\\01a1bdfe-8cc6-7f63-a5f4-f4c346a3c50a\\exec-fc1f0412-0a17-4adc-9bc9-e2a41e8216cf.png",
+  "selected": "보통형-기존비례-네자세-v03.png",
+  "background": "white fallback; transparent draft showed residual background",
+  "backgroundPrompt": "Use case: background-extraction.\nEdit this exact FOUR-POSE pixel-art character sheet. Preserve all FOUR figures and poses exactly: standing, running, batting, head bowed forward. Keep the same head shapes, proportions, green/white clothing, colors, pixel clusters, positions, canvas dimensions1774x887.\nReplace ALL background and all colored red/yellow/gray noise outside the sprite silhouettes with a completely uniform pure WHITE background (#FFFFFF). Remove colored edge halos and background residue; keep the actual character pixel outlines intact. The white background should be truly flat and opaque, no gradients, textures, shadows, mist, borders, text or checkerboard. Do not change the sprites, do not add a fifth figure. Original character study with no facial parts, no hair, no cap."
+}

@@ -1,0 +1,16 @@
+{
+  "logOpened": true,
+  "logClosed": true,
+  "soundOn": true,
+  "soundOff": true,
+  "defense": {
+    "chosen": true,
+    "defense": {
+      "depth": 0,
+      "side": 0
+    },
+    "shift": true,
+    "anim": false
+  },
+  "errors": []
+}

@@ -1,0 +1,53 @@
+{
+  "canvas": [
+    1774,
+    887
+  ],
+  "drawOrder": [
+    "body",
+    "head"
+  ],
+  "bodyPosition": [
+    0,
+    0
+  ],
+  "headPosition": [
+    0,
+    0
+  ],
+  "additionalScale": 1,
+  "additionalRotation": 0,
+  "poseNames": [
+    "서기",
+    "달리기",
+    "타격",
+    "고개 숙임"
+  ],
+  "poseDisplayRects": [
+    [
+      60,
+      150,
+      320,
+      630
+    ],
+    [
+      400,
+      150,
+      410,
+      630
+    ],
+    [
+      810,
+      150,
+      560,
+      630
+    ],
+    [
+      1390,
+      150,
+      330,
+      630
+    ]
+  ],
+  "scope": "These are head/body layers extracted from the four-pose review. Four head placements are not four distinct required directions. Face parts and common-head deduplication remain pending."
+}

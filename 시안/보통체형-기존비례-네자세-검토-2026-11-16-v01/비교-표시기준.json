@@ -1,0 +1,41 @@
+{
+  "originalStandingBounds": [
+    64,
+    190,
+    310,
+    741
+  ],
+  "newPoseBounds": [
+    [
+      93,
+      179,
+      350,
+      749
+    ],
+    [
+      426,
+      179,
+      786,
+      747
+    ],
+    [
+      827,
+      181,
+      1350,
+      747
+    ],
+    [
+      1412,
+      227,
+      1691,
+      750
+    ]
+  ],
+  "scaleReference": "Only standing full-height normalized to40px for comparison. Same new-body scale applied to all four poses. Source image bytes unmodified.",
+  "approval": "awaiting user comparison; five other bodies on hold",
+  "background": "white",
+  "generatedSize": [
+    1774,
+    887
+  ]
+}

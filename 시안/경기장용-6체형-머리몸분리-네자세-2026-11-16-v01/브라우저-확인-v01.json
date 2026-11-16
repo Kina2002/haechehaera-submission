@@ -1,0 +1,305 @@
+{
+  "frames": [
+    {
+      "type": "normal",
+      "pose": 0,
+      "headBodyPixelDistance": 1,
+      "bounds": [
+        21,
+        17,
+        38,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "normal",
+      "pose": 1,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        15,
+        17,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "normal",
+      "pose": 2,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        17,
+        17,
+        52,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "normal",
+      "pose": 3,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        21,
+        20,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "heavy",
+      "pose": 0,
+      "headBodyPixelDistance": 1,
+      "bounds": [
+        19,
+        16,
+        40,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "heavy",
+      "pose": 1,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        15,
+        16,
+        40,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "heavy",
+      "pose": 2,
+      "headBodyPixelDistance": 1,
+      "bounds": [
+        16,
+        16,
+        52,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "heavy",
+      "pose": 3,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        19,
+        20,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "slender",
+      "pose": 0,
+      "headBodyPixelDistance": 1,
+      "bounds": [
+        22,
+        15,
+        37,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "slender",
+      "pose": 1,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        16,
+        15,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "slender",
+      "pose": 2,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        17,
+        15,
+        54,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "slender",
+      "pose": 3,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        22,
+        19,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "broad",
+      "pose": 0,
+      "headBodyPixelDistance": 1,
+      "bounds": [
+        20,
+        15,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "broad",
+      "pose": 1,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        15,
+        16,
+        40,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "broad",
+      "pose": 2,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        16,
+        16,
+        52,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "broad",
+      "pose": 3,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        20,
+        19,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "tall",
+      "pose": 0,
+      "headBodyPixelDistance": 1,
+      "bounds": [
+        22,
+        12,
+        37,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "tall",
+      "pose": 1,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        17,
+        13,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "tall",
+      "pose": 2,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        18,
+        13,
+        50,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "tall",
+      "pose": 3,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        23,
+        16,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "compact",
+      "pose": 0,
+      "headBodyPixelDistance": 1,
+      "bounds": [
+        22,
+        20,
+        37,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "compact",
+      "pose": 1,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        17,
+        20,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "compact",
+      "pose": 2,
+      "headBodyPixelDistance": 1,
+      "bounds": [
+        18,
+        20,
+        51,
+        56
+      ],
+      "edgeClipped": false
+    },
+    {
+      "type": "compact",
+      "pose": 3,
+      "headBodyPixelDistance": 0,
+      "bounds": [
+        21,
+        23,
+        39,
+        56
+      ],
+      "edgeClipped": false
+    }
+  ],
+  "headScaleIdentical": true,
+  "canvasSize": [
+    64,
+    64
+  ],
+  "normalStandingTarget": 40,
+  "notes": "distance 0=overlap, 1=adjacent, >=2=gap; checks apply only to these four pose samples",
+  "horizontalOverflow": false,
+  "state": {
+    "pose": 2,
+    "layer": "both",
+    "backdrop": "light"
+  }
+}

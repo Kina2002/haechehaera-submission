@@ -1,0 +1,31 @@
+{
+  "files": 22,
+  "frames": 144,
+  "clipped": 0,
+  "standingHeights": [
+    40,
+    42,
+    43,
+    42,
+    46,
+    36
+  ],
+  "baseline": 58,
+  "headSize": [
+    18,
+    16
+  ],
+  "checklistItems": 292,
+  "checked": 105,
+  "states": {
+    "부분 시안/자료": 4,
+    "미완료": 173,
+    "시안 있음": 92,
+    "기준 기록": 8,
+    "참고만 있음": 10,
+    "시안 검증": 5
+  },
+  "localLinks": 88,
+  "missingLinks": [],
+  "scope": "selected basic skeleton poses only; no game changes"
+}
