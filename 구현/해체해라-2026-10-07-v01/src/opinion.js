@@ -205,6 +205,13 @@ function forfeitRemainingGames(t){
  news(t,'부전패 '+count+'경기 · 시즌 '+season,'선수가 '+players+'명이라 경기를 치르지 못해 남은 경기를 0:9 부전패로 처리했습니다. 급여·배당금·관중 수입은 없습니다.');
  return {count,season,from:before,to:opinionState(t).value,seasonEnd:end};
 }
+function forfeitResultMessage(t,r){
+ const prefix='부전패 '+r.count+'경기를 처리했습니다. ';
+ if(r.seasonEnd?.disband)return prefix+'구단이 해체되어 동네 리그에서 재창단했습니다. 해체 여론 '+opinionPct(r.to)+'로 다시 시작합니다.';
+ const pending=t.mlbSupport?.pending;
+ if(pending?.kind==='disband'&&pending.season===r.season)return prefix+'해체 판정으로 구단 회생권 사용 여부를 선택해야 합니다.';
+ return prefix+'해체 여론 '+opinionPct(r.from)+' → '+opinionPct(r.to);
+}
 
 // ---- season end (P09 steps 3, 4 and the rebuild) ----
 function opinionSeasonParts(t,ctx){
@@ -426,7 +433,7 @@ function showForfeitConfirm(t){
  const left=LEAGUE.seasonGames-t.league.round;
  confirmBox('남은 경기 부전패','선수가 '+t.players.length+'명이라 경기를 시작할 수 없고, 영입할 자금도 긴급 대출도 없습니다. 남은 '+left+'경기를 0:9 부전패로 처리하고 시즌 끝 판정(순위·해체 여론·해체)으로 넘어갑니다. 되돌릴 수 없습니다.',()=>{
   const r=forfeitRemainingGames(team());if(r.error){toast(r.error);return;}
-  save();toast('부전패 '+r.count+'경기를 처리했습니다. 해체 여론 '+opinionPct(r.from)+' → '+opinionPct(opinionState(team()).value));go('league');
+  save();toast(forfeitResultMessage(team(),r));go('league');
  },'부전패 처리');
 }
 // The match start check: a short roster with no money opens the loan, or the forfeit when no loan is left.
