@@ -1,0 +1,853 @@
+{
+  "bodies": [
+    {
+      "id": "normal",
+      "name": "보통형",
+      "file": "보통형-몸4자세-기준.png",
+      "frames": [
+        {
+          "name": "서기",
+          "crop": [
+            91,
+            382,
+            261,
+            370
+          ],
+          "bounds": [
+            94,
+            385,
+            349,
+            749
+          ],
+          "neck": [
+            220.5,
+            385
+          ],
+          "neckBounds": [
+            199,
+            385,
+            242,
+            403
+          ],
+          "footY": 749,
+          "headOffsetFromNeck": [
+            -124.5,
+            -209
+          ]
+        },
+        {
+          "name": "달리기",
+          "crop": [
+            424,
+            360,
+            365,
+            390
+          ],
+          "bounds": [
+            427,
+            363,
+            786,
+            747
+          ],
+          "neck": [
+            643.5,
+            363
+          ],
+          "neckBounds": [
+            619,
+            363,
+            668,
+            387
+          ],
+          "footY": 747,
+          "headOffsetFromNeck": [
+            -107.5,
+            -187
+          ]
+        },
+        {
+          "name": "타격",
+          "crop": [
+            825,
+            338,
+            527,
+            413
+          ],
+          "bounds": [
+            828,
+            341,
+            1349,
+            748
+          ],
+          "neck": [
+            1019.5,
+            377
+          ],
+          "neckBounds": [
+            999,
+            377,
+            1040,
+            390
+          ],
+          "footY": 748,
+          "headOffsetFromNeck": [
+            -116.5,
+            -198
+          ]
+        },
+        {
+          "name": "고개 숙임",
+          "crop": [
+            1411,
+            386,
+            224,
+            368
+          ],
+          "bounds": [
+            1414,
+            389,
+            1632,
+            751
+          ],
+          "neck": [
+            1542.5,
+            399
+          ],
+          "neckBounds": [
+            1513,
+            399,
+            1572,
+            439
+          ],
+          "footY": 751,
+          "headOffsetFromNeck": [
+            -80.5,
+            -175
+          ]
+        }
+      ],
+      "alphaZero": 1260486,
+      "referenceHeightRatio": 1.0,
+      "standingDisplayHeight": 40.0,
+      "bodyScale": 1.0,
+      "note": "기준 비례 그대로",
+      "sha256": "27752ba28e6ee788939f0b4c98b542f9aaecbebc86b32e30000a6b3a6ba551e6"
+    },
+    {
+      "id": "heavy",
+      "name": "단단한 중량형",
+      "file": "중량형-몸4자세-v02.png",
+      "frames": [
+        {
+          "name": "서기",
+          "crop": [
+            56,
+            362,
+            328,
+            398
+          ],
+          "bounds": [
+            59,
+            365,
+            381,
+            757
+          ],
+          "neck": [
+            221.5,
+            365
+          ],
+          "neckBounds": [
+            198,
+            365,
+            245,
+            388
+          ],
+          "footY": 757,
+          "headOffsetFromNeck": [
+            -124.5,
+            -209
+          ]
+        },
+        {
+          "name": "달리기",
+          "crop": [
+            410,
+            350,
+            386,
+            409
+          ],
+          "bounds": [
+            413,
+            353,
+            793,
+            756
+          ],
+          "neck": [
+            637.5,
+            353
+          ],
+          "neckBounds": [
+            612,
+            353,
+            663,
+            381
+          ],
+          "footY": 756,
+          "headOffsetFromNeck": [
+            -107.5,
+            -187
+          ]
+        },
+        {
+          "name": "타격",
+          "crop": [
+            811,
+            338,
+            540,
+            422
+          ],
+          "bounds": [
+            814,
+            341,
+            1348,
+            757
+          ],
+          "neck": [
+            1013.0,
+            358
+          ],
+          "neckBounds": [
+            989,
+            358,
+            1037,
+            381
+          ],
+          "footY": 757,
+          "headOffsetFromNeck": [
+            -116.5,
+            -198
+          ]
+        },
+        {
+          "name": "고개 숙임",
+          "crop": [
+            1382,
+            388,
+            293,
+            372
+          ],
+          "bounds": [
+            1385,
+            391,
+            1672,
+            757
+          ],
+          "neck": [
+            1550.0,
+            391
+          ],
+          "neckBounds": [
+            1521,
+            391,
+            1579,
+            427
+          ],
+          "footY": 757,
+          "headOffsetFromNeck": [
+            -80.5,
+            -175
+          ]
+        }
+      ],
+      "alphaZero": 1173035,
+      "referenceHeightRatio": 1.0344827586206897,
+      "standingDisplayHeight": 41.37931034482759,
+      "bodyScale": 0.9787121745249825,
+      "note": "두꺼운 몸통·팔·허벅지",
+      "sha256": "d8f8027f5e5e79611c6e44a66a869e2e3b8758229c0d9f2bc68bf4ab6c7b602f"
+    },
+    {
+      "id": "slender",
+      "name": "날렵형",
+      "file": "날렵형-몸4자세-v01.png",
+      "frames": [
+        {
+          "name": "서기",
+          "crop": [
+            122,
+            373,
+            203,
+            380
+          ],
+          "bounds": [
+            125,
+            376,
+            322,
+            750
+          ],
+          "neck": [
+            223.5,
+            376
+          ],
+          "neckBounds": [
+            205,
+            376,
+            242,
+            396
+          ],
+          "footY": 750,
+          "headOffsetFromNeck": [
+            -124.5,
+            -209
+          ]
+        },
+        {
+          "name": "달리기",
+          "crop": [
+            438,
+            358,
+            334,
+            395
+          ],
+          "bounds": [
+            441,
+            361,
+            769,
+            750
+          ],
+          "neck": [
+            635.0,
+            361
+          ],
+          "neckBounds": [
+            611,
+            361,
+            659,
+            385
+          ],
+          "footY": 750,
+          "headOffsetFromNeck": [
+            -107.5,
+            -187
+          ]
+        },
+        {
+          "name": "타격",
+          "crop": [
+            840,
+            346,
+            508,
+            407
+          ],
+          "bounds": [
+            843,
+            349,
+            1345,
+            750
+          ],
+          "neck": [
+            1016.5,
+            375
+          ],
+          "neckBounds": [
+            998,
+            375,
+            1035,
+            394
+          ],
+          "footY": 750,
+          "headOffsetFromNeck": [
+            -116.5,
+            -198
+          ]
+        },
+        {
+          "name": "고개 숙임",
+          "crop": [
+            1428,
+            394,
+            185,
+            359
+          ],
+          "bounds": [
+            1431,
+            397,
+            1610,
+            750
+          ],
+          "neck": [
+            1539.5,
+            397
+          ],
+          "neckBounds": [
+            1515,
+            397,
+            1564,
+            428
+          ],
+          "footY": 750,
+          "headOffsetFromNeck": [
+            -80.5,
+            -175
+          ]
+        }
+      ],
+      "alphaZero": 1330213,
+      "referenceHeightRatio": 1.05989110707804,
+      "standingDisplayHeight": 42.3956442831216,
+      "bodyScale": 1.064539922552093,
+      "note": "좁은 몸통·가느다란 팔다리",
+      "sha256": "7ef3aad01dc551b83aceb23f965b132cd864c33d9dd5c83019c989b341f189dd"
+    },
+    {
+      "id": "broad",
+      "name": "어깨 넓은형",
+      "file": "어깨넓은형-몸4자세-v02.png",
+      "frames": [
+        {
+          "name": "서기",
+          "crop": [
+            83,
+            356,
+            277,
+            397
+          ],
+          "bounds": [
+            86,
+            359,
+            357,
+            750
+          ],
+          "neck": [
+            221.0,
+            359
+          ],
+          "neckBounds": [
+            197,
+            359,
+            245,
+            388
+          ],
+          "footY": 750,
+          "headOffsetFromNeck": [
+            -124.5,
+            -209
+          ]
+        },
+        {
+          "name": "달리기",
+          "crop": [
+            424,
+            345,
+            375,
+            408
+          ],
+          "bounds": [
+            427,
+            348,
+            796,
+            750
+          ],
+          "neck": [
+            640.5,
+            348
+          ],
+          "neckBounds": [
+            612,
+            348,
+            669,
+            379
+          ],
+          "footY": 750,
+          "headOffsetFromNeck": [
+            -107.5,
+            -187
+          ]
+        },
+        {
+          "name": "타격",
+          "crop": [
+            827,
+            339,
+            526,
+            414
+          ],
+          "bounds": [
+            830,
+            342,
+            1350,
+            750
+          ],
+          "neck": [
+            1022.0,
+            358
+          ],
+          "neckBounds": [
+            998,
+            358,
+            1046,
+            382
+          ],
+          "footY": 750,
+          "headOffsetFromNeck": [
+            -116.5,
+            -198
+          ]
+        },
+        {
+          "name": "고개 숙임",
+          "crop": [
+            1396,
+            383,
+            279,
+            370
+          ],
+          "bounds": [
+            1399,
+            386,
+            1672,
+            750
+          ],
+          "neck": [
+            1547.5,
+            386
+          ],
+          "neckBounds": [
+            1518,
+            386,
+            1577,
+            423
+          ],
+          "footY": 750,
+          "headOffsetFromNeck": [
+            -80.5,
+            -175
+          ]
+        }
+      ],
+      "alphaZero": 1248311,
+      "referenceHeightRatio": 1.0544464609800364,
+      "standingDisplayHeight": 42.17785843920146,
+      "bodyScale": 1.0103183702266514,
+      "note": "넓은 어깨·좁은 허리",
+      "sha256": "9039816dba1bfcbbe21a739940182a403e255480dca4de557114e3c3c4e107fb"
+    },
+    {
+      "id": "tall",
+      "name": "키 큰형",
+      "file": "키큰형-몸4자세-v01.png",
+      "frames": [
+        {
+          "name": "서기",
+          "crop": [
+            108,
+            298,
+            225,
+            492
+          ],
+          "bounds": [
+            111,
+            301,
+            330,
+            787
+          ],
+          "neck": [
+            220.5,
+            301
+          ],
+          "neckBounds": [
+            200,
+            301,
+            241,
+            319
+          ],
+          "footY": 787,
+          "headOffsetFromNeck": [
+            -124.5,
+            -209
+          ]
+        },
+        {
+          "name": "달리기",
+          "crop": [
+            425,
+            298,
+            358,
+            492
+          ],
+          "bounds": [
+            428,
+            301,
+            780,
+            787
+          ],
+          "neck": [
+            641.0,
+            301
+          ],
+          "neckBounds": [
+            619,
+            301,
+            663,
+            328
+          ],
+          "footY": 787,
+          "headOffsetFromNeck": [
+            -107.5,
+            -187
+          ]
+        },
+        {
+          "name": "타격",
+          "crop": [
+            828,
+            291,
+            524,
+            499
+          ],
+          "bounds": [
+            831,
+            294,
+            1349,
+            787
+          ],
+          "neck": [
+            1014.5,
+            312
+          ],
+          "neckBounds": [
+            995,
+            312,
+            1034,
+            328
+          ],
+          "footY": 787,
+          "headOffsetFromNeck": [
+            -116.5,
+            -198
+          ]
+        },
+        {
+          "name": "고개 숙임",
+          "crop": [
+            1433,
+            332,
+            201,
+            459
+          ],
+          "bounds": [
+            1436,
+            335,
+            1631,
+            788
+          ],
+          "neck": [
+            1550.5,
+            335
+          ],
+          "neckBounds": [
+            1527,
+            335,
+            1574,
+            373
+          ],
+          "footY": 788,
+          "headOffsetFromNeck": [
+            -80.5,
+            -175
+          ]
+        }
+      ],
+      "alphaZero": 1221540,
+      "referenceHeightRatio": 1.1306715063520871,
+      "standingDisplayHeight": 45.22686025408348,
+      "bodyScale": 0.9022278983964808,
+      "note": "긴 몸통과 팔다리",
+      "sha256": "e48c39c84ce8ab963daa605b8c33a70abb6274d17e4ddb56637e086ce4e95cbf"
+    },
+    {
+      "id": "compact",
+      "name": "작고 단정한형",
+      "file": "작은형-몸4자세-v01.png",
+      "frames": [
+        {
+          "name": "서기",
+          "crop": [
+            115,
+            404,
+            212,
+            300
+          ],
+          "bounds": [
+            118,
+            407,
+            324,
+            701
+          ],
+          "neck": [
+            221.0,
+            407
+          ],
+          "neckBounds": [
+            201,
+            407,
+            241,
+            428
+          ],
+          "footY": 701,
+          "headOffsetFromNeck": [
+            -124.5,
+            -209
+          ]
+        },
+        {
+          "name": "달리기",
+          "crop": [
+            447,
+            384,
+            300,
+            320
+          ],
+          "bounds": [
+            450,
+            387,
+            744,
+            701
+          ],
+          "neck": [
+            617.0,
+            387
+          ],
+          "neckBounds": [
+            595,
+            387,
+            639,
+            411
+          ],
+          "footY": 701,
+          "headOffsetFromNeck": [
+            -107.5,
+            -187
+          ]
+        },
+        {
+          "name": "타격",
+          "crop": [
+            865,
+            367,
+            451,
+            337
+          ],
+          "bounds": [
+            868,
+            370,
+            1313,
+            701
+          ],
+          "neck": [
+            1026.5,
+            397
+          ],
+          "neckBounds": [
+            1004,
+            397,
+            1049,
+            419
+          ],
+          "footY": 701,
+          "headOffsetFromNeck": [
+            -116.5,
+            -198
+          ]
+        },
+        {
+          "name": "고개 숙임",
+          "crop": [
+            1431,
+            413,
+            207,
+            291
+          ],
+          "bounds": [
+            1434,
+            416,
+            1635,
+            701
+          ],
+          "neck": [
+            1547.5,
+            416
+          ],
+          "neckBounds": [
+            1522,
+            416,
+            1573,
+            450
+          ],
+          "footY": 701,
+          "headOffsetFromNeck": [
+            -80.5,
+            -175
+          ]
+        }
+      ],
+      "alphaZero": 1350117,
+      "referenceHeightRatio": 0.9237749546279492,
+      "standingDisplayHeight": 36.95099818511797,
+      "bodyScale": 1.090311986863711,
+      "note": "짧은 몸통과 팔다리",
+      "sha256": "f26ca556a0e8a08c67b033319676c7ebbdb1d1158a92e41592dc75d86a99c95d"
+    }
+  ],
+  "heads": [
+    {
+      "crop": [
+        96,
+        176,
+        247,
+        213
+      ],
+      "opaqueTop": 179
+    },
+    {
+      "crop": [
+        536,
+        176,
+        253,
+        214
+      ],
+      "opaqueTop": 179
+    },
+    {
+      "crop": [
+        903,
+        179,
+        249,
+        210
+      ],
+      "opaqueTop": 182
+    },
+    {
+      "crop": [
+        1462,
+        224,
+        231,
+        220
+      ],
+      "opaqueTop": 227
+    }
+  ],
+  "referenceHeights": [
+    551,
+    570,
+    584,
+    581,
+    623,
+    509
+  ],
+  "normalHeight": 570,
+  "pixelScale": 0.07017543859649122,
+  "headFile": "공통머리-4자세-보통형원본.png",
+  "coordinateNote": "source pixels; body uniform import scale per type; head scale always 1; normal standing = 40 display pixels",
+  "headSha256": "6b6b1d9375114a84e80df92afebf350179448b0526eb4f5a4d8afe97aab9ac0e"
+}

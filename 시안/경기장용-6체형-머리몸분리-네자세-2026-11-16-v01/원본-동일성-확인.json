@@ -1,0 +1,34 @@
+{
+  "headOriginal": "C:/Users/Administrator/Downloads/agentic-ai-fundamentals/agentic-ai-fundamentals/day03/projects/04-haechehaera/handoff/해체해라-이어가기-2026-10-07-v01/시안/보통체형-머리몸-분리검토-2026-11-16-v01/보통형-머리4자세-분리-v01.png",
+  "headCopy": "공통머리-4자세-보통형원본.png",
+  "headIdentical": true,
+  "normalBodyIdentical": true,
+  "headSha256": "6b6b1d9375114a84e80df92afebf350179448b0526eb4f5a4d8afe97aab9ac0e",
+  "newBodies": [
+    {
+      "id": "heavy",
+      "file": "중량형-몸4자세-v02.png",
+      "generatedSourceIdentical": true
+    },
+    {
+      "id": "slender",
+      "file": "날렵형-몸4자세-v01.png",
+      "generatedSourceIdentical": true
+    },
+    {
+      "id": "broad",
+      "file": "어깨넓은형-몸4자세-v02.png",
+      "generatedSourceIdentical": true
+    },
+    {
+      "id": "tall",
+      "file": "키큰형-몸4자세-v01.png",
+      "generatedSourceIdentical": true
+    },
+    {
+      "id": "compact",
+      "file": "작은형-몸4자세-v01.png",
+      "generatedSourceIdentical": true
+    }
+  ]
+}

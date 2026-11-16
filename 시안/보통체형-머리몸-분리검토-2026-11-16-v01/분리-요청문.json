@@ -1,0 +1,18 @@
+{
+  "mode": "built-in GPT image_gen",
+  "reference": "C:/Users/Administrator/Downloads/agentic-ai-fundamentals/agentic-ai-fundamentals/day03/projects/04-haechehaera/handoff/해체해라-이어가기-2026-10-07-v01/시안/보통체형-기존비례-네자세-검토-2026-11-16-v01/보통형-기존비례-네자세-v03.png",
+  "files": [
+    {
+      "key": "head",
+      "source": "C:\\Users\\Administrator\\.codex\\generated_images\\01a1bdfe-8cc6-7f63-a5f4-f4c346a3c50a\\exec-77ea1409-e606-4ffe-b80b-b486b94e3042.png",
+      "file": "보통형-머리4자세-분리-v01.png",
+      "prompt": "Use case: precise-object-edit / background-extraction. This is LAYER SEPARATION of the existing FOUR-POSE character image, not a redesign. Preserve exact original sprite pixel appearance, colors, proportions, pose, location and scale. Canvas1774x887, same framing as source. Do not recenter, space out, enlarge, shrink, reshape or rotate any selected object. Coarse square pixel clusters. No text, no labels, no new poses, no hair, no facial parts. All removed material and all white background must be alpha0 fully TRANSPARENT, and preserved sprite pixels opaque. No outlines added around erased regions, no glow, no shadows, no fog, no checkerboard.\nOutput the HEAD LAYER ONLY. Keep exactly the FOUR existing blank peach heads including ears, in their original places above the four poses. REMOVE EVERYTHING ELSE: all jerseys, collars, arms, hands, pants, legs, shoes and bat. The head layer ends at the bottom edge of each chin; the exposed neck stubs belong to the other body layer. Preserve the exact distinct orientation of the bowing head on the far right. No head redesign. A transparent sheet with four heads in the same original coordinates, otherwise empty."
+    },
+    {
+      "key": "body",
+      "source": "C:\\Users\\Administrator\\.codex\\generated_images\\01a1bdfe-8cc6-7f63-a5f4-f4c346a3c50a\\exec-0b42db33-0e17-424d-a4ac-af2f0da2cdd1.png",
+      "file": "보통형-몸4자세-분리-v01.png",
+      "prompt": "Use case: precise-object-edit / background-extraction. This is LAYER SEPARATION of the existing FOUR-POSE character image, not a redesign. Preserve exact original sprite pixel appearance, colors, proportions, pose, location and scale. Canvas1774x887, same framing as source. Do not recenter, space out, enlarge, shrink, reshape or rotate any selected object. Coarse square pixel clusters. No text, no labels, no new poses, no hair, no facial parts. All removed material and all white background must be alpha0 fully TRANSPARENT, and preserved sprite pixels opaque. No outlines added around erased regions, no glow, no shadows, no fog, no checkerboard.\nOutput the BODY LAYER ONLY. Keep exactly the FOUR existing clothed bodies, arms, hands, legs, shoes and batting bat at the original coordinates. REMOVE the four peach HEADS AND EARS. Retain tiny peach NECK STUBS where head meets the collar; extend only the tiny hidden neck area as necessary for reattaching the existing head. Do not draw a skull or any head part. Keep original white collars and cuffs, green jersey and socks, white pants, charcoal shoes, peach arms and hands. Keep the running and batting arm silhouettes intact. Where the bowed head was covering the collar, restore only a small natural collar/neck connection, not an extra neck sticking up. Four headless bodies ONLY."
+    }
+  ]
+}
