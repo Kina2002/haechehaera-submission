@@ -71,6 +71,60 @@ function world({seed=20261111}={}){
  return {run,exec:code=>vm.runInContext(code,ctx)};
 }
 
+test('next-game forecasts match actual home/away settlement in every league and bus level',()=>{
+ for(const tier of [0,1,2,3])for(const away of [false,true])for(const win of [false,true])for(const level of [0,1,2,3,4]){
+  const {run}=world();
+  const r=run(`(()=>{const t=club();t.league.tier=${tier};t.league.round=${away?1:0};t.stadium=5;t.ticket=12;
+   t.players.forEach(p=>p.salary=100);builds(t,['uniform','restaurant','billboard']);
+   if(${level}){buildFacility(t,'bus');for(let n=1;n<${level};n++)upgradeFacility(t,'bus');}
+   const before=JSON.stringify(t),f=budgetForecast(t),unchanged=before===JSON.stringify(t),q=f.${win?'win':'loss'},g=playLeague(t,${win?'[3,2]':'[3,4]'});
+   return {q,fixture:f.fixture,unchanged,actual:g.m.finance,funds:t.funds,change:g.after-g.before};})()`);
+  assert.ok(r.unchanged);assert.equal(r.fixture.home,away?1:0);
+  for(const k of ['reward','ticket','stores','salary','maintenance','league'])close(r.q[k],r.actual[k]||0,k);
+  close(r.q.fundsAfter,r.funds,'cash after settlement');close(r.q.cashChange,r.change,'cash change');close(r.q.net,r.actual.net,'net');
+ }
+});
+
+test('forecast includes support, capped loan repayments and arrears in the actual settlement order',()=>{
+ for(const c of [
+  {funds:0,debt:0,loan:1100,opinion:40},
+  {funds:100,debt:20000,loan:1100,opinion:40},
+  {funds:0,debt:0,loan:50,opinion:40},
+  {funds:10000,debt:500,loan:0,opinion:95},
+  {funds:10000,debt:0,loan:0,opinion:40}
+ ])for(const win of [false,true]){
+  const {run}=world();
+  const r=run(`(()=>{const t=club();send(t,95);t.league.tier=1;t.league.round=1;t.players.forEach(p=>p.salary=100);
+   t.funds=${c.funds};t.debt=${c.debt};t.opinion.value=${c.opinion};
+   t.loan=${c.loan?`{v:1,amount:${c.loan},repay:${c.loan},left:${c.loan},repaid:0,season:1,at:0}`:'null'};
+   const before=JSON.stringify(t),q=budgetForecast(t).${win?'win':'loss'},unchanged=before===JSON.stringify(t),g=playLeague(t,${win?'[3,2]':'[3,4]'});
+   return {q,unchanged,actual:g.m.finance,funds:t.funds,debt:t.debt,change:g.after-g.before};})()`);
+  assert.ok(r.unchanged,'forecast must not credit support, spend cash or repay a loan');
+  close(r.q.support,r.actual.support||0,'support');close(r.q.loanRepay,r.actual.loanRepay||0,'loan repayment');
+  close(r.q.fundsAfter,r.funds,'cash');close(r.q.cashChange,r.change,'cash change');close(r.q.debt,r.debt,'unpaid bills');
+  close(r.q.net,r.actual.net-r.debt,'net includes bills that could not be paid');
+ }
+});
+
+test('forecast is read-only, handles live and season-end states and labels the actual fixture',()=>{
+ const {run,exec}=world();
+ exec('var budgetClub=club();Math.random=()=>{throw Error("forecast used randomness");};');
+ const r=run(`(()=>{const t=budgetClub,before=JSON.stringify(t),f=budgetForecast(t),html=budgetHTML(t,true);
+  const unchanged=before===JSON.stringify(t);t.league.round=1;const away=budgetHTML(t,false);
+  t.match={done:false};const live=budgetForecast(t);t.match=null;t.league.round=10;const end=budgetForecast(t);
+  t.league.phase='offseason';const off=budgetForecast(t);return {f,html,away,unchanged,live,end,off};})()`);
+ assert.ok(r.unchanged);assert.equal(r.f.fixture.home,0);assert.ok(r.html.includes('홈 경기'));assert.ok(r.away.includes('원정 경기'));
+ for(const text of ['예상 수입','예상 지출','리그 배당금','MLB 정기 후원','대출 상환','3득점 가정'])assert.ok(r.html.includes(text),text);
+ assert.ok(!r.html.includes('홈·원정 반반'));assert.equal(r.live.fixture.available,false);assert.equal(r.end.fixture.available,false);
+ assert.equal(r.off.fixture.home,0);assert.equal(r.off.fixture.nextSeason,true);
+});
+
+test('unpaid costs remain visible instead of appearing as a break-even game',()=>{
+ const {run}=world();
+ const r=run(`(()=>{const t=club();t.league.round=1;t.funds=0;t.players.forEach(p=>p.salary=1000);const q=budgetForecast(t),html=budgetHTML(t,true);return {q,html};})()`);
+ assert.ok(r.q.loss.net<0);assert.equal(r.q.loss.fundsAfter,0);assert.ok(r.q.loss.debt>0);assert.ok(r.html.includes('미지급 예상'));
+});
+
 test('the P17 table: 15 facilities in five groups, prices, upkeep, levels, slots by stadium grade, the season-end order',()=>{
  const {run}=world();
  const T=run('FACILITY_TABLE.map(f=>[f.id,f.category,f.name,facilityPrice(f),f.train?"level":f.awayOnly?"away "+f.upkeep:f.upkeep])');

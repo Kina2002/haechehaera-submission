@@ -168,10 +168,11 @@ function takeEmergencyLoan(t){
  return '';
 }
 // P14: after wages and upkeep, up to 30% of this game's settlement income (fees, gate, shops, league payout; no prizes).
+function loanRepaymentQuote(t,income,funds=t?.funds??0){return loanLeft(t)?Math.max(0,Math.min(t.loan.left,Math.max(0,funds),Math.round(income*EMERGENCY_LOAN.repayShare))):0;}
 function repayLoanFromMatch(t,m){
  const f=m?.finance;if(!t||!f||f.loanRepay!==undefined||!loanLeft(t))return 0;
  const income=(Number(f.reward)||0)+(Number(f.ticket)||0)+(Number(f.stores)||0)+(Number(f.league)||0);
- const pay=Math.max(0,Math.min(t.loan.left,Math.max(0,t.funds),Math.round(income*EMERGENCY_LOAN.repayShare)));
+ const pay=loanRepaymentQuote(t,income);
  if(pay>0&&spend(t,pay,'긴급 대출 상환')){t.loan.left=Math.round((t.loan.left-pay)*100)/100;t.loan.repaid=Math.round((t.loan.repaid+pay)*100)/100;}
  f.loanRepay=pay>0?pay:0;f.loanLeft=t.loan.left;if(Number.isFinite(f.net))f.net-=f.loanRepay;
  const h=t.history?.find(x=>x.id===m.id);if(h?.finance)h.finance=JSON.parse(JSON.stringify(f));
