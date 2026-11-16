@@ -1,0 +1,323 @@
+{
+  "canvas": [
+    128,
+    160
+  ],
+  "skin": 0,
+  "eyeColor": 2,
+  "hairColor": 2,
+  "parts": [
+    {
+      "file": "눈-01.png",
+      "row": 0,
+      "index": 0,
+      "size": [
+        37,
+        8
+      ],
+      "anchorOn128x160": [
+        46,
+        49
+      ]
+    },
+    {
+      "file": "눈-02.png",
+      "row": 0,
+      "index": 1,
+      "size": [
+        38,
+        7
+      ],
+      "anchorOn128x160": [
+        45,
+        49
+      ]
+    },
+    {
+      "file": "눈-03.png",
+      "row": 0,
+      "index": 2,
+      "size": [
+        37,
+        9
+      ],
+      "anchorOn128x160": [
+        46,
+        49
+      ]
+    },
+    {
+      "file": "눈-04.png",
+      "row": 0,
+      "index": 3,
+      "size": [
+        35,
+        7
+      ],
+      "anchorOn128x160": [
+        47,
+        49
+      ]
+    },
+    {
+      "file": "눈-05.png",
+      "row": 0,
+      "index": 4,
+      "size": [
+        38,
+        7
+      ],
+      "anchorOn128x160": [
+        45,
+        49
+      ]
+    },
+    {
+      "file": "눈-06.png",
+      "row": 0,
+      "index": 5,
+      "size": [
+        35,
+        8
+      ],
+      "anchorOn128x160": [
+        47,
+        49
+      ]
+    },
+    {
+      "file": "눈썹-01.png",
+      "row": 1,
+      "index": 0,
+      "size": [
+        35,
+        3
+      ],
+      "anchorOn128x160": [
+        47,
+        43
+      ]
+    },
+    {
+      "file": "눈썹-02.png",
+      "row": 1,
+      "index": 1,
+      "size": [
+        35,
+        4
+      ],
+      "anchorOn128x160": [
+        47,
+        42
+      ]
+    },
+    {
+      "file": "눈썹-03.png",
+      "row": 1,
+      "index": 2,
+      "size": [
+        32,
+        3
+      ],
+      "anchorOn128x160": [
+        48,
+        43
+      ]
+    },
+    {
+      "file": "눈썹-04.png",
+      "row": 1,
+      "index": 3,
+      "size": [
+        33,
+        2
+      ],
+      "anchorOn128x160": [
+        48,
+        44
+      ]
+    },
+    {
+      "file": "눈썹-05.png",
+      "row": 1,
+      "index": 4,
+      "size": [
+        36,
+        4
+      ],
+      "anchorOn128x160": [
+        46,
+        42
+      ]
+    },
+    {
+      "file": "눈썹-06.png",
+      "row": 1,
+      "index": 5,
+      "size": [
+        35,
+        4
+      ],
+      "anchorOn128x160": [
+        47,
+        42
+      ]
+    },
+    {
+      "file": "코-01.png",
+      "row": 2,
+      "index": 0,
+      "size": [
+        5,
+        6
+      ],
+      "anchorOn128x160": [
+        62,
+        59
+      ]
+    },
+    {
+      "file": "코-02.png",
+      "row": 2,
+      "index": 1,
+      "size": [
+        6,
+        7
+      ],
+      "anchorOn128x160": [
+        61,
+        59
+      ]
+    },
+    {
+      "file": "코-03.png",
+      "row": 2,
+      "index": 2,
+      "size": [
+        6,
+        5
+      ],
+      "anchorOn128x160": [
+        61,
+        59
+      ]
+    },
+    {
+      "file": "코-04.png",
+      "row": 2,
+      "index": 3,
+      "size": [
+        6,
+        6
+      ],
+      "anchorOn128x160": [
+        61,
+        59
+      ]
+    },
+    {
+      "file": "코-05.png",
+      "row": 2,
+      "index": 4,
+      "size": [
+        7,
+        7
+      ],
+      "anchorOn128x160": [
+        61,
+        59
+      ]
+    },
+    {
+      "file": "코-06.png",
+      "row": 2,
+      "index": 5,
+      "size": [
+        5,
+        7
+      ],
+      "anchorOn128x160": [
+        62,
+        59
+      ]
+    },
+    {
+      "file": "입-01.png",
+      "row": 3,
+      "index": 0,
+      "size": [
+        13,
+        3
+      ],
+      "anchorOn128x160": [
+        58,
+        69
+      ]
+    },
+    {
+      "file": "입-02.png",
+      "row": 3,
+      "index": 1,
+      "size": [
+        15,
+        4
+      ],
+      "anchorOn128x160": [
+        57,
+        69
+      ]
+    },
+    {
+      "file": "입-03.png",
+      "row": 3,
+      "index": 2,
+      "size": [
+        14,
+        2
+      ],
+      "anchorOn128x160": [
+        57,
+        69
+      ]
+    },
+    {
+      "file": "입-04.png",
+      "row": 3,
+      "index": 3,
+      "size": [
+        14,
+        3
+      ],
+      "anchorOn128x160": [
+        57,
+        69
+      ]
+    },
+    {
+      "file": "입-05.png",
+      "row": 3,
+      "index": 4,
+      "size": [
+        14,
+        4
+      ],
+      "anchorOn128x160": [
+        57,
+        69
+      ]
+    },
+    {
+      "file": "입-06.png",
+      "row": 3,
+      "index": 5,
+      "size": [
+        14,
+        3
+      ],
+      "anchorOn128x160": [
+        57,
+        69
+      ]
+    }
+  ]
+}

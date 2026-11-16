@@ -1,0 +1,21 @@
+{
+  "config": {
+    "body": 2,
+    "skin": 3,
+    "hairColor": 2,
+    "eyeColor": 3,
+    "headwear": "cap",
+    "parts": {
+      "hair": 1,
+      "eyes": 0,
+      "brows": 0,
+      "nose": 0,
+      "mouth": 5,
+      "wear": -1,
+      "beard": -1,
+      "black": -1
+    },
+    "eyePatch": false
+  },
+  "canvasChanged": true
+}
