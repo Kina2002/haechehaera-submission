@@ -1,0 +1,18 @@
+{
+  "count": 216,
+  "unique": 216,
+  "failures": [],
+  "diagnostics": {
+    "ready": true,
+    "assets": 5,
+    "heads": 1,
+    "bodies": 6,
+    "faceParts": 24,
+    "hair": 7,
+    "equipment": 16,
+    "nativeSize": [
+      128,
+      160
+    ]
+  }
+}

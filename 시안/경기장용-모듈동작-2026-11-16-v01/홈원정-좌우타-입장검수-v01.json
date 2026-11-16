@@ -1,0 +1,102 @@
+[
+  {
+    "home": 0,
+    "hand": "우타",
+    "first": {
+      "id": "0fb2a422-a78d-405c-9b77-8b7e67018668",
+      "frame": 7,
+      "contact": null,
+      "x": 973.9732142857142,
+      "y": 462.44642857142856,
+      "scale": 2.455357142857143,
+      "flip": true,
+      "entry": 0
+    },
+    "last": {
+      "id": "0fb2a422-a78d-405c-9b77-8b7e67018668",
+      "frame": 49,
+      "contact": null,
+      "x": 328.8292682926829,
+      "y": 435.9024390243902,
+      "scale": 2.1951219512195124,
+      "flip": false,
+      "direction": 2
+    },
+    "finished": true
+  },
+  {
+    "home": 0,
+    "hand": "좌타",
+    "first": {
+      "id": "2b4e1c2e-1b26-4504-9698-9710144adf12",
+      "frame": 7,
+      "contact": null,
+      "x": 973.9732142857142,
+      "y": 462.44642857142856,
+      "scale": 2.455357142857143,
+      "flip": true,
+      "entry": 0
+    },
+    "last": {
+      "id": "2b4e1c2e-1b26-4504-9698-9710144adf12",
+      "frame": 49,
+      "contact": null,
+      "x": 571.170731707317,
+      "y": 435.9024390243902,
+      "scale": 2.1951219512195124,
+      "flip": false,
+      "direction": 2
+    },
+    "finished": true
+  },
+  {
+    "home": 1,
+    "hand": "우타",
+    "first": {
+      "id": "fc01b9ce-251a-4370-b610-82e6e19d1366",
+      "frame": 7,
+      "contact": null,
+      "x": -73.97321428571422,
+      "y": 462.44642857142856,
+      "scale": 2.455357142857143,
+      "flip": false,
+      "entry": 0
+    },
+    "last": {
+      "id": "fc01b9ce-251a-4370-b610-82e6e19d1366",
+      "frame": 48,
+      "contact": null,
+      "x": 328.8292682926829,
+      "y": 435.9024390243902,
+      "scale": 2.1951219512195124,
+      "flip": false,
+      "direction": 2
+    },
+    "finished": true
+  },
+  {
+    "home": 1,
+    "hand": "좌타",
+    "first": {
+      "id": "8ee4af98-fc06-4c7f-8f16-1f75d338c8bf",
+      "frame": 7,
+      "contact": null,
+      "x": -73.97321428571422,
+      "y": 462.44642857142856,
+      "scale": 2.455357142857143,
+      "flip": false,
+      "entry": 0
+    },
+    "last": {
+      "id": "8ee4af98-fc06-4c7f-8f16-1f75d338c8bf",
+      "frame": 48,
+      "contact": null,
+      "x": 571.170731707317,
+      "y": 435.9024390243902,
+      "scale": 2.1951219512195124,
+      "flip": false,
+      "direction": 2
+    },
+    "finished": true
+  }
+]

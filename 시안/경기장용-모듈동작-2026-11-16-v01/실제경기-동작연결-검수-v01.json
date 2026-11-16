@@ -1,0 +1,1339 @@
+{
+  "frames": [
+    {
+      "kind": "single",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "2fd56d9e-0250-4344-b99c-dfa9ac6d0a67",
+          "x": 422,
+          "y": 455,
+          "frame": 49,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "single",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "2fd56d9e-0250-4344-b99c-dfa9ac6d0a67",
+          "x": 422,
+          "y": 455,
+          "frame": 55,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "single",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "2fd56d9e-0250-4344-b99c-dfa9ac6d0a67",
+          "x": 432.7954697978269,
+          "y": 449.3655223423623,
+          "frame": 42,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "single",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "2fd56d9e-0250-4344-b99c-dfa9ac6d0a67",
+          "x": 561.9090726062504,
+          "y": 381.97728228007105,
+          "frame": 42,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "single",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "2fd56d9e-0250-4344-b99c-dfa9ac6d0a67",
+          "x": 645.2020303702595,
+          "y": 338.5042034471014,
+          "frame": 16,
+          "contact": "foot",
+          "anchor": [
+            43,
+            56
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "single",
+      "t": 1,
+      "actors": [
+        {
+          "id": "2fd56d9e-0250-4344-b99c-dfa9ac6d0a67",
+          "x": 650,
+          "y": 336,
+          "frame": 17,
+          "contact": "foot",
+          "anchor": [
+            40,
+            56
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "double",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "c8d6bae4-36cc-42e3-ba93-19668302234e",
+          "x": 422,
+          "y": 455,
+          "frame": 48,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "double",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "c8d6bae4-36cc-42e3-ba93-19668302234e",
+          "x": 422,
+          "y": 455,
+          "frame": 54,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "double",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "c8d6bae4-36cc-42e3-ba93-19668302234e",
+          "x": 449.02225715237176,
+          "y": 440.89627806520946,
+          "frame": 40,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "double",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "c8d6bae4-36cc-42e3-ba93-19668302234e",
+          "x": 570.2555558433137,
+          "y": 293.73544459695626,
+          "frame": 40,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        }
+      ]
+    },
+    {
+      "kind": "double",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "c8d6bae4-36cc-42e3-ba93-19668302234e",
+          "x": 449.99999999999994,
+          "y": 229.99999999999997,
+          "frame": 17,
+          "contact": "foot",
+          "anchor": [
+            23,
+            56
+          ],
+          "flip": true
+        }
+      ]
+    },
+    {
+      "kind": "double",
+      "t": 1,
+      "actors": [
+        {
+          "id": "c8d6bae4-36cc-42e3-ba93-19668302234e",
+          "x": 449.99999999999994,
+          "y": 229.99999999999997,
+          "frame": 17,
+          "contact": "foot",
+          "anchor": [
+            23,
+            56
+          ],
+          "flip": true
+        }
+      ]
+    },
+    {
+      "kind": "sb",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "e21545bf-5749-461f-b2a4-94e07e6a1473",
+          "x": 650,
+          "y": 336,
+          "frame": 17,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "b2cde392-6d50-43ae-90ec-ac81223aef1f",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "sb",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "e21545bf-5749-461f-b2a4-94e07e6a1473",
+          "x": 650,
+          "y": 336,
+          "frame": 17,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "b2cde392-6d50-43ae-90ec-ac81223aef1f",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "sb",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "e21545bf-5749-461f-b2a4-94e07e6a1473",
+          "x": 604.9853217061858,
+          "y": 312.1422205042785,
+          "frame": 44,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "b2cde392-6d50-43ae-90ec-ac81223aef1f",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "sb",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "e21545bf-5749-461f-b2a4-94e07e6a1473",
+          "x": 495.0146782938143,
+          "y": 253.8577794957216,
+          "frame": 44,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "b2cde392-6d50-43ae-90ec-ac81223aef1f",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "sb",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "e21545bf-5749-461f-b2a4-94e07e6a1473",
+          "x": 450,
+          "y": 230,
+          "frame": 25,
+          "contact": "foot",
+          "anchor": [
+            16,
+            56
+          ],
+          "flip": true
+        },
+        {
+          "id": "b2cde392-6d50-43ae-90ec-ac81223aef1f",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "sb",
+      "t": 1,
+      "actors": [
+        {
+          "id": "e21545bf-5749-461f-b2a4-94e07e6a1473",
+          "x": 450,
+          "y": 230,
+          "frame": 17,
+          "contact": "foot",
+          "anchor": [
+            23,
+            56
+          ],
+          "flip": true
+        },
+        {
+          "id": "b2cde392-6d50-43ae-90ec-ac81223aef1f",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "cs",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "3bfa49a1-528c-4ab7-97b8-454082c40df9",
+          "x": 650,
+          "y": 336,
+          "frame": 17,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "466263ae-65cb-47f3-ace9-283e6e9a4518",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "cs",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "3bfa49a1-528c-4ab7-97b8-454082c40df9",
+          "x": 650,
+          "y": 336,
+          "frame": 17,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "466263ae-65cb-47f3-ace9-283e6e9a4518",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "cs",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "3bfa49a1-528c-4ab7-97b8-454082c40df9",
+          "x": 613.82314994224,
+          "y": 316.8262694693872,
+          "frame": 44,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "466263ae-65cb-47f3-ace9-283e6e9a4518",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "cs",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "3bfa49a1-528c-4ab7-97b8-454082c40df9",
+          "x": 520.4234254002258,
+          "y": 267.3244154621197,
+          "frame": 44,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "466263ae-65cb-47f3-ace9-283e6e9a4518",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "cs",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "3bfa49a1-528c-4ab7-97b8-454082c40df9",
+          "x": 458.7073482752113,
+          "y": 234.614894585862,
+          "frame": 24,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "466263ae-65cb-47f3-ace9-283e6e9a4518",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "cs",
+      "t": 1,
+      "actors": [
+        {
+          "id": "3bfa49a1-528c-4ab7-97b8-454082c40df9",
+          "x": 450,
+          "y": 230,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        },
+        {
+          "id": "466263ae-65cb-47f3-ace9-283e6e9a4518",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hr",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "cc81be42-8802-4937-be6a-b416a57c6edc",
+          "x": 422,
+          "y": 455,
+          "frame": 48,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hr",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "cc81be42-8802-4937-be6a-b416a57c6edc",
+          "x": 422,
+          "y": 455,
+          "frame": 54,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hr",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "cc81be42-8802-4937-be6a-b416a57c6edc",
+          "x": 461.46102329672505,
+          "y": 434.40411503372684,
+          "frame": 45,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hr",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "cc81be42-8802-4937-be6a-b416a57c6edc",
+          "x": 367.5266625430104,
+          "y": 273.7108688522045,
+          "frame": 45,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": true
+        }
+      ]
+    },
+    {
+      "kind": "hr",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "cc81be42-8802-4937-be6a-b416a57c6edc",
+          "x": 432.81274959433756,
+          "y": 440.20326726877244,
+          "frame": 16,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hr",
+      "t": 1,
+      "actors": [
+        {
+          "id": "cc81be42-8802-4937-be6a-b416a57c6edc",
+          "x": 450,
+          "y": 450,
+          "frame": 70,
+          "contact": "foot",
+          "anchor": [
+            31,
+            56
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ks",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "3eb01b34-1795-49ab-b92b-36c6b32f249f",
+          "x": 422,
+          "y": 455,
+          "frame": 48,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ks",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "3eb01b34-1795-49ab-b92b-36c6b32f249f",
+          "x": 422,
+          "y": 455,
+          "frame": 54,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ks",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "3eb01b34-1795-49ab-b92b-36c6b32f249f",
+          "x": 422,
+          "y": 455,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ks",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "3eb01b34-1795-49ab-b92b-36c6b32f249f",
+          "x": 422,
+          "y": 455,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ks",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "3eb01b34-1795-49ab-b92b-36c6b32f249f",
+          "x": 422,
+          "y": 455,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ks",
+      "t": 1,
+      "actors": [
+        {
+          "id": "3eb01b34-1795-49ab-b92b-36c6b32f249f",
+          "x": 422,
+          "y": 455,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "kl",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "5ff98d0c-16bd-4f8b-8b84-800e099f931c",
+          "x": 422,
+          "y": 455,
+          "frame": 48,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "kl",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "5ff98d0c-16bd-4f8b-8b84-800e099f931c",
+          "x": 422,
+          "y": 455,
+          "frame": 48,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "kl",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "5ff98d0c-16bd-4f8b-8b84-800e099f931c",
+          "x": 422,
+          "y": 455,
+          "frame": 48,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "kl",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "5ff98d0c-16bd-4f8b-8b84-800e099f931c",
+          "x": 422,
+          "y": 455,
+          "frame": 48,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "kl",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "5ff98d0c-16bd-4f8b-8b84-800e099f931c",
+          "x": 422,
+          "y": 455,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "kl",
+      "t": 1,
+      "actors": [
+        {
+          "id": "5ff98d0c-16bd-4f8b-8b84-800e099f931c",
+          "x": 422,
+          "y": 455,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ground",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "198c3a87-cccf-44f5-9fa8-49e167ef3ba2",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ground",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "198c3a87-cccf-44f5-9fa8-49e167ef3ba2",
+          "x": 422,
+          "y": 455,
+          "frame": 53,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ground",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "198c3a87-cccf-44f5-9fa8-49e167ef3ba2",
+          "x": 431.79180934043256,
+          "y": 449.8893626688093,
+          "frame": 43,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ground",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "198c3a87-cccf-44f5-9fa8-49e167ef3ba2",
+          "x": 554.5064760752168,
+          "y": 385.8409181888123,
+          "frame": 43,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ground",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "198c3a87-cccf-44f5-9fa8-49e167ef3ba2",
+          "x": 636.672294479011,
+          "y": 342.95612700437584,
+          "frame": 43,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "ground",
+      "t": 1,
+      "actors": [
+        {
+          "id": "198c3a87-cccf-44f5-9fa8-49e167ef3ba2",
+          "x": 650,
+          "y": 336,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "fly",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "b31cb387-33b0-4347-8da2-d0fe537845fc",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "fly",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "b31cb387-33b0-4347-8da2-d0fe537845fc",
+          "x": 422,
+          "y": 455,
+          "frame": 53,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "fly",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "b31cb387-33b0-4347-8da2-d0fe537845fc",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "fly",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "b31cb387-33b0-4347-8da2-d0fe537845fc",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "fly",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "b31cb387-33b0-4347-8da2-d0fe537845fc",
+          "x": 422,
+          "y": 455,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "fly",
+      "t": 1,
+      "actors": [
+        {
+          "id": "b31cb387-33b0-4347-8da2-d0fe537845fc",
+          "x": 422,
+          "y": 455,
+          "frame": 30,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "bb",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "fda3dce3-d342-42b0-9c99-59748e737348",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "bb",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "fda3dce3-d342-42b0-9c99-59748e737348",
+          "x": 422,
+          "y": 455,
+          "frame": 47,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "bb",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "fda3dce3-d342-42b0-9c99-59748e737348",
+          "x": 422.00000000000665,
+          "y": 454.99999999999653,
+          "frame": 7,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "bb",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "fda3dce3-d342-42b0-9c99-59748e737348",
+          "x": 550.3939190574499,
+          "y": 387.9873843515941,
+          "frame": 7,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "bb",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "fda3dce3-d342-42b0-9c99-59748e737348",
+          "x": 644.0765807040241,
+          "y": 339.09160919395237,
+          "frame": 7,
+          "contact": "foot",
+          "anchor": [
+            34,
+            56
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "bb",
+      "t": 1,
+      "actors": [
+        {
+          "id": "fda3dce3-d342-42b0-9c99-59748e737348",
+          "x": 650,
+          "y": 336,
+          "frame": 17,
+          "contact": "foot",
+          "anchor": [
+            40,
+            56
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hbp",
+      "t": 0.1,
+      "actors": [
+        {
+          "id": "f798fec2-6d63-4df9-bceb-1de12d8d28c6",
+          "x": 422,
+          "y": 455,
+          "frame": 49,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hbp",
+      "t": 0.22,
+      "actors": [
+        {
+          "id": "f798fec2-6d63-4df9-bceb-1de12d8d28c6",
+          "x": 422,
+          "y": 455,
+          "frame": 32,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hbp",
+      "t": 0.4,
+      "actors": [
+        {
+          "id": "f798fec2-6d63-4df9-bceb-1de12d8d28c6",
+          "x": 422.00000000000665,
+          "y": 454.99999999999653,
+          "frame": 7,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hbp",
+      "t": 0.7,
+      "actors": [
+        {
+          "id": "f798fec2-6d63-4df9-bceb-1de12d8d28c6",
+          "x": 550.3939190574499,
+          "y": 387.9873843515941,
+          "frame": 7,
+          "contact": null,
+          "anchor": [
+            32,
+            57
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hbp",
+      "t": 0.9,
+      "actors": [
+        {
+          "id": "f798fec2-6d63-4df9-bceb-1de12d8d28c6",
+          "x": 644.0765807040241,
+          "y": 339.09160919395237,
+          "frame": 7,
+          "contact": "foot",
+          "anchor": [
+            34,
+            56
+          ],
+          "flip": false
+        }
+      ]
+    },
+    {
+      "kind": "hbp",
+      "t": 1,
+      "actors": [
+        {
+          "id": "f798fec2-6d63-4df9-bceb-1de12d8d28c6",
+          "x": 650,
+          "y": 336,
+          "frame": 17,
+          "contact": "foot",
+          "anchor": [
+            40,
+            56
+          ],
+          "flip": false
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "runtime": [],
+  "sideSwitch": "object"
+}

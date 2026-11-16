@@ -1,0 +1,44 @@
+{
+  "site": {
+    "testOnly": true,
+    "ready": true,
+    "field": {
+      "ready": true,
+      "framesPerBody": [
+        77,
+        77,
+        77,
+        77,
+        77,
+        77
+      ],
+      "bodies": [
+        "compact",
+        "tall",
+        "normal",
+        "broad",
+        "slender",
+        "heavy"
+      ],
+      "headDirections": 4,
+      "headSource": "6b6b1d9375114a84e80df92afebf350179448b0526eb4f5a4d8afe97aab9ac0e"
+    },
+    "errors": [],
+    "playersRoute": "players",
+    "loading": false,
+    "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site/"
+  },
+  "portraits": {
+    "count": 13,
+    "errors": []
+  },
+  "final": {
+    "sameStorage": true,
+    "portraits": 2,
+    "lineup": 9,
+    "officials": 4,
+    "errors": []
+  },
+  "version": 16,
+  "commit": "3e09e68b34b52c0165f7d45dc9e245dca37d1e99"
+}

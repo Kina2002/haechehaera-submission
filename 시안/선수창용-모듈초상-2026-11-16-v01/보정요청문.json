@@ -1,0 +1,11 @@
+{
+  "mode": "내장 GPT image_gen",
+  "bodyV02": "Preserve all six torso sprites and remove background gradient/halo to actual transparency; keep silhouettes and layout.",
+  "bodyV03": "Edit this 3x2 torso atlas into proper HEADLESS PORTRAIT BUST layers for an adult baseball player game. Keep six silhouettes, order, teal jersey style and crisp pixel art. Change only the portrait crop/body completion:\nEach item should be upper torso from open V neckline through MID-CHEST, including full shoulders and the OUTER UPPER ARMS continuing down to the SAME flat bottom cut. This is a shoulder-and-chest portrait bust, NOT a whole floating T-shirt. At bottom cut both arms and chest are present; no narrowing shirt hem, no waistband, no cropped sleeve hole without arm. Short white cuff sleeves end around middle height and WARM PEACH BARE UPPER ARMS emerge below them and continue to bottom. Both arms hang naturally at sides, no hands visible. Add these arms so no floating clothing impression. No detached arms, no head/face/hair. Open V neck is transparent, separate head/neck will go behind.\nSix builds row1: balanced, muscular heavyweight thick arms/chest NOT fat belly, slender narrow shoulders/thin arms. Row2: very broad shoulders muscular upper arms narrowing chest, tall narrow long torso/arms, compact short trunk/arms.\nRegular3x2 grid, same centered neckline anchor and same bottom baseline in each cell, all busts fully inside cells with transparent margin. Use upper-left lighting, 4 discrete teal tones, white collar/cuffs, 4 warm peach tones for arms. Hard-edged pixel clusters, no smooth lighting. Actual transparent outside each bust and in neck opening. No ground shadow or halo, no text/logo. Anatomically natural shoulder width roughly 2.5 adult head widths.",
+  "runtimeCorrections": [
+    "소매 아래 팔을 포함한 상반신 원본 v03 사용",
+    "팔 하이라이트도 피부색 변경 범위에 포함",
+    "키큰형의 이웃 체형 픽셀을 제외하고 경계 측정",
+    "128x160 논리 픽셀에서 알파 및 팔레트 정리"
+  ]
+}

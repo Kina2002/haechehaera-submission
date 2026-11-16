@@ -22,7 +22,7 @@
  }
  function update(){if(testing)return;driver.update(snapshot());updateToggle();}
  async function unlock(){driver.update(snapshot());await engine.unlock();update();}
- function toggle(){data.settings.sound=!settings().enabled;save();update();if(settings().enabled)void unlock();render();}
+ function toggle(event){event?.stopPropagation();data.settings.sound=!settings().enabled;save();update();if(settings().enabled)void unlock();render();}
  function updateToggle(){
   const on=settings().enabled,label=on?'소리 켜짐':'소리 꺼짐';
   for(const b of document.querySelectorAll('[data-audio-toggle]')){if(b.textContent!==label)b.textContent=label;b.setAttribute('aria-pressed',String(on));}
@@ -33,8 +33,8 @@
  render=function(){
   renderBeforeAudio();
   if(screen==='match'){
-   const row=document.querySelector('.match-top .row');
-   if(row){const b=document.createElement('button');b.className='small ghost';b.dataset.audioToggle='';b.setAttribute('aria-label','경기 소리 켜기 또는 끄기');b.onclick=toggle;row.prepend(b);}
+   const row=document.querySelector('.match-top .row, .stadium-toolbar .row');
+   if(row&&!row.querySelector('[data-audio-toggle]')){const b=document.createElement('button');b.className='small ghost';b.dataset.audioToggle='';b.setAttribute('aria-label','경기 소리 켜기 또는 끄기');b.onclick=toggle;row.prepend(b);}
   }
   if(screen==='settings'){
    const s=settings();document.querySelector('[data-action="sound"]').insertAdjacentHTML('afterend','<div class="audio-settings"><h3>소리 크기</h3><div class="grid2">'+

@@ -1,0 +1,40 @@
+{
+  "version": 16,
+  "sourceCommit": "3e09e68b34b52c0165f7d45dc9e245dca37d1e99",
+  "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site/",
+  "defense": {
+    "half": 0,
+    "errors": [],
+    "entrance": false,
+    "portraits": 2,
+    "lineup": 9,
+    "officials": 4
+  },
+  "offense": {
+    "half": 1,
+    "errors": [],
+    "entrance": false,
+    "portraits": 2,
+    "lineup": 9,
+    "officials": 4
+  },
+  "final": {
+    "sameStorage": true,
+    "errors": [],
+    "stacks": [],
+    "poses": [
+      77,
+      77,
+      77,
+      77,
+      77,
+      77
+    ],
+    "ready": true
+  },
+  "notes": [
+    "Full image load and entrance completion precede final captures.",
+    "A previous manual half switch retained opposite-team runner IDs; the invalid-fixture stats error was reproduced and the fixture reset. No production rule change.",
+    "A fresh isolated match completed real pitch playback without runtime errors."
+  ]
+}
