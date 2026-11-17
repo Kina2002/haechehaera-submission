@@ -41,7 +41,19 @@ if(!Number.isInteger(o.hairId)||o.hairId<1||o.hairId>15)o.hairId=1;if(!D.palette
 for(const[k,prefix,n]of[['glasses','g',13],['earring','e',5],['black','b',3],['necklace','n',5]])if(o[k]!=='none'&&!Array.from({length:n},(_,i)=>prefix+pad(i+1)).includes(o[k]))o[k]='none';return o;}
 function config(p,tm){return{...look(p),body:Math.max(0,Math.min(5,p.appearance.body||0)),primary:COLORS[tm?.primary??4]?.[1]||'#126451',secondary:COLORS[tm?.secondary??3]?.[1]||'#f4f5ed'};}
 function equipmentFor(offense,position){return{headwear:offense?'helmet':position==='C'?'catcher':'cap',catcher:!offense&&position==='C'};}
-function render(a,pose=0,options={}){const o={...a,state:options.headwear==='cap'?'CAP':options.headwear==='none'?'OFF':'HELMET'},body=D.bodyIds[a.body]||'normal',left=!!options.flip,row=D.poses.find(r=>r.body===body&&r.pose===pose);if(!row)throw Error('Pose missing '+pose);
+function renderDefensiveReady(a,view,options){
+ const data=window.DEFENSIVE_READY_V21,body=D.bodyIds[a.body]||'normal',row=data.rows[body+'/'+view];if(!row)throw Error('Defensive ready view missing: '+body+'/'+view);
+ const o={...a,state:options.headwear==='none'?'OFF':'CAP'},key='ready21|'+JSON.stringify([o,view]);if(frames.has(key))return frames.get(key);
+ const primary=rgb(o.primary),secondary=rgb(o.secondary),shade=(color,f)=>color.map(v=>Math.min(255,Math.round(v*f)));
+ const tint=pixels=>{const out=blank(64,64);for(let i=0;i<pixels.length;i+=2){const v=pixels[i+1],color=v<=5?D.palettes.skin[o.skin][v-1]:v<60?shade(primary,[.4,.65,.9,1.06][v-50]):v<70?shade(secondary,[.6,.84,1][v-60]):v<80?data.palettes.pants[v-70]:v<90?data.palettes.shoes[v-80]:data.palettes.glove[v-90];out.data.set([...color,255],pixels[i]*4);}return out;};
+ const hp=row.headPosition,h=headParts(view,o),b=tint(row.body),f=tint(row.forearm),glove=tint(row.glove),acc=blank(),chain=blank(64,64);
+ for(const id of[o.glasses,o.earring,o.black])if(id&&id!=='none')blit(acc,get('PNG/액세서리/'+view+'/'+id+'.png'));
+ if(o.necklace&&o.necklace!=='none'){blit(chain,get('PNG/목걸이/'+view+'/'+o.necklace+'.png'),...hp);const shirt=new Set();for(let i=0;i<row.body.length;i+=2)if(row.body[i+1]>=50&&row.body[i+1]<=53)shirt.add(row.body[i]);for(let p=0;p<4096;p++)if(!shirt.has(p))chain.data.fill(0,p*4,p*4+4);}
+ const out=blank(64,64);for(const[layer,x,y]of[[h.back,...hp],[b,0,0],[chain,0,0],[h.face,...hp],[acc,...hp],[h.front,...hp],[h.gear,...hp],[h.over,...hp],[f,0,0],[glove,0,0]])blit(out,layer,x,y);
+ // The glove is a supplied left-hand layer; do not add the legacy automatic glove.
+ return memo(frames,key,{canvas:bitmap(out),neck:row.neck,foot:row.foot,contacts:{foot:row.foot,hand:row.foot},body,pose:'defensive-ready',view,readyView:view,headDirection:view==='F'?0:1,headwear:options.headwear,catcher:false,gloveHand:row.gloveHand},700);
+}
+function render(a,pose=0,options={}){if(options.readyView)return renderDefensiveReady(a,options.readyView,options);const o={...a,state:options.headwear==='cap'?'CAP':options.headwear==='none'?'OFF':'HELMET'},body=D.bodyIds[a.body]||'normal',left=!!options.flip,row=D.poses.find(r=>r.body===body&&r.pose===pose);if(!row)throw Error('Pose missing '+pose);
 let view=left?(opposite[row.view]||row.view):row.view;if(options.direction!==undefined){view=['F','FR','BR','B'][options.direction]||view;if(left)view=opposite[view]||view;}
 const key=JSON.stringify([o,pose,options]);if(frames.has(key))return frames.get(key);const hp=left?[row.neck[0]-(32-row.headAnchor[0]),row.headPosition[1]]:row.headPosition,h=headParts(view,o),b=bodyPart('몸',body,pose,o,left),f=bodyPart('앞팔',body,pose,o,left),acc=blank(),chain=blank(64,64);
 for(const id of[o.glasses,o.earring,o.black])if(id&&id!=='none')blit(acc,get('PNG/액세서리/'+view+'/'+id+'.png'));

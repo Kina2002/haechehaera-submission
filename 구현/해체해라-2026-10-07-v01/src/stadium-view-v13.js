@@ -71,7 +71,7 @@ drawField=function(time){
   if(actor.departure>0){state.frame=Math.floor(call.tick/160)%2?6:7;state.flip=actor.exitFlip;state.contact=null;}
   if(state.catcher&&state.frame===5)state.direction=3;
   // Batting keeps the pose's registered head direction; do not twist only the head toward the camera.
-  V.lastFrame.push({id:call.id,frame:state.frame,contact:state.contact,x:q.x,y:q.y,scale:q.scale,flip:state.flip,entry:actor.entry,direction:state.direction,headwear:state.headwear,catcher:state.catcher,position:state.position,offense:state.offense});
+  V.lastFrame.push({id:call.id,frame:state.frame,contact:state.contact,x:q.x,y:q.y,worldX:call.x,worldY:call.y,scale:q.scale,flip:state.flip,entry:actor.entry,direction:state.direction,readyView:state.readyView,headwear:state.headwear,catcher:state.catcher,position:state.position,offense:state.offense});
   c.save();c.globalAlpha=call.opacity*(actor.departure===undefined?1:cap((1-actor.departure)/.15,0,1));FieldIntegrationV13.paint(c,q.x,q.y,q.scale,call.tm,actor.p,state);c.restore();
  }
  ball(c,e,t);c.restore();

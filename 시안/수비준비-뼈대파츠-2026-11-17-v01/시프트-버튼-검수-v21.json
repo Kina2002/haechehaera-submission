@@ -1,0 +1,136 @@
+[
+  {
+    "selected": {
+      "depth": 0,
+      "side": 0
+    },
+    "created": true,
+    "moving": [
+      {
+        "position": "CF",
+        "frame": 41
+      },
+      {
+        "position": "LF",
+        "frame": 45
+      },
+      {
+        "position": "RF",
+        "frame": 45
+      },
+      {
+        "position": "2B",
+        "frame": 45
+      },
+      {
+        "position": "SS",
+        "frame": 41
+      },
+      {
+        "position": "3B",
+        "frame": 41
+      },
+      {
+        "position": "1B",
+        "frame": 45
+      }
+    ],
+    "settled": [
+      {
+        "position": "CF",
+        "view": "F"
+      },
+      {
+        "position": "LF",
+        "view": "FR"
+      },
+      {
+        "position": "RF",
+        "view": "FL"
+      },
+      {
+        "position": "2B",
+        "view": "F"
+      },
+      {
+        "position": "SS",
+        "view": "FR"
+      },
+      {
+        "position": "3B",
+        "view": "FR"
+      },
+      {
+        "position": "1B",
+        "view": "FL"
+      }
+    ]
+  },
+  {
+    "selected": {
+      "depth": 2,
+      "side": 2
+    },
+    "created": true,
+    "moving": [
+      {
+        "position": "CF",
+        "frame": 41
+      },
+      {
+        "position": "LF",
+        "frame": 46
+      },
+      {
+        "position": "RF",
+        "frame": 46
+      },
+      {
+        "position": "2B",
+        "frame": 46
+      },
+      {
+        "position": "SS",
+        "frame": 43
+      },
+      {
+        "position": "3B",
+        "frame": 43
+      },
+      {
+        "position": "1B",
+        "frame": 46
+      }
+    ],
+    "settled": [
+      {
+        "position": "LF",
+        "view": "FR"
+      },
+      {
+        "position": "CF",
+        "view": "F"
+      },
+      {
+        "position": "RF",
+        "view": "FL"
+      },
+      {
+        "position": "2B",
+        "view": "FL"
+      },
+      {
+        "position": "SS",
+        "view": "F"
+      },
+      {
+        "position": "3B",
+        "view": "FR"
+      },
+      {
+        "position": "1B",
+        "view": "FL"
+      }
+    ]
+  }
+]
