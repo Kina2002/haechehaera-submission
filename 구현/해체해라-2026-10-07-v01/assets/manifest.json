@@ -578,5 +578,53 @@
     "mime": "audio/mpeg",
     "sha256": "65990aa1b83191089842442ee0311fdb2036caec8073bbaa2c1d7129a74641da",
     "bytes": 109235
+  },
+  "assets/2a4bf53f38bb259e3c05.png": {
+    "mime": "image/png",
+    "sha256": "2a4bf53f38bb259e3c05451e7bf2cf5760d052432740d422ccc31184dc1fde5b",
+    "bytes": 118946,
+    "source": "verified-character-parts-20261117"
+  },
+  "assets/57f87bff2eb787ba9469.png": {
+    "mime": "image/png",
+    "sha256": "57f87bff2eb787ba9469694cc258a3ccf4611d976c516a00d9c978e08a877c57",
+    "bytes": 303209,
+    "source": "verified-character-parts-20261117"
+  },
+  "assets/31bc4c3c97044bf5df57.png": {
+    "mime": "image/png",
+    "sha256": "31bc4c3c97044bf5df5762ee75d9d48118b5092ddee75e219b5d6ed75a36d3a4",
+    "bytes": 218268,
+    "source": "verified-character-parts-20261117"
+  },
+  "assets/1824025cd594af73db1e.png": {
+    "mime": "image/png",
+    "sha256": "1824025cd594af73db1ef703256a274a531f67f95b142e3765c41eb9b81672de",
+    "bytes": 2128368,
+    "source": "verified-character-parts-20261117"
+  },
+  "assets/34b44e8947e4a8e9b2ab.png": {
+    "mime": "image/png",
+    "sha256": "34b44e8947e4a8e9b2abdc21ef0378a994973edd3eda274a901e568efa5aae02",
+    "bytes": 3566685,
+    "source": "verified-character-parts-20261117"
+  },
+  "assets/0193df09d755ff4fdfca.png": {
+    "mime": "image/png",
+    "sha256": "0193df09d755ff4fdfca5381b94b2a5e1071f44094c2d58699bd860933bfc12a",
+    "bytes": 2210579,
+    "source": "verified-character-parts-20261117"
+  },
+  "assets/b68c949f836cf40aac47.png": {
+    "mime": "image/png",
+    "sha256": "b68c949f836cf40aac475e7b7c9e0ffa71ec522dbe557964f555be4e886e3495",
+    "bytes": 1532879,
+    "source": "verified-character-parts-20261117"
+  },
+  "assets/d0f8e3ce441a63ad0fc4.png": {
+    "sha256": "d0f8e3ce441a63ad0fc4a06a37a24b67181db4af7094f44933c90c5e8866c42a",
+    "bytes": 3922922,
+    "mime": "image/png",
+    "source": "portrait-body-concept-20261117"
   }
 }
