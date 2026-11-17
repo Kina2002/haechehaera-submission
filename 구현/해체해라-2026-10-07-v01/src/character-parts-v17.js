@@ -72,6 +72,22 @@ function renderDefenseAction(a,action,options){
  const shoes=[];for(let i=0;i<row.bodyLayer.length;i+=2){const p=row.bodyLayer[i],v=row.bodyLayer[i+1];if(v>=80&&v<=82&&Math.floor(p/64)>=55)shoes.push([p%64,Math.floor(p/64)]);}shoes.sort((a,b)=>Math.abs(a[0]-32)-Math.abs(b[0]-32));
  return memo(frames,key,{canvas,body,pose:action.phase,view,action:{phase:action.phase,view},neck:row.neck,foot:row.foot,contacts:{foot:shoes[0]||row.foot,hand:row.glovePoint},glovePoint:row.glovePoint,handPoint:row.handPoint,gloveHand:row.gloveHand,headwear:options.headwear,catcher,headDirection:rear?3:view==='F'?0:1},700);
 }
+// Bat contact geometry comes from the untinted equipment pixels, excluding skin masks.
+// It is independent of the player's skin, hair and uniform palette.
+const batGeometry25=new Map();
+function batContact25(body,pose,left){
+ if(pose<53||pose>55)return null;const key=body+'/'+pose+'/'+left;if(batGeometry25.has(key))return batGeometry25.get(key);
+ let edge=-1,ys=[];
+ for(const name of['몸','앞팔']){
+  const raw=get('PNG/'+name+'/'+body+'/'+pad(pose)+'.png'),skin=get('재질/피부/'+name+'/'+body+'/'+pad(pose)+'.png');
+  for(let y=0;y<54;y++)for(let x=0;x<64;x++){
+   const i=(y*64+x)*4,r=raw.data[i],g=raw.data[i+1],blue=raw.data[i+2];
+   if(!raw.data[i+3]||skin.data[i+3]||r<75||r<g*1.12||g<blue*1.12||blue>140)continue;
+   if(x>edge){edge=x;ys=[y];}else if(x===edge)ys.push(y);
+  }
+ }
+ const point=ys.length?[left?64-edge:edge,ys.reduce((a,b)=>a+b,0)/ys.length]:null;batGeometry25.set(key,point);return point;
+}
 function render(a,pose=0,options={}){if(options.action)return renderDefenseAction(a,options.action,options);if(options.readyView)return renderDefensiveReady(a,options.readyView,options);const o={...a,state:options.headwear==='cap'?'CAP':options.headwear==='none'?'OFF':'HELMET'},body=D.bodyIds[a.body]||'normal',left=!!options.flip,row=D.poses.find(r=>r.body===body&&r.pose===pose);if(!row)throw Error('Pose missing '+pose);
 let view=left?(opposite[row.view]||row.view):row.view;if(options.direction!==undefined){view=['F','FR','BR','B'][options.direction]||view;if(left)view=opposite[view]||view;}
 const key=JSON.stringify([o,pose,options]);if(frames.has(key))return frames.get(key);const hp=left?[row.neck[0]-(32-row.headAnchor[0]),row.headPosition[1]]:row.headPosition,h=headParts(view,o),b=bodyPart('몸',body,pose,o,left),f=bodyPart('앞팔',body,pose,o,left),acc=blank(),chain=blank(64,64);
@@ -86,7 +102,7 @@ const len=body==='tall'?12:body==='compact'?8:10;for(const side of [-1,1]){let x
 if(options.defense){const mask=get('재질/피부/몸/'+body+'/'+pad(pose)+'.png');let hand=null;const gloveLeft=!left!==rear;
 for(let y=row.neck[1]+2;y<55;y++)for(let x=0;x<64;x++){const sx=left?64-x:x;if(sx<0||sx>=64||Math.abs(x-32)<4||!mask.data[(y*64+sx)*4+3])continue;if(!hand||(gloveLeft?x<hand[0]:x>hand[0]))hand=[x,y];}if(hand)equip(options.catcher?4:5,hand[0]-3,hand[1]-2,options.catcher?8:7,8,gloveLeft);}
 const contacts={foot:[32,56],hand:[left?14:50,55]};let lowest=-1,xs=[];for(let y=0;y<64;y++)for(let x=0;x<64;x++)if(b.data[(y*64+x)*4+3]){if(y>lowest){lowest=y;xs=[x];}else if(y===lowest)xs.push(x);}if(xs.length)contacts.foot=[left?Math.min(...xs):Math.max(...xs),lowest];if([27,28,29].includes(pose)){let edge=left?64:0,ys=[];for(let y=25;y<57;y++)for(let x=0;x<64;x++)if(b.data[(y*64+x)*4+3]&&(left?x<=edge:x>=edge)){if(x!==edge){edge=x;ys=[];}ys.push(y);}contacts.hand=[edge,ys.length?ys[Math.floor(ys.length/2)]:55];}
-return memo(frames,key,{canvas,neck:row.neck,foot:[32,56],contacts,body,pose,view,headDirection:['F','FR','R','FL','L','FD','FRD','RD','FLD','LD','FU','FRU','FLU'].includes(view)?(view==='F'?0:1):3,name:row.name||row.poseName,headwear:options.headwear,catcher:!!options.catcher},700);}
+return memo(frames,key,{canvas,neck:row.neck,foot:[32,56],contacts,batPoint:batContact25(body,pose,left),body,pose,view,headDirection:['F','FR','R','FL','L','FD','FRD','RD','FLD','LD','FU','FRU','FLU'].includes(view)?(view==='F'?0:1):3,name:row.name||row.poseName,headwear:options.headwear,catcher:!!options.catcher},700);}
 function portrait(a,on=true){const key=JSON.stringify([a,on]);if(portraits.has(key))return portraits.get(key);const c=make(320,384),g=c.getContext('2d');g.imageSmoothingEnabled=false;const draw=k=>{const r=D.rects[k];g.drawImage(partCanvas(k),...r.offset);},s=on?'ON':'OFF',hp='portrait/hair/'+a.hairId+'/'+a.hair+'/'+s+'/';draw(hp+'back');draw('portrait/base/'+a.skin);for(const k of['nose','mouth','eyes','brows'])draw('portrait/'+k+'/'+a[k+'Id']+'/'+a.skin+'/'+(k==='eyes'?D.eyeColors.indexOf(a.eye):k==='brows'?D.hairColors.indexOf(a.hair):0));for(const id of[a.necklace,a.black,a.earring,a.glasses])if(id&&id!=='none')draw('portrait/accessory/'+id);draw(hp+'front');if(on){draw('portrait/shadow');const cap=get('portrait/cap'),copy={...cap,data:new Uint8ClampedArray(cap.data)},target=rgb(a.primary),trim=rgb(a.secondary);for(let p=0;p<copy.data.length;p+=4){if(!copy.data[p+3])continue;const r=cap.data[p],gg=cap.data[p+1],b=cap.data[p+2];const f=Math.min(1.2,gg/107),color=portraitBrim((p/4)%cap.width,Math.floor(p/4/cap.width))?trim:target;copy.data.set(color.map(v=>Math.min(255,Math.round(v*f))),p);}g.drawImage(bitmap(copy),...D.rects['portrait/cap'].offset);}return memo(portraits,key,{canvas:c,crop:[24,12,272,300]},70);}
 const fullPortraits=new Map();
 function fullPortrait(a,on=true){const key=JSON.stringify([a,on]);if(fullPortraits.has(key))return fullPortraits.get(key);const b=get('portrait/body/'+a.body+'/'+a.skin),copy={...b,data:new Uint8ClampedArray(b.data)},pri=rgb(a.primary),sec=rgb(a.secondary);

@@ -1,0 +1,465 @@
+{
+  "samples": 3564,
+  "rows": [
+    {
+      "kind": "contact-high",
+      "defending": false,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 71.82758620689656,
+      "pace": 0.9873103448275862,
+      "note": "컨택 능력으로 간신히 맞힘"
+    },
+    {
+      "kind": "contact-low",
+      "defending": false,
+      "hand": "우타",
+      "type": "swing",
+      "swing": true,
+      "exit": 71,
+      "pace": 0.984,
+      "note": "스윙이 빨라 헛스윙"
+    },
+    {
+      "kind": "command-contact",
+      "defending": false,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 72.20261437908496,
+      "pace": 0.9888104575163399,
+      "note": "빗맞아 힘이 덜 실린 타구"
+    },
+    {
+      "kind": "command-power",
+      "defending": false,
+      "hand": "우타",
+      "type": "swing",
+      "swing": true,
+      "exit": 85,
+      "pace": 1.08,
+      "note": "풀스윙 부담으로 타이밍을 놓침"
+    },
+    {
+      "kind": "hit-contact",
+      "defending": false,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 67.16091954022988,
+      "pace": 0.9686436781609196,
+      "note": "정확히 맞힌 타구"
+    },
+    {
+      "kind": "hit-power",
+      "defending": false,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 105.71428571428572,
+      "pace": 1.1628571428571428,
+      "note": "풀스윙으로 강한 타구"
+    },
+    {
+      "kind": "eye-high",
+      "defending": false,
+      "hand": "우타",
+      "type": "ball",
+      "swing": false,
+      "note": "선구안으로 바깥 공을 골라냄"
+    },
+    {
+      "kind": "eye-low",
+      "defending": false,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 81.6978417266187,
+      "pace": 1.0267913669064748,
+      "note": "정확히 맞힌 타구"
+    },
+    {
+      "kind": "watch-strike",
+      "defending": false,
+      "hand": "우타",
+      "type": "strike",
+      "swing": false,
+      "note": "지켜본 공이 스트라이크"
+    },
+    {
+      "kind": "foul",
+      "defending": false,
+      "hand": "우타",
+      "type": "foul",
+      "swing": true,
+      "contact": true,
+      "exit": 76.90849673202615,
+      "pace": 1.0076339869281046,
+      "note": "빗맞은 공이 파울로 벗어남"
+    },
+    {
+      "kind": "hr",
+      "defending": false,
+      "hand": "우타",
+      "type": "hr",
+      "swing": true,
+      "contact": true,
+      "exit": 105.71428571428572,
+      "pace": 1.1628571428571428,
+      "note": "풀스윙으로 강한 타구"
+    },
+    {
+      "kind": "contact-high",
+      "defending": false,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 71.82758620689656,
+      "pace": 0.9873103448275862,
+      "note": "컨택 능력으로 간신히 맞힘"
+    },
+    {
+      "kind": "contact-low",
+      "defending": false,
+      "hand": "좌타",
+      "type": "swing",
+      "swing": true,
+      "exit": 71,
+      "pace": 0.984,
+      "note": "스윙이 빨라 헛스윙"
+    },
+    {
+      "kind": "command-contact",
+      "defending": false,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 72.20261437908496,
+      "pace": 0.9888104575163399,
+      "note": "빗맞아 힘이 덜 실린 타구"
+    },
+    {
+      "kind": "command-power",
+      "defending": false,
+      "hand": "좌타",
+      "type": "swing",
+      "swing": true,
+      "exit": 85,
+      "pace": 1.08,
+      "note": "풀스윙 부담으로 타이밍을 놓침"
+    },
+    {
+      "kind": "hit-contact",
+      "defending": false,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 67.16091954022988,
+      "pace": 0.9686436781609196,
+      "note": "정확히 맞힌 타구"
+    },
+    {
+      "kind": "hit-power",
+      "defending": false,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 105.71428571428572,
+      "pace": 1.1628571428571428,
+      "note": "풀스윙으로 강한 타구"
+    },
+    {
+      "kind": "eye-high",
+      "defending": false,
+      "hand": "좌타",
+      "type": "ball",
+      "swing": false,
+      "note": "선구안으로 바깥 공을 골라냄"
+    },
+    {
+      "kind": "eye-low",
+      "defending": false,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 81.6978417266187,
+      "pace": 1.0267913669064748,
+      "note": "정확히 맞힌 타구"
+    },
+    {
+      "kind": "watch-strike",
+      "defending": false,
+      "hand": "좌타",
+      "type": "strike",
+      "swing": false,
+      "note": "지켜본 공이 스트라이크"
+    },
+    {
+      "kind": "foul",
+      "defending": false,
+      "hand": "좌타",
+      "type": "foul",
+      "swing": true,
+      "contact": true,
+      "exit": 76.90849673202615,
+      "pace": 1.0076339869281046,
+      "note": "빗맞은 공이 파울로 벗어남"
+    },
+    {
+      "kind": "hr",
+      "defending": false,
+      "hand": "좌타",
+      "type": "hr",
+      "swing": true,
+      "contact": true,
+      "exit": 105.71428571428572,
+      "pace": 1.1628571428571428,
+      "note": "풀스윙으로 강한 타구"
+    },
+    {
+      "kind": "contact-high",
+      "defending": true,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 71.82758620689656,
+      "pace": 0.9873103448275862,
+      "note": "컨택 능력으로 간신히 맞힘"
+    },
+    {
+      "kind": "contact-low",
+      "defending": true,
+      "hand": "우타",
+      "type": "swing",
+      "swing": true,
+      "exit": 71,
+      "pace": 0.984,
+      "note": "스윙이 빨라 헛스윙"
+    },
+    {
+      "kind": "command-contact",
+      "defending": true,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 72.20261437908496,
+      "pace": 0.9888104575163399,
+      "note": "빗맞아 힘이 덜 실린 타구"
+    },
+    {
+      "kind": "command-power",
+      "defending": true,
+      "hand": "우타",
+      "type": "swing",
+      "swing": true,
+      "exit": 85,
+      "pace": 1.08,
+      "note": "풀스윙 부담으로 타이밍을 놓침"
+    },
+    {
+      "kind": "hit-contact",
+      "defending": true,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 67.16091954022988,
+      "pace": 0.9686436781609196,
+      "note": "정확히 맞힌 타구"
+    },
+    {
+      "kind": "hit-power",
+      "defending": true,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 105.71428571428572,
+      "pace": 1.1628571428571428,
+      "note": "풀스윙으로 강한 타구"
+    },
+    {
+      "kind": "eye-high",
+      "defending": true,
+      "hand": "우타",
+      "type": "ball",
+      "swing": false,
+      "note": "선구안으로 바깥 공을 골라냄"
+    },
+    {
+      "kind": "eye-low",
+      "defending": true,
+      "hand": "우타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 81.6978417266187,
+      "pace": 1.0267913669064748,
+      "note": "정확히 맞힌 타구"
+    },
+    {
+      "kind": "watch-strike",
+      "defending": true,
+      "hand": "우타",
+      "type": "strike",
+      "swing": false,
+      "note": "지켜본 공이 스트라이크"
+    },
+    {
+      "kind": "foul",
+      "defending": true,
+      "hand": "우타",
+      "type": "foul",
+      "swing": true,
+      "contact": true,
+      "exit": 76.90849673202615,
+      "pace": 1.0076339869281046,
+      "note": "빗맞은 공이 파울로 벗어남"
+    },
+    {
+      "kind": "hr",
+      "defending": true,
+      "hand": "우타",
+      "type": "hr",
+      "swing": true,
+      "contact": true,
+      "exit": 105.71428571428572,
+      "pace": 1.1628571428571428,
+      "note": "풀스윙으로 강한 타구"
+    },
+    {
+      "kind": "contact-high",
+      "defending": true,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 71.82758620689656,
+      "pace": 0.9873103448275862,
+      "note": "컨택 능력으로 간신히 맞힘"
+    },
+    {
+      "kind": "contact-low",
+      "defending": true,
+      "hand": "좌타",
+      "type": "swing",
+      "swing": true,
+      "exit": 71,
+      "pace": 0.984,
+      "note": "스윙이 빨라 헛스윙"
+    },
+    {
+      "kind": "command-contact",
+      "defending": true,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 72.20261437908496,
+      "pace": 0.9888104575163399,
+      "note": "빗맞아 힘이 덜 실린 타구"
+    },
+    {
+      "kind": "command-power",
+      "defending": true,
+      "hand": "좌타",
+      "type": "swing",
+      "swing": true,
+      "exit": 85,
+      "pace": 1.08,
+      "note": "풀스윙 부담으로 타이밍을 놓침"
+    },
+    {
+      "kind": "hit-contact",
+      "defending": true,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 67.16091954022988,
+      "pace": 0.9686436781609196,
+      "note": "정확히 맞힌 타구"
+    },
+    {
+      "kind": "hit-power",
+      "defending": true,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 105.71428571428572,
+      "pace": 1.1628571428571428,
+      "note": "풀스윙으로 강한 타구"
+    },
+    {
+      "kind": "eye-high",
+      "defending": true,
+      "hand": "좌타",
+      "type": "ball",
+      "swing": false,
+      "note": "선구안으로 바깥 공을 골라냄"
+    },
+    {
+      "kind": "eye-low",
+      "defending": true,
+      "hand": "좌타",
+      "type": "fly",
+      "swing": true,
+      "contact": true,
+      "exit": 81.6978417266187,
+      "pace": 1.0267913669064748,
+      "note": "정확히 맞힌 타구"
+    },
+    {
+      "kind": "watch-strike",
+      "defending": true,
+      "hand": "좌타",
+      "type": "strike",
+      "swing": false,
+      "note": "지켜본 공이 스트라이크"
+    },
+    {
+      "kind": "foul",
+      "defending": true,
+      "hand": "좌타",
+      "type": "foul",
+      "swing": true,
+      "contact": true,
+      "exit": 76.90849673202615,
+      "pace": 1.0076339869281046,
+      "note": "빗맞은 공이 파울로 벗어남"
+    },
+    {
+      "kind": "hr",
+      "defending": true,
+      "hand": "좌타",
+      "type": "hr",
+      "swing": true,
+      "contact": true,
+      "exit": 105.71428571428572,
+      "pace": 1.1628571428571428,
+      "note": "풀스윙으로 강한 타구"
+    }
+  ],
+  "failures": [],
+  "runtimeErrors": [],
+  "storageUnchanged": true,
+  "loaded": [
+    "batting-motion-v25.js?v=111a26dba9d8",
+    "batting-feedback-v25.js?v=bf7fa6ba4c20"
+  ],
+  "visiblePopup": "타격 · 주루 · 수비우리 팀타격!풀스윙으로 강한 타구"
+}

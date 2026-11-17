@@ -808,6 +808,7 @@ function planMotion19(m,e){
  if(e.pitchThrown&&!e.contact)e.ball[1]=e.type==='hbp'?[ply(tside(m,e.attack),e.batter).hand==='좌타'?478:422,425]:[450,450];
  // Airborne catches wait for the fielder. Ground balls wait on the grass until pickup.
  if(e.defense24)plan.land=e.defense24.land;
+ else if(e.batting25?.flightEnd)plan.land=e.batting25.flightEnd;
  else if(primary&&plan.caught)plan.land=Math.max(.55,primary.end);
  plan.pickup=e.defense24?.pickup??Math.max(plan.land,e.bh===7?.50:primary?.end||.55);
  if(steal){plan.land=.22;plan.pickup=.29;}

@@ -20,7 +20,7 @@
   const cues=[],add=(id,at,extra={})=>cues.push({id,at:inverse(at)*duration,...extra});
   if(e.pitchThrown!==false){
    add('pitch',.13,{maxDuration:(inverse(.22)-inverse(.13))*duration/1000+.05});
-   if(e.swing&&!e.contact)add('miss',.19);
+   if(e.swing&&!e.contact)add('miss',e.batting25?.center??.19);
    if(!e.contact&&!['wp','pb','hbp'].includes(e.type))add('glove',.29);
   }
   if(e.contact)add(e.type==='hr'?'bat-hr':'bat',.22);

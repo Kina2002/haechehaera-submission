@@ -138,7 +138,7 @@ function defenseTravel24(from,target,a){
 }
 function defenseAttempt24(e,df,positions,deep,contact,command,roll){
  const budget=380*((deep?.99:.95)-(contact-50)/400+(command==='contact'?-.04:0)-roll);
- const deadline=.265+clamp(budget,6,130)/400;
+ const deadline=.22+(.045+clamp(budget,6,130)/400)*(deep&&!e.line?(e.batting25?.air||1):1)/(e.batting25?.pace||1);
  const choices=positions.map(pos=>{const p=fielder(df,pos),from=fielderStart(e,df,pos);return {pos,p,from,...defenseTravel24(from,e.target,p.a)};});
  choices.sort((a,b)=>a.arrival-b.arrival);
  const best=choices[0],neutralArrival=Math.min(...positions.map(pos=>defenseTravel24(fieldPosition(pos),e.target,fielder(df,pos).a).arrival));
@@ -175,6 +175,7 @@ function ballInPlay(m,e,bh){const b=batter(m),df=tside(m,1-e.attack),n=bh?.n||0;
 if([1,3,10,11].includes(n))deep=true;if([2,7,8,12].includes(n))deep=false;
 e.fair=true;e.swing=true;e.contact=true;e.line=deep&&r(m)<.18;
 e.target=[x,deep?198+r(m)*36:267+r(m)*60];
+if(!n&&e.batting25){const d=e.batting25,lift=(d.effectivePower-40)*.16+(d.quality-.5)*6;e.target[1]=clamp(e.target[1]-lift,deep?176:255,deep?240:336);}
 let positions=deep?["LF","CF","RF"]:["P","1B","2B","3B","SS"];e.fieldPos=positions.sort((a,b)=>{let aa=fielderStart(e,df,a),bb=fielderStart(e,df,b);return Math.hypot(aa[0]-x,aa[1]-e.target[1])-Math.hypot(bb[0]-x,bb[1]-e.target[1])})[0];e.fielder=fielder(df,e.fieldPos);
 let dist=Math.hypot(...fielderStart(e,df,e.fieldPos).map((v,i)=>v-e.target[i]));
 e.range=dist;e.reason="타구 "+(x<370?"좌측":x>530?"우측":"중앙")+" · "+e.fieldPos+" 수비";
@@ -185,7 +186,7 @@ else if(n===4)reachHit(m,e,1,false,4);
 else if([7,8,11,12].includes(n)){reachHit(m,e,1,true,n);if(n===8){const empty=[1,2,3].filter(i=>!e.before.bases[i-1]&&i!==1);e.throwBases=[empty.length?empty[0]:3];e.wrongThrow=true}if(n===12)e.noCover=true}
 else if(n===10)flyOut(m,e,10);
 else{
-const power=b.a.power+(m.command==="power"?18:m.command==="contact"?-10:0);
+const power=e.batting25?.effectivePower??b.a.power+(m.command==="power"?18:m.command==="contact"?-10:0);
 const hr=deep&&r(m)<clamp(.018+power/920,.025,.15);
 if(hr){e.target=[clamp(x,220,680),94];reachHit(m,e,4)}
 // Contact also affects how difficult a fair ball is to field; defense and positioning still resolve the out.
@@ -193,7 +194,7 @@ else{const d=e.defense24=defenseAttempt24(e,df,positions,deep,b.a.contact,m.comm
 e.fieldPos=d.pos;e.fielder=fielder(df,d.pos);e.range=d.distance;
 e.reason="타구 "+(x<370?"좌측":x>530?"우측":"중앙")+" · "+e.fieldPos+" 수비";
 if(d.reached){if(r(m)<clamp((100-e.fielder.a.catch)/1800,.006,.065)){d.drop=true;reachHit(m,e,1,true)}else if(deep)flyOut(m,e);else if(r(m)<(100-e.fielder.a.throw)/2300){reachHit(m,e,1,true);e.badThrow=true;}else groundOut(m,e,m.bases[0]&&m.outs<2&&r(m)<clamp(.34+(e.fielder.a.throw-b.a.speed)/230,.1,.7))}
-else{let bases=deep&&power>35&&r(m)<.42?2:1;if(bases===2&&b.a.speed>65&&r(m)<.15)bases=3;reachHit(m,e,bases)}
+else{let bases=deep&&power>35&&r(m)<clamp(.42+(power-50)/400+((e.batting25?.quality??.5)-.5)*.10,.15,.65)?2:1;if(bases===2&&b.a.speed>65&&r(m)<.15)bases=3;reachHit(m,e,bases)}
 defensePickup24(e);}
 }
 }
@@ -207,6 +208,42 @@ if(!m.done){if(m.half===0)m.half=1;else{m.half=0;m.inning++}m.outs=0;m.bases=[nu
 }
 function gameResultLabel(m){return m.mercy?(m.score[0]>m.score[1]?"콜드승":"콜드패"):(m.result||"기록")}
 function gameEndDetails(m){return m.mercy?m.mercy.inning+"회 종료 · "+m.mercy.margin+"점 차 콜드게임":m.walkoff?.inning?m.walkoff.inning+"회 말 "+(m.walkoff.side===0?"우리 팀":"상대 팀")+" 끝내기"+(m.walkoff.kind==="hr"?" 홈런":""):""}
+// Batting records the actual decision and timing roll, shared by outcomes and animation.
+function battingDecision25(e,b,inZone,command,chance,roll){
+ const normal=inZone?clamp(.7+50/600,.68,.89):clamp(.4-50/270,.07,.40);
+ const neutral=command==='take'?normal*(inZone?.62:.34):command==='power'?Math.min(.97,normal+.12):normal;
+ e.batting25={command,eye:b.a.eye,decision:roll,neutralDecision:neutral,swing:roll<chance};
+ return e.batting25.swing;
+}
+function battingContact25(e,b,p,command,roll){
+ const base=.52+b.a.contact*.0035-(p.a.velocity-50)*.0025;
+ const chance=clamp(base+(command==='contact'?.07:command==='power'?-.10:0),.20,.97);
+ const d=e.batting25,quality=clamp(1-roll/chance,0,1),sign=(e.pitchIndex+Math.floor(roll*997))%2?1:-1;
+ const made=roll<=chance,offset=sign*(made?.004+(1-quality)*.020:.035+clamp((roll-chance)/(1-chance),0,1)*.06);
+ const power=b.a.power+(command==='power'?18:command==='contact'?-10:0)+(quality-.5)*16;
+ const exit=clamp(55+power*.5,40,115),pace=clamp(1+(exit-75)/250+(command==='power'?.04:0),.86,1.22);
+ Object.assign(d,{contact:b.a.contact,power:b.a.power,roll,chance,baseChance:clamp(base,.2,.97),averageChance:clamp(.52+50*.0035-(p.a.velocity-50)*.0025+(command==='contact'?.07:command==='power'?-.10:0),.2,.97),quality,offset,center:.22+offset,exit,pace,air:clamp(1+(power-40)*.0025+(command==='power'?.10:0),.9,1.3),effectivePower:power});
+ return made;
+}
+function battingNote25(e){
+ const d=e.batting25;if(!d)return '';
+ if(!e.swing){if(e.inZone)return '지켜본 공이 스트라이크';return d.eye>50&&d.decision<d.neutralDecision?'선구안으로 바깥 공을 골라냄':d.command==='take'?'참아 지시로 바깥 공을 지켜봄':'바깥 공을 골라냄';}
+ if(!e.contact)return d.command==='power'&&d.roll<=d.baseChance?'풀스윙 부담으로 타이밍을 놓침':d.offset>0?'스윙이 늦어 헛스윙':'스윙이 빨라 헛스윙';
+ if(e.type==='foul')return '빗맞은 공이 파울로 벗어남';
+ if(d.roll>d.averageChance)return '컨택 능력으로 간신히 맞힘';
+ if(d.command==='contact'&&d.roll>d.baseChance)return '컨택 지시로 간신히 맞힘';
+ if(d.quality<.18)return '빗맞아 힘이 덜 실린 타구';
+ if(d.command==='power'&&d.exit>=92)return '풀스윙으로 강한 타구';
+ if(d.exit>=92)return '힘을 실어 강하게 때림';
+ return d.quality>.65?'정확히 맞힌 타구':d.command==='contact'?'맞히는 데 집중한 간결한 스윙':'타이밍에 맞춰 공을 때림';
+}
+function battingFlight25(e){
+ const d=e.batting25;if(!d)return;
+ d.note=battingNote25(e);d.release=.22+(d.command==='power'?.105:d.command==='contact'?.055:.075);
+ if(e.contact)for(const mv of e.moves)if(mv.from===0)mv.delay=Math.max(mv.delay,d.release);
+ if(e.contact){d.flightEnd=.22+clamp(Math.hypot(e.target[0]-450,e.target[1]-441)/370*.31/d.pace,.14,.43);}
+ e.reason=[d.note,e.reason].filter(Boolean).join(' · ');
+}
 function resolvePitch(m){const e=emptyEvent(m),b=batter(m),df=tside(m,1-e.attack),p=pitcher(df),c=fielder(df,"C");e.inputCommand=m.command;e.inputDefense={...m.defense};e.batterName=b.name;e.batterNumber=b.number;m.defLocked=true;
 const bh=chooseBH(m,e);
 if(bh&&[5,6,9].includes(bh.n)){runnerEvent(m,e,bh.n===5?"crowd":"steal",bh.n);if(bh.n===9)e.fielder=fielder(df,"2B")}
@@ -219,14 +256,15 @@ if(m.command==="take")sw*=inZone?.62:.34;if(m.command==="power")sw=Math.min(.97,
 if(r(m)<.009){e.fielder=c;e.ball=[[450,340],[420,452]];walk(m,e,"hbp")}
 else if(m.bases.some(Boolean)&&m.balls<3&&r(m)<TUNE.wp*(1+(100-p.a.control)/50)){e.type="wp";e.text="폭투 · 주자 진루";e.reason="포수가 잡기 어려운 투구 · 제구";e.fielder=c;p.stats.wp++;m.balls++;advanceLoose(m,e)}
 else if(m.bases.some(Boolean)&&m.balls<3&&r(m)<TUNE.pb*(1+(100-c.a.catch)/50)){e.type="pb";e.text="포일 · 주자 진루";e.reason="잡을 수 있던 공을 놓침 · 포구";e.fielder=c;c.stats.pb++;m.balls++;advanceLoose(m,e)}
-else if(r(m)<sw){e.swing=true;const contact=clamp(.52+b.a.contact*.0035-(p.a.velocity-50)*.0025+(m.command==="contact"?.07:m.command==="power"?-.10:0),.20,.97);if(r(m)>contact){m.strikes++;b.stats.whiff++;e.type="swing";e.text="헛스윙 스트라이크";if(m.strikes===3){e.type="ks";e.text="헛스윙 삼진";b.stats.k++;p.stats.pk++;addOut(m,e,b.id);finishPA(m,e,"ab")}}
-else if(r(m)<.23){e.type="foul";e.contact=true;e.text="파울 · 타석 계속";m.strikes=Math.min(2,m.strikes+1);e.target=[r(m)<.5?155:745,415]}
+else if(battingDecision25(e,b,inZone,m.command,sw,r(m))){e.swing=true;if(!battingContact25(e,b,p,m.command,r(m))){m.strikes++;b.stats.whiff++;e.type="swing";e.text="헛스윙 스트라이크";if(m.strikes===3){e.type="ks";e.text="헛스윙 삼진";b.stats.k++;p.stats.pk++;addOut(m,e,b.id);finishPA(m,e,"ab")}}
+else if(r(m)<.23+(.5-e.batting25.quality)*.08){e.type="foul";e.contact=true;e.text="파울 · 타석 계속";m.strikes=Math.min(2,m.strikes+1);e.target=[r(m)<.5?155:745,415]}
 else ballInPlay(m,e,null)}
 else if(inZone){m.strikes++;e.type="strike";e.text="루킹 스트라이크";if(m.strikes===3){e.type="kl";e.text="루킹 삼진";b.stats.k++;p.stats.pk++;addOut(m,e,b.id);finishPA(m,e,"ab")}}
 else{m.balls++;e.type="ball";e.text="볼";if(m.balls===4)walk(m,e,"bb")}
 }
 if(e.pitchThrown){m.pitches++;if(!e.pa)m.paPitches++}
 if(e.bh)registerBH(m,e);
+battingFlight25(e);
 buildMotion(m,e);
 e.after=snap(m);
 resolveInningEnd(m,e);
@@ -253,7 +291,7 @@ let dest=e.target.slice();if(e.bh===7)dest=[90,396];e.fieldMoves.push({id:e.fiel
 if(e.defense24){const d=e.defense24,mv=e.fieldMoves[0];mv.start=d.moveStart;mv.end=d.pickup;mv.to=d.recovery.slice();
  const u=clamp((d.land-mv.start)/(d.rawPickup-mv.start),0,1),atLand=start.map((v,i)=>v+(mv.to[i]-v)*u);
  mv.knots=d.reached?[[mv.start,start],[d.moveArrival,e.target],[d.land,e.target],[d.pickup,mv.to]]:d.land>mv.start?[[mv.start,start],[d.land,atLand],[d.pickup,mv.to]]:[[mv.start,start],[d.pickup,mv.to]];
- e.arc=d.deep?(e.line?20:Math.min(100,35+(d.land-.28)*220)):0;
+ e.arc=d.deep?(e.line?20:Math.min(125,(35+(d.land-.28)*220)*(e.batting25?.air||1))):0;
 }
 if(e.bh===11){const other=fielder(df,e.fieldPos==="CF"?"RF":"CF");e.fieldMoves.push({id:other.id,from:fieldPosition(e.fieldPos==="CF"?"RF":"CF",e.before.defense),to:[e.target[0]+30,e.target[1]],start:.24,end:.44});e.fieldMoves[0].to=e.target;e.fieldMoves[0].knots=[[.22,start],[.40,[e.target[0]-30,e.target[1]]],[.60,[e.target[0]-30,e.target[1]]],[.72,e.target]];e.throwStart=.75}
 if(!e.throwBases&&e.type!=="hr"&&!["fly","line"].includes(e.type))e.throwBases=[e.throwBase||2];
@@ -747,7 +785,7 @@ document.addEventListener("change",ev=>{const el=ev.target,t=team();if(el.datase
 
 
 function playProgress(u){if(u>=1)return 1;return u<.55?u/.55*.36:.36+(u-.55)/.45*.64}
-function batterPoseFor(e,t){return e?.swing&&t>.16&&t<.39?"swing":"bat"}
+function batterPoseFor(e,t){if(e?.batting25){const d=e.batting25;return e.swing&&t>=(d.command==='power'?.12:.16)&&t<d.center+(d.command==='power'?.16:.10)?"swing":"bat";}return e?.swing&&t>.16&&t<.39?"swing":"bat"}
 function pitchAction(e){if(!e)return "투구 준비";if(e.pitchThrown===false)return "주루 플레이";if(e.type==="hbp")return "공에 맞음";if(e.swing)return e.contact?"스윙 · 배트에 맞음":"스윙 · 헛스윙";if(["wp","pb"].includes(e.type))return "배트를 내지 않음";return "공을 지켜봄"}
 function pitchExplanation(e){if(e.pitchThrown===false)return "투구 전 주루 상황 · 타자의 스윙 없음";if(!e.inputCommand)return "";const cmd={power:"풀스윙",contact:"컨택",take:"참아"}[e.inputCommand]||"기본 판단";let why="";if(!e.swing&&e.inZone===false&&["ball","bb"].includes(e.type))why=" · 바깥 공을 골라냈습니다";if(!e.swing&&e.inZone===true&&["strike","kl"].includes(e.type))why=" · 지켜본 공이 스트라이크였습니다";return "지시: "+cmd+" → 실제: "+pitchAction(e)+why}
 function paintPitchAction(e,t){const host=$("#fieldStatus");if(!host||!e)return;const passed=t>=.22||e.pitchThrown===false;const key=e.id+":"+passed;if(host.dataset.phase===key)return;host.dataset.phase=key;const cmd={power:"풀스윙",contact:"컨택",take:"참아"}[e.inputCommand]||"기본 판단";host.innerHTML='<span class="pitch-order">'+(e.attack===0?"우리 타자":"상대 타자")+' · '+esc(e.batterName||"")+' · '+esc(cmd)+' 지시</span><span class="pitch-action">'+(passed?esc(pitchAction(e)):"투구 → 공을 보고 판단")+'</span>'}
