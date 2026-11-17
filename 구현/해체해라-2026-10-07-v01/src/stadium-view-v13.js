@@ -51,6 +51,19 @@ function playerAnchor(e,id,t,point,forcePhase){
  if(!action)return null;if(forcePhase)action.phase=forcePhase;const out=CharacterPartsV17.render(FieldIntegrationV13.config(p,tm),0,{headwear:position==='C'?'catcher':'cap',catcher:position==='C',action}),q=actorPoint({x:xy[0],y:xy[1],fieldPos:position,pose:'glove',tm,p}),s=Math.max(.55,q.scale*.91),anchor=action.holdBase?out.contacts.foot:out.foot,ap=out[point]||out.glovePoint;
  const hand=point==='handPoint'||point==='held'&&['load','release'].includes(action.phase),grip=hand?out.handPoint:ap;if(!grip)return null;const k=Math.round(64*s)/64;return{x:Math.round(q.x-anchor[0]*s)+grip[0]*k,y:Math.round(q.y-anchor[1]*s)+grip[1]*k,scale:q.scale,occluded:!hand&&position==='C'&&action.view==='B'&&action.phase.startsWith('crouch')};
 }
+function batAnchor(e){
+ const tm=tside(team().match,e.attack),p=ply(tm,e.batter),q=actorPoint({x:p.hand==='좌타'?478:422,y:455,pose:'swing',tm,p}),out=CharacterPartsV17.render(FieldIntegrationV13.config(p,tm),53+PlayerMotionV13.identity(p).bat,{headwear:'helmet',flip:p.hand==='좌타'}),tip=BattingMotionV25.tip(out);
+ if(!tip)return null;const s=Math.max(.55,q.scale*.91),k=Math.round(64*s)/64;
+ return {x:Math.round(q.x-out.foot[0]*s)+tip[0]*k,y:Math.round(q.y-out.foot[1]*s)+tip[1]*k};
+}
+function contactBall(q,e,t){
+ if(!e.batting25||!e.contact||t<.13||t>=e.motion19.land)return q;
+ const end=batAnchor(e);if(!end)return q;
+ if(t<=.22){const from=V.low?project(.22,18.4,1.55):(()=>{const g=ground(...e.ball[0]);return project(g.x,g.z,.08);})();const u=cap((t-.13)/.09,0,1);return{x:from.x+(end.x-from.x)*u,y:from.y+(end.y-from.y)*u,scale:q.scale};}
+ const fade=Math.max(.221,Math.min(.30,e.motion19.land-.035));if(t>=fade)return q;
+ const g=ground(...e.ball[1]),origin=project(g.x,g.z,.08),u=1-cap((t-.22)/(fade-.22),0,1);
+ return{...q,x:q.x+(end.x-origin.x)*u*u,y:q.y+(end.y-origin.y)*u*u};
+}
 function ball(c,e,t){
  V.lastBall=null;if(!e)return;let q;
  if(V.low&&e.pitchThrown&&t>=.13&&t<.29){const u=cap((t-.13)/.09,0,1);q=project(.22*(1-u),18.4*(1-u)-.3*u,1.55*(1-u)+.85*u);}
@@ -59,12 +72,16 @@ function ball(c,e,t){
  if(plan){const flight=plan.throws.find(s=>t>=s.start&&t<=s.end);
   if(flight){const from=playerAnchor(e,flight.thrower,flight.start,'handPoint','release'),end=ground(...flight.to),to=flight.receiver?playerAnchor(e,flight.receiver,flight.end,'glovePoint','receive'):project(end.x,end.z,.08);if(from&&to)q=mix(from,to,cap((t-flight.start)/(flight.end-flight.start),0,1));}
   else if(t>=plan.pickup&&!['hr','foul','wp','pb'].includes(e.type)){const last=plan.throws.filter(s=>s.end<t).at(-1),owner=last?last.receiver:e.fielderId,held=owner&&playerAnchor(e,owner,t,'held');if(held)q=held;}
-  else if(plan.caught&&t>=plan.land-.035){const end=playerAnchor(e,e.fielderId,plan.land,'glovePoint','receive');if(end)q=mix(q,end,cap((t-plan.land+.035)/.035,0,1));}
+  else if(e.defense24?.drop&&t>=plan.land&&t<plan.pickup){
+   const start=playerAnchor(e,e.fielderId,plan.land,'glovePoint','receive'),end=ground(...e.defense24.recovery),to=project(end.x,end.z,.08),u=cap((t-plan.land)/(plan.pickup-plan.land),0,1);
+   if(start){q=mix(start,to,u);q.y-=Math.sin(u*Math.PI)*5;const receive=playerAnchor(e,e.fielderId,plan.pickup,'glovePoint','ground');if(receive&&t>=plan.pickup-.025)q=mix(q,receive,cap((t-plan.pickup+.025)/.025,0,1));}
+  }
+  else if((plan.caught||e.defense24?.drop)&&t>=plan.land-.035){const end=playerAnchor(e,e.fielderId,plan.land,'glovePoint','receive');if(end)q=mix(q,end,cap((t-plan.land+.035)/.035,0,1));}
   else if(e.contact&&!plan.caught&&t>=plan.pickup-.025){const end=playerAnchor(e,e.fielderId,plan.pickup,'glovePoint','ground');if(end)q=mix(q,end,cap((t-plan.pickup+.025)/.025,0,1));}
   if(plan.steal&&!e.pitchThrown&&t<plan.pickup){const tm=tside(team().match,1-e.attack),id=tm.lineup.find(v=>v.pos==='C')?.id,held=playerAnchor(e,id,t,'glovePoint');if(held)q=held;}
   if(e.pitchThrown&&!e.contact&&!['wp','pb','hbp'].includes(e.type)&&t>=.22&&t<.29){const tm=tside(team().match,1-e.attack),id=tm.lineup.find(v=>v.pos==='C')?.id,end=playerAnchor(e,id,.29,'glovePoint');if(end){const start=V.low?project(0,0,.85):project(0,0,.08);q=mix(start,end,(t-.22)/.07);if(end.occluded&&t>=.255)q.occluded=true;}}
  }
- if(q.occluded)return;V.lastBall={x:q.x,y:q.y};c.fillStyle='#09273655';c.fillRect(q.x+2,q.y+3,5,2);c.fillStyle='#fff5da';const r=V.low?Math.max(2,q.scale*1.2):2.2;c.fillRect(Math.round(q.x-r),Math.round(q.y-r),Math.ceil(r*2),Math.ceil(r*2));c.fillStyle='#c15e4c';c.fillRect(Math.round(q.x),Math.round(q.y-r),1,Math.ceil(r*2));
+ q=contactBall(q,e,t);if(q.occluded)return;V.lastBall={x:q.x,y:q.y};c.fillStyle='#09273655';c.fillRect(q.x+2,q.y+3,5,2);c.fillStyle='#fff5da';const r=V.low?Math.max(2,q.scale*1.2):2.2;c.fillRect(Math.round(q.x-r),Math.round(q.y-r),Math.ceil(r*2),Math.ceil(r*2));c.fillStyle='#c15e4c';c.fillRect(Math.round(q.x),Math.round(q.y-r),1,Math.ceil(r*2));
 }
 sprite=function(c,x,y,scale,tm,number=0,role='player',pose='idle',tick=0,id='',flip=false){
  if(V.collecting&&c.canvas.id==='field'&&role==='player'){V.calls.push({x,y,scale,tm,number,role,pose,tick,id,flip,opacity:c.globalAlpha});return;}
@@ -77,7 +94,7 @@ drawField=function(time){
  const current=tside(m,side).lineup[m.order[side]]?.id,batterKey=[m.id,m.inning,m.half,current].join(':');
  if(!e&&!sideSwitch&&!entrance&&!reaction&&batterKey!==V.lastBatter){V.lastBatter=batterKey;V.entry={id:current,side,elapsed:0,total:1800,last:time};}
  if(V.entry){const en=V.entry;if(e||sideSwitch||en.id!==current)V.entry=null;else{if(!m.paused)en.elapsed+=Math.max(0,Math.min(100,time-en.last))*matchPlaybackRate(m);en.last=time;waitMs=Math.max(waitMs,en.total-en.elapsed);if(en.elapsed>=en.total)V.entry=null;}}
- V.low=side===0&&!(e&&(e.contact&&t>=.22||['bb','hbp','wp','pb','sb','cs'].includes(e.type)&&t>.25))&&!sideSwitch;
+ V.low=side===0&&!(e&&(e.contact&&t>=(e.batting25?(e.batting25.command==='power'?.28:.26):.22)||['bb','hbp','wp','pb','sb','cs'].includes(e.type)&&t>.25))&&!sideSwitch;
  V.calls=[];V.frame=null;V.collecting=true;try{originalDraw(time);}finally{V.collecting=false;}
  const frame=V.frame||{e,t,actors:V.calls.map(a=>({...a,p:ply(a.tm,a.id),fieldPos:a.tm.lineup.find(v=>v.id===a.id)?.pos}))},byId=new Map(frame.actors.map(a=>[a.p?.id,a]));
  const c=cv.getContext('2d'),k=cv.width/900;c.save();c.setTransform(k,0,0,cv.height/530,0,0);c.imageSmoothingEnabled=false;background(c,time);
@@ -95,10 +112,10 @@ drawField=function(time){
   V.lastFrame.push({id:call.id,frame:state.frame,contact:state.contact,x:q.x,y:q.y,worldX:call.x,worldY:call.y,scale:q.scale,flip:state.flip,entry:actor.entry,direction:state.direction,readyView:state.readyView,action:state.action,headwear:state.headwear,catcher:state.catcher,position:state.position,offense:state.offense});
   c.save();c.globalAlpha=call.opacity*(actor.departure===undefined?1:cap((1-actor.departure)/.15,0,1));FieldIntegrationV13.paint(c,q.x,q.y,q.scale,call.tm,actor.p,state);c.restore();
  }
- ball(c,e,t);c.restore();
+ ball(c,e,t);BattingMotionV25.trail(c,e,t,V.lastBall);c.restore();
  // Reuse collision-aware speech, supplying a projected head anchor in its existing units.
  const speechActors=frame.actors.map(a=>{const q=actorPoint(a),oldHeight=49*zoneScale15(a.tm,a.p,q.y,fieldScale(q.y));return{...a,x:q.x,y:q.y-47*q.scale+oldHeight};});
  originalSpeech(e,t,speechActors);window.StadiumLayoutV13?.arrange();
 };
-V.project=project;V.ground=ground;V.actorPoint=actorPoint;V.playerAnchor=playerAnchor;V.officialPoint=officialPoint;window.StadiumViewV13=V;
+V.batAnchor=batAnchor;V.project=project;V.ground=ground;V.actorPoint=actorPoint;V.playerAnchor=playerAnchor;V.officialPoint=officialPoint;window.StadiumViewV13=V;
 })();

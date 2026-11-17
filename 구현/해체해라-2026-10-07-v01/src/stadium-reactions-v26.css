@@ -1,0 +1,38 @@
+/* The moving reaction belongs to the stadium, above its fixed information. */
+.stadium-v13>#reactionHost{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+.stadium-v13>#reactionHost[hidden]{display:none}
+.stadium-v13.reaction-running .stadium-command{visibility:hidden;pointer-events:none}
+.stadium-v13>#reactionHost .reaction{
+ position:absolute;top:55%;left:0;right:auto;bottom:auto;
+ display:grid!important;grid-template-columns:minmax(0,1fr) 24%!important;
+ width:48%;max-width:470px;height:auto;min-height:86px;max-height:none;
+ align-items:stretch;gap:8px!important;padding:0;box-sizing:border-box;
+ overflow:visible;background:none;border:0;border-radius:0;box-shadow:none;
+ backdrop-filter:none;animation:none!important;transition:none!important;
+ transform:translate(-120%,-50%);will-change:transform;
+ filter:drop-shadow(0 4px 0 #071d3660);
+}
+.stadium-v13>#reactionHost .reaction::before,.stadium-v13>#reactionHost .bubble::before,.stadium-v13>#reactionHost .bubble::after{display:none!important;content:none!important}
+.stadium-v13>#reactionHost .reaction .bubble{
+ grid-column:1;grid-row:1;align-self:stretch;display:flex;flex-direction:column;justify-content:center;
+ gap:5px;min-width:0;max-width:none;margin:0;padding:9px 12px;
+ background:rgba(255,246,219,.65);color:#173149;border:3px solid rgba(22,71,100,.6);
+ border-radius:10px;box-shadow:none;transform:none;opacity:1;
+ font-family:system-ui,sans-serif;font-size:clamp(13px,1.65cqw,17px);font-weight:400;line-height:1.45;
+ white-space:normal;word-break:keep-all;overflow-wrap:anywhere;
+}
+.stadium-v13>#reactionHost .reaction .bubble small{
+ color:#17688b;font-size:12px;font-weight:500;line-height:1.4;margin:0;padding:0;border:0;
+}
+.stadium-v13>#reactionHost .reaction canvas{
+ grid-column:2;grid-row:1;align-self:end;justify-self:stretch;
+ width:100%!important;height:90px!important;max-width:100%;margin:0;padding:0;
+ object-fit:contain;object-position:bottom;aspect-ratio:auto!important;
+ transform:none;opacity:1;image-rendering:pixelated;
+}
+@container (max-width:600px){
+ .stadium-v13>#reactionHost .reaction{width:92%;max-width:none;min-height:70px;gap:5px!important;grid-template-columns:minmax(0,1fr) 22%!important}
+ .stadium-v13>#reactionHost .reaction .bubble{font-size:12px;line-height:1.35;padding:6px 8px;gap:3px;border-width:2px}
+ .stadium-v13>#reactionHost .reaction .bubble small{font-size:11px}
+ .stadium-v13>#reactionHost .reaction canvas{height:70px!important}
+}
