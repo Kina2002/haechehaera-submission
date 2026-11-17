@@ -6,6 +6,13 @@ const oldInit=CharacterRenderer.init.bind(CharacterRenderer);
 CharacterRenderer.init=async()=>{await Promise.all([oldInit(),F.init()]);};
 F.init().then(()=>{if(typeof render==='function')render();}).catch(error=>{runtimeErrors.push(String(error));console.error(error);});
 function playerConfig(p,tm){return PortraitIntegrationV13.config(p,tm);}
+// F24: waiting fielders face home. Select the matching whole-body pose,
+// not a different head direction on the same right-facing body.
+function waitingFacing(x,y,target=BASES[0]){
+ const dx=target[0]-x,dy=target[1]-y,ax=Math.abs(dx),ay=Math.abs(dy);
+ const frame=ax<=ay*.3?(dy<0?4:0):ay<ax*.25?2:dy<0?3:1;
+ return{frame,flip:frame!==0&&frame!==4&&dx<0};
+}
 function describe(p,tm,pose,tick,x,y,flip){
  const m=team()?.match,e=anim?.e,t=anim?playProgress(clamp(anim.elapsed/anim.duration,0,1)):0,form=M.identity(p);
  const attackSide=e?.attack??(m?attack(m):0),offense=m&&tm===tside(m,attackSide),move=e?.moves?.find(v=>v.id===p.id);
@@ -53,6 +60,9 @@ function describe(p,tm,pose,tick,x,y,flip){
  }
  if(offense&&e?.outIds.includes(p.id)&&anim?.resultShown&&resultHoldMs(e)-anim.holdLeft>550){frame=Math.floor(tick/160)%2?6:7;contact=null;}
  if(offense&&['bat','swing'].includes(pose))flip=p.hand==='좌타';
+ if(!offense&&['idle','ready'].includes(pose)){
+  const facing=waitingFacing(x,y);frame=facing.frame;flip=facing.flip;
+ }
  if(rear&&pose==='run')direction=3;
  if(!offense&&e){const receive=e.motion19?.throws.find(v=>v.receiver===p.id&&t>=v.end-.03);if(receive&&Math.hypot(x-BASES[receive.base][0],y-BASES[receive.base][1])<3){contact='foot';flip=receive.base===1||receive.base===4;direction=1;}}
  const catcher=!offense&&tm.lineup?.find(v=>v.id===p.id)?.pos==='C';if(catcher)headwear='catcher';
@@ -71,5 +81,5 @@ sprite=function(c,x,y,scale,tm,number=0,role='player',pose='idle',tick=0,id='',f
  const p=tm.players?.find(v=>v.id===id);if(!p)return originalSprite.apply(this,arguments);
  const state=describe(p,tm,pose,tick,x,y,flip);paint(c,x,y,scale,tm,p,state);
 };
-window.FieldIntegrationV13={describe,paint,config:playerConfig,get ready(){return F.ready;}};
+window.FieldIntegrationV13={describe,paint,waitingFacing,config:playerConfig,get ready(){return F.ready;}};
 })();
