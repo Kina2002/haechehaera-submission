@@ -1,0 +1,42 @@
+{
+  "checks": [
+    {
+      "name": "몸+글러브 분리 뒤 원본 조립 픽셀 일치",
+      "ok": true,
+      "details": {
+        "passed": 18,
+        "total": 18
+      }
+    },
+    {
+      "name": "피부/팀색 변경 시 바지·신발·글러브 색 보존",
+      "ok": true,
+      "details": {
+        "passed": 18,
+        "total": 18
+      }
+    },
+    {
+      "name": "원본칸64×64·알파0/255",
+      "ok": true,
+      "details": {
+        "passed": 18,
+        "total": 18
+      }
+    },
+    {
+      "name": "머리와 노출 피부 색 연동 F",
+      "ok": true
+    },
+    {
+      "name": "머리와 노출 피부 색 연동 FR",
+      "ok": true
+    },
+    {
+      "name": "머리와 노출 피부 색 연동 FL",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "fileCount": 198
+}

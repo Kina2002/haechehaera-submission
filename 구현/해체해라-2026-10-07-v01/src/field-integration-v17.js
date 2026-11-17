@@ -16,7 +16,8 @@ function waitingFacing(x,y,target=BASES[0]){
 function describe(p,tm,pose,tick,x,y,flip){
  const m=team()?.match,e=anim?.e,t=anim?playProgress(clamp(anim.elapsed/anim.duration,0,1)):0,form=M.identity(p);
  const attackSide=e?.attack??(m?attack(m):0),offense=m&&tm===tside(m,attackSide),move=e?.moves?.find(v=>v.id===p.id);
- let frame=0,contact=null,anchorProgress=1,direction,headwear=offense?'helmet':'cap',phase=pose;
+ const position=tm.lineup?.find(v=>v.id===p.id)?.pos;
+ let frame=0,contact=null,anchorProgress=1,direction,readyView,headwear=offense?'helmet':'cap',phase=pose;
  const k=tm.id+':'+p.id,prior=samples.get(k),dx=prior?x-prior.x:0,dy=prior?y-prior.y:0,step=Math.hypot(dx,dy);
  const distance=(prior?.pose==='run'?prior.distance:0)+(step<70?step:0);samples.set(k,{x,y,pose,distance});if(samples.size>80)samples.delete(samples.keys().next().value);
  const rear=dy<-.02&&Math.abs(dy)>Math.abs(dx)*.8;
@@ -56,20 +57,24 @@ function describe(p,tm,pose,tick,x,y,flip){
   if(e.type==='swing'&&t>.4)frame=t<.72?38:47+form.bat;
   if(e.type==='kl'&&t>.7)frame=30;
   if(e.type==='ks'&&t>.4)frame=30;
+  if(e.batting25){frame=BattingMotionV25.frame(e,t,form.bat);phase=BattingMotionV25.phase(e,t);}
   if(['bat','swing'].includes(pose))flip=p.hand==='좌타';
  }
  if(offense&&e?.outIds.includes(p.id)&&anim?.resultShown&&resultHoldMs(e)-anim.holdLeft>550){frame=Math.floor(tick/160)%2?6:7;contact=null;}
  if(offense&&['bat','swing'].includes(pose))flip=p.hand==='좌타';
  if(!offense&&['idle','ready'].includes(pose)){
   const facing=waitingFacing(x,y);frame=facing.frame;flip=facing.flip;
+  if(position&&position!=='P'&&position!=='C'&&[0,1].includes(frame)){readyView=frame===0?'F':flip?'FL':'FR';flip=false;}
  }
  if(rear&&pose==='run')direction=3;
- if(!offense&&e){const receive=e.motion19?.throws.find(v=>v.receiver===p.id&&t>=v.end-.03);if(receive&&Math.hypot(x-BASES[receive.base][0],y-BASES[receive.base][1])<3){contact='foot';flip=receive.base===1||receive.base===4;direction=1;}}
+ if(!offense&&e){const receive=e.motion19?.throws.find(v=>v.receiver===p.id&&t>=v.end-.03);if(receive&&Math.hypot(x-BASES[receive.base][0],y-BASES[receive.base][1])<3){readyView=undefined;contact='foot';flip=receive.base===1||receive.base===4;direction=1;}}
  const catcher=!offense&&tm.lineup?.find(v=>v.id===p.id)?.pos==='C';if(catcher)headwear='catcher';
- const position=tm.lineup?.find(v=>v.id===p.id)?.pos;headwear=CharacterPartsV17.equipmentFor(offense,position).headwear; return{frame,contact,anchorProgress,direction,headwear,flip,phase,offense,catcher,position,forms:form};
+ const action=!offense?DefenseMotionV22.action(p,tm,position,pose,x,y,tick,e,t,distance):null;
+ if(action){readyView=undefined;flip=false;direction=undefined;if(action.holdBase){contact='foot';anchorProgress=1;}}
+ headwear=CharacterPartsV17.equipmentFor(offense,position).headwear; return{frame,contact,anchorProgress,direction,readyView,action,headwear,flip,phase,offense,catcher,position,forms:form};
 }
 function paint(c,x,y,scale,tm,p,state){
- const a=playerConfig(p,tm),out=F.render(a,state.frame,{headwear:state.headwear,flip:state.flip,direction:state.direction,catcher:state.catcher,defense:!state.offense,position:state.position}),bitmap=out.canvas;
+ const a=playerConfig(p,tm),out=F.render(a,state.frame,{headwear:state.headwear,flip:state.flip,direction:state.direction,readyView:state.readyView,action:state.action,catcher:state.catcher,defense:!state.offense,position:state.position}),bitmap=out.canvas;
  const touch=state.contact?out.contacts[state.contact]:out.foot,u=state.anchorProgress??1,anchor=out.foot.map((v,i)=>v+(touch[i]-v)*u),s=Math.max(.55,scale*.91);
  c.save();c.imageSmoothingEnabled=false;
  c.fillStyle='#062c2555';c.beginPath();c.ellipse(Math.round(x),Math.round(y)+1,9*s,2.3*s,0,0,Math.PI*2);c.fill();

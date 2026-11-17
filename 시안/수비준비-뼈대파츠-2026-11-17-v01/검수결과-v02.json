@@ -1,0 +1,10 @@
+{
+  "cases": 972,
+  "poses": 18,
+  "failures": [],
+  "checks": {
+    "binaryAlpha": true,
+    "noFrameOverflow": true
+  },
+  "scope": "조립/색변경/경계 검사. 미술승인 및 모든 얼굴 조합 전수검사 아님."
+}

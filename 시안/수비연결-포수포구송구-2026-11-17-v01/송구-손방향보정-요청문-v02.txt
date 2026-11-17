@@ -1,0 +1,6 @@
+Edit target is this exact eight-column three-row HEADLESS pixel baseball throw atlas. Correct ONLY COLUMN EIGHT (the rightmost column, FRONT-LEFT 45 degree orientation). It currently throws with the wrong anatomical hand. Keep columns1-7 as-is. Preserve transparent background and grid dimensions.
+In the rightmost column all three sprites must face FRONT-LEFT, showing their FRONT green jersey collar/chest rotated45degrees toward screen LEFT, not their back. They are RIGHT-HANDED throwers. The RIGHT bare arm starts on the viewer LEFT side of the chest, and the LEFT brown-gloved arm starts on viewer RIGHT side of the chest.
+Row1 rightmost: bare RIGHT throwing elbow/hand cocked on viewer LEFT, left glove on viewer RIGHT at chest.
+Row2 rightmost: bare RIGHT arm from the viewer LEFT shoulder extends diagonally forward LEFT toward target; LEFT glove stays tucked on viewer RIGHT chest. Do NOT have a bare throwing arm attached to viewer RIGHT shoulder.
+Row3 rightmost: bare RIGHT arm follows across FRONT of belly, LEFT brown glove remains on viewer RIGHT.
+No head, cap, text, balls or motion trails; crisp original chunky pixel art, same dimensions, body size, uniform and neck/foot anchors. Important: this is a handedness correction, NOT a whole-character horizontal flip. Anatomical left glove stays left. Preserve the original other7 columns.

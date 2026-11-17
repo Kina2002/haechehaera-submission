@@ -1,0 +1,1080 @@
+[
+  {
+    "section": "layouts",
+    "bodyIndex": 0,
+    "counts": {
+      "layouts": 18,
+      "moving": 126,
+      "ready": 126,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "layouts",
+    "bodyIndex": 1,
+    "counts": {
+      "layouts": 18,
+      "moving": 126,
+      "ready": 126,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "layouts",
+    "bodyIndex": 2,
+    "counts": {
+      "layouts": 18,
+      "moving": 126,
+      "ready": 126,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "layouts",
+    "bodyIndex": 3,
+    "counts": {
+      "layouts": 18,
+      "moving": 126,
+      "ready": 126,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "layouts",
+    "bodyIndex": 4,
+    "counts": {
+      "layouts": 18,
+      "moving": 126,
+      "ready": 126,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "layouts",
+    "bodyIndex": 5,
+    "counts": {
+      "layouts": 18,
+      "moving": 126,
+      "ready": 126,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "composites",
+    "bodyIndex": 0,
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 240,
+      "colorPixels": 17844,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "composites",
+    "bodyIndex": 1,
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 240,
+      "colorPixels": 37233,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "composites",
+    "bodyIndex": 2,
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 240,
+      "colorPixels": 31887,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "composites",
+    "bodyIndex": 3,
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 240,
+      "colorPixels": 40359,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "composites",
+    "bodyIndex": 4,
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 240,
+      "colorPixels": 29838,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "composites",
+    "bodyIndex": 5,
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 240,
+      "colorPixels": 38805,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "events",
+    "bodyIndex": "ground",
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 242
+    },
+    "failures": [],
+    "traces": [
+      {
+        "kind": "ground",
+        "defense": false,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "secure",
+          "ground",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [
+            {
+              "base": 1,
+              "from": [
+                375,
+                320.46231261263773
+              ],
+              "to": [
+                650,
+                313.50497310936237
+              ],
+              "start": 0.6200000000000001,
+              "end": 0.92,
+              "thrower": "ad81bfeb-30a0-4163-9cb8-b181469252cc",
+              "receiver": "1e96feff-a97f-42d2-a6e6-83cc2d1eaea8"
+            }
+          ],
+          "caught": false,
+          "steal": false,
+          "visualVersion": 22
+        }
+      },
+      {
+        "kind": "ground",
+        "defense": true,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "secure",
+          "ground",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [
+            {
+              "base": 1,
+              "from": [
+                375,
+                320.46231261263773
+              ],
+              "to": [
+                650,
+                313.50497310936237
+              ],
+              "start": 0.6200000000000001,
+              "end": 0.92,
+              "thrower": "cdd045d1-c3e1-4a15-9818-fe65c3c90391",
+              "receiver": "5796c75d-4913-40f4-bfda-7cb2a6df28c8"
+            }
+          ],
+          "caught": false,
+          "steal": false,
+          "visualVersion": 22
+        }
+      }
+    ],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "events",
+    "bodyIndex": "single",
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 242
+    },
+    "failures": [],
+    "traces": [
+      {
+        "kind": "single",
+        "defense": false,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "secure",
+          "ground",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [
+            {
+              "base": 2,
+              "from": [
+                535,
+                222.08373273975928
+              ],
+              "to": [
+                450,
+                210.21085437041847
+              ],
+              "start": 0.6200000000000001,
+              "end": 0.92,
+              "thrower": "55810f26-4b0f-468b-88ed-77b3325f6fc1",
+              "receiver": "1a83d8bb-aa29-4a7c-953f-f3cde61a8715"
+            }
+          ],
+          "caught": false,
+          "steal": false,
+          "visualVersion": 22
+        }
+      },
+      {
+        "kind": "single",
+        "defense": true,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "secure",
+          "ground",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [
+            {
+              "base": 2,
+              "from": [
+                535,
+                222.08373273975928
+              ],
+              "to": [
+                450,
+                210.21085437041847
+              ],
+              "start": 0.6200000000000001,
+              "end": 0.92,
+              "thrower": "1c42be5c-7b4b-4661-b1d9-f2f0635e0695",
+              "receiver": "a6664770-bb63-4491-a3f7-9919012bca32"
+            }
+          ],
+          "caught": false,
+          "steal": false,
+          "visualVersion": 22
+        }
+      }
+    ],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "events",
+    "bodyIndex": "double",
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 242
+    },
+    "failures": [],
+    "traces": [
+      {
+        "kind": "double",
+        "defense": false,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "secure",
+          "ground",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [
+            {
+              "base": 2,
+              "from": [
+                535,
+                222.08373273975928
+              ],
+              "to": [
+                450,
+                210.21085437041847
+              ],
+              "start": 0.6200000000000001,
+              "end": 0.92,
+              "thrower": "1dbbc71c-d57b-476d-87a2-d024a640906b",
+              "receiver": "190955d2-a5b2-4a0e-819a-389c75a78378"
+            }
+          ],
+          "caught": false,
+          "steal": false,
+          "visualVersion": 22
+        }
+      },
+      {
+        "kind": "double",
+        "defense": true,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "secure",
+          "ground",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [
+            {
+              "base": 2,
+              "from": [
+                535,
+                222.08373273975928
+              ],
+              "to": [
+                450,
+                210.21085437041847
+              ],
+              "start": 0.6200000000000001,
+              "end": 0.92,
+              "thrower": "be73c1bf-6840-49c3-9320-caa3cecb62b1",
+              "receiver": "81403400-22d1-4c05-9f52-9b83702a9b5d"
+            }
+          ],
+          "caught": false,
+          "steal": false,
+          "visualVersion": 22
+        }
+      }
+    ],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "events",
+    "bodyIndex": "headSlide",
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 242
+    },
+    "failures": [],
+    "traces": [
+      {
+        "kind": "headSlide",
+        "defense": false,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "ground",
+          "secure",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.22,
+          "pickup": 0.29,
+          "throws": [
+            {
+              "base": 2,
+              "from": [
+                450,
+                445.5
+              ],
+              "to": [
+                450,
+                210.21085437041847
+              ],
+              "start": 0.36,
+              "end": 0.92,
+              "thrower": "755a5aec-dfe8-4eca-b8ff-d5b272e8dc6e",
+              "receiver": "ebe7081e-5879-49c1-9081-39c9b9cc8e85"
+            }
+          ],
+          "caught": false,
+          "steal": true,
+          "visualVersion": 22
+        }
+      },
+      {
+        "kind": "headSlide",
+        "defense": true,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "ground",
+          "secure",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.22,
+          "pickup": 0.29,
+          "throws": [
+            {
+              "base": 2,
+              "from": [
+                450,
+                445.5
+              ],
+              "to": [
+                450,
+                210.21085437041847
+              ],
+              "start": 0.36,
+              "end": 0.92,
+              "thrower": "d0400d88-a84a-4b37-998d-2db3c6b8577b",
+              "receiver": "9ea5569b-171b-458f-a7d3-959a53c6d5d9"
+            }
+          ],
+          "caught": false,
+          "steal": true,
+          "visualVersion": 22
+        }
+      }
+    ],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "events",
+    "bodyIndex": "tagout",
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 242
+    },
+    "failures": [],
+    "traces": [
+      {
+        "kind": "tagout",
+        "defense": false,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "ground",
+          "secure",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.22,
+          "pickup": 0.29,
+          "throws": [
+            {
+              "base": 2,
+              "from": [
+                450,
+                445.5
+              ],
+              "to": [
+                450,
+                210.21085437041847
+              ],
+              "start": 0.36,
+              "end": 0.92,
+              "thrower": "c1fe7c54-e3ed-49e0-a4b4-9b61ec0723f2",
+              "receiver": "1a181926-1309-4c7b-90da-24085567e938"
+            }
+          ],
+          "caught": false,
+          "steal": true,
+          "visualVersion": 22
+        }
+      },
+      {
+        "kind": "tagout",
+        "defense": true,
+        "phases": [
+          "crouch",
+          "run0",
+          "run1",
+          "crouchReceive",
+          "ground",
+          "secure",
+          "load",
+          "release",
+          "follow",
+          "receive"
+        ],
+        "plan": {
+          "land": 0.22,
+          "pickup": 0.29,
+          "throws": [
+            {
+              "base": 2,
+              "from": [
+                450,
+                445.5
+              ],
+              "to": [
+                450,
+                210.21085437041847
+              ],
+              "start": 0.36,
+              "end": 0.92,
+              "thrower": "25a491e3-0e0f-4983-bf3b-a097f18c16dd",
+              "receiver": "e515a195-d93f-4236-87c9-fc4fa8743dad"
+            }
+          ],
+          "caught": false,
+          "steal": true,
+          "visualVersion": 22
+        }
+      }
+    ],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "events",
+    "bodyIndex": "ks",
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 242
+    },
+    "failures": [],
+    "traces": [
+      {
+        "kind": "ks",
+        "defense": false,
+        "phases": [
+          "crouch",
+          "crouchReceive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [],
+          "caught": false,
+          "steal": false
+        }
+      },
+      {
+        "kind": "ks",
+        "defense": true,
+        "phases": [
+          "crouch",
+          "crouchReceive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [],
+          "caught": false,
+          "steal": false
+        }
+      }
+    ],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "events",
+    "bodyIndex": "kl",
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 242
+    },
+    "failures": [],
+    "traces": [
+      {
+        "kind": "kl",
+        "defense": false,
+        "phases": [
+          "crouch",
+          "crouchReceive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [],
+          "caught": false,
+          "steal": false
+        }
+      },
+      {
+        "kind": "kl",
+        "defense": true,
+        "phases": [
+          "crouch",
+          "crouchReceive"
+        ],
+        "plan": {
+          "land": 0.55,
+          "pickup": 0.55,
+          "throws": [],
+          "caught": false,
+          "steal": false
+        }
+      }
+    ],
+    "regression": null,
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "regression",
+    "bodyIndex": 0,
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": {
+      "checks": [
+        {
+          "name": "공격 포수도 헬멧",
+          "ok": true
+        },
+        {
+          "name": "수비 포수 보호장비",
+          "ok": true
+        },
+        {
+          "name": "투수·야수 야구모자",
+          "ok": true
+        },
+        {
+          "name": "저장 복사 후 외형 동일",
+          "ok": true
+        },
+        {
+          "name": "선수창 모자OFF와 경기 장비 독립",
+          "ok": true
+        },
+        {
+          "name": "좌·우타 준비 방향",
+          "ok": true
+        },
+        {
+          "name": "수비 시점 공격팀만 타순",
+          "ok": true
+        },
+        {
+          "name": "single 동작과 장비",
+          "ok": true
+        },
+        {
+          "name": "double 동작과 장비",
+          "ok": true
+        },
+        {
+          "name": "headSlide 동작과 장비",
+          "ok": true
+        },
+        {
+          "name": "footSlide 동작과 장비",
+          "ok": true
+        },
+        {
+          "name": "tagout 동작과 장비",
+          "ok": true
+        },
+        {
+          "name": "ground 동작과 장비",
+          "ok": true
+        },
+        {
+          "name": "ks 동작과 장비",
+          "ok": true
+        },
+        {
+          "name": "kl 동작과 장비",
+          "ok": true
+        },
+        {
+          "name": "hr 동작과 장비",
+          "ok": true
+        },
+        {
+          "name": "1루 도착 발 유지",
+          "ok": true
+        },
+        {
+          "name": "2루 세이프 후 베이스 유지",
+          "ok": true
+        },
+        {
+          "name": "태그아웃 후 베이스 유지 강제 없음",
+          "ok": true
+        }
+      ],
+      "runtimeErrors": [],
+      "diagnostics": {
+        "ready": true,
+        "parts": 5823,
+        "atlases": 8,
+        "frames": 700,
+        "heads": 250,
+        "portraits": 70,
+        "version": 17
+      }
+    },
+    "internal": null,
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "internal",
+    "bodyIndex": 0,
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": {
+      "checks": [
+        {
+          "name": "상대 13명 · 후보 3명 · 지명타자 편성",
+          "ok": true
+        },
+        {
+          "name": "30% 초과 투수는 유지",
+          "ok": true
+        },
+        {
+          "name": "체력 30% · 타순/포지션/기록 유지하며 교체",
+          "ok": true
+        },
+        {
+          "name": "타석 중에는 교체하지 않음",
+          "ok": true
+        },
+        {
+          "name": "상대 공격 중에는 교체하지 않음",
+          "ok": true
+        },
+        {
+          "name": "체력과 투구 능력이 좋은 후보 선택",
+          "ok": true
+        },
+        {
+          "name": "후보 소진 시 유지 · 내려간 투수 재등판 없음",
+          "ok": true
+        },
+        {
+          "name": "교체 저장·복원 뒤 중복 교체 기록 없음",
+          "ok": true
+        },
+        {
+          "name": "후보 없는 진행 중 저장에 후보를 한 번만 추가",
+          "ok": true
+        },
+        {
+          "name": "경기 스킵도 새 투수가 투구 · 이전 투구 기록 보존",
+          "ok": true
+        },
+        {
+          "name": "안타+선행주자 아웃은 단순 안타 축하 제외",
+          "ok": true
+        },
+        {
+          "name": "안타여도 3아웃 기회 무산 우선",
+          "ok": true
+        },
+        {
+          "name": "득점+주자 아웃은 두 결과 함께 반영",
+          "ok": true
+        },
+        {
+          "name": "우리 수비 아웃+실점은 무조건 호수비 축하 제외",
+          "ok": true
+        },
+        {
+          "name": "동점/역전/추격/추가점 구별",
+          "ok": true
+        },
+        {
+          "name": "상대 동점/역전/추격 구별",
+          "ok": true
+        },
+        {
+          "name": "본헤드와 종료 결과는 전용 멘트 유지",
+          "ok": true
+        },
+        {
+          "name": "새 그룹 한 사건 한 화자 · 직전 문구 반복 방지",
+          "ok": true
+        },
+        {
+          "name": "선수도 선행주자 아웃·포구 후 실점 인지",
+          "ok": true
+        }
+      ],
+      "dialogueGroups": 64,
+      "dialogueLines": 256,
+      "runtimeErrors": []
+    },
+    "simulation": null,
+    "runtimeErrors": []
+  },
+  {
+    "section": "simulation",
+    "bodyIndex": 0,
+    "counts": {
+      "layouts": 0,
+      "moving": 0,
+      "ready": 0,
+      "composites": 0,
+      "colorPixels": 0,
+      "eventSamples": 0
+    },
+    "failures": [],
+    "traces": [],
+    "regression": null,
+    "internal": null,
+    "simulation": {
+      "games": [
+        {
+          "seed": 1919,
+          "events": 94,
+          "done": true,
+          "ruleViolations": []
+        },
+        {
+          "seed": 2020,
+          "events": 120,
+          "done": true,
+          "ruleViolations": []
+        },
+        {
+          "seed": 2121,
+          "events": 151,
+          "done": true,
+          "ruleViolations": []
+        }
+      ],
+      "types": {
+        "single": 28,
+        "ball": 95,
+        "swing": 44,
+        "kl": 18,
+        "fly": 25,
+        "foul": 25,
+        "cs": 4,
+        "ground": 33,
+        "line": 9,
+        "dp": 5,
+        "strike": 47,
+        "ks": 3,
+        "error": 9,
+        "pb": 6,
+        "hbp": 4,
+        "double": 1,
+        "hr": 1,
+        "sb": 2,
+        "bb": 3,
+        "wp": 3
+      },
+      "failures": []
+    },
+    "runtimeErrors": []
+  }
+]
