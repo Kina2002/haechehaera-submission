@@ -1,0 +1,23 @@
+{
+  "version": 23,
+  "source_commit": "b2e5face88140b2e1bbd2fb964774e38b7c63d58",
+  "site": "https://haechehaera.sooyeon-jun-0389.chatgpt.site",
+  "deployment": {
+    "id": "appgdep_6afbc757dcf4819182395bf2be6df740",
+    "project_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b",
+    "title": "해체해라",
+    "version_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b~appgver_1cc08a9956288191800a52e70046a5ef",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ac6667e2b748191bbd3c2acd28f121b",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-17T03:18:01.409015+00:00"
+  },
+  "prior_version": 22,
+  "change": "홈을 벗어난 포수의 송구 후 복귀에서도 새 보호장비 유지",
+  "checks": "검수결과-v03.json + 포수-홈외곽-복귀검수.json"
+}

@@ -68,10 +68,12 @@ function describe(p,tm,pose,tick,x,y,flip){
  if(rear&&pose==='run')direction=3;
  if(!offense&&e){const receive=e.motion19?.throws.find(v=>v.receiver===p.id&&t>=v.end-.03);if(receive&&Math.hypot(x-BASES[receive.base][0],y-BASES[receive.base][1])<3){readyView=undefined;contact='foot';flip=receive.base===1||receive.base===4;direction=1;}}
  const catcher=!offense&&tm.lineup?.find(v=>v.id===p.id)?.pos==='C';if(catcher)headwear='catcher';
- headwear=CharacterPartsV17.equipmentFor(offense,position).headwear; return{frame,contact,anchorProgress,direction,readyView,headwear,flip,phase,offense,catcher,position,forms:form};
+ const action=!offense?DefenseMotionV22.action(p,tm,position,pose,x,y,tick,e,t,distance):null;
+ if(action){readyView=undefined;flip=false;direction=undefined;if(action.holdBase){contact='foot';anchorProgress=1;}}
+ headwear=CharacterPartsV17.equipmentFor(offense,position).headwear; return{frame,contact,anchorProgress,direction,readyView,action,headwear,flip,phase,offense,catcher,position,forms:form};
 }
 function paint(c,x,y,scale,tm,p,state){
- const a=playerConfig(p,tm),out=F.render(a,state.frame,{headwear:state.headwear,flip:state.flip,direction:state.direction,readyView:state.readyView,catcher:state.catcher,defense:!state.offense,position:state.position}),bitmap=out.canvas;
+ const a=playerConfig(p,tm),out=F.render(a,state.frame,{headwear:state.headwear,flip:state.flip,direction:state.direction,readyView:state.readyView,action:state.action,catcher:state.catcher,defense:!state.offense,position:state.position}),bitmap=out.canvas;
  const touch=state.contact?out.contacts[state.contact]:out.foot,u=state.anchorProgress??1,anchor=out.foot.map((v,i)=>v+(touch[i]-v)*u),s=Math.max(.55,scale*.91);
  c.save();c.imageSmoothingEnabled=false;
  c.fillStyle='#062c2555';c.beginPath();c.ellipse(Math.round(x),Math.round(y)+1,9*s,2.3*s,0,0,Math.PI*2);c.fill();

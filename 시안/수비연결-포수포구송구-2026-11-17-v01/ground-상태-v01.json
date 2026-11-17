@@ -1,0 +1,214 @@
+[
+  {
+    "t": 0.19,
+    "actor": {
+      "id": "04228790-a535-476f-ae8e-dde7e09b1d95",
+      "frame": 0,
+      "contact": null,
+      "x": 385.1895335228223,
+      "y": 262.84225045978934,
+      "worldX": 392,
+      "worldY": 250,
+      "scale": 0.49845343588028757,
+      "flip": false,
+      "readyView": "F",
+      "action": null,
+      "headwear": "cap",
+      "catcher": false,
+      "position": "SS",
+      "offense": false
+    },
+    "ball": {
+      "x": 454.0514120133436,
+      "y": 294.84518821246706
+    }
+  },
+  {
+    "t": 0.4,
+    "actor": {
+      "id": "04228790-a535-476f-ae8e-dde7e09b1d95",
+      "frame": 39,
+      "contact": null,
+      "x": 382.4889985273037,
+      "y": 341.9018107602202,
+      "worldX": 377.5010723016577,
+      "worldY": 329.31766329093125,
+      "scale": 0.9000145912757507,
+      "flip": false,
+      "action": {
+        "phase": "run0",
+        "view": "F",
+        "catcher": false
+      },
+      "headwear": "cap",
+      "catcher": false,
+      "position": "SS",
+      "offense": false
+    },
+    "ball": {
+      "x": 415.2750005142896,
+      "y": 371.00865701246755
+    }
+  },
+  {
+    "t": 0.53,
+    "actor": {
+      "id": "04228790-a535-476f-ae8e-dde7e09b1d95",
+      "frame": 5,
+      "contact": null,
+      "x": 380.15999999999997,
+      "y": 351.23792875089345,
+      "worldX": 375,
+      "worldY": 343,
+      "scale": 0.9198314049586778,
+      "flip": false,
+      "action": {
+        "phase": "ground",
+        "view": "FR",
+        "catcher": false
+      },
+      "headwear": "cap",
+      "catcher": false,
+      "position": "SS",
+      "offense": false
+    },
+    "ball": {
+      "x": 384.54860010397357,
+      "y": 351.0460596063934
+    }
+  },
+  {
+    "t": 0.5650000000000001,
+    "actor": {
+      "id": "04228790-a535-476f-ae8e-dde7e09b1d95",
+      "frame": 5,
+      "contact": null,
+      "x": 380.15999999999997,
+      "y": 351.23792875089345,
+      "worldX": 375,
+      "worldY": 343,
+      "scale": 0.9198314049586778,
+      "flip": false,
+      "action": {
+        "phase": "secure",
+        "view": "FR",
+        "catcher": false
+      },
+      "headwear": "cap",
+      "catcher": false,
+      "position": "SS",
+      "offense": false
+    },
+    "ball": {
+      "x": 383.375,
+      "y": 341.125
+    }
+  },
+  {
+    "t": 0.6000000000000001,
+    "actor": {
+      "id": "04228790-a535-476f-ae8e-dde7e09b1d95",
+      "frame": 35,
+      "contact": null,
+      "x": 380.15999999999997,
+      "y": 351.23792875089345,
+      "worldX": 375,
+      "worldY": 343,
+      "scale": 0.9198314049586778,
+      "flip": false,
+      "action": {
+        "phase": "load",
+        "view": "R",
+        "catcher": false,
+        "releaseAt": 0.6200000000000001
+      },
+      "headwear": "cap",
+      "catcher": false,
+      "position": "SS",
+      "offense": false
+    },
+    "ball": {
+      "x": 385.0625,
+      "y": 340.28125
+    }
+  },
+  {
+    "t": 0.6300000000000001,
+    "actor": {
+      "id": "04228790-a535-476f-ae8e-dde7e09b1d95",
+      "frame": 35,
+      "contact": null,
+      "x": 380.15999999999997,
+      "y": 351.23792875089345,
+      "worldX": 375,
+      "worldY": 343,
+      "scale": 0.9198314049586778,
+      "flip": false,
+      "action": {
+        "phase": "release",
+        "view": "R",
+        "catcher": false,
+        "releaseAt": 0.6200000000000001
+      },
+      "headwear": "cap",
+      "catcher": false,
+      "position": "SS",
+      "offense": false
+    },
+    "ball": {
+      "x": 397.3229165601508,
+      "y": 337.73958333347133
+    }
+  },
+  {
+    "t": 0.6800000000000002,
+    "actor": {
+      "id": "04228790-a535-476f-ae8e-dde7e09b1d95",
+      "frame": 5,
+      "contact": null,
+      "x": 380.15999999999997,
+      "y": 351.23792875089345,
+      "worldX": 375,
+      "worldY": 343,
+      "scale": 0.9198314049586778,
+      "flip": false,
+      "action": {
+        "phase": "follow",
+        "view": "R",
+        "catcher": false,
+        "releaseAt": 0.6200000000000001
+      },
+      "headwear": "cap",
+      "catcher": false,
+      "position": "SS",
+      "offense": false
+    },
+    "ball": {
+      "x": 437.5312498934842,
+      "y": 337.68750000013796
+    }
+  },
+  {
+    "t": 0.92,
+    "actor": {
+      "id": "04228790-a535-476f-ae8e-dde7e09b1d95",
+      "frame": 5,
+      "contact": null,
+      "x": 380.15999999999997,
+      "y": 351.23792875089345,
+      "worldX": 375,
+      "worldY": 343,
+      "scale": 0.9198314049586778,
+      "flip": true,
+      "action": null,
+      "headwear": "cap",
+      "catcher": false,
+      "position": "SS",
+      "offense": false
+    },
+    "ball": {
+      "x": 631.1875,
+      "y": 335.78125
+    }
+  }
+]

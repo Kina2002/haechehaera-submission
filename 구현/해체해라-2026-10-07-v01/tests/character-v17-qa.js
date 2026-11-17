@@ -11,7 +11,7 @@ scene(kind='single',body=2,hand='우타',defense=false){
  if(['single','double','hr'].includes(kind)){e.swing=true;e.contact=true;reachHit(m,e,{single:1,double:2,hr:4}[kind]);if(kind==='hr')e.target=[780,115];}
  else if(['headSlide','footSlide','tagout'].includes(kind)){const out=kind==='tagout';m.bases[0]=null;e.type=out?'cs':'sb';e.text=out?'태그 아웃':'2루 진루';e.pitchThrown=false;e.tag=true;e.actor=runner;e.fielder=fielder(df,'C');e.fielderId=e.fielder.id;e.fieldPos='C';e.target=null;e.throwBases=[2];moveTo(e,runner,1,2,out,.24);if(out)addOut(m,e,runner);else m.bases[1]=runner;const p=ply(at,runner);p.visualForm={...PlayerMotionV13.identity(p),variation:kind==='headSlide'?0:1};}
  else if(kind==='ground'){e.swing=true;e.contact=true;e.fieldPos='SS';e.fielder=fielder(df,'SS');e.fielderId=e.fielder.id;e.target=[375,343];groundOut(m,e,false);}
- else if(['ks','kl'].includes(kind)){e.type=kind;e.swing=kind==='ks';e.contact=false;addOut(m,e,e.batter);finishPA(m,e,'ab');}
+ else if(['ks','kl'].includes(kind)){e.type=kind;e.swing=kind==='ks';e.contact=false;e.target=null;e.fieldPos='C';e.fielder=fielder(df,'C');e.fielderId=e.fielder.id;addOut(m,e,e.batter);finishPA(m,e,'ab');}
  e.after=snap(m);buildMotion(m,e);anim={e,elapsed:0,duration:1e12,resultShown:false,holdLeft:resultHoldMs(e)};render();this.at(.01);return e;
 },
 at(t,hold=0){let lo=0,hi=1;for(let i=0;i<30;i++){const mid=(lo+hi)/2;if(playProgress(mid)<t)lo=mid;else hi=mid;}anim.elapsed=(lo+hi)/2*anim.duration;anim.resultShown=hold>0;anim.holdLeft=resultHoldMs(anim.e)-hold;drawField(performance.now());return StadiumViewV13.lastFrame;},
