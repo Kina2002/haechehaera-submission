@@ -1,0 +1,24 @@
+{
+  "site_url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site",
+  "version": 17,
+  "project_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b",
+  "version_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b~appgver_2276fb8867a48191b1ca0a565284f53c",
+  "deployment": {
+    "id": "appgdep_6afba49aad908191a201bc693aa198d8",
+    "project_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b",
+    "title": "해체해라",
+    "version_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b~appgver_2276fb8867a48191b1ca0a565284f53c",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ac6667e2b748191bbd3c2acd28f121b",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-17T00:49:50.901456+00:00"
+  },
+  "site_source_commit": "e5794a9db07a65ca2a68ea27c9eb1fca1fd1533e",
+  "implementation_commit": "e34fda74a905beba97cfa53dda643227d7ac88db",
+  "pull_request": "https://github.com/Kina2002/haechehaera-submission/pull/82"
+}

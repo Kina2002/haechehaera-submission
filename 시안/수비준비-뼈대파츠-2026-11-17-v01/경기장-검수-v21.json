@@ -1,0 +1,207 @@
+{
+  "checks": [
+    {
+      "name": "6체형 × 9시프트 × 공격/수비: 이동과 홈 방향 준비 자세",
+      "ok": true,
+      "layouts": 108,
+      "fielders": 756,
+      "moving": 756
+    },
+    {
+      "name": "run 동작 유지",
+      "ok": true
+    },
+    {
+      "name": "throw 동작 유지",
+      "ok": true
+    },
+    {
+      "name": "catch 동작 유지",
+      "ok": true
+    },
+    {
+      "name": "glove 동작 유지",
+      "ok": true
+    },
+    {
+      "name": "54 체형·방향·피부 조합: 팀색 변경 시 바지·신발·글러브 보존",
+      "ok": true,
+      "combinations": 54
+    }
+  ],
+  "failures": [],
+  "runtimeErrors": [],
+  "regression": {
+    "checks": [
+      {
+        "name": "공격 포수도 헬멧",
+        "ok": true
+      },
+      {
+        "name": "수비 포수 보호장비",
+        "ok": true
+      },
+      {
+        "name": "투수·야수 야구모자",
+        "ok": true
+      },
+      {
+        "name": "저장 복사 후 외형 동일",
+        "ok": true
+      },
+      {
+        "name": "선수창 모자OFF와 경기 장비 독립",
+        "ok": true
+      },
+      {
+        "name": "좌·우타 준비 방향",
+        "ok": true
+      },
+      {
+        "name": "수비 시점 공격팀만 타순",
+        "ok": true
+      },
+      {
+        "name": "single 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "double 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "headSlide 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "footSlide 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "tagout 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "ground 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "ks 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "kl 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "hr 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "1루 도착 발 유지",
+        "ok": true
+      },
+      {
+        "name": "2루 세이프 후 베이스 유지",
+        "ok": true
+      },
+      {
+        "name": "태그아웃 후 베이스 유지 강제 없음",
+        "ok": true
+      }
+    ],
+    "runtimeErrors": [],
+    "diagnostics": {
+      "ready": true,
+      "parts": 5823,
+      "atlases": 8,
+      "frames": 700,
+      "heads": 250,
+      "portraits": 70,
+      "version": 17
+    }
+  },
+  "internal": {
+    "checks": [
+      {
+        "name": "상대 13명 · 후보 3명 · 지명타자 편성",
+        "ok": true
+      },
+      {
+        "name": "30% 초과 투수는 유지",
+        "ok": true
+      },
+      {
+        "name": "체력 30% · 타순/포지션/기록 유지하며 교체",
+        "ok": true
+      },
+      {
+        "name": "타석 중에는 교체하지 않음",
+        "ok": true
+      },
+      {
+        "name": "상대 공격 중에는 교체하지 않음",
+        "ok": true
+      },
+      {
+        "name": "체력과 투구 능력이 좋은 후보 선택",
+        "ok": true
+      },
+      {
+        "name": "후보 소진 시 유지 · 내려간 투수 재등판 없음",
+        "ok": true
+      },
+      {
+        "name": "교체 저장·복원 뒤 중복 교체 기록 없음",
+        "ok": true
+      },
+      {
+        "name": "후보 없는 진행 중 저장에 후보를 한 번만 추가",
+        "ok": true
+      },
+      {
+        "name": "경기 스킵도 새 투수가 투구 · 이전 투구 기록 보존",
+        "ok": true
+      },
+      {
+        "name": "안타+선행주자 아웃은 단순 안타 축하 제외",
+        "ok": true
+      },
+      {
+        "name": "안타여도 3아웃 기회 무산 우선",
+        "ok": true
+      },
+      {
+        "name": "득점+주자 아웃은 두 결과 함께 반영",
+        "ok": true
+      },
+      {
+        "name": "우리 수비 아웃+실점은 무조건 호수비 축하 제외",
+        "ok": true
+      },
+      {
+        "name": "동점/역전/추격/추가점 구별",
+        "ok": true
+      },
+      {
+        "name": "상대 동점/역전/추격 구별",
+        "ok": true
+      },
+      {
+        "name": "본헤드와 종료 결과는 전용 멘트 유지",
+        "ok": true
+      },
+      {
+        "name": "새 그룹 한 사건 한 화자 · 직전 문구 반복 방지",
+        "ok": true
+      },
+      {
+        "name": "선수도 선행주자 아웃·포구 후 실점 인지",
+        "ok": true
+      }
+    ],
+    "dialogueGroups": 64,
+    "dialogueLines": 256,
+    "runtimeErrors": []
+  }
+}

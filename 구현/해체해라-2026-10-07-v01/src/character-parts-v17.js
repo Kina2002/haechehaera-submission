@@ -1,0 +1,114 @@
+/* Verified 2026-11-17 parts. Integer grid; one persisted identity in portraits and games. */
+(()=>{'use strict';
+const U=window.UNIFORM_COLORS_V18,trimMasks=new Map();const D=window.CHARACTER_ASSETS_V17,atlas=[],parts=new Map(),tints=new Map(),heads=new Map(),frames=new Map(),portraits=new Map(),cvParts=new Map();
+const blank=(w=33,h=36)=>({width:w,height:h,data:new Uint8ClampedArray(w*h*4)});
+const make=(w,h)=>Object.assign(document.createElement('canvas'),{width:w,height:h});
+const memo=(map,key,value,max=500)=>{if(map.size>=max)map.delete(map.keys().next().value);map.set(key,value);return value;};
+const pad=n=>String(n).padStart(2,'0'),rgb=h=>{const s=(h||'#126451').replace('#','');return [0,2,4].map(i=>parseInt(s.slice(i,i+2),16));};
+function get(key){if(parts.has(key))return parts.get(key);const r=D.rects[key];if(!r)throw Error('Missing new character part: '+key);const a=atlas[r.atlas],b=blank(r.rect[2],r.rect[3]);for(let y=0;y<b.height;y++){const i=((r.rect[1]+y)*a.width+r.rect[0])*4;b.data.set(a.data.subarray(i,i+b.width*4),y*b.width*4);}b.offset=r.offset;return memo(parts,key,b);}
+function blit(out,a,dx=0,dy=0){for(let y=0;y<a.height;y++)for(let x=0;x<a.width;x++){let xx=x+dx,yy=y+dy,p=(y*a.width+x)*4;if(xx<0||yy<0||xx>=out.width||yy>=out.height||!a.data[p+3])continue;out.data.set(a.data.subarray(p,p+4),(yy*out.width+xx)*4);}return out;}
+function bitmap(a){const c=make(a.width,a.height);c.getContext('2d').putImageData(new ImageData(a.data,a.width,a.height),0,0);return c;}
+function partCanvas(key){if(cvParts.has(key))return cvParts.get(key);return memo(cvParts,key,bitmap(get(key)),150);}
+function teamShade(color,level){const f=[.28,.47,.72,1][level]??1;return rgb(color).map(v=>Math.round(Math.min(255,v*f)));}
+function inPoly(x,y,poly){let inside=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])inside=!inside;}return inside;}
+function gearTrim(key,x,y){const match=key.match(/^재질\/모자\/(cap|helmet)\/([A-Z]+)\.png$/);if(!match)return false;let view=match[2];if(view==='B')return false;const flip={FL:'FR',L:'R',BL:'BR',FLD:'FRD',LD:'RD',FLU:'FRU'};if(flip[view]){x=32-x;view=flip[view];}
+const helmet=match[1]==='helmet',polys={
+F:[[10,11],[12,10],[21,10],[23,11],[25,14],[21,13],[19,12],[13,12],[9,14]],
+FR:[[15,11],[18,10],[24,10],[28,12],[29,14],[21,13],[16,14],[13,13]],
+R:[[15,11],[19,10],[25,10],[29,11],[30,13],[20,13],[16,14]],
+BR:helmet?[[26,9],[30,11],[29,13],[26,14]]:[[22,10],[26,10],[29,11],[29,13],[23,13]],
+FD:[[9,12],[13,11],[21,11],[25,13],[25,16],[8,16],[7,14]],
+FRD:[[13,13],[18,12],[24,12],[28,14],[29,17],[16,17],[12,15]],
+RD:[[17,13],[22,12],[27,12],[31,14],[32,17],[20,17],[16,15]],
+FU:[[10,9],[13,8],[20,8],[24,10],[25,13],[22,12],[19,10],[13,10],[9,13]],
+FRU:helmet?[[14,8],[16,7],[24,7],[28,9],[29,12],[23,11],[18,10],[13,12]]:[[15,9],[18,8],[24,8],[28,10],[28,12],[22,11],[17,11],[13,12]]
+};return inPoly(x+.5,y+.5,polys[view]||[]);}
+function bodyTrim(file){if(!trimMasks.has(file))trimMasks.set(file,new Set(U.trimPixels[file]||[]));return trimMasks.get(file);}
+function portraitBrim(x,y){return y>=62+.0045*(x-99)*(x-99);}
+
+function material(key,o){const k=key+'|'+[o.skin,o.eye,o.hair,o.primary,o.secondary].join('|');if(tints.has(k))return tints.get(k);const a=get(key),b=blank(a.width,a.height),P=D.palettes;for(let p=0;p<a.data.length;p+=4){if(!a.data[p+3])continue;let v=a.data[p],c=v<=5?P.skin[o.skin][v-1]:v===10?[247,245,233]:v===11?[47,32,29]:v===12?P.iris[o.eye]:v===20?P.brow[o.hair]:v>=30&&v<=33?P.hair[o.hair][v-30]:teamShade(gearTrim(key,(p/4)%a.width,Math.floor(p/4/a.width))?o.secondary:o.primary,v-40);b.data.set([...c,255],p);}return memo(tints,k,b,700);}
+function bodyPart(name,body,pose,o,left){const file='PNG/'+name+'/'+body+'/'+pad(pose)+'.png',k=file+'|'+[o.skin,o.primary,o.secondary,left].join('|');if(tints.has(k))return tints.get(k);const a=get(file),m=get('재질/피부/'+name+'/'+body+'/'+pad(pose)+'.png'),b=blank(64,64),pri=rgb(o.primary),sec=rgb(o.secondary);
+for(let y=0;y<64;y++)for(let x=0;x<64;x++){let p=(y*64+x)*4,xx=left?64-x:x;if(xx<0||xx>=64)continue;let q=(y*64+xx)*4;if(m.data[p+3])b.data.set([...D.palettes.skin[o.skin][m.data[p]-1],255],q);else {let[r,g,bb,a0]=a.data.subarray(p,p+4);if(a0&&g>r*1.2&&g>bb*.85&&bb>r*1.1){const f=Math.max(.22,Math.min(1.2,g/107));b.data.set([...pri.map(v=>Math.min(255,Math.round(v*f))),a0],q);}else if(a0&&bodyTrim(file).has(y*64+x)){const f=(r+g+bb)/3/238;b.data.set([...sec.map(v=>Math.round(v*f)),a0],q);}else b.data.set(a.data.subarray(p,p+4),q);}}
+return memo(tints,k,b,700);}
+const opposite={FR:'FL',R:'L',BR:'BL',FRD:'FLD',RD:'LD',FRU:'FLU'};
+function headParts(view,o){const key=JSON.stringify([view,o.state,o.hairId,o.skin,o.eye,o.hair,o.primary,o.secondary,o.eyesId,o.browsId,o.noseId,o.mouthId]);if(heads.has(key))return heads.get(key);const id=pad(o.hairId),back=material('재질/머리/'+o.state+'/'+view+'/back-'+id+'.png',o),front=material('재질/머리/'+o.state+'/'+view+'/front-'+id+'.png',o),over=material('재질/머리/'+o.state+'/'+view+'/over-gear-'+id+'.png',o),face=blank();
+for(const f of ['base.png','nose-'+pad(o.noseId)+'.png','mouth-'+pad(o.mouthId)+'.png','eyes-'+pad(o.eyesId)+'.png','brows-'+pad(o.browsId)+'.png'])blit(face,material('재질/얼굴/'+view+'/'+f,o));const gear=o.state==='OFF'?blank():material('재질/모자/'+o.state.toLowerCase()+'/'+view+'.png',o);return memo(heads,key,{back,front,over,face,gear},250);}
+const hash=s=>{let n=2166136261;for(const c of String(s)){n^=c.charCodeAt(0);n=Math.imul(n,16777619);}return n>>>0;};
+function newLook(seed,a={},fresh=false){const roll=(tag,n)=>hash(seed+tag)%n,p=a.parts||{};return{version:1,hairId:fresh?roll('hair',15)+1:(p.hair>=0?p.hair%15+1:1),skin:Math.min(2,Math.floor((a.skin||0)/2)),hair:D.hairColors[(a.hairColor||0)%6],eye:D.eyeColors[(a.eyeColor||0)%3],eyesId:fresh?roll('eyes',10)+1:Math.max(1,((p.eyes||0)%10)+1),browsId:fresh?roll('brows',10)+1:Math.max(1,((p.brows||0)%10)+1),noseId:fresh?roll('nose',10)+1:Math.max(1,((p.nose||0)%10)+1),mouthId:fresh?roll('mouth',10)+1:Math.max(1,((p.mouth||0)%10)+1),glasses:p.wear>=0?'g'+pad(roll('glasses',13)+1):'none',earring:roll('earringChance',4)===0?'e'+pad(roll('earring',5)+1):'none',black:p.black>=0?'b'+pad(p.black%3+1):'none',necklace:roll('necklaceChance',4)===0?'n'+pad(roll('necklace',5)+1):'none',portraitCap:true};}
+function look(p){const a=p.appearance||(p.appearance={body:2});if(!a.v17)a.v17=newLook(p.id||p.name||'player',a);const o=a.v17;
+for(const k of ['eyesId','browsId','noseId','mouthId'])if(!Number.isInteger(o[k])||o[k]<1||o[k]>10)o[k]=1;
+if(!Number.isInteger(o.hairId)||o.hairId<1||o.hairId>15)o.hairId=1;if(!D.palettes.skin[o.skin])o.skin=0;if(!D.palettes.hair[o.hair])o.hair='brown';if(!D.palettes.iris[o.eye])o.eye='brown';
+for(const[k,prefix,n]of[['glasses','g',13],['earring','e',5],['black','b',3],['necklace','n',5]])if(o[k]!=='none'&&!Array.from({length:n},(_,i)=>prefix+pad(i+1)).includes(o[k]))o[k]='none';return o;}
+function config(p,tm){return{...look(p),body:Math.max(0,Math.min(5,p.appearance.body||0)),primary:COLORS[tm?.primary??4]?.[1]||'#126451',secondary:COLORS[tm?.secondary??3]?.[1]||'#f4f5ed'};}
+function equipmentFor(offense,position){return{headwear:offense?'helmet':position==='C'?'catcher':'cap',catcher:!offense&&position==='C'};}
+function renderDefensiveReady(a,view,options){
+ const data=window.DEFENSIVE_READY_V21,body=D.bodyIds[a.body]||'normal',row=data.rows[body+'/'+view];if(!row)throw Error('Defensive ready view missing: '+body+'/'+view);
+ const o={...a,state:options.headwear==='none'?'OFF':'CAP'},key='ready21|'+JSON.stringify([o,view]);if(frames.has(key))return frames.get(key);
+ const primary=rgb(o.primary),secondary=rgb(o.secondary),shade=(color,f)=>color.map(v=>Math.min(255,Math.round(v*f)));
+ const tint=pixels=>{const out=blank(64,64);for(let i=0;i<pixels.length;i+=2){const v=pixels[i+1],color=v<=5?D.palettes.skin[o.skin][v-1]:v<60?shade(primary,[.4,.65,.9,1.06][v-50]):v<70?shade(secondary,[.6,.84,1][v-60]):v<80?data.palettes.pants[v-70]:v<90?data.palettes.shoes[v-80]:data.palettes.glove[v-90];out.data.set([...color,255],pixels[i]*4);}return out;};
+ const hp=row.headPosition,h=headParts(view,o),b=tint(row.body),f=tint(row.forearm),glove=tint(row.glove),acc=blank(),chain=blank(64,64);
+ for(const id of[o.glasses,o.earring,o.black])if(id&&id!=='none')blit(acc,get('PNG/액세서리/'+view+'/'+id+'.png'));
+ if(o.necklace&&o.necklace!=='none'){blit(chain,get('PNG/목걸이/'+view+'/'+o.necklace+'.png'),...hp);const shirt=new Set();for(let i=0;i<row.body.length;i+=2)if(row.body[i+1]>=50&&row.body[i+1]<=53)shirt.add(row.body[i]);for(let p=0;p<4096;p++)if(!shirt.has(p))chain.data.fill(0,p*4,p*4+4);}
+ const out=blank(64,64);for(const[layer,x,y]of[[h.back,...hp],[b,0,0],[chain,0,0],[h.face,...hp],[acc,...hp],[h.front,...hp],[h.gear,...hp],[h.over,...hp],[f,0,0],[glove,0,0]])blit(out,layer,x,y);
+ // The glove is a supplied left-hand layer; do not add the legacy automatic glove.
+ return memo(frames,key,{canvas:bitmap(out),neck:row.neck,foot:row.foot,contacts:{foot:row.foot,hand:row.foot},body,pose:'defensive-ready',view,readyView:view,headDirection:view==='F'?0:1,headwear:options.headwear,catcher:false,gloveHand:row.gloveHand},700);
+}
+function renderDefenseAction(a,action,options){
+ if(action.phase==='ready'){if(!options.catcher)return renderDefensiveReady(a,action.view,options);action={...action,phase:'secure'};}
+ const data=window.DEFENSE_ACTIONS_V22,body=D.bodyIds[a.body]||'normal',view=action.view,row=data.rows[body+'/'+action.phase+'/'+view];if(!row)throw Error('Defense action missing: '+body+'/'+action.phase+'/'+view);
+ const catcher=!!options.catcher,crouch=action.phase.startsWith('crouch'),o={...a,state:catcher?'HELMET':options.headwear==='none'?'OFF':'CAP'},key='defense22|'+JSON.stringify([o,action.phase,view,catcher]);if(frames.has(key))return frames.get(key);
+ const primary=rgb(o.primary),secondary=rgb(o.secondary),shade=(c,f)=>c.map(v=>Math.min(255,Math.round(v*f))),P=data.palettes;
+ const tint=list=>{const out=blank(64,64);for(let i=0;i<list.length;i+=2){const v=list[i+1],c=v<6?D.palettes.skin[o.skin][v-1]:v<60?shade(primary,[.4,.65,.9,1.06][v-50]):v<70?shade(secondary,[.6,.84,1][v-60]):v<80?P.pants[v-70]:v<90?P.shoes[v-80]:v<100?P.glove[v-90]:P.armor[v-100];out.data.set([...c,255],list[i]*4);}return out;};
+ const b=tint(row.bodyLayer),arm=tint(row.forearm),glove=tint(row.glove),hp=row.headPosition,h=headParts(view,o),acc=blank(),chain=blank(64,64),rear=['B','BR','BL'].includes(view);
+ for(const id of[catcher?'none':o.glasses,o.earring,o.black])if(id&&id!=='none')blit(acc,get('PNG/액세서리/'+view+'/'+id+'.png'));
+ if(o.necklace&&o.necklace!=='none'&&!catcher){blit(chain,get('PNG/목걸이/'+view+'/'+o.necklace+'.png'),...hp);const allowed=new Set();for(let i=0;i<row.bodyLayer.length;i+=2)if(row.bodyLayer[i+1]>=50&&row.bodyLayer[i+1]<=53)allowed.add(row.bodyLayer[i]);for(let p=0;p<4096;p++)if(!allowed.has(p))chain.data.fill(0,p*4,p*4+4);}
+ if(catcher&&!crouch){
+  const guard=make(64,64),gg=guard.getContext('2d');gg.imageSmoothingEnabled=false;const width=body==='broad'||body==='heavy'?15:body==='compact'?10:12,height=Math.max(8,Math.round((56-row.neck[1])*.48));gg.drawImage(partCanvas('equipment/'+(rear?1:0)),32-Math.floor(width/2),row.neck[1]+1,width,height);const armor=gg.getImageData(0,0,64,64).data;
+  for(let i=0;i<row.bodyLayer.length;i+=2){const p=row.bodyLayer[i],v=row.bodyLayer[i+1],y=Math.floor(p/64);if(v>=50&&v<=53&&armor[p*4+3])b.data.set(armor.subarray(p*4,p*4+4),p*4);else if(v>=70&&v<=73&&y>row.neck[1]+(56-row.neck[1])*.68&&y<55)b.data.set([...P.armor[Math.min(3,v-70)],255],p*4);}
+ }
+ const out=blank(64,64);for(const[layer,x,y]of[[h.back,...hp],[b,0,0],[chain,0,0],[h.face,...hp],[acc,...hp],[h.front,...hp],[h.gear,...hp],[h.over,...hp],[arm,0,0],[glove,0,0]])blit(out,layer,x,y);
+ const canvas=bitmap(out),g=canvas.getContext('2d');g.imageSmoothingEnabled=false;
+ if(catcher&&!rear){const mask=partCanvas('equipment/'+(view==='F'?2:3)),left=['FL','L'].includes(view);g.save();if(left){g.translate(hp[0]+25,hp[1]+8);g.scale(-1,1);g.drawImage(mask,0,0,17,17);}else g.drawImage(mask,hp[0]+8,hp[1]+8,17,17);g.restore();}
+ const shoes=[];for(let i=0;i<row.bodyLayer.length;i+=2){const p=row.bodyLayer[i],v=row.bodyLayer[i+1];if(v>=80&&v<=82&&Math.floor(p/64)>=55)shoes.push([p%64,Math.floor(p/64)]);}shoes.sort((a,b)=>Math.abs(a[0]-32)-Math.abs(b[0]-32));
+ return memo(frames,key,{canvas,body,pose:action.phase,view,action:{phase:action.phase,view},neck:row.neck,foot:row.foot,contacts:{foot:shoes[0]||row.foot,hand:row.glovePoint},glovePoint:row.glovePoint,handPoint:row.handPoint,gloveHand:row.gloveHand,headwear:options.headwear,catcher,headDirection:rear?3:view==='F'?0:1},700);
+}
+// Bat contact geometry comes from the untinted equipment pixels, excluding skin masks.
+// It is independent of the player's skin, hair and uniform palette.
+const batGeometry25=new Map();
+function batContact25(body,pose,left){
+ if(pose<53||pose>55)return null;const key=body+'/'+pose+'/'+left;if(batGeometry25.has(key))return batGeometry25.get(key);
+ let edge=-1,ys=[];
+ for(const name of['몸','앞팔']){
+  const raw=get('PNG/'+name+'/'+body+'/'+pad(pose)+'.png'),skin=get('재질/피부/'+name+'/'+body+'/'+pad(pose)+'.png');
+  for(let y=0;y<54;y++)for(let x=0;x<64;x++){
+   const i=(y*64+x)*4,r=raw.data[i],g=raw.data[i+1],blue=raw.data[i+2];
+   if(!raw.data[i+3]||skin.data[i+3]||r<75||r<g*1.12||g<blue*1.12||blue>140)continue;
+   if(x>edge){edge=x;ys=[y];}else if(x===edge)ys.push(y);
+  }
+ }
+ const point=ys.length?[left?64-edge:edge,ys.reduce((a,b)=>a+b,0)/ys.length]:null;batGeometry25.set(key,point);return point;
+}
+function render(a,pose=0,options={}){if(options.action)return renderDefenseAction(a,options.action,options);if(options.readyView)return renderDefensiveReady(a,options.readyView,options);const o={...a,state:options.headwear==='cap'?'CAP':options.headwear==='none'?'OFF':'HELMET'},body=D.bodyIds[a.body]||'normal',left=!!options.flip,row=D.poses.find(r=>r.body===body&&r.pose===pose);if(!row)throw Error('Pose missing '+pose);
+let view=left?(opposite[row.view]||row.view):row.view;if(options.direction!==undefined){view=['F','FR','BR','B'][options.direction]||view;if(left)view=opposite[view]||view;}
+const key=JSON.stringify([o,pose,options]);if(frames.has(key))return frames.get(key);const hp=left?[row.neck[0]-(32-row.headAnchor[0]),row.headPosition[1]]:row.headPosition,h=headParts(view,o),b=bodyPart('몸',body,pose,o,left),f=bodyPart('앞팔',body,pose,o,left),acc=blank(),chain=blank(64,64);
+for(const id of[o.glasses,o.earring,o.black])if(id&&id!=='none')blit(acc,get('PNG/액세서리/'+view+'/'+id+'.png'));
+if(o.necklace!=='none'&&!options.catcher){let v=row.view.replace(/[DU]$/,'');if(pose>=59)v='F';if([31,32,33,34,35].includes(pose))v='FR';if([0,30,33].includes(pose))v='F';if(left)v=opposite[v]||v;blit(chain,get('PNG/목걸이/'+v+'/'+o.necklace+'.png'),row.neck[0]-16,row.neck[1]-24);const base=get('PNG/몸/'+body+'/'+pad(pose)+'.png');for(let y=0;y<64;y++)for(let x=0;x<64;x++){let p=(y*64+x)*4;if(!chain.data[p+3])continue;let sx=left?64-x:x;const[r,g,bb,al]=base.data.subarray((y*64+sx)*4,(y*64+sx)*4+4);if(!al||!(g>r*1.2&&g>bb*.85&&bb>r*1.1))chain.data.fill(0,p,p+4);}}
+const out=blank(64,64);for(const[layer,x,y]of[[h.back,...hp],[b,0,0],[chain,0,0],[h.face,...hp],[acc,...hp],[h.front,...hp],[h.gear,...hp],[h.over,...hp],[f,0,0]])blit(out,layer,x,y);
+const canvas=bitmap(out),g=canvas.getContext('2d');g.imageSmoothingEnabled=false;const rear=['B','BR','BL'].includes(view);
+function equip(i,x,y,w,hh,mirror=false){const im=partCanvas('equipment/'+i);g.save();if(mirror){g.translate(x+w,y);g.scale(-1,1);g.drawImage(im,0,0,w,hh);}else g.drawImage(im,x,y,w,hh);g.restore();}
+if(options.catcher){const bw=body==='heavy'?15:body==='broad'?14:body==='compact'?10:12,ch=Math.max(9,Math.min(14,Math.round((56-row.neck[1])*.53)));equip(rear?1:0,32-Math.floor(bw/2),row.neck[1]+1,bw,ch);
+if(!rear)equip(view==='F'?2:3,hp[0]+8,hp[1]+8,17,17,['FL','L','FLD','LD'].includes(view));
+const len=body==='tall'?12:body==='compact'?8:10;for(const side of [-1,1]){let xs=[];for(let y=56-len;y<55;y++)for(let x=side<0?18:33;x<(side<0?32:47);x++)if(b.data[(y*64+x)*4+3])xs.push(x);if(xs.length){xs.sort((a,b)=>a-b);const xx=xs[Math.floor(xs.length/2)];equip('shin'+(view==='F'?(side<0?0:1):2),xx-2,56-len,5,len,left);}}}
+if(options.defense){const mask=get('재질/피부/몸/'+body+'/'+pad(pose)+'.png');let hand=null;const gloveLeft=!left!==rear;
+for(let y=row.neck[1]+2;y<55;y++)for(let x=0;x<64;x++){const sx=left?64-x:x;if(sx<0||sx>=64||Math.abs(x-32)<4||!mask.data[(y*64+sx)*4+3])continue;if(!hand||(gloveLeft?x<hand[0]:x>hand[0]))hand=[x,y];}if(hand)equip(options.catcher?4:5,hand[0]-3,hand[1]-2,options.catcher?8:7,8,gloveLeft);}
+const contacts={foot:[32,56],hand:[left?14:50,55]};let lowest=-1,xs=[];for(let y=0;y<64;y++)for(let x=0;x<64;x++)if(b.data[(y*64+x)*4+3]){if(y>lowest){lowest=y;xs=[x];}else if(y===lowest)xs.push(x);}if(xs.length)contacts.foot=[left?Math.min(...xs):Math.max(...xs),lowest];if([27,28,29].includes(pose)){let edge=left?64:0,ys=[];for(let y=25;y<57;y++)for(let x=0;x<64;x++)if(b.data[(y*64+x)*4+3]&&(left?x<=edge:x>=edge)){if(x!==edge){edge=x;ys=[];}ys.push(y);}contacts.hand=[edge,ys.length?ys[Math.floor(ys.length/2)]:55];}
+return memo(frames,key,{canvas,neck:row.neck,foot:[32,56],contacts,batPoint:batContact25(body,pose,left),body,pose,view,headDirection:['F','FR','R','FL','L','FD','FRD','RD','FLD','LD','FU','FRU','FLU'].includes(view)?(view==='F'?0:1):3,name:row.name||row.poseName,headwear:options.headwear,catcher:!!options.catcher},700);}
+function portrait(a,on=true){const key=JSON.stringify([a,on]);if(portraits.has(key))return portraits.get(key);const c=make(320,384),g=c.getContext('2d');g.imageSmoothingEnabled=false;const draw=k=>{const r=D.rects[k];g.drawImage(partCanvas(k),...r.offset);},s=on?'ON':'OFF',hp='portrait/hair/'+a.hairId+'/'+a.hair+'/'+s+'/';draw(hp+'back');draw('portrait/base/'+a.skin);for(const k of['nose','mouth','eyes','brows'])draw('portrait/'+k+'/'+a[k+'Id']+'/'+a.skin+'/'+(k==='eyes'?D.eyeColors.indexOf(a.eye):k==='brows'?D.hairColors.indexOf(a.hair):0));for(const id of[a.necklace,a.black,a.earring,a.glasses])if(id&&id!=='none')draw('portrait/accessory/'+id);draw(hp+'front');if(on){draw('portrait/shadow');const cap=get('portrait/cap'),copy={...cap,data:new Uint8ClampedArray(cap.data)},target=rgb(a.primary),trim=rgb(a.secondary);for(let p=0;p<copy.data.length;p+=4){if(!copy.data[p+3])continue;const r=cap.data[p],gg=cap.data[p+1],b=cap.data[p+2];const f=Math.min(1.2,gg/107),color=portraitBrim((p/4)%cap.width,Math.floor(p/4/cap.width))?trim:target;copy.data.set(color.map(v=>Math.min(255,Math.round(v*f))),p);}g.drawImage(bitmap(copy),...D.rects['portrait/cap'].offset);}return memo(portraits,key,{canvas:c,crop:[24,12,272,300]},70);}
+const fullPortraits=new Map();
+function fullPortrait(a,on=true){const key=JSON.stringify([a,on]);if(fullPortraits.has(key))return fullPortraits.get(key);const b=get('portrait/body/'+a.body+'/'+a.skin),copy={...b,data:new Uint8ClampedArray(b.data)},pri=rgb(a.primary),sec=rgb(a.secondary);
+for(let p=0;p<copy.data.length;p+=4){if(!copy.data[p+3])continue;const[r,g,bb]=b.data.subarray(p,p+3);if(g>r*1.15&&bb>r*1.15){const f=Math.min(1.25,Math.max(.2,g/88));copy.data.set(pri.map(v=>Math.min(255,Math.round(v*f))),p);}else if(Math.floor(p/4/b.width)<U.portraitHem[a.body]&&Math.min(r,g,bb)>130&&Math.max(r,g,bb)-Math.min(r,g,bb)<30){copy.data.set(sec.map(v=>Math.round(v*(r+g+bb)/3/238)),p);}}
+const c=bitmap(copy),g=c.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(portrait(a,on).canvas,...D.portraitBodies[a.body].head);return memo(fullPortraits,key,{canvas:c,crop:[0,0,320,900]},20);}
+let ready=false,promise;function init(){return promise||(promise=Promise.all(D.atlases.map(async(a,i)=>{const im=new Image;im.src=a.uri;await im.decode();const c=make(im.width,im.height),g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);atlas[i]={width:im.width,height:im.height,data:g.getImageData(0,0,im.width,im.height).data};})).then(()=>{ready=true;}));}
+const api={init,config,look,newLook,equipmentFor,render,portrait,bodyNames:D.bodyNames,get ready(){return ready;},diagnostics(){return{ready,parts:Object.keys(D.rects).length,atlases:atlas.length,frames:frames.size,heads:heads.size,portraits:portraits.size,version:17};}};
+api.fullPortrait=fullPortrait;window.CharacterPartsV17=api;window.FieldRendererV13=api;
+})();

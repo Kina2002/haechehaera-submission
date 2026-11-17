@@ -1,0 +1,25 @@
+{
+  "version": 19,
+  "source": {
+    "commit_sha": "bf20dbd730ec22471431a6ebecd1b62368bbf0d2"
+  },
+  "version_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b~appgver_943330b3ec508191ac78f0f5d3699586",
+  "deployment": {
+    "id": "appgdep_6afbaac01200819199a5ef99d1a980f3",
+    "project_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b",
+    "title": "해체해라",
+    "version_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b~appgver_943330b3ec508191ac78f0f5d3699586",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ac6667e2b748191bbd3c2acd28f121b",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-17T01:16:24.536520+00:00"
+  },
+  "github_fix": "72b2de01256a6022f6b4247b96626c5f419b124a",
+  "preserved_site_source": "2157826d8a51ab6ba9e108bef13a17ebeae1da07",
+  "scope": "유니폼 주/부색 적용 부위 복원. 저장 색상 값 및 원본 이미지 변경 없음."
+}

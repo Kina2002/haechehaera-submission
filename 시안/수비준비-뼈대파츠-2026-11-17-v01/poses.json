@@ -1,0 +1,671 @@
+{
+  "version": 1,
+  "rows": [
+    {
+      "id": "normal-defensive-ready-F",
+      "body": "normal",
+      "view": "F",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        35
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        11
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "보통형-생성원본-v01.png",
+      "sourceRect": [
+        173,
+        187,
+        388,
+        374
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/normal/F.png",
+      "foregroundFile": "PNG/forearm/normal/F.png",
+      "gloveFile": "PNG/glove/normal/F.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "normal-defensive-ready-FR",
+      "body": "normal",
+      "view": "FR",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        35
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        11
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "보통형-생성원본-v01.png",
+      "sourceRect": [
+        898,
+        187,
+        343,
+        374
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/normal/FR.png",
+      "foregroundFile": "PNG/forearm/normal/FR.png",
+      "gloveFile": "PNG/glove/normal/FR.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "normal-defensive-ready-FL",
+      "body": "normal",
+      "view": "FL",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        35
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        11
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "보통형-생성원본-v01.png",
+      "sourceRect": [
+        1645,
+        187,
+        341,
+        374
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/normal/FL.png",
+      "foregroundFile": "PNG/forearm/normal/FL.png",
+      "gloveFile": "PNG/glove/normal/FL.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "compact-defensive-ready-F",
+      "body": "compact",
+      "view": "F",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        39
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        15
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        99,
+        117,
+        183,
+        169
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/compact/F.png",
+      "foregroundFile": "PNG/forearm/compact/F.png",
+      "gloveFile": "PNG/glove/compact/F.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "compact-defensive-ready-FR",
+      "body": "compact",
+      "view": "FR",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        39
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        15
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        423,
+        117,
+        170,
+        169
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/compact/FR.png",
+      "foregroundFile": "PNG/forearm/compact/FR.png",
+      "gloveFile": "PNG/glove/compact/FR.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "compact-defensive-ready-FL",
+      "body": "compact",
+      "view": "FL",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        39
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        15
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        751,
+        118,
+        172,
+        168
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/compact/FL.png",
+      "foregroundFile": "PNG/forearm/compact/FL.png",
+      "gloveFile": "PNG/glove/compact/FL.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "tall-defensive-ready-F",
+      "body": "tall",
+      "view": "F",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        32
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        8
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        91,
+        356,
+        194,
+        273
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/tall/F.png",
+      "foregroundFile": "PNG/forearm/tall/F.png",
+      "gloveFile": "PNG/glove/tall/F.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "tall-defensive-ready-FR",
+      "body": "tall",
+      "view": "FR",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        32
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        8
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        412,
+        356,
+        182,
+        273
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/tall/FR.png",
+      "foregroundFile": "PNG/forearm/tall/FR.png",
+      "gloveFile": "PNG/glove/tall/FR.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "tall-defensive-ready-FL",
+      "body": "tall",
+      "view": "FL",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        32
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        8
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        753,
+        356,
+        184,
+        273
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/tall/FL.png",
+      "foregroundFile": "PNG/forearm/tall/FL.png",
+      "gloveFile": "PNG/glove/tall/FL.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "broad-defensive-ready-F",
+      "body": "broad",
+      "view": "F",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        34
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        10
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        67,
+        688,
+        242,
+        220
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/broad/F.png",
+      "foregroundFile": "PNG/forearm/broad/F.png",
+      "gloveFile": "PNG/glove/broad/F.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "broad-defensive-ready-FR",
+      "body": "broad",
+      "view": "FR",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        34
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        10
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        402,
+        688,
+        213,
+        220
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/broad/FR.png",
+      "foregroundFile": "PNG/forearm/broad/FR.png",
+      "gloveFile": "PNG/glove/broad/FR.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "broad-defensive-ready-FL",
+      "body": "broad",
+      "view": "FL",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        34
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        10
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        739,
+        688,
+        219,
+        220
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/broad/FL.png",
+      "foregroundFile": "PNG/forearm/broad/FL.png",
+      "gloveFile": "PNG/glove/broad/FL.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "slender-defensive-ready-F",
+      "body": "slender",
+      "view": "F",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        34
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        10
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        97,
+        974,
+        187,
+        210
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/slender/F.png",
+      "foregroundFile": "PNG/forearm/slender/F.png",
+      "gloveFile": "PNG/glove/slender/F.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "slender-defensive-ready-FR",
+      "body": "slender",
+      "view": "FR",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        34
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        10
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        416,
+        975,
+        176,
+        209
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/slender/FR.png",
+      "foregroundFile": "PNG/forearm/slender/FR.png",
+      "gloveFile": "PNG/glove/slender/FR.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "slender-defensive-ready-FL",
+      "body": "slender",
+      "view": "FL",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        34
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        10
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        757,
+        974,
+        176,
+        210
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/slender/FL.png",
+      "foregroundFile": "PNG/forearm/slender/FL.png",
+      "gloveFile": "PNG/glove/slender/FL.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "heavy-defensive-ready-F",
+      "body": "heavy",
+      "view": "F",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        35
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        11
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        67,
+        1257,
+        237,
+        214
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/heavy/F.png",
+      "foregroundFile": "PNG/forearm/heavy/F.png",
+      "gloveFile": "PNG/glove/heavy/F.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "heavy-defensive-ready-FR",
+      "body": "heavy",
+      "view": "FR",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        35
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        11
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        404,
+        1257,
+        210,
+        214
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/heavy/FR.png",
+      "foregroundFile": "PNG/forearm/heavy/FR.png",
+      "gloveFile": "PNG/glove/heavy/FR.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    },
+    {
+      "id": "heavy-defensive-ready-FL",
+      "body": "heavy",
+      "view": "FL",
+      "width": 64,
+      "height": 64,
+      "neck": [
+        32,
+        35
+      ],
+      "headAnchor": [
+        16,
+        24
+      ],
+      "headPosition": [
+        16,
+        11
+      ],
+      "foot": [
+        32,
+        56
+      ],
+      "source": "5체형-생성원본-v01.png",
+      "sourceRect": [
+        739,
+        1257,
+        216,
+        214
+      ],
+      "gloveHand": "anatomical-left",
+      "mirrored": false,
+      "bodyFile": "PNG/body/heavy/FL.png",
+      "foregroundFile": "PNG/forearm/heavy/FL.png",
+      "gloveFile": "PNG/glove/heavy/FL.png",
+      "materialPrefix": "materials/",
+      "review": "candidate; visual review required"
+    }
+  ]
+}

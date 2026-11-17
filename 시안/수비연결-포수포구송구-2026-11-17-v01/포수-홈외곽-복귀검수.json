@@ -1,0 +1,95 @@
+{
+  "checks": [
+    {
+      "body": 0,
+      "view": "F",
+      "ok": true
+    },
+    {
+      "body": 0,
+      "view": "FR",
+      "ok": true
+    },
+    {
+      "body": 0,
+      "view": "FL",
+      "ok": true
+    },
+    {
+      "body": 1,
+      "view": "F",
+      "ok": true
+    },
+    {
+      "body": 1,
+      "view": "FR",
+      "ok": true
+    },
+    {
+      "body": 1,
+      "view": "FL",
+      "ok": true
+    },
+    {
+      "body": 2,
+      "view": "F",
+      "ok": true
+    },
+    {
+      "body": 2,
+      "view": "FR",
+      "ok": true
+    },
+    {
+      "body": 2,
+      "view": "FL",
+      "ok": true
+    },
+    {
+      "body": 3,
+      "view": "F",
+      "ok": true
+    },
+    {
+      "body": 3,
+      "view": "FR",
+      "ok": true
+    },
+    {
+      "body": 3,
+      "view": "FL",
+      "ok": true
+    },
+    {
+      "body": 4,
+      "view": "F",
+      "ok": true
+    },
+    {
+      "body": 4,
+      "view": "FR",
+      "ok": true
+    },
+    {
+      "body": 4,
+      "view": "FL",
+      "ok": true
+    },
+    {
+      "body": 5,
+      "view": "F",
+      "ok": true
+    },
+    {
+      "body": 5,
+      "view": "FR",
+      "ok": true
+    },
+    {
+      "body": 5,
+      "view": "FL",
+      "ok": true
+    }
+  ],
+  "runtimeErrors": []
+}

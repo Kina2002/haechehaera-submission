@@ -1,0 +1,409 @@
+{
+  "paired": {
+    "rows": [
+      {
+        "kind": "shift-good",
+        "defending": false,
+        "type": "fly",
+        "note": "수비 배치 덕분에 따라잡음",
+        "distance": 41.23105625610284,
+        "arrival": 0.3680776406402571,
+        "deadline": 0.44500000000045004,
+        "land": 0.44500000000045004,
+        "pickup": 0.44500000000045004
+      },
+      {
+        "kind": "shift-bad",
+        "defending": false,
+        "type": "single",
+        "note": "낙구 전에 닿지 못함",
+        "distance": 123.04470732209684,
+        "arrival": 0.5726117683052421,
+        "deadline": 0.44500000000045004,
+        "land": 0.44500000000045004,
+        "pickup": 0.588641514198118
+      },
+      {
+        "kind": "speed-fast",
+        "defending": false,
+        "type": "fly",
+        "note": "빠른 발로 따라잡음",
+        "distance": 81.58431221740607,
+        "arrival": 0.43356262854835964,
+        "deadline": 0.44500000000045004,
+        "land": 0.44500000000045004,
+        "pickup": 0.44500000000045004
+      },
+      {
+        "kind": "speed-slow",
+        "defending": false,
+        "type": "single",
+        "note": "낙구 전에 닿지 못함",
+        "distance": 81.58431221740607,
+        "arrival": 0.5231782032196395,
+        "deadline": 0.44500000000045004,
+        "land": 0.44500000000045004,
+        "pickup": 0.5418926742225367
+      },
+      {
+        "kind": "hands-good",
+        "defending": false,
+        "type": "fly",
+        "note": "따라가서 간신히 포구",
+        "distance": 81.58431221740607,
+        "arrival": 0.4689607805435152,
+        "deadline": 0.5214999999999999,
+        "land": 0.5214999999999999,
+        "pickup": 0.5214999999999999
+      },
+      {
+        "kind": "hands-bad",
+        "defending": false,
+        "type": "error",
+        "note": "도착했지만 포구 실패",
+        "distance": 81.58431221740607,
+        "arrival": 0.4689607805435152,
+        "deadline": 0.5214999999999999,
+        "land": 0.5214999999999999,
+        "pickup": 0.6064999999999998
+      },
+      {
+        "kind": "ground-good",
+        "defending": false,
+        "type": "ground",
+        "note": "따라가서 간신히 포구",
+        "distance": 49.979995998382186,
+        "arrival": 0.3899499899959555,
+        "deadline": 0.40700000000044995,
+        "land": 0.40700000000044995,
+        "pickup": 0.40700000000044995
+      },
+      {
+        "kind": "ground-bad",
+        "defending": false,
+        "type": "single",
+        "note": "수비 거리가 멀어 도착 지연",
+        "distance": 75.31268153500179,
+        "arrival": 0.4532817038375045,
+        "deadline": 0.40700000000044995,
+        "land": 0.40700000000044995,
+        "pickup": 0.46700000000044994
+      },
+      {
+        "kind": "shift-good",
+        "defending": true,
+        "type": "fly",
+        "note": "수비 배치 덕분에 따라잡음",
+        "distance": 41.23105625610284,
+        "arrival": 0.3680776406402571,
+        "deadline": 0.44500000000045004,
+        "land": 0.44500000000045004,
+        "pickup": 0.44500000000045004
+      },
+      {
+        "kind": "shift-bad",
+        "defending": true,
+        "type": "single",
+        "note": "낙구 전에 닿지 못함",
+        "distance": 123.04470732209684,
+        "arrival": 0.5726117683052421,
+        "deadline": 0.44500000000045004,
+        "land": 0.44500000000045004,
+        "pickup": 0.588641514198118
+      },
+      {
+        "kind": "speed-fast",
+        "defending": true,
+        "type": "fly",
+        "note": "빠른 발로 따라잡음",
+        "distance": 81.58431221740607,
+        "arrival": 0.43356262854835964,
+        "deadline": 0.44500000000045004,
+        "land": 0.44500000000045004,
+        "pickup": 0.44500000000045004
+      },
+      {
+        "kind": "speed-slow",
+        "defending": true,
+        "type": "single",
+        "note": "낙구 전에 닿지 못함",
+        "distance": 81.58431221740607,
+        "arrival": 0.5231782032196395,
+        "deadline": 0.44500000000045004,
+        "land": 0.44500000000045004,
+        "pickup": 0.5418926742225367
+      },
+      {
+        "kind": "hands-good",
+        "defending": true,
+        "type": "fly",
+        "note": "따라가서 간신히 포구",
+        "distance": 81.58431221740607,
+        "arrival": 0.4689607805435152,
+        "deadline": 0.5214999999999999,
+        "land": 0.5214999999999999,
+        "pickup": 0.5214999999999999
+      },
+      {
+        "kind": "hands-bad",
+        "defending": true,
+        "type": "error",
+        "note": "도착했지만 포구 실패",
+        "distance": 81.58431221740607,
+        "arrival": 0.4689607805435152,
+        "deadline": 0.5214999999999999,
+        "land": 0.5214999999999999,
+        "pickup": 0.6064999999999998
+      },
+      {
+        "kind": "ground-good",
+        "defending": true,
+        "type": "ground",
+        "note": "따라가서 간신히 포구",
+        "distance": 49.979995998382186,
+        "arrival": 0.3899499899959555,
+        "deadline": 0.40700000000044995,
+        "land": 0.40700000000044995,
+        "pickup": 0.40700000000044995
+      },
+      {
+        "kind": "ground-bad",
+        "defending": true,
+        "type": "single",
+        "note": "수비 거리가 멀어 도착 지연",
+        "distance": 75.31268153500179,
+        "arrival": 0.4532817038375045,
+        "deadline": 0.40700000000044995,
+        "land": 0.40700000000044995,
+        "pickup": 0.46700000000044994
+      }
+    ],
+    "samples": 1616,
+    "failures": [],
+    "runtimeErrors": []
+  },
+  "simulation": {
+    "games": [
+      {
+        "seed": 1919,
+        "events": 121,
+        "done": true,
+        "ruleViolations": []
+      },
+      {
+        "seed": 2020,
+        "events": 90,
+        "done": true,
+        "ruleViolations": []
+      },
+      {
+        "seed": 2121,
+        "events": 125,
+        "done": true,
+        "ruleViolations": []
+      }
+    ],
+    "types": {
+      "line": 7,
+      "strike": 46,
+      "fly": 23,
+      "swing": 29,
+      "ball": 103,
+      "kl": 11,
+      "foul": 24,
+      "ground": 28,
+      "ks": 4,
+      "single": 18,
+      "dp": 4,
+      "bb": 10,
+      "error": 9,
+      "wp": 6,
+      "sb": 3,
+      "sf": 1,
+      "pb": 2,
+      "double": 1,
+      "hr": 3,
+      "cs": 4
+    },
+    "failures": []
+  },
+  "characters": {
+    "checks": [
+      {
+        "name": "공격 포수도 헬멧",
+        "ok": true
+      },
+      {
+        "name": "수비 포수 보호장비",
+        "ok": true
+      },
+      {
+        "name": "투수·야수 야구모자",
+        "ok": true
+      },
+      {
+        "name": "저장 복사 후 외형 동일",
+        "ok": true
+      },
+      {
+        "name": "선수창 모자OFF와 경기 장비 독립",
+        "ok": true
+      },
+      {
+        "name": "좌·우타 준비 방향",
+        "ok": true
+      },
+      {
+        "name": "수비 시점 공격팀만 타순",
+        "ok": true
+      },
+      {
+        "name": "single 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "double 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "headSlide 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "footSlide 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "tagout 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "ground 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "ks 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "kl 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "hr 동작과 장비",
+        "ok": true
+      },
+      {
+        "name": "1루 도착 발 유지",
+        "ok": true
+      },
+      {
+        "name": "2루 세이프 후 베이스 유지",
+        "ok": true
+      },
+      {
+        "name": "태그아웃 후 베이스 유지 강제 없음",
+        "ok": true
+      }
+    ],
+    "runtimeErrors": [],
+    "diagnostics": {
+      "ready": true,
+      "parts": 5823,
+      "atlases": 8,
+      "frames": 700,
+      "heads": 250,
+      "portraits": 62,
+      "version": 17
+    }
+  },
+  "internal": {
+    "checks": [
+      {
+        "name": "상대 13명 · 후보 3명 · 지명타자 편성",
+        "ok": true
+      },
+      {
+        "name": "30% 초과 투수는 유지",
+        "ok": true
+      },
+      {
+        "name": "체력 30% · 타순/포지션/기록 유지하며 교체",
+        "ok": true
+      },
+      {
+        "name": "타석 중에는 교체하지 않음",
+        "ok": true
+      },
+      {
+        "name": "상대 공격 중에는 교체하지 않음",
+        "ok": true
+      },
+      {
+        "name": "체력과 투구 능력이 좋은 후보 선택",
+        "ok": true
+      },
+      {
+        "name": "후보 소진 시 유지 · 내려간 투수 재등판 없음",
+        "ok": true
+      },
+      {
+        "name": "교체 저장·복원 뒤 중복 교체 기록 없음",
+        "ok": true
+      },
+      {
+        "name": "후보 없는 진행 중 저장에 후보를 한 번만 추가",
+        "ok": true
+      },
+      {
+        "name": "경기 스킵도 새 투수가 투구 · 이전 투구 기록 보존",
+        "ok": true
+      },
+      {
+        "name": "안타+선행주자 아웃은 단순 안타 축하 제외",
+        "ok": true
+      },
+      {
+        "name": "안타여도 3아웃 기회 무산 우선",
+        "ok": true
+      },
+      {
+        "name": "득점+주자 아웃은 두 결과 함께 반영",
+        "ok": true
+      },
+      {
+        "name": "우리 수비 아웃+실점은 무조건 호수비 축하 제외",
+        "ok": true
+      },
+      {
+        "name": "동점/역전/추격/추가점 구별",
+        "ok": true
+      },
+      {
+        "name": "상대 동점/역전/추격 구별",
+        "ok": true
+      },
+      {
+        "name": "본헤드와 종료 결과는 전용 멘트 유지",
+        "ok": true
+      },
+      {
+        "name": "새 그룹 한 사건 한 화자 · 직전 문구 반복 방지",
+        "ok": true
+      },
+      {
+        "name": "선수도 선행주자 아웃·포구 후 실점 인지",
+        "ok": true
+      }
+    ],
+    "dialogueGroups": 64,
+    "dialogueLines": 256,
+    "runtimeErrors": []
+  },
+  "runtimeErrors": [],
+  "fatigue": {
+    "rate": 338.4,
+    "expected": 338.4,
+    "permanentSpeed": 80
+  }
+}

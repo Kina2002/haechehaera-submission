@@ -1,0 +1,90 @@
+{
+  "checks": [
+    {
+      "name": "공격 포수도 헬멧",
+      "ok": true
+    },
+    {
+      "name": "수비 포수 보호장비",
+      "ok": true
+    },
+    {
+      "name": "투수·야수 야구모자",
+      "ok": true
+    },
+    {
+      "name": "저장 복사 후 외형 동일",
+      "ok": true
+    },
+    {
+      "name": "선수창 모자OFF와 경기 장비 독립",
+      "ok": true
+    },
+    {
+      "name": "좌·우타 준비 방향",
+      "ok": true
+    },
+    {
+      "name": "수비 시점 공격팀만 타순",
+      "ok": true
+    },
+    {
+      "name": "single 동작과 장비",
+      "ok": true
+    },
+    {
+      "name": "double 동작과 장비",
+      "ok": true
+    },
+    {
+      "name": "headSlide 동작과 장비",
+      "ok": true
+    },
+    {
+      "name": "footSlide 동작과 장비",
+      "ok": true
+    },
+    {
+      "name": "tagout 동작과 장비",
+      "ok": true
+    },
+    {
+      "name": "ground 동작과 장비",
+      "ok": true
+    },
+    {
+      "name": "ks 동작과 장비",
+      "ok": true
+    },
+    {
+      "name": "kl 동작과 장비",
+      "ok": true
+    },
+    {
+      "name": "hr 동작과 장비",
+      "ok": true
+    },
+    {
+      "name": "1루 도착 발 유지",
+      "ok": true
+    },
+    {
+      "name": "2루 세이프 후 베이스 유지",
+      "ok": true
+    },
+    {
+      "name": "태그아웃 후 베이스 유지 강제 없음",
+      "ok": true
+    }
+  ],
+  "runtimeErrors": [],
+  "diagnostics": {
+    "ready": true,
+    "parts": 5823,
+    "atlases": 8,
+    "frames": 244,
+    "heads": 198,
+    "portraits": 30,
+    "version": 17
+  }
+}
