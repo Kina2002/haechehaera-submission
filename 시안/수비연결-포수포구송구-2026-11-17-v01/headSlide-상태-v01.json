@@ -1,0 +1,219 @@
+[
+  {
+    "t": 0.19,
+    "actor": {
+      "id": "3cc5ecf2-4e44-4e46-8f16-f0210aebf872",
+      "frame": 5,
+      "contact": null,
+      "x": 450,
+      "y": 478.8604651162791,
+      "worldX": 450,
+      "worldY": 480,
+      "scale": 2.616279069767442,
+      "flip": false,
+      "action": {
+        "phase": "crouch",
+        "view": "B",
+        "catcher": true
+      },
+      "headwear": "catcher",
+      "catcher": true,
+      "position": "C",
+      "offense": false
+    },
+    "ball": {
+      "x": 450,
+      "y": 418.73824822455197
+    }
+  },
+  {
+    "t": 0.4,
+    "actor": {
+      "id": "3cc5ecf2-4e44-4e46-8f16-f0210aebf872",
+      "frame": 5,
+      "contact": null,
+      "x": 450,
+      "y": 463.05454545454546,
+      "worldX": 450,
+      "worldY": 480,
+      "scale": 1.05,
+      "flip": false,
+      "action": {
+        "phase": "follow",
+        "view": "B",
+        "catcher": true,
+        "releaseAt": 0.36
+      },
+      "headwear": "catcher",
+      "catcher": true,
+      "position": "C",
+      "offense": false
+    },
+    "ball": {
+      "x": 460.62834820916714,
+      "y": 435.398437305069
+    }
+  },
+  {
+    "t": 0.26999999999999996,
+    "actor": {
+      "id": "3cc5ecf2-4e44-4e46-8f16-f0210aebf872",
+      "frame": 5,
+      "contact": null,
+      "x": 450,
+      "y": 463.05454545454546,
+      "worldX": 450,
+      "worldY": 480,
+      "scale": 1.05,
+      "flip": false,
+      "action": {
+        "phase": "crouchReceive",
+        "view": "B",
+        "catcher": true
+      },
+      "headwear": "catcher",
+      "catcher": true,
+      "position": "C",
+      "offense": false
+    },
+    "ball": {
+      "x": 450,
+      "y": 433.74344683835955
+    }
+  },
+  {
+    "t": 0.305,
+    "actor": {
+      "id": "3cc5ecf2-4e44-4e46-8f16-f0210aebf872",
+      "frame": 5,
+      "contact": null,
+      "x": 450,
+      "y": 463.05454545454546,
+      "worldX": 450,
+      "worldY": 480,
+      "scale": 1.05,
+      "flip": false,
+      "action": {
+        "phase": "crouchReceive",
+        "view": "B",
+        "catcher": true
+      },
+      "headwear": "catcher",
+      "catcher": true,
+      "position": "C",
+      "offense": false
+    },
+    "ball": {
+      "x": 439.96875,
+      "y": 453.84375
+    }
+  },
+  {
+    "t": 0.33999999999999997,
+    "actor": {
+      "id": "3cc5ecf2-4e44-4e46-8f16-f0210aebf872",
+      "frame": 35,
+      "contact": null,
+      "x": 450,
+      "y": 463.05454545454546,
+      "worldX": 450,
+      "worldY": 480,
+      "scale": 1.05,
+      "flip": false,
+      "action": {
+        "phase": "load",
+        "view": "B",
+        "catcher": true,
+        "releaseAt": 0.36
+      },
+      "headwear": "catcher",
+      "catcher": true,
+      "position": "C",
+      "offense": false
+    },
+    "ball": {
+      "x": 459.984375,
+      "y": 446.21875
+    }
+  },
+  {
+    "t": 0.37,
+    "actor": {
+      "id": "3cc5ecf2-4e44-4e46-8f16-f0210aebf872",
+      "frame": 35,
+      "contact": null,
+      "x": 450,
+      "y": 463.05454545454546,
+      "worldX": 450,
+      "worldY": 480,
+      "scale": 1.05,
+      "flip": false,
+      "action": {
+        "phase": "release",
+        "view": "B",
+        "catcher": true,
+        "releaseAt": 0.36
+      },
+      "headwear": "catcher",
+      "catcher": true,
+      "position": "C",
+      "offense": false
+    },
+    "ball": {
+      "x": 460.8602120525477,
+      "y": 444.2285155860138
+    }
+  },
+  {
+    "t": 0.42,
+    "actor": {
+      "id": "3cc5ecf2-4e44-4e46-8f16-f0210aebf872",
+      "frame": 5,
+      "contact": null,
+      "x": 450,
+      "y": 463.05454545454546,
+      "worldX": 450,
+      "worldY": 480,
+      "scale": 1.05,
+      "flip": false,
+      "action": {
+        "phase": "follow",
+        "view": "B",
+        "catcher": true,
+        "releaseAt": 0.36
+      },
+      "headwear": "catcher",
+      "catcher": true,
+      "position": "C",
+      "offense": false
+    },
+    "ball": {
+      "x": 460.47377232040486,
+      "y": 429.5117187110138
+    }
+  },
+  {
+    "t": 0.92,
+    "actor": {
+      "id": "3cc5ecf2-4e44-4e46-8f16-f0210aebf872",
+      "frame": 5,
+      "contact": null,
+      "x": 450,
+      "y": 463.05454545454546,
+      "worldX": 450,
+      "worldY": 480,
+      "scale": 1.05,
+      "flip": false,
+      "direction": 3,
+      "action": null,
+      "headwear": "catcher",
+      "catcher": true,
+      "position": "C",
+      "offense": false
+    },
+    "ball": {
+      "x": 447.90625,
+      "y": 280.9375
+    }
+  }
+]

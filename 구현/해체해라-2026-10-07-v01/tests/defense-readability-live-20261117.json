@@ -1,0 +1,186 @@
+{
+  "rows": [
+    {
+      "kind": "shift-good",
+      "defending": false,
+      "type": "fly",
+      "note": "수비 배치 덕분에 따라잡음",
+      "distance": 41.23105625610284,
+      "arrival": 0.3680776406402571,
+      "deadline": 0.44500000000045004,
+      "land": 0.44500000000045004,
+      "pickup": 0.44500000000045004
+    },
+    {
+      "kind": "shift-bad",
+      "defending": false,
+      "type": "single",
+      "note": "낙구 전에 닿지 못함",
+      "distance": 123.04470732209684,
+      "arrival": 0.5726117683052421,
+      "deadline": 0.44500000000045004,
+      "land": 0.44500000000045004,
+      "pickup": 0.588641514198118
+    },
+    {
+      "kind": "speed-fast",
+      "defending": false,
+      "type": "fly",
+      "note": "빠른 발로 따라잡음",
+      "distance": 81.58431221740607,
+      "arrival": 0.43356262854835964,
+      "deadline": 0.44500000000045004,
+      "land": 0.44500000000045004,
+      "pickup": 0.44500000000045004
+    },
+    {
+      "kind": "speed-slow",
+      "defending": false,
+      "type": "single",
+      "note": "낙구 전에 닿지 못함",
+      "distance": 81.58431221740607,
+      "arrival": 0.5231782032196395,
+      "deadline": 0.44500000000045004,
+      "land": 0.44500000000045004,
+      "pickup": 0.5418926742225367
+    },
+    {
+      "kind": "hands-good",
+      "defending": false,
+      "type": "fly",
+      "note": "따라가서 간신히 포구",
+      "distance": 81.58431221740607,
+      "arrival": 0.4689607805435152,
+      "deadline": 0.5214999999999999,
+      "land": 0.5214999999999999,
+      "pickup": 0.5214999999999999
+    },
+    {
+      "kind": "hands-bad",
+      "defending": false,
+      "type": "error",
+      "note": "도착했지만 포구 실패",
+      "distance": 81.58431221740607,
+      "arrival": 0.4689607805435152,
+      "deadline": 0.5214999999999999,
+      "land": 0.5214999999999999,
+      "pickup": 0.6064999999999998
+    },
+    {
+      "kind": "ground-good",
+      "defending": false,
+      "type": "ground",
+      "note": "따라가서 간신히 포구",
+      "distance": 49.979995998382186,
+      "arrival": 0.3899499899959555,
+      "deadline": 0.40700000000044995,
+      "land": 0.40700000000044995,
+      "pickup": 0.40700000000044995
+    },
+    {
+      "kind": "ground-bad",
+      "defending": false,
+      "type": "single",
+      "note": "수비 거리가 멀어 도착 지연",
+      "distance": 75.31268153500179,
+      "arrival": 0.4532817038375045,
+      "deadline": 0.40700000000044995,
+      "land": 0.40700000000044995,
+      "pickup": 0.46700000000044994
+    },
+    {
+      "kind": "shift-good",
+      "defending": true,
+      "type": "fly",
+      "note": "수비 배치 덕분에 따라잡음",
+      "distance": 41.23105625610284,
+      "arrival": 0.3680776406402571,
+      "deadline": 0.44500000000045004,
+      "land": 0.44500000000045004,
+      "pickup": 0.44500000000045004
+    },
+    {
+      "kind": "shift-bad",
+      "defending": true,
+      "type": "single",
+      "note": "낙구 전에 닿지 못함",
+      "distance": 123.04470732209684,
+      "arrival": 0.5726117683052421,
+      "deadline": 0.44500000000045004,
+      "land": 0.44500000000045004,
+      "pickup": 0.588641514198118
+    },
+    {
+      "kind": "speed-fast",
+      "defending": true,
+      "type": "fly",
+      "note": "빠른 발로 따라잡음",
+      "distance": 81.58431221740607,
+      "arrival": 0.43356262854835964,
+      "deadline": 0.44500000000045004,
+      "land": 0.44500000000045004,
+      "pickup": 0.44500000000045004
+    },
+    {
+      "kind": "speed-slow",
+      "defending": true,
+      "type": "single",
+      "note": "낙구 전에 닿지 못함",
+      "distance": 81.58431221740607,
+      "arrival": 0.5231782032196395,
+      "deadline": 0.44500000000045004,
+      "land": 0.44500000000045004,
+      "pickup": 0.5418926742225367
+    },
+    {
+      "kind": "hands-good",
+      "defending": true,
+      "type": "fly",
+      "note": "따라가서 간신히 포구",
+      "distance": 81.58431221740607,
+      "arrival": 0.4689607805435152,
+      "deadline": 0.5214999999999999,
+      "land": 0.5214999999999999,
+      "pickup": 0.5214999999999999
+    },
+    {
+      "kind": "hands-bad",
+      "defending": true,
+      "type": "error",
+      "note": "도착했지만 포구 실패",
+      "distance": 81.58431221740607,
+      "arrival": 0.4689607805435152,
+      "deadline": 0.5214999999999999,
+      "land": 0.5214999999999999,
+      "pickup": 0.6064999999999998
+    },
+    {
+      "kind": "ground-good",
+      "defending": true,
+      "type": "ground",
+      "note": "따라가서 간신히 포구",
+      "distance": 49.979995998382186,
+      "arrival": 0.3899499899959555,
+      "deadline": 0.40700000000044995,
+      "land": 0.40700000000044995,
+      "pickup": 0.40700000000044995
+    },
+    {
+      "kind": "ground-bad",
+      "defending": true,
+      "type": "single",
+      "note": "수비 거리가 멀어 도착 지연",
+      "distance": 75.31268153500179,
+      "arrival": 0.4532817038375045,
+      "deadline": 0.40700000000044995,
+      "land": 0.40700000000044995,
+      "pickup": 0.46700000000044994
+    }
+  ],
+  "samples": 1616,
+  "failures": [],
+  "runtimeErrors": [],
+  "storageUnchanged": true,
+  "feedbackLoaded": true,
+  "visiblePopup": "타격 · 주루 · 수비상대 팀 공격 · 포구 판정플라이 아웃!빠른 발로 따라잡음"
+}

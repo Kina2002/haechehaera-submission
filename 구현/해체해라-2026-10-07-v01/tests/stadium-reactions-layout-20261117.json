@@ -1,0 +1,30 @@
+[
+  {
+    "defense": false,
+    "width": 668,
+    "checks": 92,
+    "failures": [],
+    "runtimeErrors": []
+  },
+  {
+    "defense": true,
+    "width": 668,
+    "checks": 92,
+    "failures": [],
+    "runtimeErrors": []
+  },
+  {
+    "defense": false,
+    "width": 852,
+    "checks": 92,
+    "failures": [],
+    "runtimeErrors": []
+  },
+  {
+    "defense": true,
+    "width": 852,
+    "checks": 92,
+    "failures": [],
+    "runtimeErrors": []
+  }
+]

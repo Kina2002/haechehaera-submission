@@ -1,0 +1,22 @@
+{
+  "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site/",
+  "poses": 480,
+  "views": [
+    "F",
+    "FR",
+    "R",
+    "BR",
+    "B",
+    "BL",
+    "L",
+    "FL"
+  ],
+  "ready": true,
+  "scripts": [
+    "https://haechehaera.sooyeon-jun-0389.chatgpt.site/src/defense-actions-v22.js?v=3a77c87b3db9",
+    "https://haechehaera.sooyeon-jun-0389.chatgpt.site/src/character-parts-v17.js?v=a009ce8104ce",
+    "https://haechehaera.sooyeon-jun-0389.chatgpt.site/src/defense-motion-v22.js?v=d62d6f195541",
+    "https://haechehaera.sooyeon-jun-0389.chatgpt.site/src/stadium-view-v13.js?v=a785ccee1fdc"
+  ],
+  "runtimeErrors": []
+}

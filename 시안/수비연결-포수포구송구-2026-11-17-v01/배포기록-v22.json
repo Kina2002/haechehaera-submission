@@ -1,0 +1,33 @@
+{
+  "version": 22,
+  "source_commit": "ee6357d8bf769d77d7014a9bfd9e7de9f103bd4f",
+  "site": "https://haechehaera.sooyeon-jun-0389.chatgpt.site",
+  "deployment": {
+    "id": "appgdep_6afbc5b632c88191ac84f51fb033732f",
+    "project_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b",
+    "title": "해체해라",
+    "version_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b~appgver_8073de18ea688191abf6a8dec7527718",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ac6667e2b748191bbd3c2acd28f121b",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-17T03:11:20.376481+00:00"
+  },
+  "checks": {
+    "layouts": 108,
+    "fieldersReady": 756,
+    "fieldersMoving": 756,
+    "appearanceCombinations": 1440,
+    "eventSamples": 1694,
+    "regression": 19,
+    "internal": 19,
+    "unit": 4,
+    "simulationEvents": 310,
+    "runtimeErrors": 0
+  },
+  "scope": "8-direction run/catch/throw and catcher poses, six registered body sizes; right-hand throws"
+}
