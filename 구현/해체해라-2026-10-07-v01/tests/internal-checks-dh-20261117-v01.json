@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-17",
+  "scope": "checks23: four stale DH-era diagnostic fixtures/assertions only",
+  "browser": {
+    "before": {
+      "total": 19,
+      "passed": 15,
+      "failures": [
+        {
+          "name": "체력과 투구 능력이 좋은 후보 선택",
+          "ok": false,
+          "error": "기대 결과와 다름"
+        },
+        {
+          "name": "후보 소진 시 유지 · 내려간 투수 재등판 없음",
+          "ok": false,
+          "error": "기대 결과와 다름"
+        },
+        {
+          "name": "교체 저장·복원 뒤 중복 교체 기록 없음",
+          "ok": false,
+          "error": "기대 결과와 다름"
+        },
+        {
+          "name": "진행 중인 이전 저장에도 후보를 한 번만 추가",
+          "ok": false,
+          "error": "기대 결과와 다름"
+        }
+      ]
+    },
+    "after": {
+      "total": 19,
+      "passed": 19,
+      "failures": []
+    },
+    "runtimeErrors": []
+  },
+  "designated_hitter_tests": {
+    "passed": 6,
+    "total": 6
+  },
+  "live_design_base": "e5794a9db07a65ca2a68ea27c9eb1fca1fd1533e",
+  "source_preservation": {
+    "files": 178,
+    "changed": [
+      "index.html",
+      "src/extensions.js"
+    ],
+    "unchanged": 176,
+    "old_commit": "e5794a9db07a65ca2a68ea27c9eb1fca1fd1533e",
+    "only_check_function_changed": true
+  },
+  "live_browser": {
+    "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site/",
+    "total": 19,
+    "passed": 19,
+    "failures": [],
+    "runtimeErrors": [],
+    "teamDataUnchanged": true
+  }
+}
