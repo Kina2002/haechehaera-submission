@@ -1,0 +1,11 @@
+{
+  "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site/",
+  "title": "해체해라 — 진지한 야구, 이상한 선수들",
+  "uniformMasks": true,
+  "ready": true,
+  "scripts": [
+    "src/uniform-colors-v18.js?v=f4831c88cf43",
+    "src/character-parts-v17.js?v=cbe095bab9be"
+  ],
+  "runtimeErrors": []
+}
