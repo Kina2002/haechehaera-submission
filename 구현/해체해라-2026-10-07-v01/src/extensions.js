@@ -807,15 +807,16 @@ function planMotion19(m,e){
  const plan={land:.55,pickup:.55,throws:[],caught:caught19(e),steal};
  if(e.pitchThrown&&!e.contact)e.ball[1]=e.type==='hbp'?[ply(tside(m,e.attack),e.batter).hand==='좌타'?478:422,425]:[450,450];
  // Airborne catches wait for the fielder. Ground balls wait on the grass until pickup.
- if(primary&&plan.caught)plan.land=Math.max(.55,primary.end);
- plan.pickup=Math.max(plan.land,e.bh===7?.50:primary?.end||.55);
+ if(e.defense24)plan.land=e.defense24.land;
+ else if(primary&&plan.caught)plan.land=Math.max(.55,primary.end);
+ plan.pickup=e.defense24?.pickup??Math.max(plan.land,e.bh===7?.50:primary?.end||.55);
  if(steal){plan.land=.22;plan.pickup=.29;}
  if(['wp','pb'].includes(e.type)){plan.land=.43;plan.pickup=Math.max(.43,...e.fieldMoves.map(x=>x.end));}
  if(['sf','fly','line'].includes(e.type))for(const mv of e.moves)mv.delay=Math.max(mv.delay,plan.land+.025);
  let bases=[...(e.throwBases||[])];
  // Covering an empty base was the mistake: no imaginary receiver or completed throw.
  if([7,10,12].includes(e.bh)||['hr','foul','wp','pb'].includes(e.type))bases=[];
- let from=steal?glove19(FIELD.C):glove19(e.target||FIELD.C),owner=steal?fielder(df,'C').id:e.fielderId;
+ let from=steal?glove19(FIELD.C):glove19(e.defense24?.recovery||e.target||FIELD.C),owner=steal?fielder(df,'C').id:e.fielderId;
  let cursor=steal?.36:plan.pickup+.025;
  const finish=.92,gap=.025;
  bases.forEach((base,index)=>{
@@ -843,13 +844,17 @@ function ballPoint19(e,t){
  if(e.type==='hbp')return t<.30?e.ball[1]:null;
  if(e.pitchThrown&&!e.contact&&!['wp','pb'].includes(e.type))return t<.29?lerp19(e.ball[1],glove19(FIELD.C),clamp((t-.22)/.07,0,1)):null;
  const pickup=e.fieldMoves.find(x=>x.id===e.fielderId),ground=e.target||[490,510];
- if(e.contact&&t<p.land){const u=clamp((t-.22)/(p.land-.22),0,1),end=p.caught?glove19(ground):ground,xy=lerp19(e.ball[1],end,u);xy[1]-=Math.sin(u*Math.PI)*(e.arc||0);return xy;}
+ if(e.contact&&t<p.land){const u=clamp((t-.22)/(p.land-.22),0,1),end=p.caught||e.defense24?.drop?glove19(ground):ground,xy=lerp19(e.ball[1],end,u);xy[1]-=Math.sin(u*Math.PI)*(e.arc||0);return xy;}
  if(['hr','foul'].includes(e.type))return t<p.land+.06?ground:null;
  if(['wp','pb'].includes(e.type))return t<p.land?lerp19(e.ball[1],[490,510],clamp((t-.22)/(p.land-.22),0,1)):t<p.pickup?[490,510]:null;
  if(e.carry&&pickup&&t>=p.pickup)return glove19(fieldPoint19(pickup,t));
- if(!p.steal&&t<p.pickup)return ground;
- let held=p.steal?glove19(FIELD.C):glove19(ground);
- if(!p.caught&&!p.steal&&t<p.pickup+.025)return lerp19(ground,held,clamp((t-p.pickup)/.025,0,1));
+ if(!p.steal&&t<p.pickup){
+  if(e.defense24&&!p.caught){const u=clamp((t-p.land)/(p.pickup-p.land),0,1),xy=lerp19(e.defense24.drop?glove19(ground):ground,e.defense24.recovery,u);xy[1]-=Math.sin(u*Math.PI)*(e.defense24.drop?8:4);return xy;}
+  return ground;
+ }
+ const collected=e.defense24?.recovery||ground;
+ let held=p.steal?glove19(FIELD.C):glove19(collected);
+ if(!p.caught&&!p.steal&&t<p.pickup+.025)return lerp19(collected,held,clamp((t-p.pickup)/.025,0,1));
  for(const segment of p.throws){if(t<segment.start)return held;if(t<=segment.end)return lerp19(segment.from,segment.to,(t-segment.start)/(segment.end-segment.start));held=segment.to;}
  return held;
 }
@@ -916,7 +921,7 @@ function renderPopup20(host,e,p,state=popupMemory20){
  if(!p){if(host.firstChild)host.replaceChildren();delete host.dataset.shown;return;}
  // One hit can advance several runners. Show the hit once, not one hit card per safe call.
  if(['single','double','triple'].includes(e.type)&&p.key.startsWith('call-')&&p.theme==='safe'){
-  if(!state.hitCard)state.hitCard={...p,tag:(e.attack===0?'우리 팀':'상대 팀')+' 공격',detail:'타구가 안타로 이어졌습니다.'};
+  if(!state.hitCard)state.hitCard={...p,tag:(e.attack===0?'우리 팀':'상대 팀')+' 공격',detail:e.defense24?.note||'타구가 안타로 이어졌습니다.'};
   p=state.hitCard;
  }
  const semantic=p.theme+':'+p.title,signature=JSON.stringify([e.id,p.theme,p.tag,p.title,p.detail]);

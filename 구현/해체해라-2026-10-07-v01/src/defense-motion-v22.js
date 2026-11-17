@@ -6,11 +6,18 @@ function positionAt(e,tm,id,t){const mv=e?.fieldMoves?.find(v=>v.id===id);if(mv)
 function action(p,tm,position,pose,x,y,tick,e,t,distance=0){
  const here=[x,y],plan=e?.motion19,isCatcher=position==='C',atPlate=isCatcher&&Math.hypot(x-FIELD.C[0],y-FIELD.C[1])<15;
  const result=(phase,view,extra={})=>({phase,view,catcher:isCatcher,...extra});
+ const d=e?.defense24;
+ if(d&&p.id===e.fielderId&&t>=.22&&t<d.pickup){
+  const view=facing(here,e.ball?.[1]||BASES[0]);
+  if(t<d.moveStart)return result('ready',view);
+  if(d.reached&&t>=d.moveArrival&&t<d.land-.035)return result('ready',view);
+  if(d.reached&&t>=d.land-.035&&t<=d.land+.012)return result('receive',view);
+ }
  const outgoing=plan?.throws.filter(s=>s.thrower===p.id&&t>=s.start-.03&&t<s.start+.105).at(-1);
  if(outgoing){const to=outgoing.receiver?positionAt(e,tm,outgoing.receiver,outgoing.end):BASES[outgoing.base]||outgoing.to,view=facing(here,to);return result(t<outgoing.start?'load':t<outgoing.start+.024?'release':'follow',view,{releaseAt:outgoing.start});}
  const incoming=plan?.throws.filter(s=>s.receiver===p.id&&t>=s.end-.04).at(-1);
  const primary=plan&&(e.contact||plan.steal||['wp','pb'].includes(e.type))&&p.id===e.fielderId&&t>=plan.pickup-.035;
- if(pose==='run'&&!(incoming&&t>=incoming.end-.04)&&!primary){
+ if(pose==='run'&&!(incoming&&t>=incoming.end-.04)&&(!primary||d&&t<d.pickup)){
   let from=here,to=here;
   const mv=e?.fieldMoves?.find(v=>v.id===p.id);
   if(mv){from=fieldPoint19(mv,Math.max(0,t-.004));to=fieldPoint19(mv,Math.min(1,t+.004));}

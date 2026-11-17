@@ -59,7 +59,11 @@ function ball(c,e,t){
  if(plan){const flight=plan.throws.find(s=>t>=s.start&&t<=s.end);
   if(flight){const from=playerAnchor(e,flight.thrower,flight.start,'handPoint','release'),end=ground(...flight.to),to=flight.receiver?playerAnchor(e,flight.receiver,flight.end,'glovePoint','receive'):project(end.x,end.z,.08);if(from&&to)q=mix(from,to,cap((t-flight.start)/(flight.end-flight.start),0,1));}
   else if(t>=plan.pickup&&!['hr','foul','wp','pb'].includes(e.type)){const last=plan.throws.filter(s=>s.end<t).at(-1),owner=last?last.receiver:e.fielderId,held=owner&&playerAnchor(e,owner,t,'held');if(held)q=held;}
-  else if(plan.caught&&t>=plan.land-.035){const end=playerAnchor(e,e.fielderId,plan.land,'glovePoint','receive');if(end)q=mix(q,end,cap((t-plan.land+.035)/.035,0,1));}
+  else if(e.defense24?.drop&&t>=plan.land&&t<plan.pickup){
+   const start=playerAnchor(e,e.fielderId,plan.land,'glovePoint','receive'),end=ground(...e.defense24.recovery),to=project(end.x,end.z,.08),u=cap((t-plan.land)/(plan.pickup-plan.land),0,1);
+   if(start){q=mix(start,to,u);q.y-=Math.sin(u*Math.PI)*5;const receive=playerAnchor(e,e.fielderId,plan.pickup,'glovePoint','ground');if(receive&&t>=plan.pickup-.025)q=mix(q,receive,cap((t-plan.pickup+.025)/.025,0,1));}
+  }
+  else if((plan.caught||e.defense24?.drop)&&t>=plan.land-.035){const end=playerAnchor(e,e.fielderId,plan.land,'glovePoint','receive');if(end)q=mix(q,end,cap((t-plan.land+.035)/.035,0,1));}
   else if(e.contact&&!plan.caught&&t>=plan.pickup-.025){const end=playerAnchor(e,e.fielderId,plan.pickup,'glovePoint','ground');if(end)q=mix(q,end,cap((t-plan.pickup+.025)/.025,0,1));}
   if(plan.steal&&!e.pitchThrown&&t<plan.pickup){const tm=tside(team().match,1-e.attack),id=tm.lineup.find(v=>v.pos==='C')?.id,held=playerAnchor(e,id,t,'glovePoint');if(held)q=held;}
   if(e.pitchThrown&&!e.contact&&!['wp','pb','hbp'].includes(e.type)&&t>=.22&&t<.29){const tm=tside(team().match,1-e.attack),id=tm.lineup.find(v=>v.pos==='C')?.id,end=playerAnchor(e,id,.29,'glovePoint');if(end){const start=V.low?project(0,0,.85):project(0,0,.08);q=mix(start,end,(t-.22)/.07);if(end.occluded&&t>=.255)q.occluded=true;}}

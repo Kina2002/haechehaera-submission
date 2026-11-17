@@ -129,6 +129,48 @@ return null}
 function registerBH(m,e){if(!e.bh)return;const side=e.bhSide,tm=tside(m,side);let ids=[];if(side===e.attack){ids=[e.actor||e.batter];if(e.bh===3)ids=e.before.bases.filter(Boolean).slice(0,1)}else{ids=[e.bh===12?fielder(tm,"1B").id:e.bh===9?fielder(tm,"2B").id:e.fielder.id];if(e.bh===11)ids.push(fielder(tm,e.fielder.id===fielder(tm,"CF").id?"RF":"CF").id)}for(const id of [...new Set(ids)])ply(tm,id).stats.bh++;e.bhActors=[...new Set(ids)];e.reason=BH_LABELS[e.bh];e.text="본헤드! "+e.reason+" · "+e.text}
 const BH_LABELS={1:"홈런인 줄 알고 구경",2:"페어를 파울로 착각",3:"잡혔는데 계속 뛰기",4:"베이스를 지나쳐 되돌아옴",5:"한 베이스에 두 주자",6:"포수가 보는데 무모한 도루",7:"2아웃인데 더그아웃으로",8:"엉뚱한 베이스로 송구",9:"베이스만 밟고 태그를 잊음",10:"송구 대신 세리머니",11:"네가 잡는 줄 알았지",12:"비어 있는 베이스 커버"};
 function fielderStart(e,tm,pos){return e.before.fieldStarts?.[fielder(tm,pos).id]||fieldPosition(pos,e.before.defense)}
+// One travel model drives both the fair-ball decision and its visible movement.
+// The sampled time belongs to the hit (pace / hang time), never to the fielder.
+function defenseTravel24(from,target,a){
+ const distance=Math.hypot(target[0]-from[0],target[1]-from[1]);
+ const reaction=.045+(50-clamp(a.sense,0,100))*.0007,rate=260+clamp(a.speed,0,100)*2.8;
+ return {distance,reaction,rate,arrival:.22+reaction+distance/rate};
+}
+function defenseAttempt24(e,df,positions,deep,contact,command,roll){
+ const budget=380*((deep?.99:.95)-(contact-50)/400+(command==='contact'?-.04:0)-roll);
+ const deadline=.265+clamp(budget,6,130)/400;
+ const choices=positions.map(pos=>{const p=fielder(df,pos),from=fielderStart(e,df,pos);return {pos,p,from,...defenseTravel24(from,e.target,p.a)};});
+ choices.sort((a,b)=>a.arrival-b.arrival);
+ const best=choices[0],neutralArrival=Math.min(...positions.map(pos=>defenseTravel24(fieldPosition(pos),e.target,fielder(df,pos).a).arrival));
+ const averageArrival=defenseTravel24(best.from,e.target,{...best.p.a,speed:50}).arrival;
+ return {pos:best.pos,from:best.from.slice(),distance:best.distance,reaction:best.reaction,rate:best.rate,arrival:best.arrival,deadline,neutralArrival,averageArrival,deep,reached:best.arrival<=deadline,drop:false};
+}
+function defenseNote24(d,badThrow=false){
+ if(d.drop)return '도착했지만 포구 실패';
+ if(badThrow)return '포구 뒤 1루 악송구';
+ if(d.reached){
+  if(d.neutralArrival>d.deadline&&d.arrival+.015<d.neutralArrival)return '수비 배치 덕분에 따라잡음';
+  if(d.averageArrival>d.deadline&&d.arrival+.015<d.averageArrival)return '빠른 발로 따라잡음';
+  if(d.neutralArrival-d.arrival>.035)return '배치가 맞아 짧게 이동';
+  return d.deadline-d.arrival>.065?'여유 있게 도착해 포구':'따라가서 간신히 포구';
+ }
+ if(d.neutralArrival<=d.deadline&&d.arrival>d.neutralArrival+.015)return '수비 거리가 멀어 도착 지연';
+ if(d.averageArrival<=d.deadline&&d.arrival>d.averageArrival+.015)return '주력이 부족해 도착 지연';
+ return d.deep?'낙구 전에 닿지 못함':'타구가 수비 범위를 빠져나감';
+}
+function defensePickup24(e){
+ const d=e.defense24;if(!d)return;
+ let target=e.target.slice(),pickup=d.deadline;
+ if(!d.reached){
+  const dx=target[0]-450,dy=target[1]-441,len=Math.hypot(dx,dy)||1,drift=22;
+  target=[clamp(target[0]+dx/len*drift,100,800),clamp(target[1]+dy/len*drift,175,430)];
+  pickup=Math.max(d.deadline+.06,.22+d.reaction+Math.hypot(target[0]-d.from[0],target[1]-d.from[1])/d.rate);
+ }else if(d.drop){target=[target[0]+9,target[1]+7];pickup=d.deadline+.085;}
+ // The hit clock never waits for a defender. Only a long, already-missed recovery is shortened.
+ d.land=d.deadline;d.moveStart=.22+d.reaction;d.moveArrival=d.arrival;
+ d.rawPickup=pickup;d.pickup=Math.min(.86,pickup);d.recovery=target;
+ d.note=defenseNote24(d,!!e.badThrow);e.reason+=' · '+d.note;
+}
 function ballInPlay(m,e,bh){const b=batter(m),df=tside(m,1-e.attack),n=bh?.n||0;const orient=b.tendency==="중앙"?0:(b.tendency==="당겨치기"?(b.hand==="우타"?-1:1):(b.hand==="우타"?1:-1));let x=clamp(450+orient*160+(r(m)-.5)*330,115,785),deep=r(m)<.44;
 if([1,3,10,11].includes(n))deep=true;if([2,7,8,12].includes(n))deep=false;
 e.fair=true;e.swing=true;e.contact=true;e.line=deep&&r(m)<.18;
@@ -147,9 +189,12 @@ const power=b.a.power+(m.command==="power"?18:m.command==="contact"?-10:0);
 const hr=deep&&r(m)<clamp(.018+power/920,.025,.15);
 if(hr){e.target=[clamp(x,220,680),94];reachHit(m,e,4)}
 // Contact also affects how difficult a fair ball is to field; defense and positioning still resolve the out.
-else{const catchChance=clamp((deep?.99:.95)+(e.fielder.a.speed+e.fielder.a.sense-100)/450-dist/380-(b.a.contact-50)/400+(m.command==="contact"?-.04:0),.15,.94);
-if(dist<=70+e.fielder.a.speed*1.2&&r(m)<catchChance){if(r(m)<clamp((100-e.fielder.a.catch)/1800,.006,.065)){reachHit(m,e,1,true);e.reason="도달한 타구의 포구 실패"}else if(deep)flyOut(m,e);else if(r(m)<(100-e.fielder.a.throw)/2300){reachHit(m,e,1,true);e.badThrow=true;e.reason="1루 방향 악송구"}else groundOut(m,e,m.bases[0]&&m.outs<2&&r(m)<clamp(.34+(e.fielder.a.throw-b.a.speed)/230,.1,.7))}
-else{let bases=deep&&power>35&&r(m)<.42?2:1;if(bases===2&&b.a.speed>65&&r(m)<.15)bases=3;reachHit(m,e,bases)}}
+else{const d=e.defense24=defenseAttempt24(e,df,positions,deep,b.a.contact,m.command,r(m));
+e.fieldPos=d.pos;e.fielder=fielder(df,d.pos);e.range=d.distance;
+e.reason="타구 "+(x<370?"좌측":x>530?"우측":"중앙")+" · "+e.fieldPos+" 수비";
+if(d.reached){if(r(m)<clamp((100-e.fielder.a.catch)/1800,.006,.065)){d.drop=true;reachHit(m,e,1,true)}else if(deep)flyOut(m,e);else if(r(m)<(100-e.fielder.a.throw)/2300){reachHit(m,e,1,true);e.badThrow=true;}else groundOut(m,e,m.bases[0]&&m.outs<2&&r(m)<clamp(.34+(e.fielder.a.throw-b.a.speed)/230,.1,.7))}
+else{let bases=deep&&power>35&&r(m)<.42?2:1;if(bases===2&&b.a.speed>65&&r(m)<.15)bases=3;reachHit(m,e,bases)}
+defensePickup24(e);}
 }
 }
 function resolveInningEnd(m,e){
@@ -205,6 +250,11 @@ if(e.contact&&e.target)e.ball.push(e.target);
 if(e.type==="hr")e.arc=80;else if(["fly","line","sf","flydp"].includes(e.type)||[1,11].includes(e.bh))e.arc=e.line?20:100;else e.arc=0;
 if(e.target&&e.type!=="hr"&&e.type!=="foul"){
 let dest=e.target.slice();if(e.bh===7)dest=[90,396];e.fieldMoves.push({id:e.fielder.id,from:start,to:dest,start:.22,end:e.bh===7?.90:e.bh===11?.72:.50});if(e.bh===7){e.fieldMoves[0].knots=[[.22,start],[.50,e.target],[.55,e.target],[.90,dest]];e.carry=true}
+if(e.defense24){const d=e.defense24,mv=e.fieldMoves[0];mv.start=d.moveStart;mv.end=d.pickup;mv.to=d.recovery.slice();
+ const u=clamp((d.land-mv.start)/(d.rawPickup-mv.start),0,1),atLand=start.map((v,i)=>v+(mv.to[i]-v)*u);
+ mv.knots=d.reached?[[mv.start,start],[d.moveArrival,e.target],[d.land,e.target],[d.pickup,mv.to]]:d.land>mv.start?[[mv.start,start],[d.land,atLand],[d.pickup,mv.to]]:[[mv.start,start],[d.pickup,mv.to]];
+ e.arc=d.deep?(e.line?20:Math.min(100,35+(d.land-.28)*220)):0;
+}
 if(e.bh===11){const other=fielder(df,e.fieldPos==="CF"?"RF":"CF");e.fieldMoves.push({id:other.id,from:fieldPosition(e.fieldPos==="CF"?"RF":"CF",e.before.defense),to:[e.target[0]+30,e.target[1]],start:.24,end:.44});e.fieldMoves[0].to=e.target;e.fieldMoves[0].knots=[[.22,start],[.40,[e.target[0]-30,e.target[1]]],[.60,[e.target[0]-30,e.target[1]]],[.72,e.target]];e.throwStart=.75}
 if(!e.throwBases&&e.type!=="hr"&&!["fly","line"].includes(e.type))e.throwBases=[e.throwBase||2];
 if(e.bh===12||e.bh===7)e.throwBases=[];
