@@ -57,6 +57,7 @@ function describe(p,tm,pose,tick,x,y,flip){
   if(e.type==='swing'&&t>.4)frame=t<.72?38:47+form.bat;
   if(e.type==='kl'&&t>.7)frame=30;
   if(e.type==='ks'&&t>.4)frame=30;
+  if(e.batting25){frame=BattingMotionV25.frame(e,t,form.bat);phase=BattingMotionV25.phase(e,t);}
   if(['bat','swing'].includes(pose))flip=p.hand==='좌타';
  }
  if(offense&&e?.outIds.includes(p.id)&&anim?.resultShown&&resultHoldMs(e)-anim.holdLeft>550){frame=Math.floor(tick/160)%2?6:7;contact=null;}
