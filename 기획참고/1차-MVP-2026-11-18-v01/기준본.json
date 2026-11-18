@@ -1,0 +1,39 @@
+{
+  "name": "해체해라 1차 MVP",
+  "recorded_on": "2026-11-18",
+  "timezone": "Asia/Seoul",
+  "status": "preserved_baseline_for_redesign",
+  "repository": "https://github.com/Kina2002/haechehaera-submission",
+  "git_tag": "mvp-1-2026-11-18",
+  "game_source_commit": "042fde914457644a02f56fe09fcda59d6e3c7f9f",
+  "game_source_branch": "codex/umpire-facing-20261118",
+  "documentation_branch": "codex/mvp1-baseline-20261118",
+  "last_game_pull_request": "https://github.com/Kina2002/haechehaera-submission/pull/91",
+  "main_contains_latest_game": false,
+  "site": {
+    "project_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b",
+    "url": "https://haechehaera.sooyeon-jun-0389.chatgpt.site",
+    "version": 28,
+    "version_id": "appgprj_6ac6667e2b748191bbd3c2acd28f121b~appgver_759848dc1fdc8191aec43cd3b874e5e1",
+    "source_commit": "b2e3225b3dd9f8bbcf68f9ddf4693b18b3a26221",
+    "saved_archive_content_hash": "sha256:acf6e08c0788ef2c134ca4dc3e9e464e09a4ce7b9483cd2f9811320a20d6b511",
+    "local_package_filename": "umpire-facing-public-v28.tar.gz",
+    "local_package_sha256": "sha256:3164abf1964e7aa4c7fa200b66fb96c3e963c59f2e01a71cce6b5dc8e2972959",
+    "public_audience": "public"
+  },
+  "runtime": {
+    "entry": "구현/해체해라-2026-10-07-v01/dev.html",
+    "build": "python tools/build-web.py",
+    "output": "dist",
+    "built_files": 187,
+    "verified_assets": 124,
+    "legacy_single_file_regenerated": false
+  },
+  "scope": {
+    "tracked_code_assets_specs": true,
+    "untracked_local_drafts": "preserved in their existing locations, not included in this Git tag",
+    "personal_browser_saves": "not collected or included",
+    "new_version_scope": "not decided",
+    "new_version_implemented": false
+  }
+}
