@@ -41,8 +41,15 @@ function officialPoint(o){
  }
  const p=ground(...o.xy),q=project(p.x,p.z);if(!V.low&&o.base===3)q.x=Math.max(236,q.x);return{...q,x:cap(q.x,22,878),y:Math.min(508,q.y)};
 }
+function officialAsset(o){
+ const spec=umpireAsset18(o.base,o.call?.kind||'out');
+ // The plate umpire stands screen-right: face rear-left toward the pitcher.
+ // Strikeout art faces the opposite way from the out/safe sheets before mirroring.
+ if(o.base===0)spec.flip=spec.file==='strikeout.png';
+ return spec;
+}
 function judge(c,o){
- const q=officialPoint(o),spec=umpireAsset18(o.base,o.call?.kind||'out'),entry=UMPIRE_ART18[spec.file],im=umpireImages18[spec.file];if(!im||!entry)return;
+ const q=officialPoint(o),spec=officialAsset(o),entry=UMPIRE_ART18[spec.file],im=umpireImages18[spec.file];if(!im||!entry)return;
  const seq=entry.rows[spec.row];let frame=o.state.frame;if(o.call?.kind==='strike')frame=frame>=2&&frame<=4?1:0;
  const f=seq[frame],s=40*q.scale/seq[0].rect[3];c.save();c.translate(Math.round(q.x),Math.round(q.y));if(spec.flip)c.scale(-1,1);c.drawImage(im,...f.rect,-f.foot[0]*s,-f.foot[1]*s,f.rect[2]*s,f.rect[3]*s);c.restore();
  if(o.state.speaking&&o.call){const word={safe:'세이프',out:'아웃',k:'삼진',strike:'스트라이크'}[o.call.kind];c.font='12px sans-serif';c.textAlign='center';const w=c.measureText(word).width+14;c.fillStyle='#fff2d9';c.fillRect(q.x-w/2,q.y-49*q.scale-17,w,19);c.fillStyle='#263d42';c.fillText(word,q.x,q.y-49*q.scale-3);}
@@ -118,5 +125,5 @@ drawField=function(time){
  const speechActors=frame.actors.map(a=>{const q=actorPoint(a),oldHeight=49*zoneScale15(a.tm,a.p,q.y,fieldScale(q.y));return{...a,x:q.x,y:q.y-47*q.scale+oldHeight};});
  originalSpeech(e,t,speechActors);window.StadiumLayoutV13?.arrange();
 };
-V.batAnchor=batAnchor;V.project=project;V.ground=ground;V.actorPoint=actorPoint;V.playerAnchor=playerAnchor;V.officialPoint=officialPoint;window.StadiumViewV13=V;
+V.batAnchor=batAnchor;V.project=project;V.ground=ground;V.actorPoint=actorPoint;V.playerAnchor=playerAnchor;V.officialPoint=officialPoint;V.officialAsset=officialAsset;window.StadiumViewV13=V;
 })();
