@@ -33,17 +33,18 @@ function background(c,time){
  c.fillStyle='#7ab7d0';c.fillRect(0,232,900,3);c.fillStyle='#1b6590';c.fillRect(0,235,900,6);StadiumBannersV13.paint(c,team(),team().match);
 }
 function officialPoint(o){
- if(o.base===0){const m=team().match,side=anim?.e.attack??attack(m),df=tside(m,1-side),at=tside(m,side),batter=ply(at,anim?.e.batter||at.lineup[m.order[side]]?.id),slot=batter?.hand==='좌타'?1:-1;
+ if(o.base===0){const m=team().match,side=anim?.e.attack??attack(m),df=tside(m,1-side);
   const call=V.calls.find(a=>a.tm===df&&df.lineup.find(v=>v.id===a.id)?.pos==='C'),xy=call&&Math.hypot(call.x-FIELD.C[0],call.y-FIELD.C[1])<15?[call.x,call.y]:FIELD.C;
   const catcher=actorPoint({x:xy[0],y:xy[1],fieldPos:'C',pose:'catcher',tm:df});
-  return{x:catcher.x+slot*(V.low?28:8),y:Math.min(520,catcher.y+(V.low?34:24)),scale:catcher.scale*.90,z:catcher.z-2,behindCatcher:true};
+  // Keep the plate umpire full-size, behind and screen-right of the catcher for either batting hand.
+  return{x:catcher.x+(V.low?52:24),y:Math.min(520,catcher.y+(V.low?34:24)),scale:catcher.scale,z:catcher.z-2,behindCatcher:true};
  }
  const p=ground(...o.xy),q=project(p.x,p.z);if(!V.low&&o.base===3)q.x=Math.max(236,q.x);return{...q,x:cap(q.x,22,878),y:Math.min(508,q.y)};
 }
 function judge(c,o){
  const q=officialPoint(o),spec=umpireAsset18(o.base,o.call?.kind||'out'),entry=UMPIRE_ART18[spec.file],im=umpireImages18[spec.file];if(!im||!entry)return;
  const seq=entry.rows[spec.row];let frame=o.state.frame;if(o.call?.kind==='strike')frame=frame>=2&&frame<=4?1:0;
- const f=seq[frame],s=(o.base===0&&frame===0?30:40)*q.scale/seq[0].rect[3];c.save();c.translate(Math.round(q.x),Math.round(q.y));if(spec.flip)c.scale(-1,1);c.drawImage(im,...f.rect,-f.foot[0]*s,-f.foot[1]*s,f.rect[2]*s,f.rect[3]*s);c.restore();
+ const f=seq[frame],s=40*q.scale/seq[0].rect[3];c.save();c.translate(Math.round(q.x),Math.round(q.y));if(spec.flip)c.scale(-1,1);c.drawImage(im,...f.rect,-f.foot[0]*s,-f.foot[1]*s,f.rect[2]*s,f.rect[3]*s);c.restore();
  if(o.state.speaking&&o.call){const word={safe:'세이프',out:'아웃',k:'삼진',strike:'스트라이크'}[o.call.kind];c.font='12px sans-serif';c.textAlign='center';const w=c.measureText(word).width+14;c.fillStyle='#fff2d9';c.fillRect(q.x-w/2,q.y-49*q.scale-17,w,19);c.fillStyle='#263d42';c.fillText(word,q.x,q.y-49*q.scale-3);}
 }
 function playerAnchor(e,id,t,point,forcePhase){
